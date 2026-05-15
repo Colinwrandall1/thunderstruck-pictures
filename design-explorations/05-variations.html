@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thunderstruck Pictures — Design System Variations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Oswald:wght@500;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: #050505;
+    color: #f5f5f2;
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+    overflow-x: hidden;
+  }
+
+  /* meta bar */
+  .meta {
+    border-bottom: 1px solid #1f1f1f;
+    padding: 1rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: #737373;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+  .meta a { color: #FFD60A; text-decoration: none; }
+  .meta a:hover { text-decoration: underline; }
+
+  /* intro */
+  .intro {
+    padding: 6rem 2.5rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .intro .brand-logo {
+    display: block;
+    width: clamp(220px, 32vw, 360px);
+    height: auto;
+    margin-bottom: 2.5rem;
+  }
+  .intro .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #FFD60A;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  .intro h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    line-height: 0.92;
+    text-transform: uppercase;
+    letter-spacing: 0.005em;
+  }
+  .intro h1 .yellow { color: #FFD60A; }
+  .intro .lede {
+    margin-top: 2rem;
+    font-size: 1.1rem;
+    color: #a3a3a3;
+    max-width: 60ch;
+    line-height: 1.7;
+  }
+  .intro .lede strong { color: #f5f5f2; font-weight: 500; }
+
+  /* quick comparison strip */
+  .compare-strip {
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    border-top: 1px solid #1f1f1f;
+    padding-top: 2rem;
+  }
+  @media (max-width: 800px) { .compare-strip { grid-template-columns: repeat(2, 1fr); } }
+  .compare-card {
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid #1f1f1f;
+    padding: 1.25rem;
+    transition: border-color 0.2s;
+    background: #0a0a0a;
+  }
+  .compare-card:hover { border-color: #FFD60A; }
+  .compare-card .num {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: #737373;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .compare-card .name {
+    display: block;
+    font-family: 'Anton', sans-serif;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.85rem;
+  }
+  .compare-card .dots {
+    display: flex;
+    gap: 0.35rem;
+    margin-bottom: 0.85rem;
+  }
+  .compare-card .dot {
+    width: 18px; height: 18px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .compare-card .fonts {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: #737373;
+    letter-spacing: 0.05em;
+    line-height: 1.6;
+  }
+
+  /* divider between variations */
+  .divider {
+    height: 1px;
+    background: #1f1f1f;
+    margin: 4rem 0 0;
+  }
+
+  /* variation block (shared layout) */
+  .v-block {
+    padding: 6rem 0 0;
+  }
+  .v-block .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+  }
+  .v-block .v-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: end;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--v-line);
+    margin-bottom: 4rem;
+  }
+  @media (max-width: 800px) { .v-block .v-header { grid-template-columns: 1fr; align-items: start; } }
+  .v-block .v-header .v-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--v-muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .v-block .v-header .v-name {
+    font-family: var(--v-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    text-transform: uppercase;
+    letter-spacing: 0.005em;
+    line-height: 0.95;
+    color: var(--v-text);
+  }
+  .v-block .v-header .v-name .v-accent { color: var(--v-accent); }
+  .v-block .v-header .v-mood {
+    margin-top: 1.25rem;
+    color: var(--v-text-dim);
+    font-size: 1rem;
+    line-height: 1.65;
+    max-width: 50ch;
+  }
+  .v-block .v-header .v-spec {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--v-text-dim);
+    letter-spacing: 0.08em;
+    line-height: 2;
+    text-align: right;
+    border: 1px solid var(--v-line);
+    padding: 1rem 1.25rem;
+    background: var(--v-bg2);
+    min-width: 240px;
+  }
+  @media (max-width: 800px) { .v-block .v-header .v-spec { text-align: left; } }
+  .v-block .v-header .v-spec .k { color: var(--v-muted); }
+  .v-block .v-header .v-spec .v { color: var(--v-text); }
+
+  /* mini hero (per variation) */
+  .v-hero {
+    padding: 3rem 0 4rem;
+  }
+  .v-hero .v-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--v-accent);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 1.5rem;
+  }
+  .v-hero h2 {
+    font-family: var(--v-display);
+    font-size: clamp(2.75rem, 7vw, 5.5rem);
+    line-height: 0.92;
+    text-transform: uppercase;
+    letter-spacing: 0.005em;
+    color: var(--v-text);
+    max-width: 14ch;
+  }
+  .v-hero h2 .v-accent { color: var(--v-accent); }
+  .v-hero .v-lede {
+    margin-top: 2rem;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--v-text-dim);
+    max-width: 55ch;
+  }
+  .v-hero .v-lede strong { color: var(--v-text); font-weight: 500; }
+  .v-hero .v-ctas {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .v-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.95rem 1.5rem;
+    font-family: var(--v-display);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    text-decoration: none;
+    border: 2px solid var(--v-text);
+    color: var(--v-text);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .v-btn:hover { background: var(--v-text); color: var(--v-bg); }
+  .v-btn-primary {
+    background: var(--v-accent);
+    color: var(--v-bg);
+    border-color: var(--v-accent);
+  }
+  .v-btn-primary:hover { background: var(--v-text); color: var(--v-bg); border-color: var(--v-text); }
+
+  /* showcase row: pillar + specimen + palette */
+  .v-showcase {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding-bottom: 6rem;
+  }
+  @media (max-width: 900px) { .v-showcase { grid-template-columns: 1fr; } }
+
+  /* pillar card sample */
+  .v-pillar {
+    background: var(--v-bg2);
+    border: 1px solid var(--v-line);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    min-height: 280px;
+  }
+  .v-pillar .num {
+    font-family: var(--v-display);
+    font-size: 0.95rem;
+    color: var(--v-accent);
+    letter-spacing: 0.05em;
+  }
+  .v-pillar h3 {
+    font-family: var(--v-display);
+    font-size: 1.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    color: var(--v-text);
+  }
+  .v-pillar p {
+    color: var(--v-text-dim);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+  .v-pillar .stat {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--v-line);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .v-pillar .stat .k {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--v-muted);
+    font-weight: 600;
+  }
+  .v-pillar .stat .v {
+    font-family: var(--v-display);
+    color: var(--v-accent);
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+  }
+
+  /* specimen + palette stack */
+  .v-right {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .v-specimen {
+    background: var(--v-bg2);
+    border: 1px solid var(--v-line);
+    padding: 2rem;
+  }
+  .v-specimen .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--v-muted);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .v-specimen .display-sample {
+    font-family: var(--v-display);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    color: var(--v-text);
+  }
+  .v-specimen .display-sample .v-accent { color: var(--v-accent); }
+  .v-specimen .body-sample {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--v-text-dim);
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--v-line);
+  }
+
+  .v-palette {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
+  }
+  .v-swatch {
+    aspect-ratio: 1;
+    padding: 0.65rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border: 1px solid var(--v-line);
+  }
+  .v-swatch .name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+  }
+  .v-swatch .hex {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    opacity: 0.6;
+    margin-top: 0.15rem;
+  }
+
+  /* per-variation theming */
+  .v1 {
+    --v-bg: #0a0a0a;
+    --v-bg2: #141414;
+    --v-line: #262626;
+    --v-text: #F5F5F2;
+    --v-text-dim: #a3a3a3;
+    --v-muted: #6b6b6b;
+    --v-accent: #FFD60A;
+    --v-display: 'Anton', sans-serif;
+    background: var(--v-bg);
+  }
+  .v2 {
+    --v-bg: #0F1419;
+    --v-bg2: #161D26;
+    --v-line: #28323F;
+    --v-text: #E5E7EB;
+    --v-text-dim: #9CA3AF;
+    --v-muted: #6B7280;
+    --v-accent: #F5C518;
+    --v-display: 'Bebas Neue', sans-serif;
+    background: var(--v-bg);
+  }
+  .v3 {
+    --v-bg: #14110D;
+    --v-bg2: #1E1813;
+    --v-line: #2E261E;
+    --v-text: #F1E8D9;
+    --v-text-dim: #B8AC97;
+    --v-muted: #7A6E5C;
+    --v-accent: #E89B2C;
+    --v-display: 'Oswald', sans-serif;
+    background: var(--v-bg);
+  }
+  .v4 {
+    --v-bg: #0A0606;
+    --v-bg2: #150D0D;
+    --v-line: #2A1818;
+    --v-text: #F5F0E8;
+    --v-text-dim: #A89B8E;
+    --v-muted: #6B5E54;
+    --v-accent: #B82C2C;
+    --v-secondary: #E8C544;
+    --v-display: 'Anton', sans-serif;
+    background: var(--v-bg);
+  }
+
+  /* footer */
+  footer {
+    background: #050505;
+    border-top: 1px solid #1f1f1f;
+    padding: 5rem 2.5rem 4rem;
+    margin-top: 6rem;
+  }
+  footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  footer .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #FFD60A;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  footer h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    text-transform: uppercase;
+    letter-spacing: 0.005em;
+    line-height: 0.95;
+    margin-bottom: 3rem;
+  }
+  footer h2 .yellow { color: #FFD60A; }
+  footer .considerations {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+  @media (max-width: 800px) { footer .considerations { grid-template-columns: 1fr; } }
+  footer .consideration {
+    border-top: 2px solid #FFD60A;
+    padding-top: 1.5rem;
+  }
+  footer .consideration h4 {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.75rem;
+  }
+  footer .consideration p {
+    color: #a3a3a3;
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+  footer .foot-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 3rem;
+    border-top: 1px solid #1f1f1f;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: #737373;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  footer .foot-row a { color: #FFD60A; text-decoration: none; }
+  @media (max-width: 600px) { footer .foot-row { flex-direction: column; gap: 1rem; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="meta">
+  <span>Design System Variations · For Client Review</span>
+  <a href="index.html">← Back to all directions</a>
+</div>
+
+<section class="intro">
+  <img src="../501339330_10231887146815337_1262213837778340050_n.jpg" alt="Thunderstruck Pictures" class="brand-logo">
+  <span class="eyebrow">Thunderstruck Pictures · Design System</span>
+  <h1>Same bones.<br><span class="yellow">Four palettes.</span></h1>
+  <p class="lede">
+    Four variations on the <strong>Grindhouse Composed</strong> direction. The composition, layout, and structure are identical across all four — what changes is the <strong>palette</strong> and the <strong>display typeface</strong>. Each tells a slightly different story about who Thunderstruck is.
+  </p>
+
+  <div class="compare-strip">
+    <a class="compare-card" href="#v1">
+      <span class="num">/ 01 · Electric</span>
+      <span class="name">Electric</span>
+      <div class="dots">
+        <div class="dot" style="background:#0a0a0a;"></div>
+        <div class="dot" style="background:#141414;"></div>
+        <div class="dot" style="background:#FFD60A;"></div>
+        <div class="dot" style="background:#F5F5F2;"></div>
+      </div>
+      <div class="fonts">Anton<br>Inter</div>
+    </a>
+    <a class="compare-card" href="#v2">
+      <span class="num">/ 02 · Cinematic</span>
+      <span class="name">Cinematic</span>
+      <div class="dots">
+        <div class="dot" style="background:#0F1419;"></div>
+        <div class="dot" style="background:#161D26;"></div>
+        <div class="dot" style="background:#F5C518;"></div>
+        <div class="dot" style="background:#E5E7EB;"></div>
+      </div>
+      <div class="fonts">Bebas Neue<br>Inter</div>
+    </a>
+    <a class="compare-card" href="#v3">
+      <span class="num">/ 03 · Texan</span>
+      <span class="name">Texan</span>
+      <div class="dots">
+        <div class="dot" style="background:#14110D;"></div>
+        <div class="dot" style="background:#1E1813;"></div>
+        <div class="dot" style="background:#E89B2C;"></div>
+        <div class="dot" style="background:#F1E8D9;"></div>
+      </div>
+      <div class="fonts">Oswald<br>Inter</div>
+    </a>
+    <a class="compare-card" href="#v4">
+      <span class="num">/ 04 · Horror</span>
+      <span class="name">Horror</span>
+      <div class="dots">
+        <div class="dot" style="background:#0A0606;"></div>
+        <div class="dot" style="background:#150D0D;"></div>
+        <div class="dot" style="background:#B82C2C;"></div>
+        <div class="dot" style="background:#F5F0E8;"></div>
+      </div>
+      <div class="fonts">Anton<br>Inter</div>
+    </a>
+  </div>
+</section>
+
+<!-- ============== VARIATION 01 · ELECTRIC ============== -->
+<div class="divider"></div>
+<section class="v-block v1" id="v1">
+  <div class="container">
+    <div class="v-header">
+      <div>
+        <span class="v-num">/ 01 · Variation</span>
+        <h2 class="v-name">Electric. <span class="v-accent">The original.</span></h2>
+        <p class="v-mood">Pure black, electric yellow, heavy condensed Anton. The literal extension of the existing logo. Loudest of the four — film-poster confidence with no apology.</p>
+      </div>
+      <div class="v-spec">
+        <span class="k">DISPLAY</span> <span class="v">ANTON</span><br>
+        <span class="k">BODY</span> <span class="v">INTER</span><br>
+        <span class="k">BG</span> <span class="v">#0A0A0A</span><br>
+        <span class="k">ACCENT</span> <span class="v">#FFD60A</span>
+      </div>
+    </div>
+
+    <div class="v-hero">
+      <span class="v-eyebrow">Thunderstruck Pictures · Austin, TX</span>
+      <h2>Production<br>+ equipment<br><span class="v-accent">rentals.</span></h2>
+      <p class="v-lede">
+        <strong>Original horror, action, and genre work</strong> — and a full lighting &amp; grip rental package, delivered on our 3-ton truck across the Austin market.
+      </p>
+      <div class="v-ctas">
+        <a class="v-btn v-btn-primary" href="#">See the Work →</a>
+        <a class="v-btn" href="#">See the Kit</a>
+      </div>
+    </div>
+
+    <div class="v-showcase">
+      <div class="v-pillar">
+        <span class="num">/ 02</span>
+        <h3>Rentals</h3>
+        <p>Lighting, modifiers, grip, camera support, distro, expendables. A full package, delivered on our 3-ton truck across central Texas.</p>
+        <div class="stat"><span class="k">Status</span><span class="v">AVAILABLE →</span></div>
+      </div>
+      <div class="v-right">
+        <div class="v-specimen">
+          <div class="label">DISPLAY · ANTON</div>
+          <div class="display-sample">First you get high.<br><span class="v-accent">Then you die.</span></div>
+          <p class="body-sample">Heavy condensed all-caps reads like a horror movie one-sheet. Body in <strong>Inter</strong> keeps long-form copy clean and current.</p>
+        </div>
+        <div class="v-palette">
+          <div class="v-swatch" style="background:#000;color:#fff;"><span class="name">Pitch</span><span class="hex">#000000</span></div>
+          <div class="v-swatch" style="background:#141414;color:#fff;"><span class="name">Panel</span><span class="hex">#141414</span></div>
+          <div class="v-swatch" style="background:#FFD60A;color:#000;"><span class="name">Bolt</span><span class="hex">#FFD60A</span></div>
+          <div class="v-swatch" style="background:#F5F5F2;color:#000;"><span class="name">Bone</span><span class="hex">#F5F5F2</span></div>
+          <div class="v-swatch" style="background:#7A1F1F;color:#fff;"><span class="name">Blood</span><span class="hex">#7A1F1F</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== VARIATION 02 · CINEMATIC ============== -->
+<section class="v-block v2" id="v2">
+  <div class="container">
+    <div class="v-header">
+      <div>
+        <span class="v-num">/ 02 · Variation</span>
+        <h2 class="v-name">Cinematic. <span class="v-accent">Cooler. Calmer.</span></h2>
+        <p class="v-mood">Cool slate base, golden-IMDB yellow, Bebas Neue (lighter and more open than Anton). Reads as a film-festival site, not a metal one. Best for industry-facing weight.</p>
+      </div>
+      <div class="v-spec">
+        <span class="k">DISPLAY</span> <span class="v">BEBAS NEUE</span><br>
+        <span class="k">BODY</span> <span class="v">INTER</span><br>
+        <span class="k">BG</span> <span class="v">#0F1419</span><br>
+        <span class="k">ACCENT</span> <span class="v">#F5C518</span>
+      </div>
+    </div>
+
+    <div class="v-hero">
+      <span class="v-eyebrow">Thunderstruck Pictures · Austin, TX</span>
+      <h2>Production<br>+ equipment<br><span class="v-accent">rentals.</span></h2>
+      <p class="v-lede">
+        <strong>Original horror, action, and genre work</strong> — and a full lighting &amp; grip rental package, delivered on our 3-ton truck across the Austin market.
+      </p>
+      <div class="v-ctas">
+        <a class="v-btn v-btn-primary" href="#">See the Work →</a>
+        <a class="v-btn" href="#">See the Kit</a>
+      </div>
+    </div>
+
+    <div class="v-showcase">
+      <div class="v-pillar">
+        <span class="num">/ 02</span>
+        <h3>Rentals</h3>
+        <p>Lighting, modifiers, grip, camera support, distro, expendables. A full package, delivered on our 3-ton truck across central Texas.</p>
+        <div class="stat"><span class="k">Status</span><span class="v">AVAILABLE →</span></div>
+      </div>
+      <div class="v-right">
+        <div class="v-specimen">
+          <div class="label">DISPLAY · BEBAS NEUE</div>
+          <div class="display-sample">First you get high.<br><span class="v-accent">Then you die.</span></div>
+          <p class="body-sample">Bebas is lighter than Anton — same condensed shape, more elegant proportions. Reads less "horror-marketing," more "film festival catalogue."</p>
+        </div>
+        <div class="v-palette">
+          <div class="v-swatch" style="background:#0F1419;color:#fff;"><span class="name">Slate</span><span class="hex">#0F1419</span></div>
+          <div class="v-swatch" style="background:#161D26;color:#fff;"><span class="name">Panel</span><span class="hex">#161D26</span></div>
+          <div class="v-swatch" style="background:#F5C518;color:#000;"><span class="name">Gold</span><span class="hex">#F5C518</span></div>
+          <div class="v-swatch" style="background:#E5E7EB;color:#000;"><span class="name">Bone</span><span class="hex">#E5E7EB</span></div>
+          <div class="v-swatch" style="background:#28323F;color:#fff;"><span class="name">Steel</span><span class="hex">#28323F</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== VARIATION 03 · TEXAN ============== -->
+<section class="v-block v3" id="v3">
+  <div class="container">
+    <div class="v-header">
+      <div>
+        <span class="v-num">/ 03 · Variation</span>
+        <h2 class="v-name">Texan. <span class="v-accent">Warm. Whiskey.</span></h2>
+        <p class="v-mood">Warm dark base with cream text and amber accent. Oswald has the same condensed silhouette as Anton but a bit less aggressive. Whiskey-bar Austin energy — local, grown-up, not metal.</p>
+      </div>
+      <div class="v-spec">
+        <span class="k">DISPLAY</span> <span class="v">OSWALD</span><br>
+        <span class="k">BODY</span> <span class="v">INTER</span><br>
+        <span class="k">BG</span> <span class="v">#14110D</span><br>
+        <span class="k">ACCENT</span> <span class="v">#E89B2C</span>
+      </div>
+    </div>
+
+    <div class="v-hero">
+      <span class="v-eyebrow">Thunderstruck Pictures · Austin, TX</span>
+      <h2>Production<br>+ equipment<br><span class="v-accent">rentals.</span></h2>
+      <p class="v-lede">
+        <strong>Original horror, action, and genre work</strong> — and a full lighting &amp; grip rental package, delivered on our 3-ton truck across the Austin market.
+      </p>
+      <div class="v-ctas">
+        <a class="v-btn v-btn-primary" href="#">See the Work →</a>
+        <a class="v-btn" href="#">See the Kit</a>
+      </div>
+    </div>
+
+    <div class="v-showcase">
+      <div class="v-pillar">
+        <span class="num">/ 02</span>
+        <h3>Rentals</h3>
+        <p>Lighting, modifiers, grip, camera support, distro, expendables. A full package, delivered on our 3-ton truck across central Texas.</p>
+        <div class="stat"><span class="k">Status</span><span class="v">AVAILABLE →</span></div>
+      </div>
+      <div class="v-right">
+        <div class="v-specimen">
+          <div class="label">DISPLAY · OSWALD</div>
+          <div class="display-sample">First you get high.<br><span class="v-accent">Then you die.</span></div>
+          <p class="body-sample">Oswald has the bones of Anton with a little more breathing room and warmth. Paired with cream and amber, it reads as a working Austin shop, not a horror brand.</p>
+        </div>
+        <div class="v-palette">
+          <div class="v-swatch" style="background:#14110D;color:#fff;"><span class="name">Smoke</span><span class="hex">#14110D</span></div>
+          <div class="v-swatch" style="background:#1E1813;color:#fff;"><span class="name">Panel</span><span class="hex">#1E1813</span></div>
+          <div class="v-swatch" style="background:#E89B2C;color:#000;"><span class="name">Amber</span><span class="hex">#E89B2C</span></div>
+          <div class="v-swatch" style="background:#F1E8D9;color:#000;"><span class="name">Cream</span><span class="hex">#F1E8D9</span></div>
+          <div class="v-swatch" style="background:#5A3A1F;color:#fff;"><span class="name">Bourbon</span><span class="hex">#5A3A1F</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== VARIATION 04 · HORROR ============== -->
+<section class="v-block v4" id="v4">
+  <div class="container">
+    <div class="v-header">
+      <div>
+        <span class="v-num">/ 04 · Variation</span>
+        <h2 class="v-name">Horror. <span class="v-accent">Blood-coded.</span></h2>
+        <p class="v-mood">Wine-black base, oxblood as the primary accent, yellow demoted to the lightning bolt only. Most overtly genre — leans into the horror IP without subtlety. Best if Chopper is the front door.</p>
+      </div>
+      <div class="v-spec">
+        <span class="k">DISPLAY</span> <span class="v">ANTON</span><br>
+        <span class="k">BODY</span> <span class="v">INTER</span><br>
+        <span class="k">BG</span> <span class="v">#0A0606</span><br>
+        <span class="k">ACCENT</span> <span class="v">#B82C2C</span>
+      </div>
+    </div>
+
+    <div class="v-hero">
+      <span class="v-eyebrow">Thunderstruck Pictures · Austin, TX</span>
+      <h2>Production<br>+ equipment<br><span class="v-accent">rentals.</span></h2>
+      <p class="v-lede">
+        <strong>Original horror, action, and genre work</strong> — and a full lighting &amp; grip rental package, delivered on our 3-ton truck across the Austin market.
+      </p>
+      <div class="v-ctas">
+        <a class="v-btn v-btn-primary" href="#">See the Work →</a>
+        <a class="v-btn" href="#">See the Kit</a>
+      </div>
+    </div>
+
+    <div class="v-showcase">
+      <div class="v-pillar">
+        <span class="num">/ 02</span>
+        <h3>Rentals</h3>
+        <p>Lighting, modifiers, grip, camera support, distro, expendables. A full package, delivered on our 3-ton truck across central Texas.</p>
+        <div class="stat"><span class="k">Status</span><span class="v">AVAILABLE →</span></div>
+      </div>
+      <div class="v-right">
+        <div class="v-specimen">
+          <div class="label">DISPLAY · ANTON</div>
+          <div class="display-sample">First you get high.<br><span class="v-accent">Then you die.</span></div>
+          <p class="body-sample">Same Anton typography as V1, but oxblood replaces yellow as the system color. Reads first as a horror brand and second as a rental house.</p>
+        </div>
+        <div class="v-palette">
+          <div class="v-swatch" style="background:#0A0606;color:#fff;"><span class="name">Wine</span><span class="hex">#0A0606</span></div>
+          <div class="v-swatch" style="background:#150D0D;color:#fff;"><span class="name">Panel</span><span class="hex">#150D0D</span></div>
+          <div class="v-swatch" style="background:#B82C2C;color:#fff;"><span class="name">Oxblood</span><span class="hex">#B82C2C</span></div>
+          <div class="v-swatch" style="background:#F5F0E8;color:#000;"><span class="name">Bone</span><span class="hex">#F5F0E8</span></div>
+          <div class="v-swatch" style="background:#E8C544;color:#000;"><span class="name">Bolt</span><span class="hex">#E8C544</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <span class="eyebrow">How to choose</span>
+    <h2>Three things to weigh<br><span class="yellow">before you pick.</span></h2>
+
+    <div class="considerations">
+      <div class="consideration">
+        <h4>Who walks in first?</h4>
+        <p>If most visitors are Austin grip crews looking for gear, lean cooler (V2 Cinematic) or warmer (V3 Texan). If most visitors are festival programmers or financiers checking on Chopper, V1 Electric or V4 Horror earns its keep faster.</p>
+      </div>
+      <div class="consideration">
+        <h4>What do the photos look like?</h4>
+        <p>The truck photo grades easily into all four. The Chopper poster is already crimson-leaning — pairs strongest with V4 Horror, fights a little with V3 Texan's amber. Future gear photography should be planned around the choice.</p>
+      </div>
+      <div class="consideration">
+        <h4>Future-proofing.</h4>
+        <p>V1 Electric is the "true to logo" choice — anything else means the existing mascot logo and the new brand are slightly different conversations. Not a problem, but worth naming.</p>
+      </div>
+    </div>
+
+    <div class="foot-row">
+      <span>© Thunderstruck Pictures · Austin, TX</span>
+      <a href="index.html">← Back to all directions</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thunderstruck — Design Explorations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: #0a0a0a;
+    color: #f5f5f2;
+    min-height: 100vh;
+    padding: 4rem 2rem;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; }
+  h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    line-height: 0.95;
+  }
+  h1 .yellow { color: #FFD60A; }
+  .lead {
+    font-size: 1.05rem;
+    color: #a3a3a3;
+    margin-top: 1.25rem;
+    max-width: 60ch;
+    line-height: 1.6;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .card {
+    background: #141414;
+    border: 1px solid #262626;
+    padding: 2rem;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s, transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .card:hover {
+    border-color: #FFD60A;
+    transform: translateY(-2px);
+  }
+  .card .label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #FFD60A;
+    font-weight: 600;
+  }
+  .card h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.75rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .card p {
+    color: #a3a3a3;
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+  .swatches {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  .swatch {
+    width: 28px;
+    height: 28px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .open {
+    margin-top: auto;
+    font-size: 0.85rem;
+    color: #FFD60A;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid #262626;
+    margin: 3rem 0;
+  }
+  .note {
+    color: #737373;
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="label" style="font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:#FFD60A;font-weight:600;margin-bottom:1rem;">Thunderstruck Productions</p>
+
+  <h1>Four directions.<br><span class="yellow">Pick one.</span></h1>
+
+  <p class="lead">
+    Each option is a self-contained mock showing the same content — hero, typography specimen, palette, Chopper card, rentals tile, and CTAs — so you can feel the difference, not just read about it. Open them in separate tabs. Direction A2 is the iteration on A using this page's composition language.
+  </p>
+
+  <div class="grid">
+    <a class="card" href="01-grindhouse.html">
+      <span class="label">Direction A</span>
+      <h2>Grindhouse Heavy</h2>
+      <p>The literal read of the logo. Pure black, heavy condensed all-caps, electric yellow. Loud, confident, horror-poster energy.</p>
+      <div class="swatches">
+        <div class="swatch" style="background:#000000;"></div>
+        <div class="swatch" style="background:#1A1A1A;"></div>
+        <div class="swatch" style="background:#FFD60A;"></div>
+        <div class="swatch" style="background:#F5F5F2;"></div>
+      </div>
+      <span class="open">Open →</span>
+    </a>
+
+    <a class="card" href="02-editorial.html">
+      <span class="label">Direction B</span>
+      <h2>Editorial Cinema</h2>
+      <p>A24 / Criterion territory. Warm dark, refined serif paired with clean sans, brass-aged yellow used sparingly. Restrained, grown-up.</p>
+      <div class="swatches">
+        <div class="swatch" style="background:#14110F;"></div>
+        <div class="swatch" style="background:#2A2521;"></div>
+        <div class="swatch" style="background:#C9A227;"></div>
+        <div class="swatch" style="background:#ECE5D5;"></div>
+      </div>
+      <span class="open">Open →</span>
+    </a>
+
+    <a class="card" href="03-workshop.html">
+      <span class="label">Direction C</span>
+      <h2>Workshop / Trade</h2>
+      <p>Leans into rentals. Slate background, monospace labels, spec-sheet layouts, IMDB-yellow as a caution accent. Operator aesthetic.</p>
+      <div class="swatches">
+        <div class="swatch" style="background:#0D1117;"></div>
+        <div class="swatch" style="background:#1C2128;"></div>
+        <div class="swatch" style="background:#F5C518;"></div>
+        <div class="swatch" style="background:#E5E7EB;"></div>
+      </div>
+      <span class="open">Open →</span>
+    </a>
+
+    <a class="card" href="04-grindhouse-composed.html" style="border-color:#FFD60A;">
+      <span class="label">Direction A2 · Iteration</span>
+      <h2>Grindhouse Composed</h2>
+      <p>A's typography and palette, rebuilt with this page's composition language — calm hero, three-pillar grid, card hover-yellow, generous black space. Bold without shouting.</p>
+      <div class="swatches">
+        <div class="swatch" style="background:#000000;"></div>
+        <div class="swatch" style="background:#141414;"></div>
+        <div class="swatch" style="background:#FFD60A;"></div>
+        <div class="swatch" style="background:#F5F5F2;"></div>
+      </div>
+      <span class="open">Open →</span>
+    </a>
+  </div>
+
+  <hr>
+
+  <p class="note">
+    Each mock uses the actual logo, truck photo, and Chopper poster from the project folder. Type pulled from Google Fonts (free). All three assume a dark background, since the logo demands it; light-mode is not on the table.
+  </p>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Direction A2 — Grindhouse Composed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg-pure: #000000;
+    --bg-2: #141414;
+    --panel: #161616;
+    --line: #262626;
+    --line-bright: #3a3a3a;
+    --text: #f5f5f2;
+    --text-dim: #a3a3a3;
+    --muted: #737373;
+    --accent: #FFD60A;
+    --blood: #7A1F1F;
+  }
+  *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+    overflow-x: hidden;
+  }
+  /* film grain overlay - subtle */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .display { font-family: 'Anton', sans-serif; text-transform: uppercase; letter-spacing: 0.02em; line-height: 0.9; }
+  .label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 2.5rem; }
+
+  /* meta bar */
+  .meta {
+    border-bottom: 1px solid var(--line);
+    padding: 1rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+  .meta a { color: var(--accent); text-decoration: none; }
+  .meta a:hover { text-decoration: underline; }
+
+  /* nav */
+  nav.top {
+    border-bottom: 1px solid var(--line);
+    padding: 1.75rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  nav.top .brand {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  nav.top .brand .bolt { color: var(--accent); font-size: 1.25rem; }
+  nav.top ul { list-style: none; display: flex; gap: 2.5rem; }
+  nav.top a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: color 0.15s;
+  }
+  nav.top a:hover { color: var(--accent); }
+  @media (max-width: 700px) { nav.top ul { display: none; } }
+
+  /* hero - calm, type-driven */
+  .hero {
+    padding: 7rem 2.5rem 8rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hero .label { display: block; margin-bottom: 2rem; }
+  .hero h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(3.25rem, 9vw, 7.5rem);
+    line-height: 0.92;
+    text-transform: uppercase;
+    letter-spacing: 0.005em;
+    max-width: 14ch;
+  }
+  .hero h1 .yellow { color: var(--accent); }
+  .hero h1 .stroke {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--text);
+  }
+  .hero .lede {
+    margin-top: 3rem;
+    font-size: clamp(1rem, 1.4vw, 1.15rem);
+    line-height: 1.65;
+    color: var(--text-dim);
+    max-width: 56ch;
+  }
+  .hero .lede strong { color: var(--text); font-weight: 500; }
+  .hero .ctas {
+    margin-top: 3rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* truck strip */
+  .truck-strip {
+    width: 100%;
+    aspect-ratio: 21/8;
+    background-image:
+      linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.85) 100%),
+      url("../Martin%20Truck.jpg");
+    background-size: cover;
+    background-position: center 40%;
+    filter: saturate(0.7) contrast(1.1);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  /* buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem 1.6rem;
+    font-family: 'Anton', sans-serif;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    text-decoration: none;
+    border: 2px solid var(--text);
+    color: var(--text);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn:hover { background: var(--text); color: var(--bg-pure); }
+  .btn-primary { background: var(--accent); color: var(--bg-pure); border-color: var(--accent); }
+  .btn-primary:hover { background: var(--text); color: var(--bg-pure); border-color: var(--text); }
+
+  /* lightning rule */
+  .rule {
+    height: 1px;
+    background: var(--line);
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .rule::after {
+    content: "⚡";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--bg);
+    padding: 0 1rem;
+    color: var(--accent);
+    font-size: 1.25rem;
+  }
+
+  /* sections */
+  section { padding: 7rem 2.5rem; }
+  .section-head { margin-bottom: 4rem; max-width: 800px; }
+  .section-head .label { display: block; margin-bottom: 1.5rem; }
+  .section-head h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+    text-transform: uppercase;
+    letter-spacing: 0.005em;
+    line-height: 0.95;
+  }
+  .section-head h2 .yellow { color: var(--accent); }
+  .section-head .sub {
+    margin-top: 1.5rem;
+    color: var(--text-dim);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 60ch;
+  }
+
+  /* WHAT WE DO three-card grid (borrowed from index pattern) */
+  .three-up {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  @media (max-width: 900px) { .three-up { grid-template-columns: 1fr; } }
+  .pillar {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    padding: 2.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s, transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    min-height: 360px;
+  }
+  .pillar:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .pillar .num {
+    font-family: 'Anton', sans-serif;
+    font-size: 0.95rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+  .pillar h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 1;
+  }
+  .pillar p {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+  .pillar .stat {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .pillar .stat .k {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .pillar .stat .v {
+    font-family: 'Anton', sans-serif;
+    color: var(--accent);
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+  }
+
+  /* type specimen */
+  .specimen { display: grid; gap: 2.5rem; }
+  .specimen-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    border-top: 1px solid var(--line);
+    padding-top: 2.5rem;
+  }
+  @media (max-width: 700px) { .specimen-row { grid-template-columns: 1fr; gap: 1rem; } }
+  .specimen-row .label { color: var(--text-dim); padding-top: 0.4rem; }
+  .specimen .h1-sample { font-family: 'Anton', sans-serif; font-size: 4rem; line-height: 0.9; text-transform: uppercase; letter-spacing: 0.005em; }
+  .specimen .h1-sample .yellow { color: var(--accent); }
+  .specimen .h2-sample { font-family: 'Anton', sans-serif; font-size: 2.25rem; line-height: 1; text-transform: uppercase; margin-top: 1rem; }
+  .specimen .body-sample { font-family: 'Inter', sans-serif; font-size: 1rem; line-height: 1.7; max-width: 60ch; color: var(--text-dim); }
+  .specimen .body-sample strong { color: var(--text); font-weight: 500; }
+
+  /* palette as cards */
+  .palette {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+  .swatch {
+    aspect-ratio: 4/3;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border: 1px solid var(--line);
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .swatch:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .swatch .name { font-family: 'Anton', sans-serif; font-size: 1.25rem; text-transform: uppercase; letter-spacing: 0.02em; }
+  .swatch .hex { font-family: 'Inter', monospace; font-size: 0.75rem; opacity: 0.7; margin-top: 0.3rem; letter-spacing: 0.05em; }
+
+  /* chopper card */
+  .film-card {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 4rem;
+    background: var(--bg-2);
+    padding: 3.5rem;
+    border: 1px solid var(--line);
+    align-items: center;
+    transition: border-color 0.2s;
+  }
+  .film-card:hover { border-color: var(--line-bright); }
+  @media (max-width: 800px) { .film-card { grid-template-columns: 1fr; padding: 2rem; gap: 2rem; } }
+  .film-card img {
+    width: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+  }
+  .film-card .meta-row {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+    font-weight: 600;
+  }
+  .film-card .title {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 0.95;
+    margin-bottom: 0.5rem;
+  }
+  .film-card .logline {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(1.5rem, 2.2vw, 2rem);
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 1.25rem 0 2rem;
+    color: var(--text-dim);
+  }
+  .film-card .logline .yellow { color: var(--accent); }
+  .film-card .credits { color: var(--text-dim); font-size: 0.95rem; line-height: 1.85; margin-bottom: 2rem; }
+  .film-card .credits strong { color: var(--text); font-weight: 500; }
+
+  /* rentals tile - card-style with hover-yellow */
+  .rentals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .rental-tile {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    padding: 2rem;
+    transition: all 0.2s;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    min-height: 220px;
+    text-decoration: none;
+    color: inherit;
+  }
+  .rental-tile:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .rental-tile .num {
+    font-family: 'Anton', sans-serif;
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+  }
+  .rental-tile h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 1;
+  }
+  .rental-tile p { color: var(--text-dim); font-size: 0.9rem; line-height: 1.6; }
+  .rental-tile .arrow {
+    margin-top: auto;
+    padding-top: 1rem;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 4rem 2.5rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  footer .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  footer .brand-foot {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  footer .brand-foot .bolt { color: var(--accent); }
+  footer .meta-foot {
+    color: var(--muted);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-align: right;
+  }
+  footer .meta-foot a { color: var(--accent); text-decoration: none; }
+  footer .meta-foot a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div class="meta">
+  <span>Direction A2 · Grindhouse Composed</span>
+  <a href="index.html">← Back to all directions</a>
+</div>
+
+<nav class="top">
+  <div class="brand"><span class="bolt">⚡</span> THUNDERSTRUCK</div>
+  <ul>
+    <li><a href="#chopper">Productions</a></li>
+    <li><a href="#rentals">Rentals</a></li>
+    <li><a href="06-inventory.html">Inventory</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <span class="label">Thunderstruck Pictures · Austin, TX</span>
+  <h1>
+    Production<br>
+    + equipment<br>
+    <span class="yellow">rentals.</span>
+  </h1>
+  <p class="lede">
+    <strong>Original horror, action, and genre work</strong> — and a full lighting &amp; grip rental package, delivered on our 3-ton truck across the Austin market.
+  </p>
+  <div class="ctas">
+    <a class="btn btn-primary" href="#chopper">See the Work →</a>
+    <a class="btn" href="#rentals">See the Kit</a>
+  </div>
+</section>
+
+<div class="truck-strip"></div>
+
+<section id="pillars">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">01 · What we do</span>
+      <h2>Two operations. <span class="yellow">One operator.</span></h2>
+      <p class="sub">The production work proves the truck. The truck pays for itself. Both halves run by the same hands.</p>
+    </div>
+    <div class="three-up">
+      <a class="pillar" href="#chopper">
+        <span class="num">/ 01</span>
+        <h3>Production</h3>
+        <p>Original horror and genre IP. Writing, directing, producing. Anchored by the festival short <em>Chopper</em> (2025).</p>
+        <div class="stat"><span class="k">In the field</span><span class="v">SCREAMFEST →</span></div>
+      </a>
+      <a class="pillar" href="#rentals">
+        <span class="num">/ 02</span>
+        <h3>Rentals</h3>
+        <p>Lighting, modifiers, grip, camera support, distro, expendables. A full package, delivered on our 3-ton truck across central Texas.</p>
+        <div class="stat"><span class="k">Status</span><span class="v">AVAILABLE →</span></div>
+      </a>
+      <a class="pillar" href="#">
+        <span class="num">/ 03</span>
+        <h3>Operator</h3>
+        <p>Martin Shapiro — UCLA-trained writer-director, MGM &amp; HBO development credits, eight years U.S. Air Force.</p>
+        <div class="stat"><span class="k">Bio</span><span class="v">READ MORE →</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section id="type">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">02 · Typography</span>
+      <h2>The voice <span class="yellow">is loud.</span></h2>
+      <p class="sub">Heavy condensed display for the headlines. Neutral sans for everything that needs to be read at a glance.</p>
+    </div>
+    <div class="specimen">
+      <div class="specimen-row">
+        <span class="label">Display · Anton</span>
+        <div>
+          <div class="h1-sample">First you get high.<br><span class="yellow">Then you die.</span></div>
+          <div class="h2-sample">A short film by Martin Shapiro.</div>
+        </div>
+      </div>
+      <div class="specimen-row">
+        <span class="label">Body · Inter</span>
+        <p class="body-sample">
+          <strong>Thunderstruck Pictures</strong> is the working banner of writer–director–producer Martin Shapiro. Original horror IP on one side, a working grip truck on the other. The two halves feed each other.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section id="palette">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">03 · Palette</span>
+      <h2>Black, bone, <span class="yellow">lightning.</span></h2>
+      <p class="sub">A near-black base, warm bone for text, electric yellow used as a system color. Oxblood reserved for one or two horror-coded moments.</p>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#000000;color:#fff;"><span class="name">Pitch</span><span class="hex">#000000</span></div>
+      <div class="swatch" style="background:#141414;color:#fff;"><span class="name">Panel</span><span class="hex">#141414</span></div>
+      <div class="swatch" style="background:#FFD60A;color:#000;"><span class="name">Lightning</span><span class="hex">#FFD60A</span></div>
+      <div class="swatch" style="background:#F5F5F2;color:#000;"><span class="name">Bone</span><span class="hex">#F5F5F2</span></div>
+      <div class="swatch" style="background:#7A1F1F;color:#fff;"><span class="name">Oxblood</span><span class="hex">#7A1F1F</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section id="chopper">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">04 · Productions</span>
+      <h2>Chopper. <span class="yellow">2025.</span></h2>
+      <p class="sub">Festival short — written, directed, and produced by Martin Shapiro. Shot on Arri 35mm. Currently on the international circuit.</p>
+    </div>
+    <div class="film-card">
+      <img src="../Chopper-Film-Poster-Primary-Low-Res.avif" alt="Chopper poster">
+      <div>
+        <div class="meta-row">Short Film · Horror · Premiered ScreamFest LA</div>
+        <div class="title">Chopper</div>
+        <div class="logline">"First you get high.<br><span class="yellow">Then you die…"</span></div>
+        <p class="credits">
+          <strong>Written, directed, and produced by</strong> Martin Shapiro<br>
+          <strong>Starring</strong> Caylee Cowan, Stevie Lynn Jones, David Hayter<br>
+          <strong>Status</strong> On the international festival circuit
+        </p>
+        <a class="btn btn-primary" href="https://www.choppermovie.com" target="_blank" rel="noopener">Visit Film Site →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section id="rentals">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">05 · Rentals</span>
+      <h2>Equipment rentals. <span class="yellow">Austin.</span></h2>
+      <p class="sub">A full lighting &amp; grip package — delivered on our 3-ton truck across central Texas. Inventory and rates available on request.</p>
+    </div>
+    <div class="rentals-grid">
+      <a class="rental-tile" href="06-inventory.html#camera">
+        <div class="num">/ 01</div>
+        <h3>Camera &amp; Lenses</h3>
+        <p>RED Komodo 6K · DZOFilm PAVO 2× anamorphics (28/40/75/135) · VESPID full-frame primes (16/25/35/75) · Laowa Ranger 17–50 zoom · Tilta Mirage matte box.</p>
+        <span class="arrow">View Inventory →</span>
+      </a>
+      <a class="rental-tile" href="06-inventory.html#lighting-big">
+        <div class="num">/ 02</div>
+        <h3>Lighting</h3>
+        <p>Nanlux Evoke 2400B · Aputure Storm 1200x · 600d &amp; 600x Pro · Astera Titan 8-tube kit · Aputure INFINIBAR · Intellytech Mega-6FC RGB mat.</p>
+        <span class="arrow">View Inventory →</span>
+      </a>
+      <a class="rental-tile" href="06-inventory.html#modifiers">
+        <div class="num">/ 03</div>
+        <h3>Modifiers &amp; Frames</h3>
+        <p>Light Dome II · Lantern 90 · F10 Fresnel · LiteFlow reflector kit · 12'×12' overhead frame system · 8'×8' &amp; 6'×6' skins.</p>
+        <span class="arrow">View Inventory →</span>
+      </a>
+      <a class="rental-tile" href="06-inventory.html#stands">
+        <div class="num">/ 04</div>
+        <h3>Grip &amp; Stands</h3>
+        <p>18ft &amp; 19ft high rollers · Combo &amp; baby stands · 40" C-stands · Menace arm · Cardellinis, Mafer, super clamps · Apple boxes &amp; sandbags.</p>
+        <span class="arrow">View Inventory →</span>
+      </a>
+      <a class="rental-tile" href="06-inventory.html#camera-support">
+        <div class="num">/ 05</div>
+        <h3>Camera Support</h3>
+        <p>Sachtler 18P / 100mm carbon tripod · Dana Dolly + slider stands · DJI RS 3 Pro + Tilta Float vest · YaegerPro cart · hi-hats.</p>
+        <span class="arrow">View Inventory →</span>
+      </a>
+      <a class="rental-tile" href="06-inventory.html#audio-recording">
+        <div class="num">/ 06</div>
+        <h3>Audio</h3>
+        <p>Sound Devices 633 · Sennheiser MKH 50 + Rycote · Lectrosonics SMDWB · Sanken COS-11D &amp; DPA 4061 lavs · Ambient carbon-fiber boom pole.</p>
+        <span class="arrow">View Inventory →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="row">
+    <div class="brand-foot"><span class="bolt">⚡</span> THUNDERSTRUCK</div>
+    <div class="meta-foot">
+      © Thunderstruck Pictures · Austin, TX<br>
+      <a href="mailto:martin@thunderstruckpictures.co">martin@thunderstruckpictures.co</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

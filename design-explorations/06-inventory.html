@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thunderstruck Pictures — Equipment Inventory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg-pure: #000000;
+    --bg-2: #141414;
+    --panel: #161616;
+    --line: #262626;
+    --line-bright: #3a3a3a;
+    --text: #f5f5f2;
+    --text-dim: #a3a3a3;
+    --muted: #737373;
+    --accent: #FFD60A;
+  }
+  *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 2.5rem; }
+
+  /* meta bar */
+  .meta {
+    border-bottom: 1px solid var(--line);
+    padding: 1rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+  .meta a { color: var(--accent); text-decoration: none; }
+  .meta a:hover { text-decoration: underline; }
+
+  /* nav */
+  nav.top {
+    border-bottom: 1px solid var(--line);
+    padding: 1.75rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  nav.top .brand {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--text);
+    text-decoration: none;
+  }
+  nav.top .brand .bolt { color: var(--accent); font-size: 1.25rem; }
+  nav.top ul { list-style: none; display: flex; gap: 2.5rem; }
+  nav.top a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: color 0.15s;
+  }
+  nav.top a:hover { color: var(--accent); }
+  nav.top a.current { color: var(--accent); }
+  @media (max-width: 700px) { nav.top ul { display: none; } }
+
+  /* hero */
+  .hero {
+    padding: 4rem 2.5rem 3.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hero .label { display: block; margin-bottom: 1.5rem; }
+  .hero h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 0.92;
+    text-transform: uppercase;
+    letter-spacing: 0.005em;
+    max-width: 14ch;
+  }
+  .hero h1 .yellow { color: var(--accent); }
+  .hero .lede {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-dim);
+    max-width: 60ch;
+  }
+  .hero .lede strong { color: var(--text); font-weight: 500; }
+  .hero .ctas {
+    margin-top: 1.75rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem 1.6rem;
+    font-family: 'Anton', sans-serif;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    text-decoration: none;
+    border: 2px solid var(--text);
+    color: var(--text);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn:hover { background: var(--text); color: var(--bg-pure); }
+  .btn-primary { background: var(--accent); color: var(--bg-pure); border-color: var(--accent); }
+  .btn-primary:hover { background: var(--text); color: var(--bg-pure); border-color: var(--text); }
+
+  /* lightning rule */
+  .rule {
+    height: 1px;
+    background: var(--line);
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .rule::after {
+    content: "⚡";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--bg);
+    padding: 0 1rem;
+    color: var(--accent);
+    font-size: 1.25rem;
+  }
+
+  /* category index */
+  .index {
+    padding: 2.5rem 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .index .index-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.85rem;
+    margin-bottom: 1.25rem;
+  }
+  .index .index-head h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .index .index-head .count {
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .index ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.25rem 1.5rem;
+  }
+  .index li a {
+    display: flex;
+    gap: 0.65rem;
+    text-decoration: none;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    padding: 0.2rem 0;
+    transition: color 0.15s;
+  }
+  .index li a:hover { color: var(--accent); }
+  .index li a .num {
+    font-family: 'Anton', sans-serif;
+    color: var(--accent);
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    min-width: 1.6rem;
+  }
+
+  /* category section */
+  section.cat {
+    padding: 2.75rem 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    scroll-margin-top: 2rem;
+  }
+  section.cat .cat-head {
+    margin-bottom: 1.5rem;
+    max-width: 800px;
+  }
+  section.cat .cat-head .num-eyebrow {
+    display: block;
+    font-family: 'Anton', sans-serif;
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+  }
+  section.cat .cat-head h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(1.6rem, 3vw, 2.25rem);
+    text-transform: uppercase;
+    letter-spacing: 0.005em;
+    line-height: 0.95;
+  }
+  section.cat .cat-head h2 .yellow { color: var(--accent); }
+  section.cat .cat-head .sub {
+    margin-top: 0.6rem;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    max-width: 60ch;
+  }
+
+  /* item list */
+  .items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 2.5rem;
+  }
+  @media (max-width: 800px) {
+    .items { grid-template-columns: 1fr; gap: 0; }
+  }
+  .items .group {
+    margin-bottom: 1rem;
+  }
+  .items .group-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+    padding-bottom: 0.35rem;
+    margin-bottom: 0.4rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .item {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.25rem;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .item:last-child { border-bottom: none; }
+  .item .name {
+    color: var(--text);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.35;
+  }
+  .item .name em {
+    color: var(--text-dim);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.78rem;
+    display: block;
+    margin-top: 0.1rem;
+  }
+  .item .qty {
+    color: var(--text-dim);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: right;
+    white-space: nowrap;
+    flex-shrink: 0;
+    font-weight: 600;
+  }
+  .item .qty.accent { color: var(--accent); }
+
+  /* contact strip */
+  .contact-strip {
+    padding: 4rem 2.5rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .contact-strip h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    text-transform: uppercase;
+    letter-spacing: 0.005em;
+    line-height: 0.95;
+  }
+  .contact-strip h2 .yellow { color: var(--accent); }
+  .contact-strip p {
+    margin-top: 1rem;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 50ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .contact-strip .ctas {
+    margin-top: 1.75rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .footnote {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 2rem;
+  }
+
+  /* footer */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 4rem 2.5rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  footer .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  footer .brand-foot {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  footer .brand-foot .bolt { color: var(--accent); }
+  footer .meta-foot {
+    color: var(--muted);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-align: right;
+  }
+  footer .meta-foot a { color: var(--accent); text-decoration: none; }
+  footer .meta-foot a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div class="meta">
+  <span>Thunderstruck Pictures · Equipment Inventory · Updated October 2025</span>
+  <a href="04-grindhouse-composed.html">← Back to home</a>
+</div>
+
+<nav class="top">
+  <a class="brand" href="04-grindhouse-composed.html"><span class="bolt">⚡</span> THUNDERSTRUCK</a>
+  <ul>
+    <li><a href="04-grindhouse-composed.html#chopper">Productions</a></li>
+    <li><a href="04-grindhouse-composed.html#rentals">Rentals</a></li>
+    <li><a href="06-inventory.html" class="current">Inventory</a></li>
+    <li><a href="04-grindhouse-composed.html#">About</a></li>
+    <li><a href="04-grindhouse-composed.html#">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <span class="label">Equipment Rentals · Austin, TX</span>
+  <h1>The full <span class="yellow">kit.</span></h1>
+  <p class="lede">
+    <strong>Camera, lenses, lighting, grip, audio, power.</strong> A complete package for narrative, commercial, and music-video work — delivered on our 3-ton truck across the Austin market. Inventory reflects fleet as of October 2025.
+  </p>
+  <div class="ctas">
+    <a class="btn btn-primary" href="mailto:martin@thunderstruckpictures.co?subject=Rental%20Inquiry">Request Quote →</a>
+    <a class="btn" href="#index">Jump to Category</a>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section class="index" id="index">
+  <div class="index-head">
+    <h2>Categories</h2>
+    <span class="count">24 sections</span>
+  </div>
+  <ul>
+    <li><a href="#camera"><span class="num">01</span>Camera</a></li>
+    <li><a href="#lenses"><span class="num">02</span>Lenses</a></li>
+    <li><a href="#camera-support"><span class="num">03</span>Camera Support</a></li>
+    <li><a href="#gimbal"><span class="num">04</span>Gimbal &amp; Stabilization</a></li>
+    <li><a href="#wireless-video"><span class="num">05</span>Wireless Video &amp; Monitors</a></li>
+    <li><a href="#power"><span class="num">06</span>Power</a></li>
+    <li><a href="#lighting-big"><span class="num">07</span>Lighting — Big</a></li>
+    <li><a href="#lighting-small"><span class="num">08</span>Lighting — Mid &amp; Small</a></li>
+    <li><a href="#lighting-tubes"><span class="num">09</span>Lighting — Tubes &amp; Panels</a></li>
+    <li><a href="#modifiers"><span class="num">10</span>Modifiers</a></li>
+    <li><a href="#frames"><span class="num">11</span>Frames &amp; Overhead</a></li>
+    <li><a href="#skins"><span class="num">12</span>Overhead Skins</a></li>
+    <li><a href="#reflectors"><span class="num">13</span>Reflectors</a></li>
+    <li><a href="#flags"><span class="num">14</span>Flags &amp; Cutters</a></li>
+    <li><a href="#stands"><span class="num">15</span>Stands</a></li>
+    <li><a href="#booms"><span class="num">16</span>Booms &amp; Headers</a></li>
+    <li><a href="#clamps"><span class="num">17</span>Clamps &amp; Mounts</a></li>
+    <li><a href="#wall-plates"><span class="num">18</span>Wall Plates &amp; Safety</a></li>
+    <li><a href="#sandbags"><span class="num">19</span>Sandbags &amp; Apple Boxes</a></li>
+    <li><a href="#dmx"><span class="num">20</span>Wireless DMX &amp; Control</a></li>
+    <li><a href="#aerial"><span class="num">21</span>Aerial</a></li>
+    <li><a href="#audio-recording"><span class="num">22</span>Audio — Recording</a></li>
+    <li><a href="#audio-mics"><span class="num">23</span>Audio — Microphones</a></li>
+    <li><a href="#audio-wireless"><span class="num">24</span>Audio — Wireless &amp; Sync</a></li>
+  </ul>
+</section>
+
+<div class="rule"></div>
+
+<!-- 01 CAMERA -->
+<section class="cat" id="camera">
+  <div class="cat-head">
+    <span class="num-eyebrow">01 · Camera</span>
+    <h2>Camera <span class="yellow">body &amp; rig.</span></h2>
+    <p class="sub">RED Komodo 6K with a full complement of cage, rod, handle, and follow-focus accessories.</p>
+  </div>
+  <div class="items">
+    <div class="group">
+      <div class="group-label">Camera</div>
+      <div class="item"><span class="name">RED Komodo 6K Cinema Camera</span><span class="qty">Body</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Cage &amp; Plates</div>
+      <div class="item"><span class="name">Bright Tangerine Top &amp; Side Plates</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Bright Tangerine Metabones RF→PL Adapter Support</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Niceyrig Manfrotto Quick Release 15mm Rod Base Plate</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Camvate Battery Cheese Plate</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Wooden Camera V-Mount Battery Plate <em>3× D-Taps</em></span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Tilta Lightweight Shoulder Rig</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Dovetail Plate &amp; Baseplate</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Kondor Blue Quick Release Plates</span><span class="qty accent">×6</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Handles &amp; Rosettes</div>
+      <div class="item"><span class="name">SmallRig Rotating NATO Top Handle</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Side Handle <em>3/8" Arri Mount</em></span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Nitze Side Handle with Rosette</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Tilta Quick Adjust Rosette Adapters</span><span class="qty accent">×4</span></div>
+      <div class="item"><span class="name">Tilta NATO Clamp <em>1/4" &amp; 3/8" Female</em></span><span class="qty accent">×2</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Rods, Clamps &amp; Misc</div>
+      <div class="item"><span class="name">15mm Rods — 16" Stainless Steel</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">15mm Rod — 6" Titanium <em>Drumstix</em></span><span class="qty">—</span></div>
+      <div class="item"><span class="name">15mm Rod Clamp w/ 3/8" Arri Screw</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">NATO 15mm Rod Clamp</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Nitze 15mm Lens Support</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Tilta Adjustable Cold Shoe Monitor Mount</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Cage Mount for Apple AirTag <em>SmallRig</em></span><span class="qty">—</span></div>
+      <div class="item"><span class="name">SmallRig 11" Magic Arm</span><span class="qty">—</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Follow Focus</div>
+      <div class="item"><span class="name">Tilta Nucleus-M Wireless Follow Focus</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Tilta Rosette for Nucleus-M FIZ</span><span class="qty">—</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Timecode &amp; Sync</div>
+      <div class="item"><span class="name">Tentacle Sync E Mk2 Timecode Generator</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Tentacle Sync Bracket</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">NP-F550 Batteries + Dual USB Charger</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Tentacle to RED Komodo Adapter Cable</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Tentacle to 5-Pin LEMO Cable</span><span class="qty">—</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- 02 LENSES -->
+<section class="cat" id="lenses">
+  <div class="cat-head">
+    <span class="num-eyebrow">02 · Lenses</span>
+    <h2>Glass — <span class="yellow">all PL.</span></h2>
+    <p class="sub">DZOFilm anamorphic and full-frame primes, Laowa Ranger zoom. Komodo runs PL via Metabones.</p>
+  </div>
+  <div class="items">
+    <div class="group">
+      <div class="group-label">Anamorphic — DZOFilm PAVO 2× Super 35</div>
+      <div class="item"><span class="name">PAVO 28mm</span><span class="qty">T2.1</span></div>
+      <div class="item"><span class="name">PAVO 40mm</span><span class="qty">T2.1</span></div>
+      <div class="item"><span class="name">PAVO 75mm</span><span class="qty">T2.1</span></div>
+      <div class="item"><span class="name">PAVO 135mm</span><span class="qty">T2.5</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Spherical — DZOFilm VESPID Full Frame</div>
+      <div class="item"><span class="name">VESPID 16mm <em>21mm on Super-35 Komodo</em></span><span class="qty">T2.1</span></div>
+      <div class="item"><span class="name">VESPID 25mm <em>33mm on Super-35 Komodo</em></span><span class="qty">T2.1</span></div>
+      <div class="item"><span class="name">VESPID 35mm <em>46mm on Super-35 Komodo</em></span><span class="qty">T2.1</span></div>
+      <div class="item"><span class="name">VESPID 75mm <em>99mm on Super-35 Komodo</em></span><span class="qty">T2.1</span></div>
+      <div class="item"><span class="name">DZOFilm 4-Lens Hard Case for VESPID Primes</span><span class="qty">—</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Zoom</div>
+      <div class="item"><span class="name">Laowa Ranger 17–50mm Super 35 Cine Zoom</span><span class="qty">T2.9</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Mount &amp; Matte Box</div>
+      <div class="item"><span class="name">Metabones Lens Mount Adapter — RF to PL</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Tilta Mirage Matte Box Kit w/ Variable ND <em>fits 95mm; adapter rings 67/72/77/82mm</em></span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Tilta Control Knob for Variable ND Filter</span><span class="qty">—</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- 03 CAMERA SUPPORT -->
+<section class="cat" id="camera-support">
+  <div class="cat-head">
+    <span class="num-eyebrow">03 · Camera Support</span>
+    <h2>Tripods, dollies, <span class="yellow">cart.</span></h2>
+    <p class="sub">Sachtler 100mm sticks, Dana Dolly, hi-hats, and a YaegerPro cart for set-to-set moves.</p>
+  </div>
+  <div class="items">
+    <div class="group">
+      <div class="group-label">Tripod Package</div>
+      <div class="item"><span class="name">Sachtler Video 18 P Fluid Head <em>100mm bowl</em></span><span class="qty">7–40 lb</span></div>
+      <div class="item"><span class="name">Sachtler SpeedLock 100mm Carbon Fiber Tripod</span><span class="qty">Heavy-Duty</span></div>
+      <div class="item"><span class="name">Sachtler Ground Spreader</span><span class="qty">—</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Hi-Hats &amp; Adapters</div>
+      <div class="item"><span class="name">100mm Hi-Hat with Cheese Plate</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">100mm Hi-Hat with Board</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">100mm to 75mm Bowl Adapter</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Fat Gecko Triple Suction Cup Car Mount</span><span class="qty">—</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Dolly &amp; Track</div>
+      <div class="item"><span class="name">Dana Dolly with Universal Track Ends</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Dana Dolly 6" Mitchell Riser Plate</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Slider Stands for Dana Dolly</span><span class="qty accent">×2</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Cart</div>
+      <div class="item"><span class="name">YaegerPro Cart <em>Mitchell Mast, Boxed Dovetail Spinner, Tripod Mast, Steadicam Mast, Battery Block Hook</em></span><span class="qty">—</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- 04 GIMBAL -->
+<section class="cat" id="gimbal">
+  <div class="cat-head">
+    <span class="num-eyebrow">04 · Gimbal &amp; Stabilization</span>
+    <h2>Move with <span class="yellow">the camera.</span></h2>
+    <p class="sub">DJI RS 3 Pro for handheld and ring-grip work. Tilta Float vest for Trinity-style moves.</p>
+  </div>
+  <div class="items">
+    <div class="group">
+      <div class="group-label">Gimbal</div>
+      <div class="item"><span class="name">DJI RS 3 Pro Gimbal Stabilizer Combo</span><span class="qty">10 lb</span></div>
+      <div class="item"><span class="name">Tilta Wireless Lens Control Handle</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Tilta Wireless Gimbal Control Handle</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Extra DJI Ronin Battery Grip</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">SmallRig Gimbal Sling Handle</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">SmallRig Side Handle for Gimbal</span><span class="qty">—</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Ring Grip System</div>
+      <div class="item"><span class="name">Tilta Basic Ring Grip Plus for DJI Gimbal</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Tilta Power Supply Module for Ring Grip</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Tilta Ring Adapter</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Tilta Battery Plate for Ring Grip</span><span class="qty">—</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Vest System</div>
+      <div class="item"><span class="name">Tilta Float Gimbal Support System V-Mount with Vest <em>similar to ARRI Trinity</em></span><span class="qty">—</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- 05 WIRELESS VIDEO & MONITORS -->
+<section class="cat" id="wireless-video">
+  <div class="cat-head">
+    <span class="num-eyebrow">05 · Wireless Video &amp; Monitors</span>
+    <h2>Monitoring <span class="yellow">to set.</span></h2>
+    <p class="sub">Teradek Bolt 6 LT 750 transmit, on-camera ULTRA 5, 13" production monitor, director's cage, and a Komodo-control PortKeys.</p>
+  </div>
+  <div class="items">
+    <div class="group">
+      <div class="group-label">Wireless Video</div>
+      <div class="item"><span class="name">Teradek Bolt 6 LT 750 3G-SDI TX/RX Kit</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Wooden Camera Mount Bracket for Teradek</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">2-Pin LEMO Power Cable for Teradek</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Kondor Blue Quick Release Plate for Teradek RX</span><span class="qty accent">×2</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Monitors</div>
+      <div class="item"><span class="name">SmallHD ULTRA 5 Monitor</span><span class="qty">5"</span></div>
+      <div class="item"><span class="name">SmallHD 1303 HDR Production Monitor</span><span class="qty">13"</span></div>
+      <div class="item"><span class="name">PortKeys BM5WR Monitor w/ Camera Control for RED Komodo</span><span class="qty">5.5"</span></div>
+      <div class="item"><span class="name">Director's Monitor Cage</span><span class="qty">—</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Monitor Mounts &amp; Plates</div>
+      <div class="item"><span class="name">SmallHD Battery Cheese Plate</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">SmallHD V-Mount Battery Plate</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">SmallHD 1/4" M Anti-Twist to 3/8" F</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Wooden Camera VESA Monitor Mount with Baby Receiver</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Kondor Blue Anti-Twist Spacer for SmallHD</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Noga CineArm</span><span class="qty">—</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Monitor Power &amp; Audio</div>
+      <div class="item"><span class="name">NP-F750 Batteries + Travel Chargers</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Audio-Technica ATH-M50x Headphones</span><span class="qty">—</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- 06 POWER -->
+<section class="cat" id="power">
+  <div class="cat-head">
+    <span class="num-eyebrow">06 · Power</span>
+    <h2>V-Mount fleet <span class="yellow">+ AC.</span></h2>
+    <p class="sub">Deep V-Mount inventory for camera, monitors, and small fixtures. Generator and 2× Aputure Delta Pros for the big lights when shore power isn't there.</p>
+  </div>
+  <div class="items">
+    <div class="group">
+      <div class="group-label">V-Mount Batteries</div>
+      <div class="item"><span class="name">Core Helix Max Dual-Voltage</span><span class="qty">360Wh</span></div>
+      <div class="item"><span class="name">Core NEO Mini</span><span class="qty">147Wh</span></div>
+      <div class="item"><span class="name">Core NEO Mini</span><span class="qty">98Wh</span></div>
+      <div class="item"><span class="name">Core NEO Slim</span><span class="qty">98Wh</span></div>
+      <div class="item"><span class="name">Core NANO X Micro</span><span class="qty">98Wh</span></div>
+      <div class="item"><span class="name">Core NANO Micro <em>147Wh</em></span><span class="qty accent">×4</span></div>
+      <div class="item"><span class="name">Core NANO Micro <em>50Wh</em></span><span class="qty accent">×2</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">V-Mount Chargers</div>
+      <div class="item"><span class="name">Core SWX Mach4 4-Position Charger <em>4A Rapid Charge</em></span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Core Mini Dual V-Mount Battery Chargers</span><span class="qty accent">×2</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">AC &amp; Portable Stations</div>
+      <div class="item"><span class="name">Honda EU2200i Generator</span><span class="qty">2200W</span></div>
+      <div class="item"><span class="name">Aputure Delta Pro Battery Stations <em>5 AC + 6 USB; runs 1200d at full 2+ hrs</em></span><span class="qty accent">×2 · 3600W</span></div>
+      <div class="item"><span class="name">Jackery Power Station 880 <em>3× 1000W AC</em></span><span class="qty">—</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- 07 LIGHTING — BIG -->
+<section class="cat" id="lighting-big">
+  <div class="cat-head">
+    <span class="num-eyebrow">07 · Lighting — Big Fixtures</span>
+    <h2>Heavy <span class="yellow">throw.</span></h2>
+    <p class="sub">From the 4000W-equivalent Nanlux down through a stack of 600-series Aputures. All bi-color or daylight LED — no HMI ballasts to wrangle.</p>
+  </div>
+  <div class="items">
+    <div class="group">
+      <div class="group-label">Fixtures</div>
+      <div class="item"><span class="name">Nanlux Evoke 2400B Bi-Color LED <em>kit w/ case &amp; accessories</em></span><span class="qty accent">≈4000W HMI</span></div>
+      <div class="item"><span class="name">Aputure Storm 1200x Bi-Color LED Kit</span><span class="qty accent">≈1800W HMI</span></div>
+      <div class="item"><span class="name">Aputure 600d Pro Daylight LED <em>24' weatherproof head cable</em></span><span class="qty accent">≈1200W HMI</span></div>
+      <div class="item"><span class="name">Aputure 600x Pro Bi-Color LED <em>2700–6500K, 24' weatherproof head cable</em></span><span class="qty">—</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Optics &amp; Barndoors</div>
+      <div class="item"><span class="name">Storm 1200x Fresnel</span><span class="qty">15–45°</span></div>
+      <div class="item"><span class="name">Storm 1200x Barndoors</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Storm 1200x Skid Support</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Aputure F10 Fresnel</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Aputure F10 Barndoors</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Aputure Spotlight Mount with 36° Lens</span><span class="qty">—</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- 08 LIGHTING — MID & SMALL -->
+<section class="cat" id="lighting-small">
+  <div class="cat-head">
+    <span class="num-eyebrow">08 · Lighting — Mid &amp; Small</span>
+    <h2>Fill, accent, <span class="yellow">practical.</span></h2>
+    <p class="sub">Amaran 200x for fill, LS 60x for tight focus, MC Pro / MC for accents and effects, and RGB bulbs for practicals.</p>
+  </div>
+  <div class="items">
+    <div class="group">
+      <div class="group-label">Mid Fixtures</div>
+      <div class="item"><span class="name">Amaran 200x Bi-Color LED</span><span class="qty">200W</span></div>
+      <div class="item"><span class="name">Barndoors, Grid &amp; Gel Holder for Amaran 200x</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Aputure LS 60x Bi-Color Focusing LED</span><span class="qty">60W</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Small RGB</div>
+      <div class="item"><span class="name">Aputure MC Pro RGB LED <em>CRMX</em></span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Aputure MC Pro Bubble Diffuser</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Anker 10,000mAh USB-C Power Bank for MC Pro</span><span class="qty">30W</span></div>
+      <div class="item"><span class="name">Aputure MC RGB LED</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Dual Magnet Light Mount</span><span class="qty">—</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">RGB Bulbs &amp; Practicals</div>
+      <div class="item"><span class="name">Aputure B7C RGB LED Bulb</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Godox C7R RGB LED Bulb</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Light Bouncer for Godox Bulb</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Magnet Mount for Bulbs</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Power Cable for Magnet Mount</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Matthews Bulb Mount</span><span class="qty">—</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- 09 LIGHTING — TUBES & PANELS -->
+<section class="cat" id="lighting-tubes">
+  <div class="cat-head">
+    <span class="num-eyebrow">09 · Lighting — Tubes &amp; Panels</span>
+    <h2>Tubes, mat, <span class="yellow">bar.</span></h2>
+    <p class="sub">Astera Titan 8-tube kit (CRMX), Aputure INFINIBAR PB12, and an Intellytech Mega-6FC 4'×3' RGB mat with DMX.</p>
+  </div>
+  <div class="items">
+    <div class="group">
+      <div class="group-label">Tubes</div>
+      <div class="item"><span class="name">Astera Titan Tube RGB LED 8-Light Kit <em>CRMX</em></span><span class="qty">8 tubes</span></div>
+      <div class="item"><span class="name">Magnetic LED Tube Light Clips</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Custom Grid for Astera Titan Tube</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Aputure INFINIBAR PB12 RGB LED Tube <em>CRMX</em></span><span class="qty">4 ft</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Flexible Mat</div>
+      <div class="item"><span class="name">Intellytech Mega-6FC Litecloth 3.0 RGB Flexible Mat <em>DMX, soft box &amp; grid included</em></span><span class="qty">4'×3'</span></div>
+      <div class="item"><span class="name">Mega-6FC Head Extension Cable</span><span class="qty">26 ft</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- 10 MODIFIERS -->
+<section class="cat" id="modifiers">
+  <div class="cat-head">
+    <span class="num-eyebrow">10 · Modifiers</span>
+    <h2>Domes &amp; <span class="yellow">lanterns.</span></h2>
+    <p class="sub">Soft-source modifiers for the 600-series and Amaran 200x. Bowens-mount.</p>
+  </div>
+  <div class="items">
+    <div class="group">
+      <div class="group-label">Soft Boxes &amp; Lanterns</div>
+      <div class="item"><span class="name">Aputure Light Dome II <em>1.5-stop &amp; 2.5-stop diffusers</em></span><span class="qty">35"</span></div>
+      <div class="item"><span class="name">Aputure Lantern 90 <em>1-stop diffuser</em></span><span class="qty">36"</span></div>
+      <div class="item"><span class="name">Amaran Light Dome Mini SE</span><span class="qty">—</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- 11 FRAMES & OVERHEAD -->
+<section class="cat" id="frames">
+  <div class="cat-head">
+    <span class="num-eyebrow">11 · Frames &amp; Overhead</span>
+    <h2>Build the <span class="yellow">overhead.</span></h2>
+    <p class="sub">Full 12'×12' / 6'×6' overhead frame system in 1-1/4" pipe. Plus Scrim Jim, Chimera, and a flat gel frame.</p>
+  </div>
+  <div class="items">
+    <div class="group">
+      <div class="group-label">12'×12' / 6'×6' Pipe Frame</div>
+      <div class="item"><span class="name">1-1/4" Schedule 40 Aluminum Pipe <em>6 ft pieces</em></span><span class="qty accent">×8 (48 ft)</span></div>
+      <div class="item"><span class="name">Matthews Pipe Ears for 1-1/4" Pipe</span><span class="qty accent">×2</span></div>
+      <div class="item"><span class="name">Matthews Pipe Connectors for 1-1/4" Pipe</span><span class="qty accent">×2</span></div>
+      <div class="item"><span class="name">Matthews Corners for 1-1/4" Pipe</span><span class="qty accent">×2</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Breakdown Frame</div>
+      <div class="item"><span class="name">12'×12' Breakdown to 6'×6' Overhead Frame <em>1" square tube</em></span><span class="qty">—</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Smaller Frames</div>
+      <div class="item"><span class="name">Westcott Scrim Jim Cine Frame Kit <em>can also build 4'×4'</em></span><span class="qty">8'×8'</span></div>
+      <div class="item"><span class="name">Tenba Bag for Scrim Jim Frame</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Chimera Collapsible Frame</span><span class="qty">6'×6'</span></div>
+      <div class="item"><span class="name">Flat Gel Frame</span><span class="qty">48"×48"</span></div>
+      <div class="item"><span class="name">4-Sided UltraBounce Floppy Tent</span><span class="qty">40"×40"</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- 12 OVERHEAD SKINS -->
+<section class="cat" id="skins">
+  <div class="cat-head">
+    <span class="num-eyebrow">12 · Overhead Skins</span>
+    <h2>Diffusion, bounce, <span class="yellow">cut.</span></h2>
+    <p class="sub">Complete skin set for 8'×8' and 6'×6' frames, plus a digital green for keyable backgrounds.</p>
+  </div>
+  <div class="items">
+    <div class="group">
+      <div class="group-label">8'×8'</div>
+      <div class="item"><span class="name">1/4 Silent Grid Cloth</span><span class="qty">8'×8'</span></div>
+      <div class="item"><span class="name">Unbleached Muslin</span><span class="qty">8'×8'</span></div>
+      <div class="item"><span class="name">Black &amp; White UltraBounce</span><span class="qty">8'×8'</span></div>
+      <div class="item"><span class="name">Digital Green</span><span class="qty">8'×8'</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">6'×6'</div>
+      <div class="item"><span class="name">1/2 Soft Frost</span><span class="qty">6'×6'</span></div>
+      <div class="item"><span class="name">Poly Silk <em>1 1/3 stop</em></span><span class="qty">6'×6'</span></div>
+      <div class="item"><span class="name">Magic Cloth</span><span class="qty">6'×6'</span></div>
+      <div class="item"><span class="name">Single Net</span><span class="qty">6'×6'</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- 13 REFLECTORS -->
+<section class="cat" id="reflectors">
+  <div class="cat-head">
+    <span class="num-eyebrow">13 · Reflectors</span>
+    <h2>Godox <span class="yellow">LiteFlow.</span></h2>
+    <p class="sub">Full LiteFlow 50 set — Hard, Medium, Soft, and Soft-Strip — with rail mounts and case.</p>
+  </div>
+  <div class="items">
+    <div class="group">
+      <div class="group-label">LiteFlow 50 Reflectors</div>
+      <div class="item"><span class="name">Hard Light Reflector</span><span class="qty">20"×20"</span></div>
+      <div class="item"><span class="name">Medium Light Reflector</span><span class="qty">20"×20"</span></div>
+      <div class="item"><span class="name">Soft Light Reflector</span><span class="qty">20"×20"</span></div>
+      <div class="item"><span class="name">Soft Strip Light Reflector</span><span class="qty">20"×20"</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Mounts &amp; Case</div>
+      <div class="item"><span class="name">LiteFlow Rail Mount Stud</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">LiteFlow Rail Mount Receiver</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">LiteFlow Kit Case</span><span class="qty">—</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- 14 FLAGS & CUTTERS -->
+<section class="cat" id="flags">
+  <div class="cat-head">
+    <span class="num-eyebrow">14 · Flags, Floppies, Cutters</span>
+    <h2>Cut the <span class="yellow">light.</span></h2>
+  </div>
+  <div class="items">
+    <div class="group">
+      <div class="group-label">Scrim &amp; Flag Kits</div>
+      <div class="item"><span class="name">Scrim &amp; Flag Kit <em>Single Scrim, Double Scrim, Artificial Silk, Solid Black, Solid Floppy</em></span><span class="qty">24"×36"</span></div>
+      <div class="item"><span class="name">Portable Run-n-Gun Scrim &amp; Flag Kit <em>Single, Double, 1-Stop Silk, 2-Stop Silk, Solid Black</em></span><span class="qty">24"×36"</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Floppies &amp; Cutters</div>
+      <div class="item"><span class="name">Modern Floppy Flag <em>Water Solid, opens to 3'×6'</em></span><span class="qty">3'×3'</span></div>
+      <div class="item"><span class="name">Matthews Floppy Cutter Top Hinge <em>opens to 4'×8'</em></span><span class="qty accent">×2 · 4'×4'</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- 15 STANDS -->
+<section class="cat" id="stands">
+  <div class="cat-head">
+    <span class="num-eyebrow">15 · Stands</span>
+    <h2>Up to <span class="yellow">19 feet.</span></h2>
+    <p class="sub">High rollers for overhead, combo stands for big fixtures, baby/maxi for everything else, and three sliding-leg C-stands.</p>
+  </div>
+  <div class="items">
+    <div class="group">
+      <div class="group-label">High Roller / Overhead</div>
+      <div class="item"><span class="name">American Grip High Roller Overhead Stand <em>Rocky Mountain leg, 60 lb max</em></span><span class="qty accent">×2 · 18 ft</span></div>
+      <div class="item"><span class="name">Kupo High Overhead Roller Stand <em>88 lb max</em></span><span class="qty accent">×2 · 19 ft</span></div>
+      <div class="item"><span class="name">Matthews Combo Triple Riser Stand <em>Rocky Mountain leg, 68 lb max</em></span><span class="qty">14 ft</span></div>
+      <div class="item"><span class="name">Matthews Lollipop Junior Grip Head</span><span class="qty">—</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Baby / Maxi / Aluminum</div>
+      <div class="item"><span class="name">Matthews Baby Double Riser Roller Stand <em>30 lb max</em></span><span class="qty">9 ft</span></div>
+      <div class="item"><span class="name">Impact Folding Baby Roller Stand <em>min 44", 26 lb max</em></span><span class="qty">11 ft</span></div>
+      <div class="item"><span class="name">Impact Folding Lowboy Combo Roller Stand <em>55 lb max</em></span><span class="qty">4 ft</span></div>
+      <div class="item"><span class="name">Matthews Baby Stand <em>Rocky Mountain leg, 25 lb max</em></span><span class="qty">12 ft</span></div>
+      <div class="item"><span class="name">Matthews Maxi Steel Stand <em>25 lb max</em></span><span class="qty">9 ft</span></div>
+      <div class="item"><span class="name">Matthews Aluminum Stand <em>13 lb max</em></span><span class="qty">9 ft</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">C-Stands</div>
+      <div class="item"><span class="name">Matthews 40" C-Stand w/ Grip Head &amp; Arm — Sliding Leg</span><span class="qty accent">×3</span></div>
+      <div class="item"><span class="name">Matthews 40" C-Stand w/ Grip Head &amp; Arm — Turtle Base</span><span class="qty accent">×2</span></div>
+      <div class="item"><span class="name">Matthews 20" C-Stand w/ Grip Head &amp; Arm — Sliding Leg</span><span class="qty">—</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Polecats &amp; Booms</div>
+      <div class="item"><span class="name">Varipole Polecats</span><span class="qty accent">×2</span></div>
+      <div class="item"><span class="name">Steel Baby Boom</span><span class="qty">—</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- 16 BOOMS & HEADERS -->
+<section class="cat" id="booms">
+  <div class="cat-head">
+    <span class="num-eyebrow">16 · Booms, Arms, Headers</span>
+    <h2>Reach &amp; <span class="yellow">extend.</span></h2>
+  </div>
+  <div class="items">
+    <div class="group">
+      <div class="group-label">Menace Arm</div>
+      <div class="item"><span class="name">Matthews Menace Arm Kit</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Matthews Pipe Connector Extension for 1-1/4" Pipe</span><span class="qty">—</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Headers &amp; Offset</div>
+      <div class="item"><span class="name">Baby Triple Header</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Baby Double Header</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Baby Offset Arm</span><span class="qty">—</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Loose Heads &amp; Arms</div>
+      <div class="item"><span class="name">Grip Heads 2-1/2" <em>separate extra</em></span><span class="qty accent">×3</span></div>
+      <div class="item"><span class="name">20" Hex Grip Arms <em>separate extra</em></span><span class="qty accent">×2</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- 17 CLAMPS -->
+<section class="cat" id="clamps">
+  <div class="cat-head">
+    <span class="num-eyebrow">17 · Clamps &amp; Mounts</span>
+    <h2>Clamp <span class="yellow">anything.</span></h2>
+    <p class="sub">Full clamp inventory — grid, super, mafer, cardellini, cine — plus baby-pin adapters in every common thread.</p>
+  </div>
+  <div class="items">
+    <div class="group">
+      <div class="group-label">Grid &amp; Cheeseboro</div>
+      <div class="item"><span class="name">Grid Clamp with Junior &amp; Baby Receiver</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Junior Grid Clamps</span><span class="qty accent">×2</span></div>
+      <div class="item"><span class="name">Grid Clamps with Ear</span><span class="qty accent">×2</span></div>
+      <div class="item"><span class="name">Swivel Cheeseboro Grid Clamps</span><span class="qty accent">×2</span></div>
+      <div class="item"><span class="name">Grid Clamps with 3/8" Male Thread</span><span class="qty accent">×2</span></div>
+      <div class="item"><span class="name">SpeedRail Receiver — 1-1/4" Pipe to 3/8" F</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Candlestick Maker — 1-1/4" Pipe to Junior Receiver</span><span class="qty">—</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Super, Mafer, Cine</div>
+      <div class="item"><span class="name">Super Clamp with Hex Stud Grip Head</span><span class="qty accent">×2</span></div>
+      <div class="item"><span class="name">Matthews Mafer Clamp</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Super Clamps with Stud</span><span class="qty accent">×3</span></div>
+      <div class="item"><span class="name">6" Extension Arm with Spigot for Super Clamp</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Westcott Scrim Jim Cine Clamps</span><span class="qty accent">×2</span></div>
+      <div class="item"><span class="name">Cardellini Clamps with Center Jaw</span><span class="qty accent">×2</span></div>
+      <div class="item"><span class="name">Cardellini Clamps with End Jaw</span><span class="qty accent">×2</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Studs &amp; Adapters</div>
+      <div class="item"><span class="name">Hex Stud 1/4" Male</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Hex Stud 3/8" Male</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">1/4" Male to 3/8" Male Adapter</span><span class="qty">—</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Articulating &amp; Baby Pin</div>
+      <div class="item"><span class="name">3-Section Double Articulated Arm</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Adapter 5/8" F Baby to 1/4-20" M</span><span class="qty accent">×2</span></div>
+      <div class="item"><span class="name">Adapter 5/8" F Baby to 3/8" M</span><span class="qty accent">×2</span></div>
+      <div class="item"><span class="name">Baby Pin to 3/8" F</span><span class="qty accent">×3</span></div>
+      <div class="item"><span class="name">Baby Pin to 1/4-20" F</span><span class="qty accent">×2</span></div>
+      <div class="item"><span class="name">Matthews Baby Pin to 3/8" M</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Matthews Baby Pin to 1/4-20" M</span><span class="qty">—</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- 18 WALL PLATES & SAFETY -->
+<section class="cat" id="wall-plates">
+  <div class="cat-head">
+    <span class="num-eyebrow">18 · Wall Plates &amp; Safety</span>
+    <h2>Mount &amp; <span class="yellow">secure.</span></h2>
+  </div>
+  <div class="items">
+    <div class="group">
+      <div class="group-label">Wall Plates</div>
+      <div class="item"><span class="name">Baby Wall Plate</span><span class="qty">6"</span></div>
+      <div class="item"><span class="name">Right Angle Baby Plate</span><span class="qty">6"</span></div>
+      <div class="item"><span class="name">Baby Wall Plate</span><span class="qty">3"</span></div>
+      <div class="item"><span class="name">C-Clamp with Baby Pins</span><span class="qty">6"</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Specialty &amp; Safety</div>
+      <div class="item"><span class="name">Chain Vice Grip</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Duckbill Clamp</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Adjustable Hanging Wire Kit</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Safety Cable</span><span class="qty">41"</span></div>
+      <div class="item"><span class="name">Safety Cable</span><span class="qty">32"</span></div>
+      <div class="item"><span class="name">Safety Cable</span><span class="qty">18"</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- 19 SANDBAGS & APPLE BOXES -->
+<section class="cat" id="sandbags">
+  <div class="cat-head">
+    <span class="num-eyebrow">19 · Sandbags &amp; Apple Boxes</span>
+    <h2>Weight &amp; <span class="yellow">stage.</span></h2>
+  </div>
+  <div class="items">
+    <div class="group">
+      <div class="group-label">Sandbags</div>
+      <div class="item"><span class="name">Boa Shot Bags</span><span class="qty accent">×2 · 10 lb</span></div>
+      <div class="item"><span class="name">Sandbags</span><span class="qty accent">×6 · 15 lb</span></div>
+      <div class="item"><span class="name">Sandbags</span><span class="qty accent">×6 · 25 lb</span></div>
+      <div class="item"><span class="name">Sandbags</span><span class="qty accent">×5 · 35 lb</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Apple Boxes</div>
+      <div class="item"><span class="name">Apple Box — Full</span><span class="qty accent">×4</span></div>
+      <div class="item"><span class="name">Apple Box — Half</span><span class="qty accent">×4</span></div>
+      <div class="item"><span class="name">Apple Box — Quarter</span><span class="qty accent">×4</span></div>
+      <div class="item"><span class="name">Apple Box — 1/8 <em>Pancake</em></span><span class="qty accent">×4</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- 20 WIRELESS DMX -->
+<section class="cat" id="dmx">
+  <div class="cat-head">
+    <span class="num-eyebrow">20 · Wireless DMX &amp; Control</span>
+    <h2>Drive the <span class="yellow">lights.</span></h2>
+  </div>
+  <div class="items">
+    <div class="group">
+      <div class="group-label">CRMX</div>
+      <div class="item"><span class="name">RatPac Satellite CRMX Transmitter</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Godox TimoLink RX CRMX Receiver</span><span class="qty">—</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Tablet Console</div>
+      <div class="item"><span class="name">Apple iPad Pro M4 with Apple Pencil Pro</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Nitze iPad Cage</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Nitze Side Handles with NATO Clamp</span><span class="qty">—</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- 21 AERIAL -->
+<section class="cat" id="aerial">
+  <div class="cat-head">
+    <span class="num-eyebrow">21 · Aerial</span>
+    <h2>Air <span class="yellow">unit.</span></h2>
+  </div>
+  <div class="items">
+    <div class="group">
+      <div class="group-label">Drone</div>
+      <div class="item"><span class="name">DJI Mavic Mini Drone — Fly More Combo</span><span class="qty">2.7K</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- 22 AUDIO — RECORDING -->
+<section class="cat" id="audio-recording">
+  <div class="cat-head">
+    <span class="num-eyebrow">22 · Audio — Recording</span>
+    <h2>Sound Devices <span class="yellow">633.</span></h2>
+    <p class="sub">Production sound recorder, cards, and bag/harness rig.</p>
+  </div>
+  <div class="items">
+    <div class="group">
+      <div class="group-label">Recorder &amp; Media</div>
+      <div class="item"><span class="name">Sound Devices 633 Sound Recorder</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">SanDisk SDXC <em>256GB</em></span><span class="qty accent">×2</span></div>
+      <div class="item"><span class="name">SanDisk Extreme SDXC <em>64GB</em></span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Memory Card Case for SDXC &amp; CFast</span><span class="qty">—</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Bag &amp; Harness</div>
+      <div class="item"><span class="name">ORCA OR-28 Sound Bag</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Porta Brace Harness</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">K-Tek Stingray Junior X Sound Mixer Bag</span><span class="qty">—</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- 23 AUDIO — MICROPHONES -->
+<section class="cat" id="audio-mics">
+  <div class="cat-head">
+    <span class="num-eyebrow">23 · Audio — Microphones</span>
+    <h2>Boom &amp; <span class="yellow">lavs.</span></h2>
+  </div>
+  <div class="items">
+    <div class="group">
+      <div class="group-label">Shotgun / Boom</div>
+      <div class="item"><span class="name">Sennheiser MKH 50 Supercardioid Microphone</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Rycote Super-Shield Kit for Shotgun Mic</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Ambient QP480-SCM Carbon Fiber Boom Pole <em>11 ft, 1.6 lb</em></span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Auray Boom Pole Holder</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Coiled Boom Pole-to-Mixer Cable</span><span class="qty">—</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Lavaliers</div>
+      <div class="item"><span class="name">Sanken COS-11D Lavalier Mic <em>XLR male, phantom or battery</em></span><span class="qty">—</span></div>
+      <div class="item"><span class="name">DPA 4061 Low-Sensitivity Lavalier Mic</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Bubblebee Lav Concealer</span><span class="qty">—</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- 24 AUDIO — WIRELESS -->
+<section class="cat" id="audio-wireless">
+  <div class="cat-head">
+    <span class="num-eyebrow">24 · Audio — Wireless &amp; Sync</span>
+    <h2>Wireless &amp; <span class="yellow">treatment.</span></h2>
+  </div>
+  <div class="items">
+    <div class="group">
+      <div class="group-label">Wireless &amp; Preamp</div>
+      <div class="item"><span class="name">Lectrosonics SMDWB Transmitter / Recorder</span><span class="qty">B1: 537–614 MHz</span></div>
+      <div class="item"><span class="name">Sound Devices MM-1 Mic Preamp <em>for boom op</em></span><span class="qty">—</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Pocket Recorder</div>
+      <div class="item"><span class="name">Tentacle TRACK E Pocket Recorder</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">SanDisk Extreme microSDHC</span><span class="qty">32GB</span></div>
+      <div class="item"><span class="name">Dinkum ActionPod PRO 10" <em>2 lb lateral / 4 lb upright; 1/4-20 + 3/8-16 adapter</em></span><span class="qty">—</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Cables</div>
+      <div class="item"><span class="name">Kopul XLR3F to 3.5mm Male Mic Cable</span><span class="qty">—</span></div>
+      <div class="item"><span class="name">Remote Audio XLR3F to TA5F Adapter Cable</span><span class="qty">—</span></div>
+    </div>
+    <div class="group">
+      <div class="group-label">Acoustic Treatment</div>
+      <div class="item"><span class="name">Producers Choice Black &amp; White Sound Blanket <em>72"×80" w/ grommets · doubles as black flag / white bounce</em></span><span class="qty accent">×2</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- contact strip -->
+<section class="contact-strip">
+  <h2>Tell us your dates and <span class="yellow">what you need.</span></h2>
+  <p>
+    Inventory updated regularly. Contact for current availability and rates. Austin, TX and surrounding.
+  </p>
+  <div class="ctas">
+    <a class="btn btn-primary" href="mailto:martin@thunderstruckpictures.co?subject=Rental%20Inquiry">Email Martin →</a>
+    <a class="btn" href="04-grindhouse-composed.html">Back to Home</a>
+  </div>
+  <p class="footnote">Equipment list reflects fleet as of October 2025</p>
+</section>
+
+<footer>
+  <div class="row">
+    <div class="brand-foot"><span class="bolt">⚡</span> THUNDERSTRUCK</div>
+    <div class="meta-foot">
+      © Thunderstruck Pictures · Austin, TX<br>
+      <a href="mailto:martin@thunderstruckpictures.co">martin@thunderstruckpictures.co</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

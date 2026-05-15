@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thunderstruck Pictures — Design Mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: #0a0a0a;
+    color: #f5f5f2;
+    min-height: 100vh;
+    padding: 4rem 2rem;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; }
+  h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    line-height: 0.95;
+  }
+  h1 .yellow { color: #FFD60A; }
+  .lead {
+    font-size: 1.05rem;
+    color: #a3a3a3;
+    margin-top: 1.25rem;
+    max-width: 60ch;
+    line-height: 1.6;
+  }
+  .label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #FFD60A;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .featured {
+    margin-top: 3rem;
+    border: 1px solid #FFD60A;
+    background: linear-gradient(180deg, rgba(255,214,10,0.05) 0%, transparent 60%);
+    padding: 2.5rem 2.5rem 2.25rem;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .featured:hover { transform: translateY(-2px); }
+  .featured .tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #FFD60A;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .featured h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: 2.5rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 0.85rem;
+  }
+  .featured p {
+    color: #c8c8c8;
+    line-height: 1.6;
+    max-width: 60ch;
+    margin-bottom: 1.25rem;
+  }
+  .featured .open {
+    font-size: 0.85rem;
+    color: #FFD60A;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+  .section-head {
+    margin-top: 4rem;
+    margin-bottom: 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #888;
+    font-weight: 600;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .card {
+    background: #141414;
+    border: 1px solid #262626;
+    padding: 2rem;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s, transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .card:hover {
+    border-color: #FFD60A;
+    transform: translateY(-2px);
+  }
+  .card .clabel {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #FFD60A;
+    font-weight: 600;
+  }
+  .card h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.75rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .card p {
+    color: #a3a3a3;
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+  .swatches { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
+  .swatch { width: 28px; height: 28px; border: 1px solid rgba(255,255,255,0.1); }
+  .open {
+    margin-top: auto;
+    font-size: 0.85rem;
+    color: #FFD60A;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+  hr { border: none; border-top: 1px solid #262626; margin: 3rem 0; }
+  .note { color: #737373; font-size: 0.85rem; line-height: 1.6; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <span class="label">Thunderstruck Pictures</span>
+
+  <h1>Website mockups.<br><span class="yellow">Work in progress.</span></h1>
+
+  <p class="lead">
+    A working set of design explorations and a first-pass rentals page. Use the featured tile to see the most built-out mock; the four direction tiles below show the visual options under consideration.
+  </p>
+
+  <a class="featured" href="design-explorations/06-inventory.html">
+    <span class="tag">Most recent · Rentals page</span>
+    <h2>Rentals Page — Full Inventory</h2>
+    <p>Built from the October equipment list. All 24 categories — camera, lenses, support, lighting, grip, audio, the works. The closest thing to a finished page so far, and the heart of the site for Austin rental clients.</p>
+    <span class="open">Open →</span>
+  </a>
+
+  <p class="section-head">Design Directions</p>
+
+  <div class="grid">
+    <a class="card" href="design-explorations/01-grindhouse.html">
+      <span class="clabel">Direction A</span>
+      <h3>Grindhouse Heavy</h3>
+      <p>The literal read of the logo. Pure black, heavy condensed all-caps, electric yellow. Loud, confident, horror-poster energy.</p>
+      <div class="swatches">
+        <div class="swatch" style="background:#000000;"></div>
+        <div class="swatch" style="background:#1A1A1A;"></div>
+        <div class="swatch" style="background:#FFD60A;"></div>
+        <div class="swatch" style="background:#F5F5F2;"></div>
+      </div>
+      <span class="open">Open →</span>
+    </a>
+
+    <a class="card" href="design-explorations/02-editorial.html">
+      <span class="clabel">Direction B</span>
+      <h3>Editorial Cinema</h3>
+      <p>A24 / Criterion territory. Warm dark, refined serif paired with clean sans, brass-aged yellow used sparingly. Restrained, grown-up.</p>
+      <div class="swatches">
+        <div class="swatch" style="background:#14110F;"></div>
+        <div class="swatch" style="background:#2A2521;"></div>
+        <div class="swatch" style="background:#C9A227;"></div>
+        <div class="swatch" style="background:#ECE5D5;"></div>
+      </div>
+      <span class="open">Open →</span>
+    </a>
+
+    <a class="card" href="design-explorations/03-workshop.html">
+      <span class="clabel">Direction C</span>
+      <h3>Workshop / Trade</h3>
+      <p>Leans into rentals. Slate background, monospace labels, spec-sheet layouts, IMDB-yellow as a caution accent. Operator aesthetic.</p>
+      <div class="swatches">
+        <div class="swatch" style="background:#0D1117;"></div>
+        <div class="swatch" style="background:#1C2128;"></div>
+        <div class="swatch" style="background:#F5C518;"></div>
+        <div class="swatch" style="background:#E5E7EB;"></div>
+      </div>
+      <span class="open">Open →</span>
+    </a>
+
+    <a class="card" href="design-explorations/04-grindhouse-composed.html" style="border-color:#FFD60A;">
+      <span class="clabel">Direction A2 · Iteration</span>
+      <h3>Grindhouse Composed</h3>
+      <p>A's typography and palette, rebuilt with calmer composition — three-pillar grid, generous black space. Bold without shouting.</p>
+      <div class="swatches">
+        <div class="swatch" style="background:#000000;"></div>
+        <div class="swatch" style="background:#141414;"></div>
+        <div class="swatch" style="background:#FFD60A;"></div>
+        <div class="swatch" style="background:#F5F5F2;"></div>
+      </div>
+      <span class="open">Open →</span>
+    </a>
+  </div>
+
+  <p class="section-head">More</p>
+  <div class="grid">
+    <a class="card" href="design-explorations/05-variations.html">
+      <span class="clabel">Variations</span>
+      <h3>Four Directions, Side by Side</h3>
+      <p>The compact comparison view — all four directions on one scroll. Anchors at #v1–#v4 for direct linking.</p>
+      <span class="open">Open →</span>
+    </a>
+  </div>
+
+  <hr>
+
+  <p class="note">
+    Each mock uses the actual logo, truck photo, and Chopper poster from the project folder. Type pulled from Google Fonts (free). Dark background throughout — the logo demands it.
+  </p>
+
+</div>
+</body>
+</html>

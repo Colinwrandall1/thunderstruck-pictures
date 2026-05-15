@@ -1,0 +1,12 @@
+.DS_Store
+.tmp/
+.scrapes/
+.claude/
+
+# Internal docs — not for the deployed repo
+BRIEF.md
+PLAN.md
+INVENTORY.md
+
+# The FTW pitch deck lives on FTW's repo, not here
+pitch-from-feed-the-wolf.html

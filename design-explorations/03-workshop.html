@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Direction C — Workshop / Trade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0D1117;
+    --bg-2: #11161D;
+    --panel: #1C2128;
+    --line: #2A313C;
+    --line-2: #353C48;
+    --text: #E5E7EB;
+    --text-dim: #9CA3AF;
+    --muted: #6B7280;
+    --accent: #F5C518;
+    --accent-dim: #B8941F;
+    --status-on: #34D399;
+  }
+  *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+    overflow-x: hidden;
+  }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  .display { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em; }
+  .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .container { max-width: 1320px; margin: 0 auto; padding: 0 2rem; }
+
+  /* meta bar */
+  .meta {
+    border-bottom: 1px solid var(--line);
+    padding: 0.85rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background: var(--bg-2);
+  }
+  .meta a { color: var(--accent); text-decoration: none; }
+  .meta a:hover { text-decoration: underline; }
+
+  /* nav */
+  nav.top {
+    border-bottom: 1px solid var(--line);
+    padding: 1.25rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1320px;
+    margin: 0 auto;
+    gap: 2rem;
+  }
+  nav.top .brand {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  nav.top .brand .bolt { color: var(--accent); }
+  nav.top .brand .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    border-left: 1px solid var(--line);
+    padding-left: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  nav.top ul { list-style: none; display: flex; gap: 0.25rem; }
+  nav.top a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 0.5rem 0.85rem;
+    border: 1px solid transparent;
+    transition: all 0.15s;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  nav.top a:hover { border-color: var(--line-2); }
+  nav.top .status {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--status-on);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  nav.top .status .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--status-on);
+    box-shadow: 0 0 8px var(--status-on);
+  }
+  @media (max-width: 800px) { nav.top ul { display: none; } nav.top .status { display: none; } }
+
+  /* hero */
+  .hero {
+    padding: 4rem 2rem 5rem;
+    max-width: 1320px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 4rem;
+    align-items: end;
+    border-bottom: 1px solid var(--line);
+  }
+  @media (max-width: 900px) { .hero { grid-template-columns: 1fr; gap: 2rem; } }
+  .hero .breadcrumb {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    margin-bottom: 2rem;
+    letter-spacing: 0.05em;
+  }
+  .hero .breadcrumb .accent { color: var(--accent); }
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 .accent { color: var(--accent); }
+  .hero .lede {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    max-width: 50ch;
+    color: var(--text-dim);
+  }
+  .hero .lede strong { color: var(--text); font-weight: 500; }
+  .hero .ctas { margin-top: 2.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+  /* spec card on hero right */
+  .spec-card {
+    border: 1px solid var(--line);
+    background: var(--bg-2);
+    padding: 1.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+  }
+  .spec-card .card-head {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.85rem;
+    margin-bottom: 1rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.7rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  .spec-card .row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.45rem 0;
+    color: var(--text-dim);
+  }
+  .spec-card .row .v { color: var(--text); }
+  .spec-card .row .v.ok { color: var(--status-on); }
+
+  /* buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.4rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: var(--accent);
+    color: var(--bg);
+    border: 1px solid var(--accent);
+    font-weight: 500;
+    transition: all 0.15s;
+  }
+  .btn:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--line-2);
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); background: transparent; }
+
+  /* sections */
+  section { padding: 5rem 2rem; border-bottom: 1px solid var(--line); }
+  .section-head {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    margin-bottom: 3.5rem;
+    max-width: 1320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media (max-width: 800px) { .section-head { grid-template-columns: 1fr; gap: 1rem; } }
+  .section-head .lhs {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding-top: 0.85rem;
+  }
+  .section-head .lhs .num { color: var(--accent); display: block; margin-bottom: 0.4rem; font-weight: 700; }
+  .section-head h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+  }
+  .section-head h2 .accent { color: var(--accent); }
+  .section-head .sub {
+    margin-top: 1rem;
+    color: var(--text-dim);
+    font-size: 1rem;
+    max-width: 60ch;
+  }
+
+  /* type specimen */
+  .specimen {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    border-top: 1px solid var(--line);
+    padding-top: 2rem;
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+  @media (max-width: 800px) { .specimen { grid-template-columns: 1fr; gap: 1rem; } }
+  .specimen + .specimen { margin-top: 0; }
+  .specimen .label { color: var(--text-dim); padding-top: 0.4rem; }
+  .specimen .h1-sample { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 3rem; line-height: 1.05; letter-spacing: -0.025em; }
+  .specimen .h1-sample .accent { color: var(--accent); }
+  .specimen .h2-sample { font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 1.75rem; line-height: 1.2; letter-spacing: -0.015em; margin-top: 1rem; }
+  .specimen .body-sample { font-family: 'Inter', sans-serif; font-size: 1rem; line-height: 1.65; max-width: 60ch; color: var(--text-dim); }
+  .specimen .body-sample strong { color: var(--text); font-weight: 500; }
+  .specimen .mono-sample { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent); letter-spacing: 0.05em; }
+
+  /* palette */
+  .palette {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0;
+    border: 1px solid var(--line);
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+  .swatch {
+    aspect-ratio: 5/4;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid var(--line);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+  }
+  .swatch:last-child { border-right: none; }
+  .swatch .name { font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; }
+  .swatch .hex { opacity: 0.75; }
+
+  /* chopper card */
+  .film-card {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 3rem;
+    align-items: start;
+    border: 1px solid var(--line);
+    background: var(--bg-2);
+    padding: 2.5rem;
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+  @media (max-width: 800px) { .film-card { grid-template-columns: 1fr; gap: 2rem; padding: 1.5rem; } }
+  .film-card img {
+    width: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    border: 1px solid var(--line);
+  }
+  .film-card .card-meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+  .film-card .card-meta .id { color: var(--accent); }
+  .film-card .title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    margin-bottom: 0.5rem;
+  }
+  .film-card .subtitle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-bottom: 2rem;
+  }
+  .film-card .logline {
+    font-size: 1.15rem;
+    line-height: 1.55;
+    color: var(--text);
+    border-left: 2px solid var(--accent);
+    padding-left: 1.25rem;
+    margin-bottom: 2rem;
+    font-style: italic;
+  }
+  .film-card .specs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin-bottom: 2rem;
+  }
+  .film-card .spec {
+    background: var(--bg-2);
+    padding: 0.85rem 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+  }
+  .film-card .spec .k { color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.65rem; display: block; margin-bottom: 0.3rem; }
+  .film-card .spec .v { color: var(--text); }
+
+  /* rentals tile */
+  .rentals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+  .rental-tile {
+    background: var(--bg-2);
+    padding: 1.75rem;
+    transition: background 0.15s;
+    cursor: pointer;
+    position: relative;
+  }
+  .rental-tile:hover { background: var(--panel); }
+  .rental-tile .tile-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .rental-tile .tile-head .id { color: var(--accent); }
+  .rental-tile .tile-head .stock { color: var(--status-on); display: flex; align-items: center; gap: 0.35rem; }
+  .rental-tile .tile-head .stock .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--status-on); }
+  .rental-tile h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-bottom: 0.65rem;
+    letter-spacing: -0.015em;
+  }
+  .rental-tile p { color: var(--text-dim); font-size: 0.88rem; line-height: 1.6; }
+  .rental-tile .arrow {
+    margin-top: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  /* caution stripe */
+  .caution {
+    height: 12px;
+    background: repeating-linear-gradient(
+      135deg,
+      var(--accent),
+      var(--accent) 14px,
+      var(--bg) 14px,
+      var(--bg) 28px
+    );
+    opacity: 0.55;
+  }
+
+  footer {
+    padding: 3rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+  @media (max-width: 600px) { footer { flex-direction: column; gap: 1rem; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="meta">
+  <span>DIR_C // WORKSHOP_TRADE.html</span>
+  <a href="index.html">[ ← back to all directions ]</a>
+</div>
+
+<nav class="top">
+  <div class="brand">
+    <span class="bolt">⚡</span> THUNDERSTRUCK
+    <span class="tag">PIX // ATX</span>
+  </div>
+  <ul>
+    <li><a href="#chopper">/productions</a></li>
+    <li><a href="#rentals">/rentals</a></li>
+    <li><a href="#">/about</a></li>
+    <li><a href="#">/contact</a></li>
+  </ul>
+  <div class="status"><span class="dot"></span>TRUCK · OPERATIONAL</div>
+</nav>
+
+<section class="hero" style="border-bottom:none;">
+  <div>
+    <div class="breadcrumb"><span class="accent">●</span> THUNDERSTRUCK_PICTURES // PRODUCTION + RENTAL // EST. AUSTIN, TX</div>
+    <h1>A 3-ton grip truck.<br>Run by a <span class="accent">working filmmaker.</span></h1>
+    <p class="lede">
+      <strong>Thunderstruck</strong> is two operations under one roof: original horror, action, and genre production — and a fully-stocked rental package available across the Austin market. The truck pays for itself. The films prove the truck.
+    </p>
+    <div class="ctas">
+      <a class="btn" href="#rentals">REQUEST AVAILABILITY →</a>
+      <a class="btn btn-ghost" href="#chopper">SEE THE WORK</a>
+    </div>
+  </div>
+  <div class="spec-card">
+    <div class="card-head"><span>UNIT_01.SPEC</span><span>v2.5</span></div>
+    <div class="row"><span>CLASS</span><span class="v">3-TON GRIP</span></div>
+    <div class="row"><span>BASE</span><span class="v">AUSTIN, TX</span></div>
+    <div class="row"><span>RADIUS</span><span class="v">CENTRAL TX</span></div>
+    <div class="row"><span>OPERATOR</span><span class="v">M. SHAPIRO</span></div>
+    <div class="row"><span>STATUS</span><span class="v ok">● AVAILABLE</span></div>
+    <div class="row" style="border-top:1px solid var(--line);margin-top:0.5rem;padding-top:0.85rem;"><span>RATES</span><span class="v">ON REQUEST</span></div>
+  </div>
+</section>
+
+<div class="caution"></div>
+
+<section id="type">
+  <div class="section-head">
+    <div class="lhs"><span class="num">// 01</span>TYPOGRAPHY</div>
+    <div>
+      <h2>Spec-sheet typography. <span class="accent">Built to read.</span></h2>
+      <p class="sub">A display sans for headlines, mono for labels and IDs, neutral sans for body. Every label looks like it was etched on a flight case.</p>
+    </div>
+  </div>
+  <div class="specimen">
+    <span class="label">DISPLAY · SPACE GROTESK</span>
+    <div>
+      <div class="h1-sample">First you get high. <span class="accent">Then you die.</span></div>
+      <div class="h2-sample">A short film by Martin Shapiro.</div>
+    </div>
+  </div>
+  <div class="specimen" style="border-top:1px solid var(--line); padding-top:2rem; margin-top:2rem;">
+    <span class="label">MONO · JETBRAINS MONO</span>
+    <div class="mono-sample">UNIT_01 // STATUS: AVAILABLE // RATE: ON_REQUEST</div>
+  </div>
+  <div class="specimen" style="border-top:1px solid var(--line); padding-top:2rem; margin-top:2rem;">
+    <span class="label">BODY · INTER</span>
+    <p class="body-sample">
+      <strong>Thunderstruck Pictures</strong> is the working banner of writer–director–producer Martin Shapiro. Original horror IP on one side, a fully-loaded grip truck on the other. The two halves built and run by the same hands — every fixture in the inventory has been on a set the operator was running.
+    </p>
+  </div>
+</section>
+
+<section id="palette">
+  <div class="section-head">
+    <div class="lhs"><span class="num">// 02</span>PALETTE</div>
+    <div>
+      <h2>Slate, bone, <span class="accent">caution.</span></h2>
+      <p class="sub">Cold dark base, warm yellow accent borrowed from grip-truck signage and IMDB cards. Used as a system color, not a decoration.</p>
+    </div>
+  </div>
+  <div class="palette">
+    <div class="swatch" style="background:#0D1117;color:#E5E7EB;"><span class="name">Slate_900</span><span class="hex">#0D1117</span></div>
+    <div class="swatch" style="background:#1C2128;color:#E5E7EB;"><span class="name">Slate_800</span><span class="hex">#1C2128</span></div>
+    <div class="swatch" style="background:#2A313C;color:#E5E7EB;"><span class="name">Slate_700</span><span class="hex">#2A313C</span></div>
+    <div class="swatch" style="background:#F5C518;color:#0D1117;"><span class="name">Caution</span><span class="hex">#F5C518</span></div>
+    <div class="swatch" style="background:#E5E7EB;color:#0D1117;"><span class="name">Bone</span><span class="hex">#E5E7EB</span></div>
+  </div>
+</section>
+
+<section id="chopper">
+  <div class="section-head">
+    <div class="lhs"><span class="num">// 03</span>PRODUCTIONS</div>
+    <div>
+      <h2>Chopper. <span class="accent">2025.</span></h2>
+      <p class="sub">Festival short. Written, directed, and produced by Martin Shapiro. Shot on Arri 35mm.</p>
+    </div>
+  </div>
+  <div class="film-card">
+    <img src="../Chopper-Film-Poster-Primary-Low-Res.avif" alt="Chopper poster">
+    <div>
+      <div class="card-meta">
+        <span class="id">FILM_001 // CHOPPER</span>
+        <span>2025 // HORROR // SHORT</span>
+      </div>
+      <div class="title">Chopper</div>
+      <div class="subtitle">Written / Directed / Produced — M. SHAPIRO</div>
+      <div class="logline">"First you get high. Then you die…"</div>
+      <div class="specs">
+        <div class="spec"><span class="k">Format</span><span class="v">Arri 35mm</span></div>
+        <div class="spec"><span class="k">Premiere</span><span class="v">ScreamFest LA</span></div>
+        <div class="spec"><span class="k">Cast</span><span class="v">Cowan / Jones / Hayter</span></div>
+        <div class="spec"><span class="k">Status</span><span class="v">Festival run</span></div>
+      </div>
+      <a class="btn" href="https://www.choppermovie.com" target="_blank" rel="noopener">VISIT FILM SITE →</a>
+    </div>
+  </div>
+</section>
+
+<section id="rentals">
+  <div class="section-head">
+    <div class="lhs"><span class="num">// 04</span>RENTALS</div>
+    <div>
+      <h2>The kit. <span class="accent">By category.</span></h2>
+      <p class="sub">Inventory subject to current bookings. Live status shown per category. Contact for hold and rate sheet.</p>
+    </div>
+  </div>
+  <div class="rentals-grid">
+    <div class="rental-tile">
+      <div class="tile-head"><span class="id">CAT_01</span><span class="stock"><span class="dot"></span>IN STOCK</span></div>
+      <h3>Lighting</h3>
+      <p>Aputure 600x Pro · 300x · MC Pro · Astera Titan tubes · Quasar Crossfades · Litepanels Gemini</p>
+      <div class="arrow">VIEW INVENTORY →</div>
+    </div>
+    <div class="rental-tile">
+      <div class="tile-head"><span class="id">CAT_02</span><span class="stock"><span class="dot"></span>IN STOCK</span></div>
+      <h3>Modifiers</h3>
+      <p>Light Domes · Lanterns · Snapbags · 4×4 / 6×6 / 8×8 frames with silk, diffusion, bounce</p>
+      <div class="arrow">VIEW INVENTORY →</div>
+    </div>
+    <div class="rental-tile">
+      <div class="tile-head"><span class="id">CAT_03</span><span class="stock"><span class="dot"></span>IN STOCK</span></div>
+      <h3>Grip</h3>
+      <p>C-stands · Combo stands · Hi-rollers · Apple boxes · Flags / nets / floppies · Sandbags</p>
+      <div class="arrow">VIEW INVENTORY →</div>
+    </div>
+    <div class="rental-tile">
+      <div class="tile-head"><span class="id">CAT_04</span><span class="stock"><span class="dot"></span>IN STOCK</span></div>
+      <h3>Camera Support</h3>
+      <p>Sachtler / O'Connor fluid heads · Slider · 8' dolly track · Easyrig</p>
+      <div class="arrow">VIEW INVENTORY →</div>
+    </div>
+    <div class="rental-tile">
+      <div class="tile-head"><span class="id">CAT_05</span><span class="stock"><span class="dot"></span>IN STOCK</span></div>
+      <h3>Distro &amp; Power</h3>
+      <p>100A spider box · Bates extensions · Stingers (25 / 50 / 100 ft) · Breakouts</p>
+      <div class="arrow">VIEW INVENTORY →</div>
+    </div>
+    <div class="rental-tile">
+      <div class="tile-head"><span class="id">CAT_06</span><span class="stock"><span class="dot"></span>IN STOCK</span></div>
+      <h3>Expendables</h3>
+      <p>Sound blankets · Furniture pads · Gels · Gaff &amp; paper tape · Magliner carts</p>
+      <div class="arrow">VIEW INVENTORY →</div>
+    </div>
+  </div>
+</section>
+
+<div class="caution"></div>
+
+<footer>
+  <span>© THUNDERSTRUCK PICTURES // ATX // ALL RIGHTS RESERVED</span>
+  <span>DIR_C // WORKSHOP_TRADE</span>
+</footer>
+
+</body>
+</html>
