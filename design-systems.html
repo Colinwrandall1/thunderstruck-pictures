@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thunderstruck — Three Design Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Permanent+Marker&family=Rajdhani:wght@400;500;600;700&family=Saira+Condensed:wght@300;500;700&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+  body { background:#000; color:#fff; font-family:'Inter',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:1180px; margin:0 auto; padding:0 clamp(1.4rem,5vw,4rem); }
+  .sys { min-height:100vh; padding:clamp(4rem,9vw,8rem) 0; position:relative; overflow:hidden; display:flex; align-items:center; }
+  .kicker { font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.34em; text-transform:uppercase; margin-bottom:1.6rem; }
+  .sys-no { font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.3em; opacity:0.5; }
+  .specimen { display:grid; grid-template-columns:1.15fr 0.85fr; gap:clamp(2rem,5vw,4rem); align-items:center; }
+  @media (max-width:880px){ .specimen{ grid-template-columns:1fr; } }
+  .swatches { display:flex; gap:0; margin:2rem 0; border:1px solid rgba(255,255,255,0.12); }
+  .swatch { flex:1; height:54px; display:flex; align-items:flex-end; padding:0.4rem; font-family:'JetBrains Mono',monospace; font-size:0.52rem; letter-spacing:0.05em; }
+  .meta-line { font-family:'JetBrains Mono',monospace; font-size:0.74rem; line-height:2; letter-spacing:0.04em; }
+  .meta-line b { font-weight:500; }
+  .divider { height:1px; background:rgba(255,255,255,0.1); }
+  .intro { padding:clamp(3rem,7vw,6rem) 0 2rem; }
+  .intro h1 { font-family:'Anton',sans-serif; text-transform:uppercase; font-size:clamp(2rem,5vw,3.4rem); line-height:0.95; letter-spacing:0.01em; }
+  .intro p { color:#9aa6b2; max-width:62ch; margin-top:1rem; line-height:1.6; }
+
+  /* ============================================================
+     SYSTEM 00 — STORMHOUSE (our current / house system)
+     ============================================================ */
+  .s0 { background:radial-gradient(130% 100% at 50% -8%, #0f1620 0%, #06080d 52%, #030406 100%); }
+  .s0 .kicker { color:#FFD60A; }
+  .s0 .bolt-mark { width:38px; height:54px; color:#FFD60A; margin-bottom:1.4rem; filter:drop-shadow(0 0 14px rgba(255,214,10,0.4)); }
+  .s0 .wordmark { font-family:'Anton',sans-serif; font-size:clamp(2.8rem,9vw,6.5rem); text-transform:uppercase; letter-spacing:0.03em; line-height:0.88; color:#f5f5f2; text-shadow:0 2px 44px rgba(0,0,0,0.6); }
+  .s0 .sub { font-family:'JetBrains Mono',monospace; letter-spacing:0.28em; text-transform:uppercase; color:#93a0ac; margin-top:1.3rem; font-size:clamp(0.68rem,1.4vw,0.82rem); }
+  .s0 .sub .y { color:#FFD60A; }
+  .s0 .swatch.a{background:#050608;color:#93a0ac} .s0 .swatch.b{background:#0c1014;color:#93a0ac}
+  .s0 .swatch.c{background:#1c232b;color:#c7d0da} .s0 .swatch.d{background:#FFD60A;color:#0a0a0a} .s0 .swatch.e{background:#f5f5f2;color:#0a0a0a}
+  .s0 .btn { display:inline-block; font-family:'Inter',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; font-size:0.85rem; padding:0.8rem 1.7rem; background:#FFD60A; color:#0a0a0a; border:none; cursor:pointer; transition:transform .15s, box-shadow .2s; }
+  .s0 .btn:hover { transform:translateY(-1px); box-shadow:0 6px 22px rgba(255,214,10,0.28); }
+  .s0 .demo-card { border:1px solid #1c232b; background:#0c1014; padding:1.6rem; position:relative; }
+  .s0 .demo-card::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background:#FFD60A; }
+  .s0 .demo-card .pn{ font-family:'Anton',sans-serif; text-transform:uppercase; letter-spacing:0.02em; font-size:1.35rem; }
+  .s0 .demo-card .pp{ font-family:'Anton',sans-serif; color:#FFD60A; font-size:1.5rem; margin-top:0.3rem; }
+
+  /* ============================================================
+     SYSTEM 01 — VOLTAGE (chrome lightning bolt)
+     ============================================================ */
+  .s1 { background:radial-gradient(120% 90% at 50% 0%, #0e141c 0%, #03050a 60%, #000 100%); }
+  .s1 .kicker { color:#9fc4ee; }
+  .s1 .chrome-bolt { width:clamp(120px,18vw,200px); margin-bottom:2rem; filter:drop-shadow(0 0 24px rgba(150,190,255,0.5)); }
+  .s1 .wordmark {
+    font-family:'Saira Condensed',sans-serif; font-weight:700; font-style:italic;
+    font-size:clamp(2.6rem,8vw,6rem); line-height:0.9; text-transform:uppercase; letter-spacing:0.01em;
+    background:linear-gradient(180deg,#ffffff 0%,#dfeaf8 16%,#8ea3bf 47%,#ffffff 52%,#6c81a0 66%,#c2d2e8 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    text-shadow:0 1px 0 rgba(255,255,255,0.3);
+  }
+  .s1 .sub { font-family:'Saira Condensed',sans-serif; font-weight:300; letter-spacing:0.3em; text-transform:uppercase; color:#9fb4ce; margin-top:1.2rem; font-size:clamp(0.8rem,1.6vw,1rem); }
+  .s1 .swatch.a{background:#03050a;color:#7e97b5} .s1 .swatch.b{background:#1a2330;color:#9fb4ce}
+  .s1 .swatch.c{background:linear-gradient(135deg,#e9f1fb,#8ea3bf);color:#0a0a0a} .s1 .swatch.d{background:#9fc4ee;color:#03050a} .s1 .swatch.e{background:#f4f8ff;color:#0a0a0a}
+  .s1 .btn { display:inline-block; font-family:'Saira Condensed',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.16em; font-size:0.9rem;
+    padding:0.85rem 1.8rem; color:#0a0f16; border:none; cursor:pointer; position:relative; overflow:hidden;
+    background:linear-gradient(180deg,#ffffff,#cdddf0 45%,#9fb4ce 55%,#eaf2fb); box-shadow:0 0 18px rgba(150,190,255,0.35), inset 0 1px 0 rgba(255,255,255,0.8); }
+  .s1 .demo-card { border:1px solid rgba(159,196,238,0.25); background:linear-gradient(180deg,rgba(20,28,40,0.7),rgba(5,8,12,0.7)); padding:1.6rem; position:relative; }
+  .s1 .demo-card::before{ content:""; position:absolute; inset:0; border-top:1px solid rgba(255,255,255,0.25); pointer-events:none; }
+  .s1 .demo-card .pn{ font-family:'Saira Condensed',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; font-size:1.3rem; }
+  .s1 .demo-card .pp{ font-family:'Saira Condensed',sans-serif; color:#9fc4ee; font-size:1.5rem; margin-top:0.3rem; }
+
+  /* ============================================================
+     SYSTEM 02 — BLACK THUNDER (brush / street / punk)
+     ============================================================ */
+  .s2 { background:#0a0a0a; color:#f5f5f2; }
+  .s2::before { content:""; position:absolute; inset:0; opacity:0.16; pointer-events:none;
+    background-image:radial-gradient(#F4E11E 1px, transparent 1.4px); background-size:9px 9px; -webkit-mask-image:linear-gradient(135deg, #000 0%, transparent 42%); mask-image:linear-gradient(135deg, #000 0%, transparent 42%); }
+  .s2 .kicker { color:#F4E11E; }
+  .s2 .brush-bolt { width:46px; height:64px; margin-bottom:1.3rem; color:#F4E11E; transform:rotate(-6deg); filter:drop-shadow(3px 3px 0 rgba(0,0,0,0.55)); }
+  .s2 .brush { font-family:'Permanent Marker',cursive; font-size:clamp(3rem,11vw,8.5rem); line-height:0.82; transform:rotate(-3deg); display:inline-block; color:#F4E11E; text-shadow:3px 3px 0 rgba(0,0,0,0.55); }
+  .s2 .brush .sm { display:block; font-size:0.32em; transform:rotate(1deg) translateX(0.4em); letter-spacing:0.02em; color:#fff; }
+  .s2 .sub { font-family:'Archivo Black',sans-serif; text-transform:uppercase; letter-spacing:0.02em; font-size:clamp(0.85rem,1.8vw,1.1rem); margin-top:1.6rem; color:#f5f5f2; }
+  .s2 .swatch{ border-right:1px solid rgba(255,255,255,0.12); }
+  .s2 .swatch.a{background:#0a0a0a;color:#F4E11E} .s2 .swatch.b{background:#F4E11E;color:#0a0a0a}
+  .s2 .swatch.c{background:#fff;color:#0a0a0a} .s2 .swatch.d{background:#E5342B;color:#fff} .s2 .swatch.e{background:#2b2b2b;color:#F4E11E}
+  .s2 .swatches{ border-color:rgba(255,255,255,0.12); }
+  .s2 .meta-line{ color:#b8c0c8; }
+  .s2 .divider{ background:rgba(255,255,255,0.1); }
+  .s2 .btn { display:inline-block; font-family:'Archivo Black',sans-serif; text-transform:uppercase; letter-spacing:0.04em; font-size:0.95rem;
+    padding:0.9rem 2rem; background:#F4E11E; color:#0a0a0a; border:none; cursor:pointer; transform:rotate(-1.5deg); box-shadow:5px 5px 0 rgba(244,225,30,0.22); }
+  .s2 .sticker { display:inline-block; background:#E5342B; color:#fff; font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:0.75rem; letter-spacing:0.05em; padding:0.5rem 1rem; transform:rotate(4deg); box-shadow:3px 3px 0 rgba(0,0,0,0.5); }
+  .s2 .demo-card{ background:#141414; color:#f5f5f2; padding:1.6rem; transform:rotate(-1deg); border-left:4px solid #F4E11E; box-shadow:8px 8px 0 rgba(0,0,0,0.45); }
+  .s2 .demo-card .pn{ font-family:'Archivo Black',sans-serif; text-transform:uppercase; font-size:1.3rem; line-height:1.05; color:#fff; }
+  .s2 .demo-card .pp{ font-family:'Permanent Marker',cursive; font-size:1.8rem; color:#F4E11E; margin-top:0.5rem; }
+
+  /* ============================================================
+     SYSTEM 03 — PRISM (iridescent liquid chrome)
+     ============================================================ */
+  .s3 { background:#030308; }
+  .s3 .blob { position:absolute; width:60vw; height:60vw; max-width:680px; max-height:680px; right:-8%; top:50%; transform:translateY(-50%); z-index:0;
+    background:conic-gradient(from 0deg, #ff6fb5, #6fa8ff, #b06fff, #ffd1a8, #6ff0ff, #ff6fb5);
+    filter:blur(46px) saturate(1.3); opacity:0.5; border-radius:46% 54% 60% 40% / 50% 46% 54% 50%;
+    animation:morph 18s ease-in-out infinite alternate, spin 40s linear infinite; }
+  @keyframes morph { 0%{border-radius:46% 54% 60% 40% / 50% 46% 54% 50%;} 100%{border-radius:60% 40% 42% 58% / 42% 58% 42% 58%;} }
+  @keyframes spin { to{ transform:translateY(-50%) rotate(360deg);} }
+  .s3 .kicker { color:#c7b3ff; }
+  .s3 .prism-bolt { width:44px; height:62px; margin-bottom:1.4rem; filter:drop-shadow(0 0 16px rgba(176,111,255,0.65)); }
+  .s3 .wordmark {
+    font-family:'Space Grotesk',sans-serif; font-weight:300; font-size:clamp(2.4rem,8vw,6rem); line-height:0.95; text-transform:uppercase; letter-spacing:0.06em;
+    background:linear-gradient(110deg,#ffd1e8 0%,#a8c4ff 30%,#d6b0ff 55%,#bfffe9 78%,#ffd1a8 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    background-size:200% auto; animation:shimmer 8s linear infinite;
+  }
+  @keyframes shimmer { to{ background-position:200% center; } }
+  .s3 .sub { font-family:'Space Grotesk',sans-serif; font-weight:300; letter-spacing:0.34em; text-transform:uppercase; color:#aeb8d6; margin-top:1.4rem; font-size:clamp(0.78rem,1.5vw,0.95rem); }
+  .s3 .swatch.a{background:#030308;color:#aeb8d6} .s3 .swatch.b{background:#ff6fb5;color:#1a0a14}
+  .s3 .swatch.c{background:#6fa8ff;color:#04101f} .s3 .swatch.d{background:#b06fff;color:#fff} .s3 .swatch.e{background:linear-gradient(120deg,#ffd1e8,#a8c4ff,#bfffe9);color:#1a1a1a}
+  .s3 .btn { display:inline-block; font-family:'Space Grotesk',sans-serif; font-weight:500; text-transform:uppercase; letter-spacing:0.16em; font-size:0.82rem;
+    padding:0.85rem 1.9rem; color:#fff; cursor:pointer; border:1px solid transparent; border-radius:999px; position:relative;
+    background:linear-gradient(#0a0a12,#0a0a12) padding-box, linear-gradient(110deg,#ff6fb5,#6fa8ff,#b06fff) border-box; }
+  .s3 .demo-card{ border-radius:18px; padding:1.7rem; background:rgba(255,255,255,0.04); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.12); position:relative; }
+  .s3 .demo-card .pn{ font-family:'Space Grotesk',sans-serif; font-weight:400; letter-spacing:0.08em; text-transform:uppercase; font-size:1.15rem; }
+  .s3 .demo-card .pp{ font-family:'Space Grotesk',sans-serif; font-weight:300; font-size:1.5rem; margin-top:0.4rem;
+    background:linear-gradient(110deg,#ffd1e8,#a8c4ff,#bfffe9); -webkit-background-clip:text; background-clip:text; color:transparent; }
+
+  /* ============================================================
+     SYSTEM 04 — LIVE WIRE (neon electric-blue bolt)
+     ============================================================ */
+  .s4 { background:radial-gradient(130% 100% at 50% 30%, #0c2444 0%, #081832 45%, #050b18 100%); }
+  .s4 .kicker { color:#6fc0ff; }
+  .s4 .neon-bolt { width:clamp(90px,13vw,140px); margin-bottom:1.8rem; }
+  .s4 .neon-bolt path { fill:none; stroke:#eaf4ff; stroke-width:3; stroke-linejoin:round; stroke-linecap:round;
+    filter:drop-shadow(0 0 4px #cfe6ff) drop-shadow(0 0 10px #4da3ff) drop-shadow(0 0 22px #3b82f6) drop-shadow(0 0 40px #2563eb); }
+  .s4 .wordmark {
+    font-family:'Rajdhani',sans-serif; font-weight:600; font-size:clamp(2.6rem,8.5vw,6rem); line-height:0.92; text-transform:uppercase; letter-spacing:0.06em;
+    color:#eaf4ff; text-shadow:0 0 6px #cfe6ff, 0 0 16px #4da3ff, 0 0 34px #3b82f6, 0 0 60px rgba(37,99,235,0.6);
+    animation:flicker 6s infinite;
+  }
+  @keyframes flicker { 0%,100%{opacity:1} 92%{opacity:1} 93%{opacity:0.55} 94%{opacity:1} 96%{opacity:0.7} 97%{opacity:1} }
+  .s4 .sub { font-family:'Rajdhani',sans-serif; font-weight:500; letter-spacing:0.26em; text-transform:uppercase; color:#8fb6e6; margin-top:1.2rem; font-size:clamp(0.8rem,1.6vw,1rem); }
+  .s4 .swatch.a{background:#050b18;color:#6fc0ff} .s4 .swatch.b{background:#0e2138;color:#8fb6e6}
+  .s4 .swatch.c{background:#3b82f6;color:#04101f} .s4 .swatch.d{background:#6fc0ff;color:#04101f} .s4 .swatch.e{background:#eaf4ff;color:#0a0a0a}
+  .s4 .btn { display:inline-block; font-family:'Rajdhani',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.14em; font-size:0.95rem;
+    padding:0.8rem 1.9rem; background:rgba(59,130,246,0.08); color:#eaf4ff; border:1px solid #4da3ff; cursor:pointer; border-radius:4px;
+    box-shadow:0 0 10px rgba(77,163,255,0.4), inset 0 0 12px rgba(77,163,255,0.15); transition:all .2s; }
+  .s4 .btn:hover { background:#4da3ff; color:#04101f; box-shadow:0 0 22px rgba(77,163,255,0.7); }
+  .s4 .demo-card { border:1px solid rgba(77,163,255,0.3); background:rgba(14,33,56,0.55); padding:1.6rem; position:relative; border-radius:6px;
+    box-shadow:0 0 18px rgba(37,99,235,0.18), inset 0 0 20px rgba(37,99,235,0.08); }
+  .s4 .demo-card::before{ content:""; position:absolute; left:1.6rem; right:1.6rem; top:0; height:1px; background:#4da3ff; box-shadow:0 0 8px #4da3ff; }
+  .s4 .demo-card .pn{ font-family:'Rajdhani',sans-serif; font-weight:600; text-transform:uppercase; letter-spacing:0.04em; font-size:1.4rem; }
+  .s4 .demo-card .pp{ font-family:'Rajdhani',sans-serif; font-weight:700; color:#6fc0ff; font-size:1.55rem; margin-top:0.3rem; text-shadow:0 0 12px rgba(77,163,255,0.5); }
+
+  .logo-zone { font-family:'JetBrains Mono',monospace; font-size:0.6rem; letter-spacing:0.18em; text-transform:uppercase; opacity:0.45; border:1px dashed currentColor; padding:0.4rem 0.7rem; display:inline-block; margin-bottom:1.6rem; }
+</style>
+</head>
+<body>
+
+<header class="intro">
+  <div class="wrap">
+    <p class="kicker" style="color:#FFD60A;">Thunderstruck Pictures · Brand exploration</p>
+    <h1>Five design systems,<br>five different worlds.</h1>
+    <p>System 01 is our current house direction (the dark cinematic storm look we've been building). The next four are each derived from a different logo direction — chrome, street, liquid-iridescent, and electric neon. Same brand, same content (grip truck rental &amp; production, Austin TX) rendered five ways: wordmark, palette, a button, and a sample rental card. Your real logo drops into the marked zone in each.</p>
+  </div>
+</header>
+
+<!-- SYSTEM 00 — STORMHOUSE (current) -->
+<section class="sys s0">
+  <div class="wrap">
+    <div class="specimen">
+      <div>
+        <p class="kicker">System 01 — Stormhouse <span class="sys-no">/ our current direction</span></p>
+        <span class="logo-zone" style="color:#FFD60A;">your wordmark / bolt sits here</span>
+        <svg class="bolt-mark" viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg>
+        <div class="wordmark">Thunderstruck</div>
+        <div class="sub">Grip Truck Rental &amp; Production <span class="y">·</span> Austin, TX</div>
+        <div style="margin-top:2.2rem;"><span class="btn">Book / Hire</span></div>
+      </div>
+      <div>
+        <div class="swatches">
+          <div class="swatch a">#050608</div><div class="swatch b">#0C1014</div><div class="swatch c">#1C232B</div><div class="swatch d">#FFD60A</div><div class="swatch e">#F5F5F2</div>
+        </div>
+        <div class="demo-card">
+          <div class="pn">Nanlux Evoke 2400B</div>
+          <div class="pp">$575 <span style="font-size:0.6em;color:#93a0ac;">/ DAY</span></div>
+        </div>
+        <p class="meta-line" style="margin-top:1.4rem;color:#93a0ac;"><b>Mood:</b> dark cinematic storm, grindhouse, filmmaker-rugged<br><b>Type:</b> Anton (heavy condensed) + Inter + JetBrains Mono<br><b>Texture:</b> storm plate &amp; lightning · yellow bolt rules · film grain<br><b>Motion:</b> the scroll-driven storm hero reveal (home.html)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SYSTEM 01 — VOLTAGE -->
+<section class="sys s1">
+  <div class="wrap">
+    <div class="specimen">
+      <div>
+        <p class="kicker">System 02 — Voltage <span class="sys-no">/ from the chrome bolt</span></p>
+        <span class="logo-zone" style="color:#9fc4ee;">⚡ your chrome bolt sits here</span>
+        <svg class="chrome-bolt" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffffff"/><stop offset="0.4" stop-color="#9fb4ce"/><stop offset="0.5" stop-color="#ffffff"/><stop offset="0.7" stop-color="#6c81a0"/><stop offset="1" stop-color="#cfe0f5"/>
+          </linearGradient></defs>
+          <path d="M58 0 L20 82 L46 82 L34 150 L82 56 L54 56 L72 0 Z" fill="url(#cg)" stroke="#eaf2fb" stroke-width="1"/>
+        </svg>
+        <div class="wordmark">Thunderstruck</div>
+        <div class="sub">Grip Truck Rental &amp; Production · Austin TX</div>
+        <div style="margin-top:2.2rem;"><span class="btn">Book the Rig</span></div>
+      </div>
+      <div>
+        <div class="swatches">
+          <div class="swatch a">#03050A</div><div class="swatch b">#1A2330</div><div class="swatch c">CHROME</div><div class="swatch d">#9FC4EE</div><div class="swatch e">#F4F8FF</div>
+        </div>
+        <div class="demo-card">
+          <div class="pn">Nanlux Evoke 2400B</div>
+          <div class="pp">$575 <span style="font-size:0.6em;color:#7e97b5;">/ DAY</span></div>
+        </div>
+        <p class="meta-line" style="margin-top:1.4rem;color:#9fb4ce;"><b>Mood:</b> premium hardware, sci-fi gloss, AC/DC chrome<br><b>Type:</b> Saira Condensed italic + Inter<br><b>Texture:</b> brushed-metal gradients · specular sparkle · bevels<br><b>Motion:</b> a light-sweep sheens across edges on hover</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SYSTEM 02 — BLACK THUNDER -->
+<section class="sys s2">
+  <div class="wrap">
+    <div class="specimen">
+      <div>
+        <p class="kicker">System 03 — Black Thunder <span class="sys-no">/ from the brush mark</span></p>
+        <span class="logo-zone" style="color:#F4E11E;">your brush wordmark sits here</span>
+        <svg class="brush-bolt" viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg>
+        <div class="brush"><span class="sm">Thunder</span>Struck</div>
+        <div class="sub">Grip Truck Rental &amp; Production — Austin, TX</div>
+        <div style="margin-top:2.2rem; display:flex; gap:1.4rem; align-items:center;"><span class="btn">Rent It</span><span class="sticker">Up to Eleven</span></div>
+      </div>
+      <div>
+        <div class="swatches">
+          <div class="swatch a">#F4E11E</div><div class="swatch b">#0A0A0A</div><div class="swatch c">#FFF</div><div class="swatch d">#E5342B</div><div class="swatch e">#2B2B2B</div>
+        </div>
+        <div class="demo-card">
+          <div class="pn">Nanlux Evoke 2400B</div>
+          <div class="pp">$575 / day</div>
+        </div>
+        <p class="meta-line" style="margin-top:1.4rem;"><b>Mood:</b> punk, street, rock poster, hand-made, loud<br><b>Type:</b> Permanent Marker brush + Archivo Black<br><b>Texture:</b> halftone dots · tape · stickers · rough rotation<br><b>Motion:</b> snappy stamps, slight tilts, kinetic</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SYSTEM 03 — PRISM -->
+<section class="sys s3">
+  <div class="blob" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="specimen">
+      <div>
+        <p class="kicker">System 04 — Prism <span class="sys-no">/ from the liquid-chrome form</span></p>
+        <span class="logo-zone" style="color:#c7b3ff;">your iridescent mark sits here</span>
+        <svg class="prism-bolt" viewBox="0 0 24 32"><defs><linearGradient id="pg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd1e8"/><stop offset="0.4" stop-color="#a8c4ff"/><stop offset="0.72" stop-color="#b06fff"/><stop offset="1" stop-color="#bfffe9"/></linearGradient></defs><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z" fill="url(#pg)"/></svg>
+        <div class="wordmark">Thunderstruck</div>
+        <div class="sub">Grip Truck Rental &amp; Production · Austin TX</div>
+        <div style="margin-top:2.4rem;"><span class="btn">Reserve Gear</span></div>
+      </div>
+      <div>
+        <div class="swatches">
+          <div class="swatch a">#030308</div><div class="swatch b">#FF6FB5</div><div class="swatch c">#6FA8FF</div><div class="swatch d">#B06FFF</div><div class="swatch e">PRISM</div>
+        </div>
+        <div class="demo-card">
+          <div class="pn">Nanlux Evoke 2400B</div>
+          <div class="pp">$575 / day</div>
+        </div>
+        <p class="meta-line" style="margin-top:1.4rem;color:#aeb8d6;"><b>Mood:</b> futuristic, holographic, premium-modern, fluid<br><b>Type:</b> Space Grotesk Light + Inter<br><b>Texture:</b> liquid-chrome blobs · glassmorphism · iridescent glow<br><b>Motion:</b> slow morphing gradient · shimmer sweep</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SYSTEM 04 — LIVE WIRE -->
+<section class="sys s4">
+  <div class="wrap">
+    <div class="specimen">
+      <div>
+        <p class="kicker">System 05 — Live Wire <span class="sys-no">/ from the neon bolt</span></p>
+        <span class="logo-zone" style="color:#6fc0ff;">your neon bolt sits here</span>
+        <svg class="neon-bolt" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+          <path d="M58 6 L22 80 L48 80 L38 144 L80 60 L52 60 L66 6 Z"/>
+        </svg>
+        <div class="wordmark">Thunderstruck</div>
+        <div class="sub">Grip Truck Rental &amp; Production · Austin TX</div>
+        <div style="margin-top:2.3rem;"><span class="btn">Power Up</span></div>
+      </div>
+      <div>
+        <div class="swatches">
+          <div class="swatch a">#050B18</div><div class="swatch b">#0E2138</div><div class="swatch c">#3B82F6</div><div class="swatch d">#6FC0FF</div><div class="swatch e">#EAF4FF</div>
+        </div>
+        <div class="demo-card">
+          <div class="pn">Nanlux Evoke 2400B</div>
+          <div class="pp">$575 <span style="font-size:0.6em;color:#8fb6e6;">/ DAY</span></div>
+        </div>
+        <p class="meta-line" style="margin-top:1.4rem;color:#8fb6e6;"><b>Mood:</b> electric neon, night energy, kinetic, cyber-clean<br><b>Type:</b> Rajdhani (techy) + Inter<br><b>Texture:</b> neon glow · electric arcs · glowing edges on dark glass<br><b>Motion:</b> neon flicker + glow pulse, arcs that crackle on hover</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
