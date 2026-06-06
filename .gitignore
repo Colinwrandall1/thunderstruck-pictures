@@ -19,3 +19,6 @@ node_modules/
 # contract docs — not part of the site
 *.pdf
 Thunderstruck-Website-Agreement.html
+
+# Local Netlify folder
+.netlify

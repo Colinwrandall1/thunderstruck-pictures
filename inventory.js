@@ -46,5 +46,15 @@ const INVENTORY = [
   { dept:'grip', id:'honda-eu2200', cat:'power', brand:'Honda', tag:'Generator', name:'Honda EU2200i Generator', spec:'2200W quiet inverter generator — clean power for set.', day:65 },
   { dept:'grip', id:'delta-pro', cat:'power', brand:'Aputure', tag:'Battery Station', name:'Aputure Delta Pro 3600W (×2)', spec:'3600W stations — 5 AC + 6 USB. Runs a 1200d 2+ hrs. Pair.', day:120 },
   { dept:'grip', id:'jackery-880', cat:'power', brand:'Jackery', tag:'Power Station', name:'Jackery 880 Power Station', spec:'Portable station with 3× 1000W AC outlets.', day:45 },
-  { dept:'grip', id:'grip-truck-package', cat:'truck', brand:'Thunderstruck', tag:'Full Package', name:'Full Grip Truck Package', spec:'The entire 3-ton truck — all grip, stands, flags, frames, distro &amp; the electric package, delivered and operated.', day:1250, photo:true }
+  { dept:'grip', id:'grip-truck-package', cat:'truck', brand:'Thunderstruck', tag:'Full Package', name:'Full Grip Truck Package', spec:'The entire 3-ton truck — all grip, stands, flags, frames, distro &amp; the electric package, delivered and operated.', day:1250, photo:true },
+  { dept:'sound', id:'sd-633', cat:'recording', brand:'Sound Devices', tag:'Recorder · Mixer', name:'Sound Devices 633', spec:'6-input field mixer/recorder with timecode &amp; dual SD. ORCA bag and harness available.', day:85 },
+  { dept:'sound', id:'orca-bag', cat:'recording', brand:'ORCA', tag:'Sound Bag', name:'ORCA OR-28 Bag + Harness', spec:'Audio bag with Porta Brace harness and K-Tek Stingray mixer bag.', day:25 },
+  { dept:'sound', id:'sound-blanket', cat:'recording', brand:'Producers Choice', tag:'Blankets', name:'Sound Blankets (×2)', spec:'72×80&quot; moving/sound blankets — also double as a black flag or white bounce.', day:20 },
+  { dept:'sound', id:'mkh50', cat:'mics', brand:'Sennheiser', tag:'Shotgun', name:'Sennheiser MKH 50', spec:'Supercardioid microphone with Rycote Super-Shield blimp kit.', day:55 },
+  { dept:'sound', id:'boom-pole', cat:'mics', brand:'Ambient', tag:'Boom Pole', name:'Ambient QP480-SCM Boom Pole', spec:'Carbon-fiber boom pole, extends 11 ft, internal coiled cable. Auray holder.', day:25 },
+  { dept:'sound', id:'cos11d', cat:'mics', brand:'Sanken', tag:'Lavalier', name:'Sanken COS-11D Lav', spec:'Broadcast lavalier — XLR, phantom or battery. Bubblebee concealer included.', day:30 },
+  { dept:'sound', id:'dpa4061', cat:'mics', brand:'DPA', tag:'Lavalier', name:'DPA 4061 Lav', spec:'Low-sensitivity omni lavalier for louder sources.', day:30 },
+  { dept:'sound', id:'lectro-smdwb', cat:'wireless', brand:'Lectrosonics', tag:'Wireless · Recorder', name:'Lectrosonics SMDWB', spec:'Wireless transmitter/recorder (B1: 537–614 MHz).', day:65 },
+  { dept:'sound', id:'mm1', cat:'wireless', brand:'Sound Devices', tag:'Boom Preamp', name:'Sound Devices MM-1', spec:'Single-channel mic preamp for the boom operator.', day:35 },
+  { dept:'sound', id:'tentacle-track-e', cat:'wireless', brand:'Tentacle', tag:'Timecode', name:'Tentacle TRACK E', spec:'Pocket timecode audio recorder for camera/sound sync.', day:20 }
 ];
