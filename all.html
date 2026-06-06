@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thunderstruck Pictures — Lighting Rentals · Build a Quote</title>
+<title>Thunderstruck Pictures — All Inventory · Build a Quote</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -231,6 +231,8 @@
     background:linear-gradient(180deg,#ffffff,#dbe8f7 45%,#aac1da 55%,#f2f8ff);
     box-shadow:0 0 26px rgba(150,190,255,0.45), inset 0 1px 0 rgba(255,255,255,0.95);
   }
+  .card .image.image-soon{ background:#e4e1d9; }
+  .image-soon .soon-ico{ width:30px; height:40px; color:#bbb5a8; opacity:.8; }
 </style>
 </head>
 <body>
@@ -239,7 +241,7 @@
   <a href="index.html" class="brand">Thunderstruck</a>
   <div class="links">
     <a href="camera.html">Camera</a>
-    <a href="rentals.html" class="current">Lighting &amp; Grip</a>
+    <a href="rentals.html">Lighting &amp; Grip</a>
     <a href="grip-truck.html">Grip Truck</a>
     <a href="index.html#crew">Production</a>
     <a href="contact.html">Contact</a>
@@ -250,29 +252,32 @@
 <section class="rhero">
   <div class="bg" aria-hidden="true"></div>
   <div class="inner wrap">
-    <nav class="deptrail" aria-label="Departments"><a href="all.html">All Inventory</a><a href="camera.html">Camera</a><a href="rentals.html" class="current">Lighting</a><a href="grip-truck.html">Grip</a><a href="sound.html">Audio</a></nav>
-    <h1>The lighting <span class="y">package.</span></h1>
-    <p class="lede"><strong>HMI-equivalent LEDs from 600W to 4000W</strong>, tube kits, RGB panels, and accent lights — all CRMX-controllable. Build your package below; we respond within 24 hours with availability and a firm rate. No card, no commitment.</p>
+    <nav class="deptrail" aria-label="Departments"><a href="all.html" class="current">All Inventory</a><a href="camera.html">Camera</a><a href="rentals.html">Lighting</a><a href="grip-truck.html">Grip</a><a href="sound.html">Audio</a></nav>
+    <h1>All <span class="y">inventory.</span></h1>
+    <p class="lede">Every department in one place — <strong>camera, lighting, grip &amp; audio</strong>. Add anything to a single quote across departments; we respond within 24 hours with availability and a firm rate. No card, no commitment.</p>
   </div>
 </section>
 
 <div class="tabs">
   <div class="tabs-inner">
-    <button class="tab active" data-filter="all">All <span class="count">15</span></button>
-    <button class="tab" data-filter="big">Big Fixtures <span class="count">6</span></button>
-    <button class="tab" data-filter="mid">Mid &amp; Small <span class="count">6</span></button>
-    <button class="tab" data-filter="tubes">Tubes &amp; Panels <span class="count">3</span></button>
+    <button class="tab active" data-filter="all">All <span class="count">55</span></button>
+    <button class="tab" data-filter="camera">Camera <span class="count">14</span></button>
+    <button class="tab" data-filter="lighting">Lighting <span class="count">15</span></button>
+    <button class="tab" data-filter="grip">Grip <span class="count">16</span></button>
+    <button class="tab" data-filter="sound">Audio <span class="count">10</span></button>
   </div>
 </div>
 
 <main class="catalog">
-  <div class="subcat-head" data-section="big"><h2>Big <span class="y">fixtures.</span></h2><span class="tag">600W–4000W HMI eq.</span></div>
-  <div class="grid" id="grid-big"></div>
-  <div class="subcat-head" data-section="mid"><h2>Mid &amp; <span class="y">small.</span></h2><span class="tag">Accent &amp; practicals</span></div>
-  <div class="grid" id="grid-mid"></div>
-  <div class="subcat-head" data-section="tubes"><h2>Tubes &amp; <span class="y">panels.</span></h2><span class="tag">RGB · CRMX · DMX</span></div>
-  <div class="grid" id="grid-tubes"></div>
-  <div class="note-strip"><strong>About these rates.</strong> Daily rates shown are placeholders for this demo. Multi-day discounts and weekly rates (3-day equivalent) calculate automatically at quote stage. Pickup &amp; delivery across Greater Austin; longer hauls quoted separately. <strong>More departments — camera, lenses, grip, sound — come online as product photos land.</strong></div>
+  <div class="subcat-head" data-section="camera"><h2><span class="y">Camera.</span></h2><span class="tag">Bodies · lenses · support · monitoring</span></div>
+  <div class="grid" id="grid-camera"></div>
+  <div class="subcat-head" data-section="lighting"><h2><span class="y">Lighting.</span></h2><span class="tag">Fixtures · control · distro</span></div>
+  <div class="grid" id="grid-lighting"></div>
+  <div class="subcat-head" data-section="grip"><h2><span class="y">Grip.</span></h2><span class="tag">Stands · flags · frames · power — full truck on the Grip page</span></div>
+  <div class="grid" id="grid-grip"></div>
+  <div class="subcat-head" data-section="sound"><h2><span class="y">Audio.</span></h2><span class="tag">Recorders · mics · wireless &amp; sync</span></div>
+  <div class="grid" id="grid-sound"></div>
+  <div class="note-strip"><strong>About these rates.</strong> Daily rates shown are indicative — multi-day and weekly rates (3-day equivalent) calculate automatically at quote stage. Pickup &amp; delivery across Greater Austin; longer hauls quoted separately. <strong>Product photography for the camera package lands with the gear shoot.</strong></div>
 </main>
 
 <footer>
@@ -364,19 +369,19 @@
 
 <script src="inventory.js"></script>
 <script>
-const DEPT='lighting';
+const DEPT=null; const DEPTS=['camera','lighting','grip','sound'];
 
 let cart = {}; let days = 1;
 
 function renderCatalog(){
-  ['big','mid','tubes'].forEach(cat=>{
-    document.getElementById('grid-'+cat).innerHTML = INVENTORY.filter(i=>i.dept===DEPT&&i.cat===cat).map(cardHtml).join('');
+  DEPTS.forEach(dept=>{
+    document.getElementById('grid-'+dept).innerHTML = INVENTORY.filter(i=>i.dept===dept && i.cat!=='truck').map(cardHtml).join('');
   });
 }
 function cardHtml(i){
   const inCart = cart[i.id] > 0;
   return `<article class="card ${inCart?'in-cart':''}" data-id="${i.id}">
-    <div class="image"><span class="badge">${i.tag}</span><img src="media/products/${i.id}.jpg" alt="${i.name}" loading="lazy"></div>
+    <div class="image ${i.photo?'':'image-soon'}"><span class="badge">${i.tag}</span>${i.photo?`<img src="media/products/${i.id}.webp" alt="${i.name}" loading="lazy">`:`<svg viewBox="0 0 24 32" fill="currentColor" class="soon-ico"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg>`}</div>
     <div class="body">
       <div class="brand-label">${i.brand}</div>
       <div class="name">${i.name}</div>
@@ -492,10 +497,10 @@ ${data.notes||'(none)'}`;
 function resetAfterSuccess(){ cart={}; days=1; save(); setDays(1); renderCatalog(); renderCart(); updateNav(); document.getElementById('quoteForm').reset(); document.getElementById('drawerTitle').innerHTML='Your <span class="y">quote.</span>'; closeDrawer(); }
 function applyFilter(f){
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.filter===f));
-  ['big','mid','tubes'].forEach(cat=>{
-    const show=(f==='all'||f===cat);
-    document.querySelector(`[data-section="${cat}"]`).style.display=show?'':'none';
-    document.getElementById('grid-'+cat).style.display=show?'':'none';
+  DEPTS.forEach(dept=>{
+    const show=(f==='all'||f===dept);
+    document.querySelector(`[data-section="${dept}"]`).style.display=show?'':'none';
+    document.getElementById('grid-'+dept).style.display=show?'':'none';
   });
 }
 const CART_KEY='ts-cart';
