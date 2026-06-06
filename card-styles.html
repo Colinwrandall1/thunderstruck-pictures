@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thunderstruck — Card Treatments (Voltage)</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+  :root{
+    --bg:#04060c; --panel:#0e141c; --panel-2:#121a24; --line:#1f2a38; --line-bright:#33485f;
+    --text:#f4f8ff; --muted:#9fb4ce; --dim:#6b7681; --accent:#9fc4ee;
+  }
+  body{ background:var(--bg); color:var(--text); font-family:'Inter',system-ui,sans-serif; line-height:1.55; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 clamp(1.2rem,4vw,3rem); }
+  .pagehead{ padding:clamp(3rem,6vw,5rem) 0 1.4rem; border-bottom:1px solid var(--line); }
+  .pagehead .eyebrow{ font-family:'JetBrains Mono',monospace; font-size:0.72rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--accent); margin-bottom:1rem; }
+  .pagehead h1{ font-family:'Saira Condensed',sans-serif; font-weight:700; font-style:italic; font-size:clamp(2.2rem,5.5vw,3.8rem); text-transform:uppercase; line-height:0.92; }
+  .pagehead h1 .y{ color:var(--accent); }
+  .pagehead p{ color:var(--muted); max-width:66ch; margin-top:1rem; }
+
+  section.treatment{ padding:clamp(2.5rem,5vw,4rem) 0; border-bottom:1px solid var(--line); }
+  .t-head{ display:flex; align-items:baseline; gap:1rem; margin-bottom:0.4rem; }
+  .t-num{ font-family:'Saira Condensed',sans-serif; font-weight:700; font-style:italic; font-size:2.4rem; color:var(--accent); line-height:1; }
+  .t-title{ font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:1.7rem; text-transform:uppercase; letter-spacing:0.02em; }
+  .rec{ display:inline-block; font-family:'JetBrains Mono',monospace; font-size:0.58rem; letter-spacing:0.18em; text-transform:uppercase; color:#0a0f16; background:var(--accent); padding:0.22rem 0.6rem; border-radius:999px; }
+  .t-desc{ color:var(--muted); max-width:74ch; margin:0.4rem 0 0.3rem; font-size:0.95rem; }
+  .t-trade{ color:var(--dim); max-width:74ch; font-size:0.82rem; font-family:'JetBrains Mono',monospace; }
+  .t-trade b{ color:var(--accent); font-weight:500; }
+  .grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-top:1.8rem; }
+  @media (max-width:1000px){ .grid{ grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .grid{ grid-template-columns:1fr;} }
+
+  /* shared card text bits */
+  .bl{ font-family:'JetBrains Mono',monospace; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); }
+  .nm{ font-size:0.92rem; font-weight:600; line-height:1.3; }
+  .sp{ font-size:0.76rem; line-height:1.4; min-height:2em; color:var(--muted); }
+  .row{ display:flex; align-items:baseline; justify-content:space-between; margin-top:0.3rem; padding-top:0.7rem; border-top:1px solid var(--line); }
+  .price{ font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:1.45rem; color:var(--accent); }
+  .unit{ font-family:'JetBrains Mono',monospace; font-size:0.62rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--dim); }
+  .badge{ position:absolute; top:0.6rem; left:0.6rem; font-family:'JetBrains Mono',monospace; font-size:0.55rem; letter-spacing:0.16em; text-transform:uppercase; padding:0.18rem 0.42rem; z-index:2; border-radius:3px; }
+  .body{ padding:0.9rem 1rem 1.1rem; display:flex; flex-direction:column; gap:0.35rem; flex:1; }
+
+  /* ===== 01 — KNOCKOUT, SPOTLIT ===== */
+  .t1 .card{ background:var(--panel); border:1px solid var(--line); overflow:hidden; display:flex; flex-direction:column; transition:border-color .2s, transform .2s; }
+  .t1 .card:hover{ border-color:var(--accent); transform:translateY(-3px); }
+  .t1 .image{ height:clamp(160px,17.5vw,210px); display:flex; align-items:center; justify-content:center; padding:1.2rem; border-bottom:1px solid var(--line);
+    background:radial-gradient(72% 62% at 50% 40%, #1b2533 0%, #0c121b 72%); }
+  .t1 .image img{ max-width:100%; max-height:84%; object-fit:contain; filter:drop-shadow(0 16px 22px rgba(0,0,0,.6)); transition:transform .35s ease; }
+  .t1 .card:hover .image img{ transform:scale(1.05); }
+  .t1 .badge{ background:rgba(0,0,0,.5); border:1px solid var(--line-bright); color:var(--text); }
+
+  /* ===== 02 — KNOCKOUT, FLAT BLACK ===== */
+  .t2 .card{ background:var(--panel); border:1px solid var(--line); overflow:hidden; display:flex; flex-direction:column; transition:border-color .2s, transform .2s; }
+  .t2 .card:hover{ border-color:var(--accent); transform:translateY(-3px); }
+  .t2 .image{ aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; padding:1.2rem; border-bottom:1px solid var(--line); background:#04060a; }
+  .t2 .image img{ max-width:84%; max-height:100%; object-fit:contain; filter:drop-shadow(0 10px 18px rgba(0,0,0,.5)); }
+  .t2 .badge{ background:rgba(255,255,255,.06); border:1px solid var(--line-bright); color:var(--muted); }
+
+  /* ===== 03 — KNOCKOUT, ELECTRIC GLOW ===== */
+  .t3 .card{ background:var(--panel); border:1px solid var(--line); overflow:hidden; display:flex; flex-direction:column; transition:border-color .2s, transform .2s; }
+  .t3 .card:hover{ border-color:var(--accent); transform:translateY(-3px); }
+  .t3 .image{ aspect-ratio:4/3; position:relative; display:flex; align-items:center; justify-content:center; padding:1.2rem; border-bottom:1px solid var(--line); background:#070d15; overflow:hidden; }
+  .t3 .image::before{ content:""; position:absolute; inset:0; background:radial-gradient(46% 44% at 50% 46%, rgba(159,196,238,.30), rgba(159,196,238,0) 70%); transition:opacity .35s; }
+  .t3 .card:hover .image::before{ opacity:1.4; }
+  .t3 .image img{ position:relative; z-index:1; max-width:84%; max-height:100%; object-fit:contain; filter:drop-shadow(0 14px 22px rgba(0,0,0,.55)); transition:transform .35s ease; }
+  .t3 .card:hover .image img{ transform:scale(1.05); }
+  .t3 .badge{ background:rgba(0,0,0,.5); border:1px solid var(--line-bright); color:var(--text); }
+
+  /* ===== 04 — CONTAINED LIGHT PLATE ===== */
+  .t4 .card{ background:var(--panel); border:1px solid var(--line); padding:0.85rem; display:flex; flex-direction:column; transition:border-color .2s, transform .2s; }
+  .t4 .card:hover{ border-color:var(--accent); transform:translateY(-3px); }
+  .t4 .plate{ aspect-ratio:4/3; background:#e9e6df; border-radius:6px; position:relative; display:flex; align-items:center; justify-content:center; padding:0.9rem; overflow:hidden; }
+  .t4 .plate img{ max-width:100%; max-height:100%; object-fit:contain; }
+  .t4 .badge{ background:rgba(255,255,255,.82); border:1px solid rgba(0,0,0,.12); color:#555; }
+  .t4 .body{ padding:0.9rem 0.4rem 0.3rem; }
+
+  /* ===== 05 — STORMFRONT ===== */
+  .t5{ position:relative; overflow:hidden; border-bottom:1px solid var(--line); }
+  .t5 .clouds{ position:absolute; inset:-8% -12%; z-index:0; background:url("assets/clouds-bg.jpg") center/cover no-repeat;
+    filter:brightness(0.42) saturate(0.7) contrast(1.05); animation:drift 46s ease-in-out infinite alternate; will-change:transform; }
+  @keyframes drift{ from{ transform:translate3d(-2.5%,0,0) scale(1.12);} to{ transform:translate3d(2.5%,-1.5%,0) scale(1.12);} }
+  .t5 .shade{ position:absolute; inset:0; z-index:1; pointer-events:none;
+    background:linear-gradient(180deg, rgba(4,6,12,0.74) 0%, rgba(4,6,12,0.55) 45%, rgba(4,6,12,0.85) 100%); }
+  .t5 .wrap{ position:relative; z-index:2; }
+  .t5 .t-desc, .t5 .t-trade{ color:#c2ccd6; }
+  .t5 .grid{ margin-top:2.2rem; }
+  .t5 .card{ position:relative; padding:2.4rem 1.2rem 1.8rem; background:rgba(10,16,26,0.34); backdrop-filter:blur(3px);
+    border:1px solid rgba(159,196,238,0.10); display:flex; flex-direction:column; align-items:center; text-align:center; transition:background .25s, transform .25s; }
+  .t5 .card:hover{ background:rgba(14,22,34,0.5); transform:translateY(-3px); }
+  .t5 .cnr{ position:absolute; width:20px; height:20px; border:0 solid rgba(255,255,255,0.5); transition:border-color .25s; }
+  .t5 .card:hover .cnr{ border-color:var(--accent); }
+  .t5 .tl{ top:10px; left:10px; border-top-width:1.5px; border-left-width:1.5px; }
+  .t5 .tr{ top:10px; right:10px; border-top-width:1.5px; border-right-width:1.5px; }
+  .t5 .blc{ bottom:10px; left:10px; border-bottom-width:1.5px; border-left-width:1.5px; }
+  .t5 .brc{ bottom:10px; right:10px; border-bottom-width:1.5px; border-right-width:1.5px; }
+  .t5 .stage{ height:200px; display:flex; align-items:center; justify-content:center; }
+  .t5 .stage img{ max-width:80%; max-height:100%; object-fit:contain; filter:drop-shadow(0 18px 26px rgba(0,0,0,.6));
+    -webkit-box-reflect:below 1px linear-gradient(to bottom, transparent 58%, rgba(255,255,255,0.14)); transition:transform .35s ease; }
+  .t5 .card:hover .stage img{ transform:scale(1.05); }
+  .t5 .pname{ margin-top:1.3rem; font-family:'Inter',sans-serif; font-weight:500; font-size:0.92rem; letter-spacing:0.16em; text-transform:uppercase; color:#f2f5f8; line-height:1.5; }
+  .t5 .pprice{ margin-top:0.6rem; font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:1.2rem; color:var(--accent); letter-spacing:0.02em; }
+  .t5 .addbtn{ margin-top:1.3rem; cursor:pointer;
+    background:linear-gradient(180deg,#ffffff,#cdddf0 45%,#9fb4ce 55%,#eaf2fb); color:#0a0f16;
+    font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:0.8rem; letter-spacing:0.16em; text-transform:uppercase;
+    padding:0.62rem 1.5rem; border:none; border-radius:3px; box-shadow:0 0 18px rgba(150,190,255,.25), inset 0 1px 0 rgba(255,255,255,.85); transition:filter .2s; }
+  .t5 .addbtn:hover{ filter:brightness(1.06); }
+
+  footer{ padding:3rem 0 4rem; }
+  footer .wrap{ color:var(--dim); font-family:'JetBrains Mono',monospace; font-size:0.78rem; letter-spacing:0.04em; line-height:1.8; }
+  footer a{ color:var(--accent); }
+</style>
+</head>
+<body>
+
+<header class="pagehead">
+  <div class="wrap">
+    <p class="eyebrow">Thunderstruck · Gear card directions</p>
+    <h1>Three directions for <span class="y">the gear cards.</span></h1>
+    <p>Three ways to present each piece of gear in the rental catalog, shown with real product cutouts. The same four items appear in every row — RED Komodo, Sachtler, Teradek, Nanlux — so you can compare directly. Hover a card to see the motion. <strong style="color:var(--text)">Our recommendation is Option 01.</strong></p>
+  </div>
+</header>
+
+<section class="treatment t1"><div class="wrap">
+  <div class="t-head"><span class="t-num">01</span><span class="t-title">Spotlit</span><span class="rec">Recommended</span></div>
+  <p class="t-desc">Cutout product floating on a dark card over a soft radial spotlight, with a drop shadow grounding it. The B&amp;H / Aputure-premium look — the most cohesive, and it leans into the dark Voltage palette.</p>
+  <p class="t-trade"><b>Best:</b> premium, cohesive, on-brand &nbsp;|&nbsp; <b>Needs:</b> clean cutouts (we have them)</p>
+  <div class="grid" id="g1"></div>
+</div></section>
+
+
+
+<section class="treatment t4"><div class="wrap">
+  <div class="t-head"><span class="t-num">02</span><span class="t-title">Light plate</span></div>
+  <p class="t-desc">Card stays dark; the product sits in a small light "plate" with the details on the dark area below. Shrinks the bright footprint — the white reads as an intentional gear swatch. Most forgiving of imperfect cutouts.</p>
+  <p class="t-trade"><b>Best:</b> safest, works with any source image &nbsp;|&nbsp; <b>Cost:</b> smaller product, brightest of the set</p>
+  <div class="grid" id="g4"></div>
+</div></section>
+
+<section class="treatment t5">
+  <div class="clouds" aria-hidden="true"></div>
+  <div class="shade" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="t-head"><span class="t-num">03</span><span class="t-title">Stormfront</span></div>
+    <p class="t-desc">Knockouts floating over slowly rolling storm clouds, in translucent cards with viewfinder corner-brackets and a soft reflection. The cloud drift is live — give it a few seconds. The brand baked into the card itself.</p>
+    <p class="t-trade"><b>Best:</b> unmistakably Thunderstruck, cinematic &nbsp;|&nbsp; <b>Best for:</b> a "Featured" row rather than a 50-item catalog</p>
+    <div class="grid" id="g5"></div>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  Three directions for the Thunderstruck gear cards. Let us know which one you prefer and we’ll build it out across the full inventory.
+</div></footer>
+
+<script>
+const ITEMS=[
+  { brand:'RED',     name:'Komodo 6K Body Kit',      spec:'Super-35 global-shutter 6K cinema camera.', day:450, tag:'Cinema · 6K',     img:'media/products/red-komodo.webp' },
+  { brand:'Sachtler',name:'Video 18 + Carbon Tripod',spec:'7–40 lb fluid head, 100mm bowl.',           day:95,  tag:'Fluid Head',      img:'media/products/sachtler-18.webp' },
+  { brand:'Teradek', name:'Bolt 6 LT 750 Kit',       spec:'Zero-delay 3G-SDI TX/RX, up to 750 ft.',    day:125, tag:'Wireless Video',  img:'media/products/teradek-bolt6.webp' },
+  { brand:'Nanlux',  name:'Evoke 2400B',             spec:'Bi-Color LED · 4000W HMI equivalent.',      day:575, tag:'LED · Key',       img:'media/products/cutouts/nanlux-2400b.png' },
+];
+
+const cardImage = (cls, i) => `
+  <article class="card">
+    <div class="${cls}"><span class="badge">${i.tag}</span><img src="${i.img}" alt="${i.name}" loading="lazy"></div>
+    <div class="body">
+      <div class="bl">${i.brand}</div><div class="nm">${i.name}</div><div class="sp">${i.spec}</div>
+      <div class="row"><span class="price">$${i.day}</span><span class="unit">/ day</span></div>
+    </div>
+  </article>`;
+
+const card5 = (i) => `
+  <article class="card">
+    <span class="cnr tl"></span><span class="cnr tr"></span><span class="cnr blc"></span><span class="cnr brc"></span>
+    <div class="stage"><img src="${i.img}" alt="${i.name}" loading="lazy"></div>
+    <div class="pname">${i.brand} ${i.name}</div>
+    <div class="pprice">$${i.day}<span style="opacity:.6;font-size:.8em;"> / day</span></div>
+    <button class="addbtn">Add to Quote</button>
+  </article>`;
+
+g1.innerHTML = ITEMS.map(i=>cardImage('image', i)).join('');
+g4.innerHTML = ITEMS.map(i=>cardImage('plate', i)).join('');
+g5.innerHTML = ITEMS.map(card5).join('');
+</script>
+</body>
+</html>

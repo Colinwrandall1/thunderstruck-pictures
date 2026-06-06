@@ -101,9 +101,35 @@
   nav.top a.current { color: var(--accent); }
   @media (max-width: 700px) { nav.top ul { display: none; } }
 
-  /* hero */
+  /* hero - full-width banner with truck backdrop */
   .hero {
-    padding: 4rem 2.5rem 3.5rem;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+    isolation: isolate;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url("../Martin%20Truck.jpg");
+    background-size: cover;
+    background-position: center 40%;
+    filter: saturate(0.7) contrast(1.05) brightness(0.85);
+    z-index: 0;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.75) 60%, var(--bg) 100%);
+    z-index: 1;
+    pointer-events: none;
+  }
+  .hero .hero-inner {
+    position: relative;
+    z-index: 2;
+    padding: 6rem 2.5rem 5rem;
     max-width: 1200px;
     margin: 0 auto;
   }
@@ -409,14 +435,17 @@
 </nav>
 
 <section class="hero">
-  <span class="label">Equipment Rentals · Austin, TX</span>
-  <h1>The full <span class="yellow">kit.</span></h1>
-  <p class="lede">
-    <strong>Camera, lenses, lighting, grip, audio, power.</strong> A complete package for narrative, commercial, and music-video work — delivered on our 3-ton truck across the Austin market. Inventory reflects fleet as of October 2025.
-  </p>
-  <div class="ctas">
-    <a class="btn btn-primary" href="mailto:martin@thunderstruckpictures.co?subject=Rental%20Inquiry">Request Quote →</a>
-    <a class="btn" href="#index">Jump to Category</a>
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <span class="label">Equipment Rentals · Austin, TX</span>
+    <h1>The full <span class="yellow">kit.</span></h1>
+    <p class="lede">
+      <strong>Camera, lenses, lighting, grip, audio, power.</strong> A complete package for narrative, commercial, and music-video work — delivered on our 3-ton truck across the Austin market. Inventory reflects fleet as of October 2025.
+    </p>
+    <div class="ctas">
+      <a class="btn btn-primary" href="mailto:martin@thunderstruckpictures.co?subject=Rental%20Inquiry">Request Quote →</a>
+      <a class="btn" href="#index">Jump to Category</a>
+    </div>
   </div>
 </section>
 

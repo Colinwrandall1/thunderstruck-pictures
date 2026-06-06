@@ -10,3 +10,12 @@ INVENTORY.md
 
 # The FTW pitch deck lives on FTW's repo, not here
 pitch-from-feed-the-wolf.html
+
+# build output
+public/
+# raw extracted video frames (optimized copies live in assets/hero-frames)
+assets/EZgif_thunderstruck/
+node_modules/
+# contract docs — not part of the site
+*.pdf
+Thunderstruck-Website-Agreement.html

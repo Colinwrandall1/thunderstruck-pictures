@@ -101,8 +101,42 @@
   nav.top a:hover { color: var(--accent); }
   @media (max-width: 700px) { nav.top ul { display: none; } }
 
-  /* hero - calm, type-driven */
+  /* hero - calm, type-driven, video backdrop */
   .hero {
+    position: relative;
+    overflow: hidden;
+    background: #000;
+    isolation: isolate;
+  }
+  .hero .hero-bg,
+  .hero .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero .hero-bg {
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.5) contrast(1.05);
+    z-index: 0;
+  }
+  .hero .hero-video {
+    z-index: 1;
+    filter: brightness(0.5) contrast(1.05);
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10,10,10,0.35) 0%, rgba(10,10,10,0.65) 70%, var(--bg) 100%);
+    z-index: 2;
+    pointer-events: none;
+  }
+  .hero .hero-inner {
+    position: relative;
+    z-index: 3;
     padding: 7rem 2.5rem 8rem;
     max-width: 1200px;
     margin: 0 auto;
@@ -134,20 +168,6 @@
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
-  }
-
-  /* truck strip */
-  .truck-strip {
-    width: 100%;
-    aspect-ratio: 21/8;
-    background-image:
-      linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.85) 100%),
-      url("../Martin%20Truck.jpg");
-    background-size: cover;
-    background-position: center 40%;
-    filter: saturate(0.7) contrast(1.1);
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
   }
 
   /* buttons */
@@ -458,22 +478,26 @@
 </nav>
 
 <section class="hero">
-  <span class="label">Thunderstruck Pictures · Austin, TX</span>
-  <h1>
-    Production<br>
-    + equipment<br>
-    <span class="yellow">rentals.</span>
-  </h1>
-  <p class="lede">
-    <strong>Original horror, action, and genre work</strong> — and a full lighting &amp; grip rental package, delivered on our 3-ton truck across the Austin market.
-  </p>
-  <div class="ctas">
-    <a class="btn btn-primary" href="#chopper">See the Work →</a>
-    <a class="btn" href="#rentals">See the Kit</a>
+  <div class="hero-bg" style="background-image:url('../media/hero-poster.png');" aria-hidden="true"></div>
+  <video class="hero-video" autoplay loop muted playsinline preload="metadata" poster="../media/hero-poster.png">
+    <source src="../media/hero.mp4" type="video/mp4">
+  </video>
+  <div class="hero-inner">
+    <span class="label">Thunderstruck Pictures · Austin, TX</span>
+    <h1>
+      Production<br>
+      + equipment<br>
+      <span class="yellow">rentals.</span>
+    </h1>
+    <p class="lede">
+      <strong>Original horror, action, and genre work</strong> — and a full lighting &amp; grip rental package, delivered on our 3-ton truck across the Austin market.
+    </p>
+    <div class="ctas">
+      <a class="btn btn-primary" href="#chopper">See the Work →</a>
+      <a class="btn" href="#rentals">See the Kit</a>
+    </div>
   </div>
 </section>
-
-<div class="truck-strip"></div>
 
 <section id="pillars">
   <div class="container">

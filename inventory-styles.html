@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thunderstruck — Inventory Card Treatments (4-way compare)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg:#050608; --panel:#0c1014; --line:#1c232b; --line-bright:#2c3640;
+    --text:#f5f5f2; --muted:#93a0ac; --dim:#6b7681; --yellow:#FFD60A;
+  }
+  body { background:var(--bg); color:var(--text); font-family:'Inter',system-ui,sans-serif; line-height:1.55; }
+  .wrap { max-width:1180px; margin:0 auto; padding:0 clamp(1.2rem,4vw,3rem); }
+  .pagehead { padding: clamp(3rem,6vw,5rem) 0 1rem; border-bottom:1px solid var(--line); }
+  .pagehead .eyebrow { font-family:'JetBrains Mono',monospace; font-size:0.72rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--yellow); margin-bottom:1rem; }
+  .pagehead h1 { font-family:'Anton',sans-serif; font-size:clamp(2.2rem,5.5vw,3.6rem); text-transform:uppercase; line-height:0.95; }
+  .pagehead h1 .y { color:var(--yellow); }
+  .pagehead p { color:var(--muted); max-width:64ch; margin-top:1rem; }
+
+  section.treatment { padding: clamp(2.5rem,5vw,4rem) 0; border-bottom:1px solid var(--line); }
+  .t-head { display:flex; align-items:baseline; gap:1rem; margin-bottom:0.4rem; }
+  .t-num { font-family:'Anton',sans-serif; font-size:2.4rem; color:var(--yellow); line-height:1; }
+  .t-title { font-family:'Anton',sans-serif; font-size:1.7rem; text-transform:uppercase; letter-spacing:0.02em; }
+  .t-desc { color:var(--muted); max-width:70ch; margin:0.4rem 0 0.4rem; font-size:0.95rem; }
+  .t-trade { color:var(--dim); max-width:70ch; font-size:0.85rem; font-family:'JetBrains Mono',monospace; letter-spacing:0.02em; }
+  .t-trade b { color:var(--yellow); font-weight:500; }
+  .grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-top:1.8rem; }
+  @media (max-width:1000px){ .grid{ grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .grid{ grid-template-columns:1fr;} }
+
+  /* shared card bits */
+  .nm { font-size:0.92rem; font-weight:600; line-height:1.3; }
+  .sp { font-size:0.76rem; line-height:1.4; min-height:2em; }
+  .price { font-family:'Anton',sans-serif; font-size:1.35rem; }
+  .unit { font-family:'JetBrains Mono',monospace; font-size:0.64rem; letter-spacing:0.14em; text-transform:uppercase; }
+  .bl { font-family:'JetBrains Mono',monospace; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; }
+  .badge { position:absolute; top:0.6rem; left:0.6rem; font-family:'JetBrains Mono',monospace; font-size:0.55rem; letter-spacing:0.16em; text-transform:uppercase; padding:0.18rem 0.42rem; z-index:2; }
+
+  /* ============ T1 — REFINED LIGHT CARD ============ */
+  .t1 .card { background:#e9e5dc; border:1px solid #d8d2c5; display:flex; flex-direction:column; overflow:hidden; transition:border-color .2s, transform .2s; }
+  .t1 .card:hover { border-color:var(--yellow); transform:translateY(-3px); }
+  .t1 .image { aspect-ratio:4/3; background:#e9e5dc; position:relative; display:flex; align-items:center; justify-content:center; padding:1rem; }
+  .t1 .image img { max-width:100%; max-height:100%; object-fit:contain; mix-blend-mode:multiply; }
+  .t1 .badge { background:rgba(0,0,0,0.06); border:1px solid rgba(0,0,0,0.12); color:#555; }
+  .t1 .body { padding:0.9rem 1rem 1.1rem; background:#efece5; border-top:1px solid #ddd7ca; display:flex; flex-direction:column; gap:0.35rem; flex:1; color:#1a1a1a; }
+  .t1 .bl { color:#8a7a23; }
+  .t1 .nm { color:#16181c; }
+  .t1 .sp { color:#5a5e63; }
+  .t1 .row { display:flex; align-items:baseline; justify-content:space-between; margin-top:0.3rem; padding-top:0.7rem; border-top:1px solid #ddd7ca; }
+  .t1 .price { color:#16181c; } .t1 .unit { color:#8a8d92; }
+
+  /* ============ T2 — CONTAINED PLATE ON DARK ============ */
+  .t2 .card { background:var(--panel); border:1px solid var(--line); padding:0.85rem; display:flex; flex-direction:column; transition:border-color .2s, transform .2s; }
+  .t2 .card:hover { border-color:var(--yellow); transform:translateY(-3px); }
+  .t2 .plate { aspect-ratio:4/3; background:#ece9e2; border-radius:6px; position:relative; display:flex; align-items:center; justify-content:center; padding:0.9rem; overflow:hidden; }
+  .t2 .plate img { max-width:100%; max-height:100%; object-fit:contain; mix-blend-mode:multiply; }
+  .t2 .badge { background:rgba(255,255,255,0.82); border:1px solid rgba(0,0,0,0.12); color:#555; border-radius:3px; }
+  .t2 .body { padding:0.9rem 0.4rem 0.3rem; display:flex; flex-direction:column; gap:0.35rem; flex:1; }
+  .t2 .bl { color:var(--yellow); } .t2 .sp { color:var(--muted); }
+  .t2 .row { display:flex; align-items:baseline; justify-content:space-between; margin-top:0.3rem; padding-top:0.7rem; border-top:1px solid var(--line); }
+  .t2 .price { color:var(--yellow); } .t2 .unit { color:var(--dim); }
+
+  /* ============ T3 — DUOTONE ON DARK ============ */
+  .t3 .card { background:var(--panel); border:1px solid var(--line); overflow:hidden; display:flex; flex-direction:column; transition:border-color .2s, transform .2s; }
+  .t3 .card:hover { border-color:var(--yellow); transform:translateY(-3px); }
+  .t3 .image { aspect-ratio:4/3; position:relative; overflow:hidden; background:#0c1014; border-bottom:1px solid var(--line); }
+  .t3 .image img { width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.12) brightness(0.86); transition:filter .35s ease; }
+  .t3 .image::after { content:""; position:absolute; inset:0; background:linear-gradient(160deg, rgba(255,214,10,0.10), rgba(10,13,18,0.55)); mix-blend-mode:overlay; pointer-events:none; transition:opacity .35s; }
+  .t3 .card:hover .image img { filter:grayscale(0) contrast(1) brightness(1); }
+  .t3 .card:hover .image::after { opacity:0; }
+  .t3 .badge { background:rgba(0,0,0,0.55); border:1px solid var(--line-bright); color:var(--text); }
+  .t3 .body { padding:0.9rem 1rem 1.1rem; display:flex; flex-direction:column; gap:0.35rem; flex:1; }
+  .t3 .bl { color:var(--yellow); } .t3 .sp { color:var(--muted); }
+  .t3 .row { display:flex; align-items:baseline; justify-content:space-between; margin-top:0.3rem; padding-top:0.7rem; border-top:1px solid var(--line); }
+  .t3 .price { color:var(--yellow); } .t3 .unit { color:var(--dim); }
+
+  /* ============ T4 — KNOCKOUT ON DARK ============ */
+  .t4 .card { background:var(--panel); border:1px solid var(--line); overflow:hidden; display:flex; flex-direction:column; transition:border-color .2s, transform .2s; }
+  .t4 .card:hover { border-color:var(--yellow); transform:translateY(-3px); }
+  .t4 .image { aspect-ratio:4/3; position:relative; display:flex; align-items:center; justify-content:center; padding:1.1rem;
+    background:radial-gradient(70% 60% at 50% 42%, #1a222b 0%, #0c1014 70%); border-bottom:1px solid var(--line); }
+  .t4 .image img { max-width:100%; max-height:100%; object-fit:contain; filter:drop-shadow(0 14px 22px rgba(0,0,0,0.55)); transition:transform .35s ease; }
+  .t4 .card:hover .image img { transform:scale(1.05); }
+  .t4 .badge { background:rgba(0,0,0,0.5); border:1px solid var(--line-bright); color:var(--text); }
+  .t4 .body { padding:0.9rem 1rem 1.1rem; display:flex; flex-direction:column; gap:0.35rem; flex:1; }
+  .t4 .bl { color:var(--yellow); } .t4 .sp { color:var(--muted); }
+  .t4 .row { display:flex; align-items:baseline; justify-content:space-between; margin-top:0.3rem; padding-top:0.7rem; border-top:1px solid var(--line); }
+  .t4 .price { color:var(--yellow); } .t4 .unit { color:var(--dim); }
+
+  /* ============ T5 — STORMFRONT (knockout + rolling clouds + brackets) ============ */
+  .t5 { position:relative; overflow:hidden; border-bottom:1px solid var(--line); }
+  .t5 .clouds {
+    position:absolute; inset:-8% -12%; z-index:0;
+    background:url("assets/clouds-bg.jpg") center/cover no-repeat;
+    filter:brightness(0.5) saturate(0.75) contrast(1.05);
+    animation:drift 46s ease-in-out infinite alternate;
+    will-change:transform;
+  }
+  @keyframes drift { from{ transform:translate3d(-2.5%,0,0) scale(1.12);} to{ transform:translate3d(2.5%,-1.5%,0) scale(1.12);} }
+  .t5 .shade { position:absolute; inset:0; z-index:1; pointer-events:none;
+    background:linear-gradient(180deg, rgba(5,6,8,0.72) 0%, rgba(5,6,8,0.55) 45%, rgba(5,6,8,0.82) 100%); }
+  .t5 .wrap { position:relative; z-index:2; }
+  .t5 .t-desc, .t5 .t-trade { color:#c2ccd6; }
+  .t5 .grid { margin-top:2.2rem; }
+  .t5 .card {
+    position:relative; padding:2.5rem 1.2rem 1.8rem;
+    background:rgba(10,14,20,0.32); backdrop-filter:blur(3px);
+    border:1px solid rgba(255,255,255,0.06);
+    display:flex; flex-direction:column; align-items:center; text-align:center;
+    transition:background .25s, transform .25s;
+  }
+  .t5 .card:hover { background:rgba(14,20,28,0.46); transform:translateY(-3px); }
+  /* viewfinder corner brackets */
+  .t5 .card .cnr { position:absolute; width:20px; height:20px; border:0 solid rgba(255,255,255,0.55); transition:border-color .25s; }
+  .t5 .card:hover .cnr { border-color:var(--yellow); }
+  .t5 .card .tl { top:10px; left:10px; border-top-width:1.5px; border-left-width:1.5px; }
+  .t5 .card .tr { top:10px; right:10px; border-top-width:1.5px; border-right-width:1.5px; }
+  .t5 .card .bl { top:auto; bottom:10px; left:10px; border-bottom-width:1.5px; border-left-width:1.5px; }
+  .t5 .card .br { bottom:10px; right:10px; border-bottom-width:1.5px; border-right-width:1.5px; }
+  .t5 .stage { height:210px; display:flex; align-items:center; justify-content:center; }
+  .t5 .stage img {
+    max-width:80%; max-height:100%; object-fit:contain;
+    filter:drop-shadow(0 18px 26px rgba(0,0,0,0.6));
+    -webkit-box-reflect:below 1px linear-gradient(to bottom, transparent 58%, rgba(255,255,255,0.16));
+    transition:transform .35s ease;
+  }
+  .t5 .card:hover .stage img { transform:scale(1.05); }
+  .t5 .pname { margin-top:1.4rem; font-family:'Inter',sans-serif; font-weight:500; font-size:0.95rem; letter-spacing:0.18em; text-transform:uppercase; color:#f2f5f8; line-height:1.5; }
+  .t5 .pprice { margin-top:0.7rem; font-family:'Inter',sans-serif; font-size:1rem; color:#c2ccd6; letter-spacing:0.04em; }
+  .t5 .addbtn { margin-top:1.4rem; background:transparent; border:1px solid rgba(255,255,255,0.6); color:#fff;
+    font-family:'JetBrains Mono',monospace; font-size:0.66rem; letter-spacing:0.22em; text-transform:uppercase;
+    padding:0.7rem 1.6rem; cursor:pointer; transition:all .2s; }
+  .t5 .addbtn:hover { background:var(--yellow); border-color:var(--yellow); color:#0a0a0a; }
+
+  footer { padding:3rem 0 4rem; }
+  footer .wrap { color:var(--dim); font-family:'JetBrains Mono',monospace; font-size:0.78rem; letter-spacing:0.04em; line-height:1.7; }
+  footer a { color:var(--yellow); }
+</style>
+</head>
+<body>
+
+<header class="pagehead">
+  <div class="wrap">
+    <p class="eyebrow">Inventory · Card treatment study</p>
+    <h1>Four ways to <span class="y">handle the product cards.</span></h1>
+    <p>Same gear, four card styles, judged against the <em>real</em> source images — which are a mix of clean white-background shots (Nanlux, Astera) and messy lifestyle/marketing images (the Aputure 1200x "BLAIR" shot, the 600d on dark bokeh). The white-vs-dark clash is the thing we're solving. Scroll and compare.</p>
+  </div>
+</header>
+
+<!-- T1 -->
+<section class="treatment t1">
+  <div class="wrap">
+    <div class="t-head"><span class="t-num">01</span><span class="t-title">Refined light cards</span></div>
+    <p class="t-desc">Lean into it — soft off-white cards (not stark white), consistent padding, dark text, a yellow edge on hover. The bright catalog plates become a deliberate rhythm against the dark frame. This is the "clean, bright product library" Martin liked at Charlotte Film Rentals.</p>
+    <p class="t-trade"><b>Best:</b> handles any source image · familiar e-comm feel &nbsp;|&nbsp; <b>Cost:</b> brightest option, least cinematic</p>
+    <div class="grid" id="g1"></div>
+  </div>
+</section>
+
+<!-- T2 -->
+<section class="treatment t2">
+  <div class="wrap">
+    <div class="t-head"><span class="t-num">02</span><span class="t-title">Contained plate on dark</span></div>
+    <p class="t-desc">Card stays dark to match the page; the photo sits in a smaller rounded light "plate" with the name, spec, and price on the dark area below. Shrinks the bright footprint so the white reads as an intentional gear swatch, not a glaring box.</p>
+    <p class="t-trade"><b>Best:</b> cohesive + works with any source image · my pick for "now" &nbsp;|&nbsp; <b>Cost:</b> smaller product image</p>
+    <div class="grid" id="g2"></div>
+  </div>
+</section>
+
+<!-- T3 -->
+<section class="treatment t3">
+  <div class="wrap">
+    <div class="t-head"><span class="t-num">03</span><span class="t-title">Duotone on dark</span></div>
+    <p class="t-desc">Every image gets a grayscale + contrast + brand-tint treatment so wildly different sources unify into one moody, editorial look — full color blooms back on hover. Most cinematic, very on-brand with the storm.</p>
+    <p class="t-trade"><b>Best:</b> unifies lifestyle/varied shots beautifully &nbsp;|&nbsp; <b>Cost:</b> pure white backgrounds still read light (see Nanlux) · loses true product color</p>
+    <div class="grid" id="g3"></div>
+  </div>
+</section>
+
+<!-- T4 -->
+<section class="treatment t4">
+  <div class="wrap">
+    <div class="t-head"><span class="t-num">04</span><span class="t-title">Knockout on dark <span style="font-size:0.9rem;color:var(--dim);">(the end-state)</span></span></div>
+    <p class="t-desc">Background-removed product floating on a dark card with a soft spotlight + shadow — the B&amp;H / Aputure-premium look, the most cohesive of all. Shown here with the items whose source photos have clean white backgrounds (I knocked them out for this mock).</p>
+    <p class="t-trade"><b>Best:</b> most premium + cohesive &nbsp;|&nbsp; <b>Needs:</b> clean product photography — exactly what Martin's planned gear shoot can deliver (shoot every item on a seamless)</p>
+    <div class="grid" id="g4"></div>
+  </div>
+</section>
+
+<!-- T5 -->
+<section class="treatment t5">
+  <div class="clouds" aria-hidden="true"></div>
+  <div class="shade" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="t-head"><span class="t-num">05</span><span class="t-title">Stormfront</span></div>
+    <p class="t-desc">The one you spotted — knockout products floating over slowly rolling storm clouds, in translucent cards with viewfinder corner-brackets and a soft reflection. The cloud drift is live (give it a few seconds). This is the most "Thunderstruck" of the bunch — the brand baked into the card itself.</p>
+    <p class="t-trade"><b>Best:</b> unmistakably on-brand, premium, cinematic &nbsp;|&nbsp; <b>Needs:</b> clean cutouts (same as #4) · heavier visually, best for a "Featured" row rather than a 50-item catalog</p>
+    <div class="grid" id="g5"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Same data, four treatments. My recommendation: <a href="#">#2 (contained plate)</a> or <a href="#">#3 (duotone)</a> to ship now, moving to <a href="#">#4 (knockouts)</a> once Martin shoots gear on a seamless.<br>
+    ← back to <a href="rentals.html">rentals.html</a> · <a href="home.html">home.html</a>
+  </div>
+</footer>
+
+<script>
+// Mixed set (real source images) for T1–T3 — includes clean + messy backgrounds on purpose.
+const MIX = [
+  { id:'nanlux-2400b', brand:'Nanlux', name:'Evoke 2400B', spec:'Bi-Color · 4000W HMI eq.', day:575, tag:'LED · Key' },
+  { id:'aputure-1200x', brand:'Aputure', name:'Storm 1200x', spec:'Bi-Color Kit · 1800W HMI eq.', day:350, tag:'LED · Key' },
+  { id:'aputure-600d', brand:'Aputure', name:'600d Pro', spec:'Daylight · 1200W HMI eq.', day:185, tag:'LED · Daylight' },
+  { id:'astera-titan', brand:'Astera', name:'Titan Tube 8-Kit', spec:'RGB · CRMX · battery', day:400, tag:'Tube · CRMX' },
+];
+// Clean-cutout set for T4 (knockouts exist for these).
+const CLEAN = [
+  { id:'nanlux-2400b', brand:'Nanlux', name:'Evoke 2400B', spec:'Bi-Color · 4000W HMI eq.', day:575, tag:'LED · Key' },
+  { id:'astera-titan', brand:'Astera', name:'Titan Tube 8-Kit', spec:'RGB · CRMX · battery', day:400, tag:'Tube · CRMX' },
+  { id:'amaran-200x', brand:'Amaran', name:'200x Bi-Color', spec:'Compact LED · barndoors', day:65, tag:'LED · Compact' },
+  { id:'aputure-60x', brand:'Aputure', name:'LS 60x', spec:'Focusing Bi-Color LED', day:55, tag:'Focusing' },
+];
+
+const card = (i, src) => `
+  <article class="card">
+    <div class="image"><span class="badge">${i.tag}</span><img src="${src}" alt="${i.name}" loading="lazy"></div>
+    <div class="body">
+      <div class="bl">${i.brand}</div>
+      <div class="nm">${i.name}</div>
+      <div class="sp">${i.spec}</div>
+      <div class="row"><span class="price">$${i.day}</span><span class="unit">/ day</span></div>
+    </div>
+  </article>`;
+
+// T2 uses a .plate wrapper instead of .image
+const cardPlate = (i, src) => `
+  <article class="card">
+    <div class="plate"><span class="badge">${i.tag}</span><img src="${src}" alt="${i.name}" loading="lazy"></div>
+    <div class="body">
+      <div class="bl">${i.brand}</div>
+      <div class="nm">${i.name}</div>
+      <div class="sp">${i.spec}</div>
+      <div class="row"><span class="price">$${i.day}</span><span class="unit">/ day</span></div>
+    </div>
+  </article>`;
+
+document.getElementById('g1').innerHTML = MIX.map(i => card(i, `media/products/${i.id}.jpg`)).join('');
+document.getElementById('g2').innerHTML = MIX.map(i => cardPlate(i, `media/products/${i.id}.jpg`)).join('');
+document.getElementById('g3').innerHTML = MIX.map(i => card(i, `media/products/${i.id}.jpg`)).join('');
+document.getElementById('g4').innerHTML = CLEAN.map(i => card(i, `media/products/cutouts/${i.id}.png`)).join('');
+
+// T5 — Stormfront: knockouts in bracketed translucent cards with "Add to List"
+const card5 = (i) => `
+  <article class="card">
+    <span class="cnr tl"></span><span class="cnr tr"></span><span class="cnr bl"></span><span class="cnr br"></span>
+    <div class="stage"><img src="media/products/cutouts/${i.id}.png" alt="${i.name}" loading="lazy"></div>
+    <div class="pname">${i.brand} ${i.name}</div>
+    <div class="pprice">$${i.day}<span style="opacity:0.6;font-size:0.8em;"> / day</span></div>
+    <button class="addbtn">Add to List</button>
+  </article>`;
+document.getElementById('g5').innerHTML = CLEAN.map(card5).join('');
+</script>
+</body>
+</html>

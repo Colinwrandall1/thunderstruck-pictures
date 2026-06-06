@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thunderstruck — Lighting · Quote Builder (Light)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f6f1;          /* warm off-white page bg */
+    --bg-pure: #ffffff;     /* pure white (drawer, modals) */
+    --bg-2: #ffffff;        /* card bg */
+    --panel: #fafaf6;       /* secondary panel */
+    --panel-2: #f0eee8;     /* sunken panel */
+    --line: #e3e0d6;        /* soft warm border */
+    --line-bright: #c8c4b8; /* hover border */
+    --text: #0a0a0a;        /* near-black body text */
+    --text-dim: #5a5752;    /* secondary text */
+    --muted: #8a8780;       /* muted/eyebrow text */
+    --accent: #FFD60A;      /* same brand yellow */
+    --accent-ink: #8c6a00;  /* darker amber for text on light bg */
+    --blood: #7A1F1F;
+    --green: #16a34a;
+    --shadow-sm: 0 1px 2px rgba(20,18,12,0.04), 0 2px 6px rgba(20,18,12,0.04);
+    --shadow-md: 0 4px 10px rgba(20,18,12,0.05), 0 12px 28px rgba(20,18,12,0.06);
+  }
+  *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.025;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    font-weight: 700;
+  }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 2.5rem; }
+
+  /* meta bar */
+  .meta {
+    border-bottom: 1px solid var(--line);
+    padding: 1rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+  .meta a { color: var(--accent-ink); text-decoration: none; }
+  .meta a:hover { text-decoration: underline; }
+  .meta .tag {
+    display: inline-block;
+    border: 1px solid var(--accent-ink);
+    color: var(--accent-ink);
+    padding: 0.15rem 0.5rem;
+    margin-right: 0.6rem;
+    font-weight: 700;
+    background: rgba(255, 214, 10, 0.15);
+  }
+
+  /* nav */
+  nav.top {
+    border-bottom: 1px solid var(--line);
+    padding: 1.5rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  nav.top .brand {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--text);
+    text-decoration: none;
+  }
+  nav.top .brand .bolt { color: var(--accent); font-size: 1.25rem; }
+  nav.top .right { display: flex; align-items: center; gap: 2.5rem; }
+  nav.top ul { list-style: none; display: flex; gap: 2.5rem; }
+  nav.top a.navlink {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: color 0.15s;
+  }
+  nav.top a.navlink:hover { color: var(--accent-ink); }
+  nav.top a.navlink.current { color: var(--accent-ink); }
+  @media (max-width: 800px) { nav.top ul { display: none; } }
+
+  /* cart pill in nav */
+  .cart-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    padding: 0.55rem 1rem;
+    font-family: 'Anton', sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .cart-trigger:hover { border-color: var(--accent); color: var(--accent-ink); background: rgba(255, 214, 10, 0.12); }
+  .cart-trigger .count {
+    background: var(--accent);
+    color: var(--text);
+    padding: 0.15rem 0.55rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    min-width: 1.5rem;
+    text-align: center;
+  }
+  .cart-trigger .count.zero { background: var(--line); color: var(--muted); }
+
+  /* hero */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg);
+    isolation: isolate;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url("../Martin%20Truck.jpg");
+    background-size: cover;
+    background-position: center 35%;
+    filter: saturate(0.55) contrast(0.95) brightness(1.15);
+    z-index: 0;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(247,246,241,0.55) 0%, rgba(247,246,241,0.8) 60%, var(--bg) 100%);
+    z-index: 1;
+    pointer-events: none;
+  }
+  .hero .hero-inner {
+    position: relative;
+    z-index: 2;
+    padding: 5rem 2.5rem 3.5rem;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .hero .breadcrumb {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .hero .breadcrumb a { color: var(--text-dim); text-decoration: none; }
+  .hero .breadcrumb a:hover { color: var(--accent-ink); }
+  .hero .breadcrumb .sep { color: var(--line-bright); margin: 0 0.5rem; }
+  .hero h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 0.92;
+    text-transform: uppercase;
+    letter-spacing: 0.005em;
+    max-width: 14ch;
+  }
+  .hero h1 .yellow { color: var(--accent); }
+  .hero .lede {
+    margin-top: 1.25rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-dim);
+    max-width: 60ch;
+  }
+  .hero .lede strong { color: var(--text); font-weight: 500; }
+
+  /* subcategory tabs */
+  .tabs {
+    border-bottom: 1px solid var(--line);
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    backdrop-filter: blur(6px);
+  }
+  .tabs-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+  }
+  .tab {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-dim);
+    font-family: 'Anton', sans-serif;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 1.1rem 1.5rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab .count {
+    color: var(--muted);
+    font-size: 0.75rem;
+    margin-left: 0.4rem;
+    letter-spacing: 0.05em;
+  }
+  .tab.active .count { color: var(--accent); opacity: 0.7; }
+
+  /* catalog grid */
+  main.catalog {
+    padding: 3rem 2.5rem 4rem;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  /* product card */
+  .card {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+  .card:hover {
+    border-color: var(--line-bright);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  .card.in-cart { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), var(--shadow-md); }
+
+  .card .image {
+    aspect-ratio: 4/3;
+    background: #ecebe7;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem;
+    border-bottom: 1px solid var(--line);
+    overflow: hidden;
+  }
+  .card .image img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.35s ease;
+    mix-blend-mode: multiply;
+  }
+  .card:hover .image img { transform: scale(1.04); }
+
+  .card .image .tag {
+    position: absolute;
+    top: 0.7rem;
+    left: 0.7rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #444;
+    font-weight: 700;
+    border: 1px solid rgba(0,0,0,0.15);
+    padding: 0.22rem 0.5rem;
+    background: rgba(255,255,255,0.85);
+    z-index: 2;
+    backdrop-filter: blur(2px);
+  }
+
+  .card .body {
+    padding: 1.1rem 1.25rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+  }
+  .card .body .brand-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    font-weight: 700;
+    margin-bottom: -0.1rem;
+  }
+  .card .body .name {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .card .body .spec {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    line-height: 1.45;
+    min-height: 2.2em;
+  }
+  .card .body .pricing {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-top: 0.4rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--line);
+  }
+  .card .body .pricing .day {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.5rem;
+    color: var(--text);
+    letter-spacing: 0.01em;
+  }
+  .card .body .pricing .unit {
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* add button */
+  .add-btn {
+    margin-top: 0.85rem;
+    width: 100%;
+    background: transparent;
+    border: 1.5px solid var(--text);
+    color: var(--text);
+    padding: 0.7rem 1rem;
+    font-family: 'Anton', sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .add-btn:hover {
+    background: var(--text);
+    color: var(--bg-pure);
+  }
+  .add-btn.added {
+    background: var(--accent);
+    color: var(--bg-pure);
+    border-color: var(--accent);
+  }
+  .add-btn .check { font-size: 0.95rem; }
+
+  /* qty stepper (replaces add button when in cart) */
+  .stepper {
+    margin-top: 0.85rem;
+    display: flex;
+    align-items: stretch;
+    border: 1.5px solid var(--accent);
+    background: rgba(255,214,10,0.12);
+  }
+  .stepper button {
+    background: transparent;
+    border: none;
+    color: var(--accent-ink);
+    font-family: 'Anton', sans-serif;
+    font-size: 1.1rem;
+    width: 2.5rem;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .stepper button:hover { background: rgba(255,214,10,0.2); }
+  .stepper .qty-display {
+    flex: 1;
+    text-align: center;
+    font-family: 'Anton', sans-serif;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent-ink);
+    padding: 0.7rem 0;
+    border-left: 1px solid var(--accent);
+    border-right: 1px solid var(--accent);
+  }
+
+  /* subcategory heading */
+  .subcat-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin: 2.5rem 0 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .subcat-head:first-child { margin-top: 0; }
+  .subcat-head h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+  .subcat-head h2 .yellow { color: var(--accent); }
+  .subcat-head .meta {
+    border: none;
+    padding: 0;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* note strip */
+  .note-strip {
+    margin: 4rem 0 0;
+    padding: 1.5rem 2rem;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.65;
+  }
+  .note-strip strong { color: var(--text); font-weight: 600; }
+
+  /* ==================== QUOTE DRAWER ==================== */
+  .drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+  }
+  .drawer-backdrop.open { opacity: 1; pointer-events: auto; }
+
+  .drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 440px;
+    max-width: 100vw;
+    background: var(--bg-pure);
+    border-left: 1px solid var(--line);
+    z-index: 201;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+  }
+  .drawer.open { transform: translateX(0); }
+  @media (max-width: 500px) {
+    .drawer { width: 100vw; border-left: none; }
+  }
+
+  .drawer-head {
+    padding: 1.5rem 1.75rem;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .drawer-head h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+  .drawer-head h3 .yellow { color: var(--accent); }
+  .drawer-head .close {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--text);
+    width: 2.25rem;
+    height: 2.25rem;
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 1;
+    transition: all 0.15s;
+  }
+  .drawer-head .close:hover { border-color: var(--accent); color: var(--accent-ink); background: rgba(255, 214, 10, 0.12); }
+
+  .drawer-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.25rem 1.75rem;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 4rem 1rem;
+    color: var(--text-dim);
+  }
+  .empty-state .icon {
+    font-size: 2.25rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    opacity: 0.7;
+  }
+  .empty-state h4 {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+  .empty-state p { font-size: 0.85rem; line-height: 1.55; }
+
+  /* days picker */
+  .days-block {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 1rem 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+  .days-block .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.65rem;
+  }
+  .days-block label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .days-block .pills {
+    display: flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+  }
+  .days-block .pill {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--text-dim);
+    padding: 0.45rem 0.75rem;
+    font-family: 'Anton', sans-serif;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: all 0.15s;
+    min-width: 2.5rem;
+  }
+  .days-block .pill:hover { color: var(--text); border-color: var(--line-bright); }
+  .days-block .pill.active {
+    background: var(--accent);
+    color: var(--text);
+    border-color: var(--accent);
+  }
+  .days-block .hint {
+    margin-top: 0.5rem;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    line-height: 1.4;
+  }
+
+  /* line item */
+  .line {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.85rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .line:last-child { border-bottom: none; }
+  .line .name {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .line .sub {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 0.2rem;
+  }
+  .line .controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  .line .qty {
+    display: inline-flex;
+    align-items: stretch;
+    border: 1px solid var(--line);
+  }
+  .line .qty button {
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.15s;
+  }
+  .line .qty button:hover { color: var(--accent-ink); }
+  .line .qty .v {
+    min-width: 1.75rem;
+    text-align: center;
+    font-family: 'Anton', sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.5rem;
+    color: var(--text);
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+  }
+  .line .remove {
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 0.25rem 0;
+  }
+  .line .remove:hover { color: var(--blood); }
+  .line .price {
+    text-align: right;
+    align-self: start;
+  }
+  .line .price .lt {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.15rem;
+    color: var(--text);
+    letter-spacing: 0.01em;
+  }
+  .line .price .rate {
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-top: 0.15rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* drawer footer */
+  .drawer-foot {
+    padding: 1.25rem 1.75rem 1.5rem;
+    border-top: 1px solid var(--line);
+    background: var(--bg-pure);
+    flex-shrink: 0;
+  }
+  .totals {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .totals .k {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .totals .v {
+    font-family: 'Anton', sans-serif;
+    font-size: 2rem;
+    color: var(--text);
+    letter-spacing: 0.01em;
+  }
+  .totals .v .est {
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-left: 0.4rem;
+    font-family: 'Inter', sans-serif;
+  }
+  .submit-btn {
+    width: 100%;
+    background: var(--accent);
+    border: none;
+    color: var(--text);
+    padding: 1.1rem 1.5rem;
+    font-family: 'Anton', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .submit-btn:hover { background: var(--text); color: var(--bg-pure); }
+  .submit-btn:disabled { background: var(--line); color: var(--muted); cursor: not-allowed; }
+  .disclaimer {
+    margin-top: 0.85rem;
+    font-size: 0.7rem;
+    color: var(--muted);
+    line-height: 1.55;
+    text-align: center;
+  }
+
+  /* ==================== QUOTE FORM (replaces drawer body) ==================== */
+  .form-view {
+    display: none;
+    flex-direction: column;
+    height: 100%;
+  }
+  .drawer.form-mode .body-view { display: none; }
+  .drawer.form-mode .form-view { display: flex; }
+  .drawer.form-mode .foot-view { display: none; }
+  .drawer.form-mode .form-foot { display: block; }
+  .form-foot { display: none; }
+
+  .form-view .summary {
+    padding: 1rem 1.75rem;
+    background: var(--panel-2);
+    border-bottom: 1px solid var(--line);
+    flex-shrink: 0;
+  }
+  .form-view .summary .row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+  }
+  .form-view .summary .row .k { color: var(--text-dim); }
+  .form-view .summary .row .v { color: var(--text); font-weight: 600; font-family: 'Anton', sans-serif; letter-spacing: 0.04em; }
+  .form-view .summary .v.accent { color: var(--text); }
+
+  .form-view .fields {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem 1.75rem;
+  }
+  .field {
+    margin-bottom: 1.1rem;
+  }
+  .field label {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+  .field label .req { color: var(--accent); margin-left: 0.25rem; }
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    padding: 0.7rem 0.85rem;
+    transition: border-color 0.15s;
+  }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .field textarea { resize: vertical; min-height: 80px; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+
+  .form-foot {
+    padding: 1rem 1.75rem 1.5rem;
+    border-top: 1px solid var(--line);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .form-foot .btn-row { display: flex; gap: 0.6rem; }
+  .form-foot .back-btn {
+    flex: 0 0 auto;
+    padding: 0.85rem 1.25rem;
+    background: transparent;
+    border: 1.5px solid var(--line);
+    color: var(--text-dim);
+    font-family: 'Anton', sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .form-foot .back-btn:hover { border-color: var(--text-dim); color: var(--text); }
+  .form-foot .send-btn {
+    flex: 1;
+    padding: 0.95rem 1.25rem;
+    background: var(--accent);
+    color: var(--text);
+    border: none;
+    font-family: 'Anton', sans-serif;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .form-foot .send-btn:hover { background: var(--text); color: var(--bg-pure); }
+
+  /* ==================== SUCCESS STATE ==================== */
+  .drawer.success-mode .body-view,
+  .drawer.success-mode .form-view,
+  .drawer.success-mode .foot-view,
+  .drawer.success-mode .form-foot { display: none; }
+  .drawer.success-mode .success-view { display: flex; }
+
+  .success-view {
+    display: none;
+    flex-direction: column;
+    flex: 1;
+    overflow-y: auto;
+    padding: 3rem 1.75rem 2rem;
+    align-items: center;
+    text-align: center;
+  }
+  .success-view .icon {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .success-view h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    margin-bottom: 0.85rem;
+  }
+  .success-view h3 .yellow { color: var(--accent); }
+  .success-view p {
+    color: var(--text-dim);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    max-width: 30ch;
+    margin-bottom: 2rem;
+  }
+  .success-view .demo-receipt {
+    width: 100%;
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    padding: 1.25rem;
+    text-align: left;
+    margin-bottom: 1.5rem;
+  }
+  .success-view .demo-receipt .tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    display: block;
+  }
+  .success-view .demo-receipt h4 {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.85rem;
+    color: var(--text);
+  }
+  .success-view .demo-receipt pre {
+    font-family: ui-monospace, 'SF Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    white-space: pre-wrap;
+    line-height: 1.55;
+  }
+  .success-view .done-btn {
+    background: transparent;
+    border: 1.5px solid var(--text);
+    color: var(--text);
+    padding: 0.85rem 2rem;
+    font-family: 'Anton', sans-serif;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .success-view .done-btn:hover { background: var(--text); color: var(--bg-pure); }
+
+  /* footer */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 3rem 2.5rem 2.5rem;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  footer .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  footer .brand-foot {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  footer .brand-foot .bolt { color: var(--accent); }
+  footer .meta-foot {
+    color: var(--muted);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-align: right;
+  }
+  footer .meta-foot a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="meta">
+  <span><span class="tag">MOCKUP</span>Quote-builder demo · prices are placeholders</span>
+  <a href="index.html">← Back to all directions</a>
+</div>
+
+<nav class="top">
+  <a class="brand" href="04-grindhouse-composed.html"><span class="bolt">⚡</span> THUNDERSTRUCK</a>
+  <div class="right">
+    <ul>
+      <li><a class="navlink" href="04-grindhouse-composed.html#chopper">Productions</a></li>
+      <li><a class="navlink current" href="06-inventory.html">Rentals</a></li>
+      <li><a class="navlink" href="#">About</a></li>
+      <li><a class="navlink" href="#">Contact</a></li>
+    </ul>
+    <button class="cart-trigger" id="cartBtn" aria-label="Open quote">
+      <span>Quote</span>
+      <span class="count zero" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="breadcrumb">
+      <a href="06-inventory.html">Rentals</a> <span class="sep">/</span> <span>Lighting</span>
+    </div>
+    <h1>Lighting <span class="yellow">package.</span></h1>
+    <p class="lede">
+      <strong>HMI-equivalent LEDs from 600W to 4000W</strong>, tube kits, RGB panels, and small accent lights — fully CRMX-controllable. Add what you need to your quote. We'll respond within 24 hours with availability and a firm rate.
+    </p>
+  </div>
+</section>
+
+<div class="tabs">
+  <div class="tabs-inner">
+    <button class="tab active" data-filter="all">All <span class="count">15</span></button>
+    <button class="tab" data-filter="big">Big Fixtures <span class="count">6</span></button>
+    <button class="tab" data-filter="mid">Mid &amp; Small <span class="count">6</span></button>
+    <button class="tab" data-filter="tubes">Tubes &amp; Panels <span class="count">3</span></button>
+  </div>
+</div>
+
+<main class="catalog">
+
+  <div class="subcat-head" data-section="big">
+    <h2>Big <span class="yellow">fixtures.</span></h2>
+    <span class="meta">600W–4000W HMI equivalent</span>
+  </div>
+  <div class="grid" id="grid-big"></div>
+
+  <div class="subcat-head" data-section="mid">
+    <h2>Mid &amp; <span class="yellow">small.</span></h2>
+    <span class="meta">Accent &amp; practicals</span>
+  </div>
+  <div class="grid" id="grid-mid"></div>
+
+  <div class="subcat-head" data-section="tubes">
+    <h2>Tubes &amp; <span class="yellow">panels.</span></h2>
+    <span class="meta">RGB · CRMX · DMX</span>
+  </div>
+  <div class="grid" id="grid-tubes"></div>
+
+  <div class="note-strip">
+    <strong>About these rates.</strong> Daily rates shown are placeholders for this demo. Standard industry pricing applies on the live site — multi-day discounts and weekly rates (3-day equivalent) calculated automatically at quote stage. Pickup &amp; delivery available across Greater Austin; longer hauls quoted separately.
+  </div>
+
+</main>
+
+<footer>
+  <div class="row">
+    <div class="brand-foot"><span class="bolt">⚡</span> THUNDERSTRUCK</div>
+    <div class="meta-foot">
+      © Thunderstruck Pictures · Austin, TX<br>
+      <a href="mailto:hello@thunderstruckpictures.co">hello@thunderstruckpictures.co</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ QUOTE DRAWER ============ -->
+<div class="drawer-backdrop" id="backdrop"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-head">
+    <h3 id="drawerTitle">Your <span class="yellow">quote.</span></h3>
+    <button class="close" id="closeDrawer" aria-label="Close">✕</button>
+  </div>
+
+  <!-- DEFAULT VIEW: cart contents -->
+  <div class="drawer-body body-view" id="drawerBody">
+    <!-- populated by JS -->
+  </div>
+
+  <div class="drawer-foot foot-view" id="drawerFoot">
+    <div class="days-block">
+      <div class="row">
+        <label>Rental days</label>
+        <span style="font-size:0.7rem;color:var(--muted);letter-spacing:0.1em;" id="daysSummary">1 day</span>
+      </div>
+      <div class="pills" id="daysPills">
+        <button class="pill active" data-d="1">1</button>
+        <button class="pill" data-d="2">2</button>
+        <button class="pill" data-d="3">3</button>
+        <button class="pill" data-d="5">5</button>
+        <button class="pill" data-d="7">Wk</button>
+        <button class="pill" data-d="14">2wk</button>
+      </div>
+      <p class="hint">Weekly rate = 3-day equivalent. Reflected in final quote.</p>
+    </div>
+    <div class="totals">
+      <span class="k">Estimated total</span>
+      <span class="v" id="cartTotal">$0<span class="est">est.</span></span>
+    </div>
+    <button class="submit-btn" id="continueBtn" disabled>Continue to Quote →</button>
+    <p class="disclaimer">No payment collected — this is a request. We respond with firm rates &amp; availability within 24 hours.</p>
+  </div>
+
+  <!-- FORM VIEW -->
+  <div class="form-view">
+    <div class="summary">
+      <div class="row"><span class="k">Items</span><span class="v" id="sumItems">0</span></div>
+      <div class="row"><span class="k">Days</span><span class="v" id="sumDays">1</span></div>
+      <div class="row"><span class="k">Estimated</span><span class="v accent" id="sumTotal">$0</span></div>
+    </div>
+    <form class="fields" id="quoteForm" onsubmit="return submitQuote(event)">
+      <div class="field">
+        <label>Your name <span class="req">*</span></label>
+        <input type="text" name="name" required placeholder="Jane Doe">
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Email <span class="req">*</span></label>
+          <input type="email" name="email" required placeholder="jane@studio.com">
+        </div>
+        <div class="field">
+          <label>Phone</label>
+          <input type="tel" name="phone" placeholder="(555) 123-4567">
+        </div>
+      </div>
+      <div class="field">
+        <label>Production company</label>
+        <input type="text" name="company" placeholder="Optional">
+      </div>
+      <div class="field">
+        <label>Project type</label>
+        <select name="projectType">
+          <option>Commercial</option>
+          <option>Music Video</option>
+          <option>Short Film</option>
+          <option>Feature</option>
+          <option>Episodic / TV</option>
+          <option>Corporate / Branded</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Shoot start <span class="req">*</span></label>
+          <input type="date" name="start" required>
+        </div>
+        <div class="field">
+          <label>Shoot end</label>
+          <input type="date" name="end">
+        </div>
+      </div>
+      <div class="field">
+        <label>Location / pickup</label>
+        <input type="text" name="location" placeholder="Austin, TX or delivery address">
+      </div>
+      <div class="field">
+        <label>Notes</label>
+        <textarea name="notes" placeholder="Crew size, special needs, sub-rentals, anything else."></textarea>
+      </div>
+    </form>
+    <div class="form-foot">
+      <div class="btn-row">
+        <button type="button" class="back-btn" id="backBtn">← Back</button>
+        <button type="submit" form="quoteForm" class="send-btn">Send Request →</button>
+      </div>
+      <p class="disclaimer" style="margin:0;">By submitting, you agree to be contacted about this rental. No card on file.</p>
+    </div>
+  </div>
+
+  <!-- SUCCESS VIEW -->
+  <div class="success-view">
+    <div class="icon">⚡</div>
+    <h3>Quote <span class="yellow">sent.</span></h3>
+    <p>Martin &amp; Taylor will be back within 24 hours with firm rates and a confirmation on availability for your dates.</p>
+
+    <div class="demo-receipt">
+      <span class="tag">Demo · what gets emailed</span>
+      <h4>To: hello@thunderstruckpictures.co</h4>
+      <pre id="receiptBody"></pre>
+    </div>
+
+    <button class="done-btn" id="doneBtn">Close</button>
+  </div>
+</aside>
+
+<script>
+// ============================================================
+// INVENTORY DATA (lighting category — placeholder rates)
+// ============================================================
+const INVENTORY = [
+  // BIG FIXTURES
+  { id: 'nanlux-2400b', cat: 'big', brand: 'Nanlux', model: 'Evoke 2400B', tag: 'LED · Key', name: 'Nanlux Evoke 2400B', spec: 'Bi-Color LED · 4000W HMI equivalent. Kit includes case, softbox, accessories.', day: 575 },
+  { id: 'aputure-1200x', cat: 'big', brand: 'Aputure', model: 'Storm 1200x', tag: 'LED · Key', name: 'Aputure Storm 1200x', spec: 'Bi-Color LED Kit · 1800W HMI eq · Fresnel 15–45°, barndoors, skid support.', day: 350 },
+  { id: 'aputure-600d', cat: 'big', brand: 'Aputure', model: '600d Pro', tag: 'LED · Daylight', name: 'Aputure 600d Pro', spec: 'Daylight LED · 1200W HMI eq. 24\' weatherproof head cable. 50% on 2 V-Mounts.', day: 185 },
+  { id: 'aputure-600x', cat: 'big', brand: 'Aputure', model: '600x Pro', tag: 'LED · Bi-Color', name: 'Aputure 600x Pro', spec: 'Bi-Color LED · 2700–6500K. 24\' weatherproof head cable. 50% on 2 V-Mounts.', day: 225 },
+  { id: 'aputure-f10', cat: 'big', brand: 'Aputure', model: 'F10', tag: 'Fresnel', name: 'Aputure F10 Fresnel + Barndoors', spec: 'Fresnel attachment for 600-series fixtures. Barndoors included.', day: 85 },
+  { id: 'aputure-spot', cat: 'big', brand: 'Aputure', model: 'Spotlight 36°', tag: 'Optic', name: 'Aputure Spotlight Mount 36°', spec: 'Projection optic for 600-series — gobo-ready focused beam.', day: 65 },
+
+  // MID & SMALL
+  { id: 'amaran-200x', cat: 'mid', brand: 'Amaran', model: '200x', tag: 'LED · Compact', name: 'Amaran 200x Bi-Color', spec: 'Compact LED with barndoors, grid &amp; gel holder.', day: 65 },
+  { id: 'aputure-60x', cat: 'mid', brand: 'Aputure', model: 'LS 60x', tag: 'Focusing LED', name: 'Aputure LS 60x Bi-Color', spec: 'Focusing LED — adjustable beam angle. Small footprint, big punch.', day: 55 },
+  { id: 'mc-pro', cat: 'mid', brand: 'Aputure', model: 'MC Pro', tag: 'RGB · CRMX', name: 'Aputure MC Pro RGB', spec: 'CRMX-controllable RGBWW pocket light. Bubble diffuser included.', day: 35 },
+  { id: 'mc', cat: 'mid', brand: 'Aputure', model: 'MC', tag: 'RGB · Pocket', name: 'Aputure MC RGB', spec: 'Pocket-sized RGBWW. Magnet mount, dual magnet light mount.', day: 20 },
+  { id: 'b7c', cat: 'mid', brand: 'Aputure', model: 'B7C', tag: 'Bulb · RGB', name: 'Aputure B7C RGB Bulb', spec: 'RGB practical bulb. E26 fit, app-controlled.', day: 15 },
+  { id: 'c7r', cat: 'mid', brand: 'Godox', model: 'C7R', tag: 'Bulb · RGB', name: 'Godox C7R RGB Bulb', spec: 'RGB practical bulb. Includes magnet mount &amp; bouncer.', day: 15 },
+
+  // TUBES & PANELS
+  { id: 'astera-titan', cat: 'tubes', brand: 'Astera', model: 'Titan 8-Kit', tag: 'Tube · CRMX', name: 'Astera Titan Tube 8-Light Kit', spec: 'Battery-powered RGB LED tubes. CRMX, magnetic clips, custom grid.', day: 400 },
+  { id: 'infinibar', cat: 'tubes', brand: 'Aputure', model: 'INFINIBAR PB12', tag: 'Tube · 4ft', name: 'Aputure INFINIBAR PB12 4ft', spec: '4ft RGB LED tube. CRMX. Pixel-mappable.', day: 75 },
+  { id: 'mega-6fc', cat: 'tubes', brand: 'Intellytech', model: 'Mega-6FC', tag: 'RGB · Mat', name: 'Intellytech Mega-6FC Litecloth 3.0', spec: '4\'×3\' RGB flexible mat. DMX, softbox &amp; grid, 26\' head extension.', day: 275 },
+];
+
+// ============================================================
+// STATE
+// ============================================================
+let cart = {};       // { itemId: qty }
+let days = 1;
+
+// ============================================================
+// RENDER CATALOG
+// ============================================================
+function renderCatalog() {
+  ['big', 'mid', 'tubes'].forEach(cat => {
+    const grid = document.getElementById(`grid-${cat}`);
+    const items = INVENTORY.filter(i => i.cat === cat);
+    grid.innerHTML = items.map(i => cardHtml(i)).join('');
+  });
+}
+
+function cardHtml(i) {
+  const inCart = cart[i.id] > 0;
+  return `
+    <article class="card ${inCart ? 'in-cart' : ''}" data-id="${i.id}">
+      <div class="image">
+        <span class="tag">${i.tag}</span>
+        <img src="../media/products/${i.id}.jpg" alt="${i.name}" loading="lazy">
+      </div>
+      <div class="body">
+        <div class="brand-label">${i.brand}</div>
+        <div class="name">${i.name}</div>
+        <div class="spec">${i.spec}</div>
+        <div class="pricing">
+          <span class="day">$${i.day}</span>
+          <span class="unit">/ day</span>
+        </div>
+        ${inCart
+          ? `<div class="stepper">
+              <button onclick="changeQty('${i.id}', -1)" aria-label="decrease">−</button>
+              <span class="qty-display">${cart[i.id]} in quote</span>
+              <button onclick="changeQty('${i.id}', 1)" aria-label="increase">+</button>
+            </div>`
+          : `<button class="add-btn" onclick="addToCart('${i.id}')">+ Add to Quote</button>`
+        }
+      </div>
+    </article>
+  `;
+}
+
+// ============================================================
+// CART OPERATIONS
+// ============================================================
+function addToCart(id) {
+  cart[id] = (cart[id] || 0) + 1;
+  save(); renderCatalog(); renderCart(); updateNav();
+  // pop the cart so users see what happened (only first add)
+  const totalItems = Object.values(cart).reduce((a, b) => a + b, 0);
+  if (totalItems === 1) openDrawer();
+}
+function changeQty(id, delta) {
+  cart[id] = (cart[id] || 0) + delta;
+  if (cart[id] <= 0) delete cart[id];
+  save(); renderCatalog(); renderCart(); updateNav();
+}
+function removeItem(id) {
+  delete cart[id];
+  save(); renderCatalog(); renderCart(); updateNav();
+}
+function setDays(d) {
+  days = d;
+  save(); renderCart();
+  document.querySelectorAll('#daysPills .pill').forEach(p => {
+    p.classList.toggle('active', parseInt(p.dataset.d) === d);
+  });
+  const lbl = d === 7 ? '1 week' : d === 14 ? '2 weeks' : `${d} days`;
+  document.getElementById('daysSummary').textContent = lbl;
+}
+
+// ============================================================
+// RENDER CART DRAWER
+// ============================================================
+function renderCart() {
+  const body = document.getElementById('drawerBody');
+  const ids = Object.keys(cart);
+  if (ids.length === 0) {
+    body.innerHTML = `
+      <div class="empty-state">
+        <div class="icon">⚡</div>
+        <h4>Empty quote</h4>
+        <p>Add gear from the catalog and it'll show up here.<br>No payment, no commitment — just a quote request.</p>
+      </div>`;
+    document.getElementById('cartTotal').innerHTML = '$0<span class="est">est.</span>';
+    document.getElementById('continueBtn').disabled = true;
+    return;
+  }
+
+  // pricing — simple linear with a 3-day cap on multi-day so we approximate weekly rate
+  let total = 0;
+  body.innerHTML = ids.map(id => {
+    const item = INVENTORY.find(i => i.id === id);
+    const qty = cart[id];
+    // Industry-style: 1d = 1×, 2d = 2×, 3d+ caps at 3× per item-week
+    const effectiveDays = days <= 3 ? days : 3 + (Math.floor((days - 1) / 7) * 3) + Math.min((days - 1) % 7 + 1 - 1, 3);
+    const lineTotal = item.day * qty * Math.min(days, calcEffDays(days));
+    total += lineTotal;
+    return `
+      <div class="line" data-id="${id}">
+        <div>
+          <div class="name">${item.name}</div>
+          <div class="sub">$${item.day}/day · ${item.brand}</div>
+          <div class="controls">
+            <span class="qty">
+              <button onclick="changeQty('${id}', -1)" aria-label="-">−</button>
+              <span class="v">${qty}</span>
+              <button onclick="changeQty('${id}', 1)" aria-label="+">+</button>
+            </span>
+            <button class="remove" onclick="removeItem('${id}')">Remove</button>
+          </div>
+        </div>
+        <div class="price">
+          <div class="lt">$${lineTotal.toLocaleString()}</div>
+          <div class="rate">${qty} × ${days}d</div>
+        </div>
+      </div>`;
+  }).join('');
+  document.getElementById('cartTotal').innerHTML = `$${total.toLocaleString()}<span class="est">est.</span>`;
+  document.getElementById('continueBtn').disabled = false;
+}
+
+// effective days for week-discount calc
+function calcEffDays(d) {
+  if (d <= 3) return d;
+  // 4-7 days = 3 day rate (industry weekly)
+  if (d <= 7) return 3;
+  // 8-14 = 3 + 3 = 6
+  if (d <= 14) return 6;
+  return Math.ceil(d / 7) * 3;
+}
+
+// override lineTotal calc using calcEffDays consistently
+function lineCalc(item, qty) {
+  return item.day * qty * calcEffDays(days);
+}
+
+// patch renderCart's totals using lineCalc (cleaner)
+function renderCartV2() {
+  const body = document.getElementById('drawerBody');
+  const ids = Object.keys(cart);
+  if (ids.length === 0) {
+    body.innerHTML = `
+      <div class="empty-state">
+        <div class="icon">⚡</div>
+        <h4>Empty quote</h4>
+        <p>Add gear from the catalog and it'll show up here.<br>No payment, no commitment — just a quote request.</p>
+      </div>`;
+    document.getElementById('cartTotal').innerHTML = '$0<span class="est">est.</span>';
+    document.getElementById('continueBtn').disabled = true;
+    return;
+  }
+  let total = 0;
+  body.innerHTML = ids.map(id => {
+    const item = INVENTORY.find(i => i.id === id);
+    const qty = cart[id];
+    const lt = lineCalc(item, qty);
+    total += lt;
+    return `
+      <div class="line" data-id="${id}">
+        <div>
+          <div class="name">${item.name}</div>
+          <div class="sub">$${item.day}/day · ${item.brand}</div>
+          <div class="controls">
+            <span class="qty">
+              <button onclick="changeQty('${id}', -1)" aria-label="-">−</button>
+              <span class="v">${qty}</span>
+              <button onclick="changeQty('${id}', 1)" aria-label="+">+</button>
+            </span>
+            <button class="remove" onclick="removeItem('${id}')">Remove</button>
+          </div>
+        </div>
+        <div class="price">
+          <div class="lt">$${lt.toLocaleString()}</div>
+          <div class="rate">${qty} × ${days <= 3 ? days + 'd' : days + 'd (wk rate)'}</div>
+        </div>
+      </div>`;
+  }).join('');
+  document.getElementById('cartTotal').innerHTML = `$${total.toLocaleString()}<span class="est">est.</span>`;
+  document.getElementById('continueBtn').disabled = false;
+}
+// alias
+renderCart = renderCartV2;
+
+// ============================================================
+// NAV CART BADGE
+// ============================================================
+function updateNav() {
+  const count = Object.values(cart).reduce((a, b) => a + b, 0);
+  const el = document.getElementById('cartCount');
+  el.textContent = count;
+  el.classList.toggle('zero', count === 0);
+}
+
+// ============================================================
+// DRAWER OPEN / CLOSE
+// ============================================================
+function openDrawer() {
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('backdrop').classList.add('open');
+  document.getElementById('drawer').setAttribute('aria-hidden', 'false');
+}
+function closeDrawer() {
+  const d = document.getElementById('drawer');
+  d.classList.remove('open', 'form-mode', 'success-mode');
+  document.getElementById('backdrop').classList.remove('open');
+  d.setAttribute('aria-hidden', 'true');
+}
+
+// ============================================================
+// FORM FLOW
+// ============================================================
+function goToForm() {
+  if (Object.keys(cart).length === 0) return;
+  // populate summary
+  const itemCount = Object.values(cart).reduce((a, b) => a + b, 0);
+  const total = Object.entries(cart).reduce((sum, [id, qty]) => {
+    const item = INVENTORY.find(i => i.id === id);
+    return sum + lineCalc(item, qty);
+  }, 0);
+  document.getElementById('sumItems').textContent = `${itemCount} (${Object.keys(cart).length} unique)`;
+  document.getElementById('sumDays').textContent = days === 7 ? '1 week' : days === 14 ? '2 weeks' : `${days} days`;
+  document.getElementById('sumTotal').textContent = `$${total.toLocaleString()}`;
+  document.getElementById('drawer').classList.add('form-mode');
+  document.getElementById('drawerTitle').innerHTML = 'Your <span class="yellow">details.</span>';
+}
+function backToCart() {
+  document.getElementById('drawer').classList.remove('form-mode');
+  document.getElementById('drawerTitle').innerHTML = 'Your <span class="yellow">quote.</span>';
+}
+
+function submitQuote(e) {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const data = Object.fromEntries(fd.entries());
+
+  // build demo receipt
+  const lines = Object.entries(cart).map(([id, qty]) => {
+    const item = INVENTORY.find(i => i.id === id);
+    return `  ${qty}× ${item.name}  —  $${(lineCalc(item, qty)).toLocaleString()}`;
+  }).join('\n');
+  const total = Object.entries(cart).reduce((sum, [id, qty]) => {
+    const item = INVENTORY.find(i => i.id === id);
+    return sum + lineCalc(item, qty);
+  }, 0);
+
+  const receipt = `Subject: New Quote Request — ${data.name}
+
+FROM
+  ${data.name}
+  ${data.email}${data.phone ? ' · ' + data.phone : ''}
+  ${data.company || '(no company)'}
+
+PROJECT
+  Type:     ${data.projectType}
+  Dates:    ${data.start}${data.end ? ' → ' + data.end : ''}
+  Days:     ${days === 7 ? '1 week' : days === 14 ? '2 weeks' : days + ' days'}
+  Location: ${data.location || '—'}
+
+GEAR REQUESTED
+${lines}
+
+ESTIMATED  $${total.toLocaleString()}
+(daily-rate × days, weekly = 3-day cap — confirm pricing on response)
+
+NOTES
+${data.notes || '(none)'}
+`;
+  document.getElementById('receiptBody').textContent = receipt;
+  document.getElementById('drawer').classList.remove('form-mode');
+  document.getElementById('drawer').classList.add('success-mode');
+  document.getElementById('drawerTitle').innerHTML = 'Request <span class="yellow">received.</span>';
+  return false;
+}
+
+function resetAfterSuccess() {
+  cart = {};
+  days = 1;
+  save();
+  setDays(1);
+  renderCatalog();
+  renderCart();
+  updateNav();
+  document.getElementById('quoteForm').reset();
+  document.getElementById('drawerTitle').innerHTML = 'Your <span class="yellow">quote.</span>';
+  closeDrawer();
+}
+
+// ============================================================
+// TABS / FILTERS
+// ============================================================
+function applyFilter(f) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.filter === f));
+  ['big', 'mid', 'tubes'].forEach(cat => {
+    const head = document.querySelector(`[data-section="${cat}"]`);
+    const grid = document.getElementById(`grid-${cat}`);
+    const show = (f === 'all' || f === cat);
+    head.style.display = show ? '' : 'none';
+    grid.style.display = show ? '' : 'none';
+  });
+}
+
+// ============================================================
+// PERSISTENCE
+// ============================================================
+function save() {
+  try {
+    localStorage.setItem('ts-cart', JSON.stringify({ cart, days }));
+  } catch (e) {}
+}
+function load() {
+  try {
+    const raw = localStorage.getItem('ts-cart');
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      cart = parsed.cart || {};
+      days = parsed.days || 1;
+    }
+  } catch (e) {}
+}
+
+// ============================================================
+// INIT
+// ============================================================
+load();
+renderCatalog();
+renderCart();
+updateNav();
+setDays(days);
+
+document.getElementById('cartBtn').addEventListener('click', openDrawer);
+document.getElementById('closeDrawer').addEventListener('click', closeDrawer);
+document.getElementById('backdrop').addEventListener('click', closeDrawer);
+document.getElementById('continueBtn').addEventListener('click', goToForm);
+document.getElementById('backBtn').addEventListener('click', backToCart);
+document.getElementById('doneBtn').addEventListener('click', resetAfterSuccess);
+document.querySelectorAll('#daysPills .pill').forEach(p => {
+  p.addEventListener('click', () => setDays(parseInt(p.dataset.d)));
+});
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => applyFilter(t.dataset.filter));
+});
+</script>
+
+</body>
+</html>

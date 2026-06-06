@@ -3,237 +3,530 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thunderstruck Pictures — Design Mockups</title>
+<title>Thunderstruck Pictures — Grip Truck Rental &amp; Production · Austin, TX</title>
+<meta name="description" content="Austin's grip &amp; lighting truck and production company, owned and run by working filmmakers. RED, DZOFilm, Aputure, Nanlux and more — delivered on a 3-ton truck. Build a quote in minutes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { height: 100%; }
+  :root {
+    --bg: #04060c;
+    --panel: #0e141c;
+    --panel-2: #121a24;
+    --line: #1f2a38;
+    --text: #f4f8ff;
+    --muted: #9fb4ce;
+    --yellow: #9fc4ee;
+  }
+  html { scroll-behavior: smooth; }
   body {
+    background: var(--bg);
+    color: var(--text);
     font-family: 'Inter', system-ui, sans-serif;
-    background: #0a0a0a;
-    color: #f5f5f2;
-    min-height: 100vh;
-    padding: 4rem 2rem;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
-  .wrap { max-width: 960px; margin: 0 auto; }
-  h1 {
-    font-family: 'Anton', sans-serif;
-    font-size: clamp(2.5rem, 7vw, 4.5rem);
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    line-height: 0.95;
+  a { color: inherit; text-decoration: none; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  /* ---------- NAV ---------- */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.8rem clamp(1.2rem, 4vw, 3rem);
+    background: rgba(6,8,11,0.88);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+    /* Hidden through the entire storm reveal; slides in only once the hero
+       animation has finished, so it never competes with the effect. */
+    opacity: 0; transform: translateY(-100%); pointer-events: none;
+    transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.16,1,0.3,1);
   }
-  h1 .yellow { color: #FFD60A; }
-  .lead {
-    font-size: 1.05rem;
-    color: #a3a3a3;
-    margin-top: 1.25rem;
-    max-width: 60ch;
-    line-height: 1.6;
+  .nav.revealed { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .nav .brand {
+    font-family: 'Saira Condensed', sans-serif; text-transform: uppercase;
+    font-size: 1.35rem; letter-spacing: 0.06em; line-height: 1;
   }
-  .label {
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: #FFD60A;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    display: block;
+  .nav .links { display: flex; align-items: center; gap: 2rem; }
+  .nav .links a {
+    font-size: 0.82rem; letter-spacing: 0.04em; color: #c7d0da;
+    text-transform: uppercase; transition: color 0.2s;
   }
-  .featured {
-    margin-top: 3rem;
-    border: 1px solid #FFD60A;
-    background: linear-gradient(180deg, rgba(255,214,10,0.05) 0%, transparent 60%);
-    padding: 2.5rem 2.5rem 2.25rem;
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    transition: transform 0.2s, border-color 0.2s;
+  .nav .links a:hover { color: #fff; }
+  .nav .links a.soon { color: #5f6b77; }
+  .nav .links a.soon::after {
+    content: "soon"; font-family: 'JetBrains Mono', monospace; font-size: 0.55rem;
+    color: var(--yellow); margin-left: 0.35rem; vertical-align: super; letter-spacing: 0.1em;
   }
-  .featured:hover { transform: translateY(-2px); }
-  .featured .tag {
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: #FFD60A;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    display: block;
+  .cart-trigger {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    background: var(--panel); border: 1px solid var(--line);
+    padding: 0.5rem 0.9rem; font-family: 'Saira Condensed', sans-serif; font-size: 0.85rem;
+    text-transform: uppercase; letter-spacing: 0.1em; color: var(--text);
+    transition: border-color 0.15s, color 0.15s;
   }
-  .featured h2 {
-    font-family: 'Anton', sans-serif;
-    font-size: 2.5rem;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    line-height: 1;
-    margin-bottom: 0.85rem;
+  .cart-trigger:hover { border-color: var(--yellow); color: var(--yellow); }
+  .cart-trigger .count { background: var(--yellow); color: #0a0a0a; padding: 0.1rem 0.5rem; font-size: 0.8rem; min-width: 1.5rem; text-align: center; }
+  .cart-trigger .count.zero { background: var(--line); color: var(--muted); }
+  .btn {
+    display:inline-block; cursor:pointer;
+    background:linear-gradient(180deg,#ffffff,#cdddf0 45%,#9fb4ce 55%,#eaf2fb);
+    color:#0a0f16; font-family:'Saira Condensed',sans-serif; font-weight:700;
+    font-size:0.92rem; letter-spacing:0.14em; text-transform:uppercase;
+    padding:0.72rem 1.5rem; border:none; border-radius:3px;
+    box-shadow:0 0 18px rgba(150,190,255,0.3), inset 0 1px 0 rgba(255,255,255,0.85);
+    transition:transform .15s, box-shadow .2s;
   }
-  .featured p {
-    color: #c8c8c8;
-    line-height: 1.6;
-    max-width: 60ch;
-    margin-bottom: 1.25rem;
+  .btn:hover { transform:translateY(-1px); box-shadow:0 0 26px rgba(150,190,255,0.5), inset 0 1px 0 rgba(255,255,255,0.95); }
+  .btn.ghost { background:transparent; color:var(--text); border:1px solid #33485f; box-shadow:none; }
+  .btn.ghost:hover { border-color:#9fc4ee; box-shadow:0 0 16px rgba(159,196,238,0.25); }
+  @media (max-width: 760px) { .nav .links a:not(.cart-trigger) { display: none; } }
+
+  /* ---------- HERO (storm reveal) ---------- */
+  .hero-track { height: 320vh; position: relative; }
+  .hero-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; background: var(--bg); }
+  .hero-photo {
+    position: absolute; inset: -2%;
+    filter: brightness(var(--exposure, 0.45)) contrast(var(--contrast, 1.06)) saturate(var(--sat, 0.82));
+    will-change: filter;
   }
-  .featured .open {
-    font-size: 0.85rem;
-    color: #FFD60A;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 600;
+  .hero-plate, .hero-plate-lit {
+    position: absolute; inset: 0;
+    background-color: #05070a; background-size: cover; background-position: center center; background-repeat: no-repeat;
   }
-  .section-head {
-    margin-top: 4rem;
-    margin-bottom: 1rem;
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: #888;
-    font-weight: 600;
+  .hero-plate {
+    background-image:
+      url("assets/hero-plate.webp"),
+      linear-gradient(180deg, #0b0f15 0%, #070a0f 55%, #04060a 100%);
   }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+  .hero-plate-lit { background-image: url("assets/hero-plate-lit.webp"); opacity: var(--reveal, 0); will-change: opacity; }
+  .hero-bolt {
+    position: absolute; top: -2%; left: 47%; transform: translateX(-50%);
+    height: 74%; width: auto; pointer-events: none; opacity: var(--bolt, 0); will-change: opacity;
+    filter: drop-shadow(0 0 22px rgba(150,190,255,0.45));
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, transparent 34%, #000 52%, #000 100%);
+            mask-image: linear-gradient(to bottom, transparent 0%, transparent 34%, #000 52%, #000 100%);
   }
+  .hero-flash {
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(58% 48% at 49% 25%, rgba(234,242,255,1) 0%, rgba(150,190,255,0.72) 42%, rgba(90,140,230,0) 82%);
+    opacity: var(--flash, 0); mix-blend-mode: screen; will-change: opacity;
+  }
+  .hero-vignette {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 26%),
+      radial-gradient(140% 110% at 47% 60%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.42) 100%);
+  }
+  .hero-content {
+    position: absolute; left: 0; right: 0; top: 50%; transform: translateY(calc(-50% + var(--content-y, 16px)));
+    text-align: center; padding: 0 1.5rem;
+    opacity: var(--content, 0); will-change: opacity, transform;
+  }
+  .hero-content .eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: clamp(0.6rem,1.4vw,0.75rem);
+    letter-spacing: 0.4em; text-transform: uppercase; color: var(--yellow); margin-bottom: 1.2rem;
+  }
+  .hero-content h1 {
+    font-family: 'Saira Condensed', sans-serif; font-weight:700; font-style:italic;
+    font-size: clamp(3rem, 14vw, 10rem); letter-spacing: 0.01em; text-transform: uppercase; line-height: 0.86;
+    background:linear-gradient(180deg,#ffffff 0%,#dfeaf8 16%,#8ea3bf 47%,#ffffff 52%,#6c81a0 66%,#c2d2e8 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    filter:drop-shadow(0 2px 30px rgba(150,190,255,0.35));
+  }
+  .hero-content .sub {
+    margin-top: 1.3rem; font-size: clamp(0.95rem,2.2vw,1.3rem); color: #d6dee7; font-weight: 500; letter-spacing: 0.01em;
+  }
+  .hero-content .cta-row { margin-top: 2.2rem; display: flex; gap: 0.9rem; justify-content: center; flex-wrap: wrap; }
+  .scroll-hint {
+    position: absolute; left: 50%; bottom: 3vh; transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: #6f7d8c; opacity: var(--hint, 1);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  }
+  .scroll-hint .arrow { width: 1px; height: 26px; background: linear-gradient(#6f7d8c, transparent); }
+  .sound-btn {
+    position: fixed; bottom: 1.1rem; right: 1.1rem; z-index: 60;
+    background: rgba(10,13,18,0.6); color: #c9d4e2; border: 1px solid #283341; border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 0.5rem 0.85rem; cursor: pointer; backdrop-filter: blur(6px);
+  }
+  .sound-btn:hover { border-color: var(--yellow); color: #fff; }
+
+  /* ---------- SHARED SECTION ---------- */
+  section.block { position: relative; z-index: 2; background: var(--bg); }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: clamp(4rem, 9vw, 8rem) clamp(1.2rem, 4vw, 3rem); }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--yellow); margin-bottom: 1.2rem;
+  }
+  h2.head {
+    font-family: 'Saira Condensed', sans-serif; text-transform: uppercase; line-height: 0.95;
+    font-size: clamp(2.1rem, 6vw, 4.2rem); letter-spacing: 0.01em; margin-bottom: 1.4rem;
+  }
+  h2.head .y { color: var(--yellow); }
+  p.lead { font-size: clamp(1.05rem, 2.2vw, 1.3rem); color: #cdd6df; line-height: 1.6; max-width: 60ch; }
+  p.body { color: var(--muted); line-height: 1.7; max-width: 62ch; }
+  p.body + p.body { margin-top: 1rem; }
+
+  /* lightning divider */
+  .bolt-rule { display:flex; align-items:center; gap:0.8rem; color: var(--yellow); margin: 0 auto; width: fit-content; }
+  .bolt-rule::before, .bolt-rule::after { content:""; height:1px; width:60px; background: linear-gradient(90deg, transparent, #2a333d); }
+  .bolt-rule svg { width: 16px; height: 22px; }
+
+  /* INTRO */
+  .intro { text-align: center; }
+  .intro .wrap { padding-top: clamp(3.5rem,7vw,6rem); padding-bottom: clamp(3.5rem,7vw,6rem); }
+  .intro h2.head { max-width: 16ch; margin-left:auto; margin-right:auto; }
+
+  /* TRUCK */
+  .truck-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(2rem,5vw,4.5rem); align-items: center; }
+  @media (max-width: 880px){ .truck-grid{ grid-template-columns: 1fr; } }
+  .truck-photo {
+    position: relative; aspect-ratio: 16/11; border: 1px solid var(--line); overflow: hidden;
+    background: #05070a center/cover no-repeat;
+  }
+  .features { list-style: none; margin-top: 2rem; display: grid; gap: 0.2rem; }
+  .features li { display:flex; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--line); align-items:flex-start; }
+  .features li:last-child { border-bottom: none; }
+  .features .k { font-family:'Saira Condensed',sans-serif; text-transform:uppercase; font-size:1.15rem; letter-spacing:0.02em; color:#fff; min-width: 9.5rem; }
+  .features .v { color: var(--muted); font-size: 0.95rem; line-height: 1.5; }
+
+  /* INVENTORY */
+  .inv { background: linear-gradient(180deg, #0a0d11 0%, #0c1015 100%); }
+  .inv-head { display:flex; justify-content:space-between; align-items:flex-end; gap:2rem; flex-wrap:wrap; margin-bottom: 2.5rem; }
+  .cards { display:grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  @media (max-width: 880px){ .cards{ grid-template-columns: repeat(2,1fr);} }
+  @media (max-width: 540px){ .cards{ grid-template-columns: 1fr;} }
   .card {
-    background: #141414;
-    border: 1px solid #262626;
-    padding: 2rem;
-    text-decoration: none;
-    color: inherit;
-    transition: border-color 0.2s, transform 0.2s;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    border: 1px solid var(--line); background: var(--panel); overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s; display:flex; flex-direction:column;
   }
-  .card:hover {
-    border-color: #FFD60A;
-    transform: translateY(-2px);
+  .card:hover { border-color: var(--yellow); transform: translateY(-3px); }
+  .card .thumb {
+    aspect-ratio: 4/3; background: linear-gradient(135deg, #141a21, #0b0f14);
+    display:flex; align-items:center; justify-content:center; position: relative; border-bottom: 1px solid var(--line);
   }
-  .card .clabel {
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: #FFD60A;
-    font-weight: 600;
+  .card .thumb .ico { width: 30px; height: 40px; color:#33404c; }
+  .card .thumb .ph { position:absolute; bottom:0.5rem; right:0.6rem; font-family:'JetBrains Mono',monospace; font-size:0.55rem; letter-spacing:0.15em; color:#3a4651; text-transform:uppercase;}
+  .card .meta { padding: 1.1rem 1.2rem 1.3rem; }
+  .card .meta .cat { font-family:'Saira Condensed',sans-serif; text-transform:uppercase; font-size:1.2rem; letter-spacing:0.02em; }
+  .card .meta .ex { color: var(--muted); font-size: 0.85rem; margin-top: 0.35rem; line-height:1.5; }
+  .inv-note { margin-top: 1.6rem; color:#6b7681; font-size: 0.85rem; }
+
+  /* WHY */
+  .why-grid { display:grid; grid-template-columns: repeat(3,1fr); gap: clamp(1.5rem,4vw,3rem); }
+  @media (max-width: 880px){ .why-grid{ grid-template-columns:1fr; gap:2rem;} }
+  .why-grid .col h3 { font-family:'Saira Condensed',sans-serif; text-transform:uppercase; font-size:1.5rem; letter-spacing:0.02em; margin-bottom:0.8rem; }
+  .why-grid .col .num { font-family:'JetBrains Mono',monospace; color: var(--yellow); font-size:0.75rem; letter-spacing:0.2em; margin-bottom:1rem; }
+  .why-grid .col p { color: var(--muted); line-height:1.65; font-size:0.95rem; }
+
+  /* CREW */
+  .crew { background: linear-gradient(180deg, #0c1015 0%, #06080b 100%); }
+  .crew-grid { display:grid; grid-template-columns:1fr 1fr; gap: clamp(1.5rem,4vw,3rem); }
+  @media (max-width: 760px){ .crew-grid{ grid-template-columns:1fr; gap:2.5rem; } }
+  .person .role { font-family:'JetBrains Mono',monospace; color:var(--yellow); font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:0.6rem; }
+  .person h3 { font-family:'Saira Condensed',sans-serif; text-transform:uppercase; font-size:2rem; letter-spacing:0.02em; margin-bottom:1rem; }
+  .person p { color: var(--muted); line-height:1.7; font-size:0.95rem; }
+  .person p + p { margin-top:0.8rem; }
+  .person .names { color:#cdd6df; }
+
+  /* ACADEMY */
+  .academy { text-align:center; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    background: radial-gradient(120% 120% at 50% 0%, rgba(159,196,238,0.06), transparent 55%), var(--bg); }
+  .academy .pill { display:inline-block; font-family:'JetBrains Mono',monospace; font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase;
+    color:var(--yellow); border:1px solid #3a3a1a; border-radius:999px; padding:0.4rem 0.9rem; margin-bottom:1.5rem; }
+  .academy p.lead { margin: 0 auto; }
+  .notify { margin-top: 2rem; display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap; }
+  .notify input {
+    background:#0a0d11; border:1px solid var(--line); color:#fff; padding:0.7rem 1rem; border-radius:2px;
+    font-family:'Inter',sans-serif; font-size:0.9rem; min-width: 240px;
   }
-  .card h3 {
-    font-family: 'Anton', sans-serif;
-    font-size: 1.75rem;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
+  .notify input:focus { outline:none; border-color: var(--yellow); }
+
+  /* BOOK / CONTACT */
+  .book { background: linear-gradient(180deg, #0a0d11, #05070a); text-align:center; }
+  .book h2.head { max-width: 18ch; margin: 0 auto 1.6rem; }
+  .book .sub { color:var(--muted); margin-bottom: 2.2rem; }
+  .book .meta-row { margin-top:2.5rem; display:flex; gap:2rem; justify-content:center; flex-wrap:wrap; color:var(--muted); font-family:'JetBrains Mono',monospace; font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase; }
+  .book .meta-row a:hover { color: var(--yellow); }
+
+  /* FOOTER */
+  footer { background: #04060a; border-top:1px solid var(--line); padding: 2.5rem clamp(1.2rem,4vw,3rem); }
+  .foot-in { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap; }
+  .foot-in .brand { font-family:'Saira Condensed',sans-serif; text-transform:uppercase; letter-spacing:0.04em; font-size:1.1rem; }
+  .foot-in .brand .spark{ color:var(--yellow);}
+  .foot-in .small { color:#6b7681; font-size:0.75rem; font-family:'JetBrains Mono',monospace; letter-spacing:0.1em; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-track { height: 100vh; }
+    .hero-stage { position: relative; }
   }
-  .card p {
-    color: #a3a3a3;
-    font-size: 0.95rem;
-    line-height: 1.55;
-  }
-  .swatches { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
-  .swatch { width: 28px; height: 28px; border: 1px solid rgba(255,255,255,0.1); }
-  .open {
-    margin-top: auto;
-    font-size: 0.85rem;
-    color: #FFD60A;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 600;
-  }
-  hr { border: none; border-top: 1px solid #262626; margin: 3rem 0; }
-  .note { color: #737373; font-size: 0.85rem; line-height: 1.6; }
+
+  /* --- Voltage system overrides --- */
+  .nav .brand,h2.head,.features .k,.card .meta .cat,.why-grid .col h3,.person h3,.foot-in .brand{font-weight:700;}
+  .nav .brand{ font-style:italic; }
+  .foot-in .brand{ font-style:italic; }
+  h2.head .y, .eyebrow { color:#9fc4ee; }
+  .hero-content h1{ font-style:italic; }
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <span class="label">Thunderstruck Pictures</span>
-
-  <h1>Website mockups.<br><span class="yellow">Work in progress.</span></h1>
-
-  <p class="lead">
-    A working set of design explorations and a first-pass rentals page. Use the featured tile to see the most built-out mock; the four direction tiles below show the visual options under consideration.
-  </p>
-
-  <a class="featured" href="design-explorations/06-inventory.html">
-    <span class="tag">Most recent · Rentals page</span>
-    <h2>Rentals Page — Full Inventory</h2>
-    <p>Built from the October equipment list. All 24 categories — camera, lenses, support, lighting, grip, audio, the works. The closest thing to a finished page so far, and the heart of the site for Austin rental clients.</p>
-    <span class="open">Open →</span>
-  </a>
-
-  <p class="section-head">Design Directions</p>
-
-  <div class="grid">
-    <a class="card" href="design-explorations/01-grindhouse.html">
-      <span class="clabel">Direction A</span>
-      <h3>Grindhouse Heavy</h3>
-      <p>The literal read of the logo. Pure black, heavy condensed all-caps, electric yellow. Loud, confident, horror-poster energy.</p>
-      <div class="swatches">
-        <div class="swatch" style="background:#000000;"></div>
-        <div class="swatch" style="background:#1A1A1A;"></div>
-        <div class="swatch" style="background:#FFD60A;"></div>
-        <div class="swatch" style="background:#F5F5F2;"></div>
-      </div>
-      <span class="open">Open →</span>
-    </a>
-
-    <a class="card" href="design-explorations/02-editorial.html">
-      <span class="clabel">Direction B</span>
-      <h3>Editorial Cinema</h3>
-      <p>A24 / Criterion territory. Warm dark, refined serif paired with clean sans, brass-aged yellow used sparingly. Restrained, grown-up.</p>
-      <div class="swatches">
-        <div class="swatch" style="background:#14110F;"></div>
-        <div class="swatch" style="background:#2A2521;"></div>
-        <div class="swatch" style="background:#C9A227;"></div>
-        <div class="swatch" style="background:#ECE5D5;"></div>
-      </div>
-      <span class="open">Open →</span>
-    </a>
-
-    <a class="card" href="design-explorations/03-workshop.html">
-      <span class="clabel">Direction C</span>
-      <h3>Workshop / Trade</h3>
-      <p>Leans into rentals. Slate background, monospace labels, spec-sheet layouts, IMDB-yellow as a caution accent. Operator aesthetic.</p>
-      <div class="swatches">
-        <div class="swatch" style="background:#0D1117;"></div>
-        <div class="swatch" style="background:#1C2128;"></div>
-        <div class="swatch" style="background:#F5C518;"></div>
-        <div class="swatch" style="background:#E5E7EB;"></div>
-      </div>
-      <span class="open">Open →</span>
-    </a>
-
-    <a class="card" href="design-explorations/04-grindhouse-composed.html" style="border-color:#FFD60A;">
-      <span class="clabel">Direction A2 · Iteration</span>
-      <h3>Grindhouse Composed</h3>
-      <p>A's typography and palette, rebuilt with calmer composition — three-pillar grid, generous black space. Bold without shouting.</p>
-      <div class="swatches">
-        <div class="swatch" style="background:#000000;"></div>
-        <div class="swatch" style="background:#141414;"></div>
-        <div class="swatch" style="background:#FFD60A;"></div>
-        <div class="swatch" style="background:#F5F5F2;"></div>
-      </div>
-      <span class="open">Open →</span>
-    </a>
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="#top" class="brand">Thunderstruck</a>
+  <div class="links">
+    <a href="camera.html">Camera</a>
+    <a href="rentals.html">Lighting &amp; Grip</a>
+    <a href="grip-truck.html">Grip Truck</a>
+    <a href="#crew">Production</a>
+    <a href="contact.html">Contact</a>
+    <a href="rentals.html" class="cart-trigger" aria-label="View quote"><span>Quote</span><span class="count zero" id="cartCount">0</span></a>
   </div>
+</nav>
 
-  <p class="section-head">More</p>
-  <div class="grid">
-    <a class="card" href="design-explorations/05-variations.html">
-      <span class="clabel">Variations</span>
-      <h3>Four Directions, Side by Side</h3>
-      <p>The compact comparison view — all four directions on one scroll. Anchors at #v1–#v4 for direct linking.</p>
-      <span class="open">Open →</span>
-    </a>
+
+<!-- HERO -->
+<section class="hero-track" id="track">
+  <div class="hero-stage">
+    <div class="hero-photo" id="photo">
+      <div class="hero-plate"></div>
+      <div class="hero-plate-lit"></div>
+    </div>
+    <img class="hero-bolt" id="bolt" src="assets/bolt.png" alt="">
+    <div class="hero-flash" id="flash"></div>
+    <div class="hero-vignette"></div>
+
+    <div class="hero-content" id="content">
+      <p class="eyebrow">There's a storm coming</p>
+      <h1>Thunderstruck</h1>
+      <p class="sub">Stories that hit like lightning. Grip truck rental &amp; production — Austin, TX.</p>
+      <div class="cta-row">
+        <a href="#book" class="btn">Book / Hire</a>
+        <a href="#inventory" class="btn ghost">See the kit</a>
+      </div>
+    </div>
+
+    <div class="scroll-hint" id="hint"><span>Scroll</span><span class="arrow"></span></div>
   </div>
+</section>
 
-  <hr>
+<!-- INTRO -->
+<section class="block intro" id="top">
+  <div class="wrap">
+    <div class="bolt-rule"><svg viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg></div>
+    <h2 class="head" style="margin-top:1.6rem;">Big-city kit. <span class="y">Small-town hustle.</span></h2>
+    <p class="lead" style="margin:0 auto;">Austin's grip &amp; lighting truck — owned and run by working filmmakers, not a warehouse counter. The same gear you'd find in LA or New York, delivered on a 3-ton truck and operated by people who actually shoot. We go up to eleven.</p>
+  </div>
+</section>
 
-  <p class="note">
-    Each mock uses the actual logo, truck photo, and Chopper poster from the project folder. Type pulled from Google Fonts (free). Dark background throughout — the logo demands it.
-  </p>
+<!-- TRUCK -->
+<section class="block" id="truck">
+  <div class="wrap">
+    <div class="truck-grid">
+      <div class="truck-photo" style="background-image:url('assets/hero-plate-lit.webp');"></div>
+      <div>
+        <p class="eyebrow">The 3-Ton Grip Truck</p>
+        <h2 class="head">The rig that <span class="y">runs the show.</span></h2>
+        <p class="body">The perfect mix of capacity and mobility — built to streamline load-ins and load-outs. Modular shelving and all-terrain carts keep crews nimble, with a built-in camera workstation, 15 outlets, and shore power for charging on set.</p>
+        <ul class="features">
+          <li><span class="k">Lights in &amp; out</span><span class="v">LED throughout the box, inside and out. Wrap a late night or load in at dawn — flip the switches and you're ready to rock.</span></li>
+          <li><span class="k">Jockey boxes</span><span class="v">Custom under-truck boxes for sandbags, stingers, and grip — each one lit so you're never fumbling in the dark.</span></li>
+          <li><span class="k">7' liftgate</span><span class="v">Top-of-the-line 7-foot gate rated over 3,000 lbs. Heavy carts on and off, stress-free.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-</div>
+<!-- INVENTORY -->
+<section class="block inv" id="inventory">
+  <div class="wrap">
+    <div class="inv-head">
+      <div>
+        <p class="eyebrow">The Kit</p>
+        <h2 class="head">The inventory <span class="y">runs deep.</span></h2>
+        <p class="body">RED Komodo. DZOFilm anamorphics. Nanlux 2400B. Aputure everything. Twenty-plus categories of camera, lighting, grip, and sound — browse by department, build your package.</p>
+      </div>
+      <a href="rentals.html" class="btn ghost">Browse the full kit →</a>
+    </div>
+    <div class="cards">
+      <a class="card" href="rentals.html">
+        <div class="thumb"><svg class="ico" viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg><span class="ph">photo soon</span></div>
+        <div class="meta"><div class="cat">Camera</div><div class="ex">RED Komodo 6K · Tilta Nucleus · Teradek Bolt 6</div></div>
+      </a>
+      <a class="card" href="rentals.html">
+        <div class="thumb"><svg class="ico" viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg><span class="ph">photo soon</span></div>
+        <div class="meta"><div class="cat">Lenses</div><div class="ex">DZOFilm PAVO anamorphics · VESPID primes · Laowa</div></div>
+      </a>
+      <a class="card" href="rentals.html">
+        <div class="thumb"><svg class="ico" viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg><span class="ph">photo soon</span></div>
+        <div class="meta"><div class="cat">Lighting</div><div class="ex">Nanlux 2400B · Aputure Storm 1200x · Astera Titan</div></div>
+      </a>
+      <a class="card" href="rentals.html">
+        <div class="thumb"><svg class="ico" viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg><span class="ph">photo soon</span></div>
+        <div class="meta"><div class="cat">Grip</div><div class="ex">C-stands · overhead frames · flags · apple boxes</div></div>
+      </a>
+      <a class="card" href="rentals.html">
+        <div class="thumb"><svg class="ico" viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg><span class="ph">photo soon</span></div>
+        <div class="meta"><div class="cat">Camera Support</div><div class="ex">Sachtler fluid heads · Dana Dolly · DJI RS 3 Pro</div></div>
+      </a>
+      <a class="card" href="rentals.html">
+        <div class="thumb"><svg class="ico" viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg><span class="ph">photo soon</span></div>
+        <div class="meta"><div class="cat">Sound</div><div class="ex">Sound Devices 633 · Sennheiser MKH 50 · Lectrosonics</div></div>
+      </a>
+    </div>
+    <p class="inv-note">Inventory updated regularly. Looking for something not on the list? We partner with the biggest houses in the country — we'll get it. <span style="color:#8b96a1;">(Product photos &amp; shopping cart coming with the gear shoot.)</span></p>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="block" id="why">
+  <div class="wrap">
+    <p class="eyebrow" style="text-align:center;">Why Thunderstruck</p>
+    <h2 class="head" style="text-align:center; max-width:18ch; margin:0 auto 3rem;">Filmmakers first. <span class="y">Rental house second.</span></h2>
+    <div class="why-grid">
+      <div class="col">
+        <div class="num">/ 01</div>
+        <h3>Large Inventory</h3>
+        <p>The same selection you'd find in LA or New York — our inventory runs deep, and what we don't stock, we source from the biggest houses in the country. No dead ends.</p>
+      </div>
+      <div class="col">
+        <div class="num">/ 02</div>
+        <h3>New Technology</h3>
+        <p>When the newest gear drops, we go get it. Our staff trains constantly, so what arrives on your set works like it should. No lemons.</p>
+      </div>
+      <div class="col">
+        <div class="num">/ 03</div>
+        <h3>Friendly Support</h3>
+        <p>We're filmmakers, and we've been at this a long time. Need crew recommendations, a demo, or a production problem solved? Give us a call.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREW -->
+<section class="block crew" id="crew" style="background:linear-gradient(180deg,#0c1015,#06080b);">
+  <div class="wrap">
+    <p class="eyebrow">The Crew</p>
+    <h2 class="head">Run by people who <span class="y">make films.</span></h2>
+    <div class="crew-grid" style="margin-top:2.5rem;">
+      <div class="person">
+        <div class="role">Director · Director of Photography</div>
+        <h3>Taylor Randall</h3>
+        <p class="names">Music videos for Jennifer Lopez, Cardi B, Bad Bunny, DJ Khaled, Nipsey Hussle, John Legend, Enrique Iglesias, Becky G.</p>
+        <p>From Chicago to LA at 17, Taylor learned the set from every seat. Twelve-plus years in, he's one of the rare few who directs and shoots at once — for Kodak Black, Sunny Malouf, Tahj Mowry, Dizzy Wright, and Mann.</p>
+      </div>
+      <div class="person">
+        <div class="role">Writer · Director · Producer</div>
+        <h3>Martin Shapiro</h3>
+        <p>Wrote, directed, and produced the horror short <em>Chopper</em>, from his own comic series — its prequel became a web series starring Tyler Mane (Halloween, X-Men). His thriller <em>Lair of the Fox</em> sold to Ilya Salkind (producer of Superman).</p>
+        <p>He's developed for HBO and MGM, including an adaptation of <em>Dragonlance</em>. MFA in Screenwriting, UCLA — where he won the Showcase award for his war drama <em>Crossfire</em>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK -->
+<section class="block book" id="book">
+  <div class="wrap">
+    <p class="eyebrow" style="text-align:center;">Book / Hire</p>
+    <h2 class="head">There's a storm coming. <span class="y">Let's make something.</span></h2>
+    <p class="sub">Tell us your dates and what you need — gear, the truck, or the whole package. We'll get back fast.</p>
+    <a href="rentals.html" class="btn" style="font-size:0.95rem; padding:0.95rem 2rem;">Check Availability</a>
+    <div class="meta-row">
+      <span>Austin, TX</span>
+      <a href="https://www.instagram.com/nightowlmartin/">Instagram</a>
+      <a href="https://www.facebook.com/MartinShapiro/">Facebook</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-in">
+    <span class="brand">Thunderstruck Pictures</span>
+    <span class="small">© 2026 Thunderstruck Pictures LLC · Austin, TX · Stories that hit like lightning</span>
+  </div>
+</footer>
+
+
+<script>
+(() => {
+  const CFG = {
+    darkExposure: 0.45, litExposure: 1.22, strikeAt: 0.66,
+    flashBoost: 1.0, flashMax: 0.82, boltMax: 0.8, thunderDelay: 240,
+    pulses: [
+      { at: 0.46, w: 0.012, amp: 0.22 },
+      { at: 0.56, w: 0.012, amp: 0.34 },
+      { at: 0.66, w: 0.020, amp: 1.00 },
+      { at: 0.71, w: 0.014, amp: 0.42 },
+    ],
+  };
+  const photo=document.getElementById('photo'), flashEl=document.getElementById('flash'),
+        boltEl=document.getElementById('bolt'), contentEl=document.getElementById('content'),
+        hintEl=document.getElementById('hint'), track=document.getElementById('track'),
+        nav=document.getElementById('nav');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
+  const lerp=(a,b,t)=>a+(b-a)*t;
+  const smoothstep=(e0,e1,x)=>{const t=clamp((x-e0)/(e1-e0),0,1);return t*t*(3-2*t);};
+  const pulse=(p,at,w)=>Math.exp(-Math.pow((p-at)/w,2));
+  const flashEnergy=p=>CFG.pulses.reduce((e,pu)=>e+pu.amp*pulse(p,pu.at,pu.w),0);
+
+
+  let progress=0;
+  function readProgress(){
+    const rect=track.getBoundingClientRect();
+    const scrollable=track.offsetHeight-window.innerHeight;
+    progress=clamp(-rect.top/scrollable,0,1);
+    // Reveal nav only once the hero scrub is fully complete (stage about to unpin),
+    // so it never appears over the storm animation.
+    nav.classList.toggle('revealed', window.scrollY >= track.offsetHeight - window.innerHeight - 2);
+  }
+  function render(time){
+    const p=progress;
+    const approach=smoothstep(0.12,CFG.strikeAt,p)*(1-smoothstep(CFG.strikeAt,CFG.strikeAt+0.06,p));
+    const ambient=approach*0.10*(0.5+0.5*Math.sin(time*0.012)*Math.sin(time*0.031+1.3));
+    const flash=clamp(flashEnergy(p)+ambient,0,1.35);
+    const baseT=smoothstep(CFG.strikeAt-0.04,0.95,p);
+    const exposure=clamp(lerp(CFG.darkExposure,CFG.litExposure,baseT)+flash*CFG.flashBoost,0,2.4);
+    photo.style.setProperty('--exposure',exposure.toFixed(3));
+    photo.style.setProperty('--contrast',lerp(1.06,1.07,baseT).toFixed(3));
+    photo.style.setProperty('--sat',lerp(0.82,0.92,baseT).toFixed(3));
+    flashEl.style.setProperty('--flash',clamp(flash,0,CFG.flashMax).toFixed(3));
+    boltEl.style.setProperty('--bolt',(CFG.boltMax*clamp(pulse(p,CFG.strikeAt-0.018,0.016)+0.3*pulse(p,0.71,0.012),0,1)).toFixed(3));
+    photo.style.setProperty('--reveal',smoothstep(CFG.strikeAt,CFG.strikeAt+0.16,p).toFixed(3));
+    const c=smoothstep(CFG.strikeAt+0.04,0.92,p);
+    contentEl.style.setProperty('--content',c.toFixed(3));
+    contentEl.style.setProperty('--content-y',(16*(1-c)).toFixed(1)+'px');
+    hintEl.style.setProperty('--hint',(1-smoothstep(0,0.10,p)).toFixed(3));
+    requestAnimationFrame(render);
+  }
+  if(reduce){
+    photo.style.setProperty('--exposure','0.95'); photo.style.setProperty('--reveal','1');
+    contentEl.style.setProperty('--content','1'); contentEl.style.setProperty('--content-y','0px');
+    hintEl.style.setProperty('--hint','0'); nav.classList.add('revealed');
+  } else {
+    window.addEventListener('scroll',readProgress,{passive:true});
+    window.addEventListener('resize',readProgress);
+    readProgress(); requestAnimationFrame(render);
+  }
+})();
+</script>
+
+<!-- Reflect the shared quote cart count in the nav (cart lives on the rental pages). -->
+<script>
+(function(){
+  try{
+    var r=localStorage.getItem('ts-cart'); var n=0;
+    if(r){ var c=(JSON.parse(r)||{}).cart||{}; n=Object.values(c).reduce(function(a,b){return a+(b||0);},0); }
+    var el=document.getElementById('cartCount');
+    if(el){ el.textContent=n; el.classList.toggle('zero', n===0); }
+  }catch(e){}
+})();
+</script>
+
 </body>
 </html>
