@@ -211,6 +211,8 @@
   }
   .card .thumb .ico { width: 30px; height: 40px; color:#33404c; }
   .card .thumb .ph { position:absolute; bottom:0.5rem; right:0.6rem; font-family:'JetBrains Mono',monospace; font-size:0.55rem; letter-spacing:0.15em; color:#3a4651; text-transform:uppercase;}
+  .card .thumb.has-photo { background:#e9e6df; }
+  .card .thumb img { position:absolute; inset:0; margin:auto; max-width:82%; max-height:80%; width:auto; height:auto; object-fit:contain; mix-blend-mode:multiply; }
   .card .meta { padding: 1.1rem 1.2rem 1.3rem; }
   .card .meta .cat { font-family:'Saira Condensed',sans-serif; text-transform:uppercase; font-size:1.2rem; letter-spacing:0.02em; }
   .card .meta .ex { color: var(--muted); font-size: 0.85rem; margin-top: 0.35rem; line-height:1.5; }
@@ -280,7 +282,7 @@
   <a href="#top" class="brand">Thunderstruck</a>
   <div class="links">
     <a href="all.html">Rentals</a>
-    <a href="#crew">Production</a>
+    <a href="production.html">Production</a>
     <a href="contact.html">Contact</a>
     <a href="rentals.html" class="cart-trigger" aria-label="View quote"><span>Quote</span><span class="count zero" id="cartCount">0</span></a>
   </div>
@@ -325,7 +327,7 @@
 <section class="block" id="truck">
   <div class="wrap">
     <div class="truck-grid">
-      <div class="truck-photo" style="background-image:url('assets/hero-plate-lit.webp');"></div>
+      <div class="truck-photo" style="background-image:url('media/truck-profile.webp');"></div>
       <div>
         <p class="eyebrow">The 3-Ton Grip Truck</p>
         <h2 class="head">The rig that <span class="y">runs the show.</span></h2>
@@ -352,27 +354,27 @@
       <a href="rentals.html" class="btn ghost">Browse the full kit →</a>
     </div>
     <div class="cards">
-      <a class="card" href="rentals.html">
-        <div class="thumb"><svg class="ico" viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg><span class="ph">photo soon</span></div>
+      <a class="card" href="camera.html">
+        <div class="thumb has-photo"><img src="media/products/red-komodo.webp" alt="RED Komodo 6K" loading="lazy"></div>
         <div class="meta"><div class="cat">Camera</div><div class="ex">RED Komodo 6K · Tilta Nucleus · Teradek Bolt 6</div></div>
       </a>
-      <a class="card" href="rentals.html">
-        <div class="thumb"><svg class="ico" viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg><span class="ph">photo soon</span></div>
+      <a class="card" href="camera.html">
+        <div class="thumb has-photo"><img src="media/products/laowa-ranger.webp" alt="Laowa Ranger cine lens" loading="lazy"></div>
         <div class="meta"><div class="cat">Lenses</div><div class="ex">DZOFilm PAVO anamorphics · VESPID primes · Laowa</div></div>
       </a>
       <a class="card" href="rentals.html">
-        <div class="thumb"><svg class="ico" viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg><span class="ph">photo soon</span></div>
+        <div class="thumb has-photo"><img src="media/products/nanlux-2400b-cut.webp" alt="Nanlux Evoke 2400B" loading="lazy"></div>
         <div class="meta"><div class="cat">Lighting</div><div class="ex">Nanlux 2400B · Aputure Storm 1200x · Astera Titan</div></div>
       </a>
-      <a class="card" href="rentals.html">
+      <a class="card" href="grip-truck.html">
         <div class="thumb"><svg class="ico" viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg><span class="ph">photo soon</span></div>
         <div class="meta"><div class="cat">Grip</div><div class="ex">C-stands · overhead frames · flags · apple boxes</div></div>
       </a>
-      <a class="card" href="rentals.html">
-        <div class="thumb"><svg class="ico" viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg><span class="ph">photo soon</span></div>
+      <a class="card" href="camera.html">
+        <div class="thumb has-photo"><img src="media/products/sachtler-18.webp" alt="Sachtler fluid head" loading="lazy"></div>
         <div class="meta"><div class="cat">Camera Support</div><div class="ex">Sachtler fluid heads · Dana Dolly · DJI RS 3 Pro</div></div>
       </a>
-      <a class="card" href="rentals.html">
+      <a class="card" href="sound.html">
         <div class="thumb"><svg class="ico" viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg><span class="ph">photo soon</span></div>
         <div class="meta"><div class="cat">Sound</div><div class="ex">Sound Devices 633 · Sennheiser MKH 50 · Lectrosonics</div></div>
       </a>
@@ -401,28 +403,6 @@
         <div class="num">/ 03</div>
         <h3>Friendly Support</h3>
         <p>We're filmmakers, and we've been at this a long time. Need crew recommendations, a demo, or a production problem solved? Give us a call.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CREW -->
-<section class="block crew" id="crew" style="background:linear-gradient(180deg,#0c1015,#06080b);">
-  <div class="wrap">
-    <p class="eyebrow">The Crew</p>
-    <h2 class="head">Run by people who <span class="y">make films.</span></h2>
-    <div class="crew-grid" style="margin-top:2.5rem;">
-      <div class="person">
-        <div class="role">Director · Director of Photography</div>
-        <h3>Taylor Randall</h3>
-        <p class="names">Music videos for Jennifer Lopez, Cardi B, Bad Bunny, DJ Khaled, Nipsey Hussle, John Legend, Enrique Iglesias, Becky G.</p>
-        <p>From Chicago to LA at 17, Taylor learned the set from every seat. Twelve-plus years in, he's one of the rare few who directs and shoots at once — for Kodak Black, Sunny Malouf, Tahj Mowry, Dizzy Wright, and Mann.</p>
-      </div>
-      <div class="person">
-        <div class="role">Writer · Director · Producer</div>
-        <h3>Martin Shapiro</h3>
-        <p>Wrote, directed, and produced the horror short <em>Chopper</em>, from his own comic series — its prequel became a web series starring Tyler Mane (Halloween, X-Men). His thriller <em>Lair of the Fox</em> sold to Ilya Salkind (producer of Superman).</p>
-        <p>He's developed for HBO and MGM, including an adaptation of <em>Dragonlance</em>. MFA in Screenwriting, UCLA — where he won the Showcase award for his war drama <em>Crossfire</em>.</p>
       </div>
     </div>
   </div>
