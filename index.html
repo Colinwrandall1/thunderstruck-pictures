@@ -49,11 +49,10 @@
     font-family: 'Saira Condensed', sans-serif; text-transform: uppercase;
     font-size: 1.35rem; letter-spacing: 0.06em; line-height: 1;
   }
-  .nav .links { display: flex; align-items: center; gap: 2rem; }
+  .nav .links { display: flex; align-items: center; gap: 1.25rem; flex-wrap: nowrap; }
   .nav .links a {
     font-size: 0.82rem; letter-spacing: 0.04em; color: #c7d0da;
-    text-transform: uppercase; transition: color 0.2s;
-  }
+    text-transform: uppercase; transition: color 0.2s; white-space:nowrap; }
   .nav .links a:hover { color: #fff; }
   .nav .links a.soon { color: #5f6b77; }
   .nav .links a.soon::after {
@@ -82,7 +81,7 @@
   .btn:hover { transform:translateY(-1px); box-shadow:0 0 26px rgba(150,190,255,0.5), inset 0 1px 0 rgba(255,255,255,0.95); }
   .btn.ghost { background:transparent; color:var(--text); border:1px solid #33485f; box-shadow:none; }
   .btn.ghost:hover { border-color:#9fc4ee; box-shadow:0 0 16px rgba(159,196,238,0.25); }
-  @media (max-width: 760px) { .nav .links a:not(.cart-trigger) { display: none; } }
+  @media (max-width: 960px) { .nav .links a:not(.cart-trigger) { display: none; } }
 
   /* ---------- HERO (storm reveal) ---------- */
   .hero-track { height: 320vh; position: relative; }
@@ -298,7 +297,10 @@
 <nav class="nav" id="nav">
   <a href="#top" class="brand">Thunderstruck</a>
   <div class="links">
-    <a href="all.html">Rentals</a>
+    <a href="camera.html">Camera</a>
+    <a href="rentals.html">Lighting &amp; Grip</a>
+    <a href="grip-truck.html">Grip Truck</a>
+    <a href="sound.html">Audio</a>
     <a href="production.html">Production</a>
     <a href="contact.html">Contact</a>
     <a href="rentals.html" class="cart-trigger" aria-label="View quote"><span>Quote</span><span class="count zero" id="cartCount">0</span></a>
