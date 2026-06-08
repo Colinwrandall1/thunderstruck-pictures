@@ -198,9 +198,12 @@
   /* INVENTORY */
   .inv { background: linear-gradient(180deg, #0a0d11 0%, #0c1015 100%); }
   .inv-head { display:flex; justify-content:space-between; align-items:flex-end; gap:2rem; flex-wrap:wrap; margin-bottom: 2.5rem; }
-  /* expanding accordion — thin vertical-label columns that open to a square on hover */
-  .inv-acc { --sq: clamp(230px,32vw,320px); --thin: clamp(58px,7.5vw,80px);
-    display:flex; gap:10px; justify-content:flex-end; align-items:stretch; }
+  /* INVENTORY — two-column: heading left, expanding accordion right */
+  .inv-layout { display:flex; align-items:center; gap:clamp(2rem,5vw,4.5rem); }
+  .inv-intro { flex:1 1 0; min-width:0; display:flex; flex-direction:column; }
+  .inv-acc { --sq: clamp(220px,26vw,300px); --thin: clamp(52px,6vw,72px); --gap:10px;
+    flex:0 0 calc(var(--sq) + 4 * (var(--thin) + var(--gap)));
+    display:flex; gap:var(--gap); justify-content:flex-end; align-items:stretch; height:var(--sq); }
   .acol { position:relative; flex:0 0 var(--thin); height:var(--sq); overflow:hidden;
     border:1px solid var(--line); background:var(--panel); text-decoration:none; cursor:pointer;
     transition: flex-basis .55s cubic-bezier(.22,.85,.25,1), border-color .3s; }
@@ -215,16 +218,20 @@
     display:flex; align-items:center; justify-content:center; white-space:nowrap;
     writing-mode: vertical-rl; transform: rotate(180deg);
     font-family:'Saira Condensed',sans-serif; font-weight:700; text-transform:uppercase;
-    letter-spacing:0.14em; font-size:clamp(.92rem,1.4vw,1.12rem); color:var(--text); }
-  .acol .acol-label::before { content:""; position:absolute; inset:0; z-index:-1; opacity:0; transition:opacity .4s;
-    background:linear-gradient(270deg, rgba(8,11,16,0.88) 35%, rgba(8,11,16,0)); }
-  .acol:hover .acol-label::before, .acol:focus-visible .acol-label::before { opacity:1; }
+    letter-spacing:0.14em; font-size:clamp(.92rem,1.4vw,1.1rem); color:var(--text); transition: opacity .35s; }
+  /* when expanded, drop the label (and its gradient) for a clean image-only square */
+  .acol:hover .acol-label, .acol:focus-visible .acol-label { opacity:0; }
+  @media (max-width:880px){
+    .inv-layout { flex-direction:column; align-items:stretch; gap:2.4rem; }
+    .inv-acc { flex:0 0 auto; }
+  }
   @media (max-width:680px){
-    .inv-acc { flex-wrap:wrap; align-items:stretch; }
+    .inv-acc { flex-wrap:wrap; height:auto; align-items:stretch; justify-content:space-between; }
     .acol { flex:0 0 calc(50% - 5px); height:auto; aspect-ratio:1/1; }
     .acol .acol-img { opacity:1; }
-    .acol .acol-label { writing-mode:horizontal-tb; transform:none; inset:auto 0 0 0; top:auto; width:auto; height:auto; justify-content:flex-start; padding:.7rem .85rem; }
-    .acol .acol-label::before { opacity:1; inset:auto 0 0 0; height:3.4rem; background:linear-gradient(0deg, rgba(8,11,16,0.92), rgba(8,11,16,0)); }
+    .acol .acol-label, .acol:hover .acol-label, .acol:focus-visible .acol-label { opacity:1;
+      writing-mode:horizontal-tb; transform:none; inset:auto 0 0 0; top:auto; width:auto; height:auto;
+      justify-content:flex-start; padding:.7rem .85rem; background:linear-gradient(0deg, rgba(8,11,16,0.92) 30%, rgba(8,11,16,0)); }
   }
   .inv-note { margin-top: 1.6rem; color:#6b7681; font-size: 0.85rem; }
 
@@ -376,33 +383,30 @@
 <!-- INVENTORY -->
 <section class="block inv" id="inventory">
   <div class="wrap">
-    <div class="inv-head">
-      <div>
+    <div class="inv-layout">
+      <div class="inv-intro">
         <p class="eyebrow">The Kit</p>
         <h2 class="head">The inventory <span class="y">runs deep.</span></h2>
         <p class="body">RED Komodo. DZOFilm anamorphics. Nanlux 2400B. Aputure everything. Twenty-plus categories of camera, lighting, grip, and sound — browse by department, build your package.</p>
+        <a href="rentals.html" class="btn ghost" style="align-self:flex-start; margin-top:1.8rem;">Browse the full kit →</a>
       </div>
-      <a href="rentals.html" class="btn ghost">Browse the full kit →</a>
-    </div>
-    <div class="inv-acc">
-      <a class="acol" href="camera.html" style="--img:url('media/products/red-komodo.webp')" aria-label="Camera rentals">
-        <span class="acol-img"></span><span class="acol-label">Camera</span>
-      </a>
-      <a class="acol" href="camera.html" style="--img:url('media/products/laowa-ranger.webp')" aria-label="Lens rentals">
-        <span class="acol-img"></span><span class="acol-label">Lenses</span>
-      </a>
-      <a class="acol" href="rentals.html" style="--img:url('media/products/nanlux-2400b-cut.webp')" aria-label="Lighting rentals">
-        <span class="acol-img"></span><span class="acol-label">Lighting</span>
-      </a>
-      <a class="acol soon" href="grip-truck.html" aria-label="Grip rentals">
-        <span class="acol-img"><svg class="acol-bolt" viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg><span class="acol-soon">photo soon</span></span><span class="acol-label">Grip</span>
-      </a>
-      <a class="acol" href="camera.html" style="--img:url('media/products/sachtler-18.webp')" aria-label="Camera support rentals">
-        <span class="acol-img"></span><span class="acol-label">Support</span>
-      </a>
-      <a class="acol soon" href="sound.html" aria-label="Sound rentals">
-        <span class="acol-img"><svg class="acol-bolt" viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg><span class="acol-soon">photo soon</span></span><span class="acol-label">Sound</span>
-      </a>
+      <div class="inv-acc">
+        <a class="acol" href="camera.html" style="--img:url('media/products/red-komodo.webp')" aria-label="Camera rentals">
+          <span class="acol-img"></span><span class="acol-label">Camera</span>
+        </a>
+        <a class="acol" href="camera.html" style="--img:url('media/products/laowa-ranger.webp')" aria-label="Lens rentals">
+          <span class="acol-img"></span><span class="acol-label">Lenses</span>
+        </a>
+        <a class="acol" href="rentals.html" style="--img:url('media/products/nanlux-2400b-cut.webp')" aria-label="Lighting rentals">
+          <span class="acol-img"></span><span class="acol-label">Lighting</span>
+        </a>
+        <a class="acol soon" href="grip-truck.html" aria-label="Grip rentals">
+          <span class="acol-img"><svg class="acol-bolt" viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg><span class="acol-soon">photo soon</span></span><span class="acol-label">Grip</span>
+        </a>
+        <a class="acol soon" href="sound.html" aria-label="Sound rentals">
+          <span class="acol-img"><svg class="acol-bolt" viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg><span class="acol-soon">photo soon</span></span><span class="acol-label">Sound</span>
+        </a>
+      </div>
     </div>
     <p class="inv-note">Inventory updated regularly. Looking for something not on the list? We partner with the biggest houses in the country — we'll get it. <span style="color:#8b96a1;">(Product photos &amp; shopping cart coming with the gear shoot.)</span></p>
   </div>
