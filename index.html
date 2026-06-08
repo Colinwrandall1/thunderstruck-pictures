@@ -35,8 +35,8 @@
   .nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 50;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 0.8rem clamp(1.2rem, 4vw, 3rem);
-    background: rgba(6,8,11,0.88);
+    padding: 0.85rem clamp(1.2rem, 4vw, 3rem);
+    background: rgba(6,8,11,0.9);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--line);
     /* Hidden through the entire storm reveal; slides in only once the hero
@@ -51,9 +51,10 @@
   }
   .nav .links { display: flex; align-items: center; gap: 1.25rem; flex-wrap: nowrap; }
   .nav .links a {
-    font-size: 0.82rem; letter-spacing: 0.04em; color: #c7d0da;
-    text-transform: uppercase; transition: color 0.2s; white-space:nowrap; }
+    font-size: 0.78rem; letter-spacing: 0.04em; color: #c7d0da;
+    text-transform: uppercase; transition: color 0.2s; white-space: nowrap; }
   .nav .links a:hover { color: #fff; }
+  .nav .links a.current { color: var(--yellow); }
   .nav .links a.soon { color: #5f6b77; }
   .nav .links a.soon::after {
     content: "soon"; font-family: 'JetBrains Mono', monospace; font-size: 0.55rem;
