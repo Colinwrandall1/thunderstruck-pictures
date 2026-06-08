@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- thunderstruckpictures.co -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thunderstruck Pictures — Video Hero (alt)</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Austin's grip &amp; lighting truck and production company, owned and run by working filmmakers. RED, DZOFilm, Aputure, Nanlux and more — delivered on a 3-ton truck. Build a quote in minutes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #04060c;
+    --panel: #0e141c;
+    --panel-2: #121a24;
+    --line: #1f2a38;
+    --text: #f4f8ff;
+    --muted: #9fb4ce;
+    --yellow: #9fc4ee;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  /* ---------- NAV ---------- */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.8rem clamp(1.2rem, 4vw, 3rem);
+    background: rgba(6,8,11,0.88);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+    /* Hidden through the entire storm reveal; slides in only once the hero
+       animation has finished, so it never competes with the effect. */
+    opacity: 0; transform: translateY(-100%); pointer-events: none;
+    transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.16,1,0.3,1);
+  }
+  .nav.revealed { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .nav .brand {
+    font-family: 'Saira Condensed', sans-serif; text-transform: uppercase;
+    font-size: 1.35rem; letter-spacing: 0.06em; line-height: 1;
+  }
+  .nav .links { display: flex; align-items: center; gap: 2rem; }
+  .nav .links a {
+    font-size: 0.82rem; letter-spacing: 0.04em; color: #c7d0da;
+    text-transform: uppercase; transition: color 0.2s;
+  }
+  .nav .links a:hover { color: #fff; }
+  .nav .links a.soon { color: #5f6b77; }
+  .nav .links a.soon::after {
+    content: "soon"; font-family: 'JetBrains Mono', monospace; font-size: 0.55rem;
+    color: var(--yellow); margin-left: 0.35rem; vertical-align: super; letter-spacing: 0.1em;
+  }
+  .cart-trigger {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    background: var(--panel); border: 1px solid var(--line);
+    padding: 0.5rem 0.9rem; font-family: 'Saira Condensed', sans-serif; font-size: 0.85rem;
+    text-transform: uppercase; letter-spacing: 0.1em; color: var(--text);
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .cart-trigger:hover { border-color: var(--yellow); color: var(--yellow); }
+  .cart-trigger .count { background: var(--yellow); color: #0a0a0a; padding: 0.1rem 0.5rem; font-size: 0.8rem; min-width: 1.5rem; text-align: center; }
+  .cart-trigger .count.zero { background: var(--line); color: var(--muted); }
+  .btn {
+    display:inline-block; cursor:pointer;
+    background:linear-gradient(180deg,#ffffff,#cdddf0 45%,#9fb4ce 55%,#eaf2fb);
+    color:#0a0f16; font-family:'Saira Condensed',sans-serif; font-weight:700;
+    font-size:0.92rem; letter-spacing:0.14em; text-transform:uppercase;
+    padding:0.72rem 1.5rem; border:none; border-radius:3px;
+    box-shadow:0 0 18px rgba(150,190,255,0.3), inset 0 1px 0 rgba(255,255,255,0.85);
+    transition:transform .15s, box-shadow .2s;
+  }
+  .btn:hover { transform:translateY(-1px); box-shadow:0 0 26px rgba(150,190,255,0.5), inset 0 1px 0 rgba(255,255,255,0.95); }
+  .btn.ghost { background:transparent; color:var(--text); border:1px solid #33485f; box-shadow:none; }
+  .btn.ghost:hover { border-color:#9fc4ee; box-shadow:0 0 16px rgba(159,196,238,0.25); }
+  @media (max-width: 760px) { .nav .links a:not(.cart-trigger) { display: none; } }
+
+  /* ---------- HERO (storm reveal) ---------- */
+  .hero-track { height: 320vh; position: relative; }
+  .hero-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; background: var(--bg); }
+  .hero-photo {
+    position: absolute; inset: -2%;
+    filter: brightness(var(--exposure, 0.45)) contrast(var(--contrast, 1.06)) saturate(var(--sat, 0.82));
+    will-change: filter;
+  }
+  .hero-plate, .hero-plate-lit {
+    position: absolute; inset: 0;
+    background-color: #05070a; background-size: cover; background-position: center center; background-repeat: no-repeat;
+  }
+  .hero-plate {
+    background-image:
+      url("assets/hero-plate.webp"),
+      linear-gradient(180deg, #0b0f15 0%, #070a0f 55%, #04060a 100%);
+  }
+  .hero-plate-lit { background-image: url("assets/hero-plate-lit.webp"); opacity: var(--reveal, 0); will-change: opacity; }
+  .hero-bolt {
+    position: absolute; top: -2%; left: 47%; transform: translateX(-50%);
+    height: 74%; width: auto; pointer-events: none; opacity: var(--bolt, 0); will-change: opacity;
+    filter: drop-shadow(0 0 22px rgba(150,190,255,0.45));
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, transparent 34%, #000 52%, #000 100%);
+            mask-image: linear-gradient(to bottom, transparent 0%, transparent 34%, #000 52%, #000 100%);
+  }
+  .hero-flash {
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(58% 48% at 49% 25%, rgba(234,242,255,1) 0%, rgba(150,190,255,0.72) 42%, rgba(90,140,230,0) 82%);
+    opacity: var(--flash, 0); mix-blend-mode: screen; will-change: opacity;
+  }
+  .hero-vignette {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 26%),
+      radial-gradient(140% 110% at 47% 60%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.42) 100%);
+  }
+  .hero-content {
+    position: absolute; left: 0; right: 0; top: 50%; transform: translateY(calc(-50% + var(--content-y, 16px)));
+    text-align: center; padding: 0 1.5rem;
+    opacity: var(--content, 0); will-change: opacity, transform;
+  }
+  .hero-content .eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: clamp(0.6rem,1.4vw,0.75rem);
+    letter-spacing: 0.4em; text-transform: uppercase; color: var(--yellow); margin-bottom: 1.2rem;
+  }
+  /* Knockout headline: the letters are subtracted from a soft dark halo,
+     so the storm/lightning layers behind show through the letterforms exactly. */
+  .hero-content h1 { margin: 0 auto; line-height: 0; filter: drop-shadow(0 3px 26px rgba(150,190,255,0.30)); }
+  .hero-content h1 svg { display: block; width: min(91vw, 1160px); height: auto; margin: 0 auto; }
+  .hero-content h1 .ts-text {
+    font-family: 'Saira Condensed', sans-serif; font-weight: 700; font-style: italic;
+    text-transform: uppercase;
+  }
+  .hero-content .sub {
+    margin-top: 1.3rem; font-size: clamp(0.95rem,2.2vw,1.3rem); color: #d6dee7; font-weight: 500; letter-spacing: 0.01em;
+  }
+  .hero-content .cta-row { margin-top: 2.2rem; display: flex; gap: 0.9rem; justify-content: center; flex-wrap: wrap; }
+  .scroll-hint {
+    position: absolute; left: 50%; bottom: 3vh; transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: #6f7d8c; opacity: var(--hint, 1);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  }
+  .scroll-hint .arrow { width: 1px; height: 26px; background: linear-gradient(#6f7d8c, transparent); }
+  .sound-btn {
+    position: fixed; bottom: 1.1rem; right: 1.1rem; z-index: 60;
+    background: rgba(10,13,18,0.6); color: #c9d4e2; border: 1px solid #283341; border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 0.5rem 0.85rem; cursor: pointer; backdrop-filter: blur(6px);
+  }
+  .sound-btn:hover { border-color: var(--yellow); color: #fff; }
+
+  /* ---------- SHARED SECTION ---------- */
+  section.block { position: relative; z-index: 2; background: var(--bg); }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: clamp(4rem, 9vw, 8rem) clamp(1.2rem, 4vw, 3rem); }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--yellow); margin-bottom: 1.2rem;
+  }
+  h2.head {
+    font-family: 'Saira Condensed', sans-serif; text-transform: uppercase; line-height: 0.95;
+    font-size: clamp(2.1rem, 6vw, 4.2rem); letter-spacing: 0.01em; margin-bottom: 1.4rem;
+  }
+  h2.head .y { color: var(--yellow); }
+  p.lead { font-size: clamp(1.05rem, 2.2vw, 1.3rem); color: #cdd6df; line-height: 1.6; max-width: 60ch; }
+  p.body { color: var(--muted); line-height: 1.7; max-width: 62ch; }
+  p.body + p.body { margin-top: 1rem; }
+
+  /* lightning divider */
+  .bolt-rule { display:flex; align-items:center; gap:0.8rem; color: var(--yellow); margin: 0 auto; width: fit-content; }
+  .bolt-rule::before, .bolt-rule::after { content:""; height:1px; width:60px; background: linear-gradient(90deg, transparent, #2a333d); }
+  .bolt-rule svg { width: 16px; height: 22px; }
+
+  /* INTRO */
+  .intro { text-align: center; }
+  .intro .wrap { padding-top: clamp(3.5rem,7vw,6rem); padding-bottom: clamp(3.5rem,7vw,6rem); }
+  .intro h2.head { max-width: 16ch; margin-left:auto; margin-right:auto; }
+
+  /* TRUCK */
+  .truck-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(2rem,5vw,4.5rem); align-items: center; }
+  @media (max-width: 880px){ .truck-grid{ grid-template-columns: 1fr; } }
+  .truck-photo {
+    position: relative; aspect-ratio: 1800/1018; border: 1px solid var(--line); overflow: hidden;
+    background: #05070a center/cover no-repeat;
+  }
+  .features { list-style: none; margin-top: 2rem; display: grid; gap: 0.2rem; }
+  .features li { display:flex; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--line); align-items:flex-start; }
+  .features li:last-child { border-bottom: none; }
+  .features .k { font-family:'Saira Condensed',sans-serif; text-transform:uppercase; font-size:1.15rem; letter-spacing:0.02em; color:#fff; min-width: 9.5rem; }
+  .features .v { color: var(--muted); font-size: 0.95rem; line-height: 1.5; }
+
+  /* INVENTORY */
+  .inv { background: linear-gradient(180deg, #0a0d11 0%, #0c1015 100%); }
+  .inv-head { display:flex; justify-content:space-between; align-items:flex-end; gap:2rem; flex-wrap:wrap; margin-bottom: 2.5rem; }
+  /* INVENTORY — two-column: heading left, expanding accordion right */
+  .inv-layout { display:flex; align-items:center; gap:clamp(2rem,5vw,4.5rem); }
+  .inv-intro { flex:1 1 0; min-width:0; display:flex; flex-direction:column; }
+  .inv-acc { --sq: clamp(220px,26vw,300px); --thin: clamp(52px,6vw,72px); --gap:10px;
+    flex:0 0 calc(var(--sq) + 4 * (var(--thin) + var(--gap)));
+    display:flex; gap:var(--gap); justify-content:flex-end; align-items:stretch; height:var(--sq); }
+  .acol { position:relative; flex:0 0 var(--thin); height:var(--sq); overflow:hidden;
+    border:1px solid var(--line); background:var(--panel); text-decoration:none; cursor:pointer;
+    transition: flex-basis .55s cubic-bezier(.22,.85,.25,1), border-color .3s; }
+  .acol:hover, .acol:focus-visible { flex-basis: var(--sq); border-color: var(--yellow); outline:none; }
+  .acol .acol-img { position:absolute; inset:0; opacity:0; transition: opacity .5s ease .05s;
+    background: var(--img) center/64% no-repeat, #e9e6df; }
+  .acol:hover .acol-img, .acol:focus-visible .acol-img { opacity:1; }
+  .acol.soon .acol-img { background:#10161e; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.6rem; }
+  .acol .acol-bolt { width:32px; height:44px; fill:#33404c; }
+  .acol .acol-soon { font-family:'JetBrains Mono',monospace; font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; color:#3a4651; }
+  .acol .acol-label { position:absolute; z-index:2; right:0; top:0; bottom:0; width:var(--thin);
+    display:flex; align-items:center; justify-content:center; white-space:nowrap;
+    writing-mode: vertical-rl; transform: rotate(180deg);
+    font-family:'Saira Condensed',sans-serif; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.14em; font-size:clamp(.92rem,1.4vw,1.1rem); color:var(--text); transition: opacity .35s; }
+  /* when expanded, drop the label (and its gradient) for a clean image-only square */
+  .acol:hover .acol-label, .acol:focus-visible .acol-label { opacity:0; }
+  @media (max-width:880px){
+    .inv-layout { flex-direction:column; align-items:stretch; gap:2.4rem; }
+    .inv-acc { flex:0 0 auto; }
+  }
+  @media (max-width:680px){
+    .inv-acc { flex-wrap:wrap; height:auto; align-items:stretch; justify-content:space-between; }
+    .acol { flex:0 0 calc(50% - 5px); height:auto; aspect-ratio:1/1; }
+    .acol .acol-img { opacity:1; }
+    .acol .acol-label, .acol:hover .acol-label, .acol:focus-visible .acol-label { opacity:1;
+      writing-mode:horizontal-tb; transform:none; inset:auto 0 0 0; top:auto; width:auto; height:auto;
+      justify-content:flex-start; padding:.7rem .85rem; background:linear-gradient(0deg, rgba(8,11,16,0.92) 30%, rgba(8,11,16,0)); }
+  }
+  .inv-note { margin-top: 1.6rem; color:#6b7681; font-size: 0.85rem; }
+
+  /* WHY */
+  .why-grid { display:grid; grid-template-columns: repeat(3,1fr); gap: clamp(1.5rem,4vw,3rem); }
+  @media (max-width: 880px){ .why-grid{ grid-template-columns:1fr; gap:2rem;} }
+  .why-grid .col h3 { font-family:'Saira Condensed',sans-serif; text-transform:uppercase; font-size:1.5rem; letter-spacing:0.02em; margin-bottom:0.8rem; }
+  .why-grid .col .num { font-family:'JetBrains Mono',monospace; color: var(--yellow); font-size:0.75rem; letter-spacing:0.2em; margin-bottom:1rem; }
+  .why-grid .col p { color: var(--muted); line-height:1.65; font-size:0.95rem; }
+
+  /* CREW */
+  .crew { background: linear-gradient(180deg, #0c1015 0%, #06080b 100%); }
+  .crew-grid { display:grid; grid-template-columns:1fr 1fr; gap: clamp(1.5rem,4vw,3rem); }
+  @media (max-width: 760px){ .crew-grid{ grid-template-columns:1fr; gap:2.5rem; } }
+  .person .role { font-family:'JetBrains Mono',monospace; color:var(--yellow); font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:0.6rem; }
+  .person h3 { font-family:'Saira Condensed',sans-serif; text-transform:uppercase; font-size:2rem; letter-spacing:0.02em; margin-bottom:1rem; }
+  .person p { color: var(--muted); line-height:1.7; font-size:0.95rem; }
+  .person p + p { margin-top:0.8rem; }
+  .person .names { color:#cdd6df; }
+
+  /* ACADEMY */
+  .academy { text-align:center; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    background: radial-gradient(120% 120% at 50% 0%, rgba(159,196,238,0.06), transparent 55%), var(--bg); }
+  .academy .pill { display:inline-block; font-family:'JetBrains Mono',monospace; font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase;
+    color:var(--yellow); border:1px solid #3a3a1a; border-radius:999px; padding:0.4rem 0.9rem; margin-bottom:1.5rem; }
+  .academy p.lead { margin: 0 auto; }
+  .notify { margin-top: 2rem; display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap; }
+  .notify input {
+    background:#0a0d11; border:1px solid var(--line); color:#fff; padding:0.7rem 1rem; border-radius:2px;
+    font-family:'Inter',sans-serif; font-size:0.9rem; min-width: 240px;
+  }
+  .notify input:focus { outline:none; border-color: var(--yellow); }
+
+  /* BOOK / CONTACT */
+  .book { background: linear-gradient(180deg, #0a0d11, #05070a); text-align:center; }
+  .book h2.head { max-width: 18ch; margin: 0 auto 1.6rem; }
+  .book .sub { color:var(--muted); margin-bottom: 2.2rem; }
+  .book .meta-row { margin-top:2.5rem; display:flex; gap:2rem; justify-content:center; flex-wrap:wrap; color:var(--muted); font-family:'JetBrains Mono',monospace; font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase; }
+  .book .meta-row a:hover { color: var(--yellow); }
+
+  /* FOOTER */
+  footer { background: #04060a; border-top:1px solid var(--line); padding: 2.5rem clamp(1.2rem,4vw,3rem); }
+  .foot-in { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap; }
+  .foot-in .brand { font-family:'Saira Condensed',sans-serif; text-transform:uppercase; letter-spacing:0.04em; font-size:1.1rem; }
+  .foot-in .brand .spark{ color:var(--yellow);}
+  .foot-in .small { color:#6b7681; font-size:0.75rem; font-family:'JetBrains Mono',monospace; letter-spacing:0.1em; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-track { height: 100vh; }
+    .hero-stage { position: relative; }
+  }
+
+  /* --- Voltage system overrides --- */
+  .nav .brand,h2.head,.features .k,.card .meta .cat,.why-grid .col h3,.person h3,.foot-in .brand{font-weight:700;}
+  .nav .brand{ font-style:italic; }
+  .foot-in .brand{ font-style:italic; }
+  h2.head .y, .eyebrow { color:#9fc4ee; }
+  .hero-content h1{ font-style:italic; }
+
+  /* ALT — static video hero (no scroll effect) */
+  .hero-video { position:relative; height:100vh; min-height:560px; overflow:hidden; background:#04060c; }
+  .hv-bg { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .hv-scrim { position:absolute; inset:0; z-index:1; pointer-events:none;
+    background:
+      radial-gradient(120% 95% at 50% 38%, rgba(4,6,12,0.18), rgba(4,6,12,0.72) 100%),
+      linear-gradient(180deg, rgba(4,6,12,0.55) 0%, rgba(4,6,12,0) 26%, rgba(4,6,12,0.7) 100%); }
+  .hv-content { position:absolute; inset:0; z-index:2; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 1.5rem; }
+  .hv-content .eyebrow { font-family:'JetBrains Mono',monospace; font-size:clamp(.6rem,1.4vw,.75rem); letter-spacing:.4em; text-transform:uppercase; color:var(--yellow); margin-bottom:1.2rem; }
+  .hv-content h1 { margin:0 auto; line-height:0; filter:drop-shadow(0 3px 26px rgba(150,190,255,.3)); }
+  .hv-content h1 svg { display:block; width:min(91vw,1160px); height:auto; }
+  .hv-content h1 .ts-text { font-family:'Saira Condensed',sans-serif; font-weight:700; font-style:italic; text-transform:uppercase; }
+  .hv-content .sub { margin-top:1.3rem; font-size:clamp(.95rem,2.2vw,1.3rem); color:#d6dee7; font-weight:500; }
+  .hv-content .cta-row { margin-top:2.2rem; display:flex; gap:.9rem; justify-content:center; flex-wrap:wrap; }
+  .hv-scroll { position:absolute; left:50%; bottom:2.4vh; transform:translateX(-50%); z-index:2; text-decoration:none;
+    display:flex; flex-direction:column; align-items:center; gap:.5rem; color:#9fb0c2;
+    font-family:'JetBrains Mono',monospace; font-size:.62rem; letter-spacing:.3em; text-transform:uppercase; }
+  .hv-arrow { width:1px; height:34px; background:linear-gradient(180deg,#9fb0c2,transparent); }
+  @media (max-width:600px){ .hero-video { height:88vh; min-height:480px; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav revealed" id="nav">
+  <a href="#top" class="brand">Thunderstruck</a>
+  <div class="links">
+    <a href="all.html">Rentals</a>
+    <a href="production.html">Production</a>
+    <a href="contact.html">Contact</a>
+    <a href="rentals.html" class="cart-trigger" aria-label="View quote"><span>Quote</span><span class="count zero" id="cartCount">0</span></a>
+  </div>
+</nav>
+
+
+<!-- HERO (video) -->
+<section class="hero-video">
+  <video class="hv-bg" autoplay muted loop playsinline poster="media/hero-poster.webp" aria-hidden="true">
+    <source src="media/hero-web.webm" type="video/webm">
+    <source src="media/hero-web.mp4" type="video/mp4">
+  </video>
+  <div class="hv-scrim" aria-hidden="true"></div>
+  <div class="hv-content">
+    <p class="eyebrow">There's a storm coming</p>
+    <h1 aria-label="Thunderstruck">
+      <svg viewBox="0 0 1600 250" role="img" aria-label="Thunderstruck" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <radialGradient id="tsScrim" cx="50%" cy="54%" r="60%">
+            <stop offset="0%" stop-color="#04060c" stop-opacity="0.78"/>
+            <stop offset="52%" stop-color="#04060c" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#04060c" stop-opacity="0"/>
+          </radialGradient>
+          <mask id="tsMask">
+            <rect x="0" y="0" width="1600" height="250" fill="#fff"/>
+            <text class="ts-text" x="800" y="186" text-anchor="middle" font-size="210" textLength="1520" lengthAdjust="spacingAndGlyphs" fill="#000">THUNDERSTRUCK</text>
+          </mask>
+        </defs>
+        <rect x="0" y="0" width="1600" height="250" fill="url(#tsScrim)" mask="url(#tsMask)"/>
+        <text class="ts-text" x="800" y="186" text-anchor="middle" font-size="210" textLength="1520" lengthAdjust="spacingAndGlyphs" fill="none" stroke="#d6e4f6" stroke-opacity="0.45" stroke-width="1.1">THUNDERSTRUCK</text>
+      </svg>
+    </h1>
+    <p class="sub">Stories that hit like lightning. Grip truck rental &amp; production — Austin, TX.</p>
+    <div class="cta-row">
+      <a href="#book" class="btn">Book / Hire</a>
+      <a href="#inventory" class="btn ghost">See the kit</a>
+    </div>
+  </div>
+  <a href="#top" class="hv-scroll" aria-label="Scroll down"><span>Scroll</span><span class="hv-arrow"></span></a>
+</section>
+
+<!-- INTRO -->
+<section class="block intro" id="top">
+  <div class="wrap">
+    <div class="bolt-rule"><svg viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg></div>
+    <h2 class="head" style="margin-top:1.6rem;">Big-city kit. <span class="y">Small-town hustle.</span></h2>
+    <p class="lead" style="margin:0 auto;">Austin's grip &amp; lighting truck — owned and run by working filmmakers, not a warehouse counter. The same gear you'd find in LA or New York, delivered on a 3-ton truck and operated by people who actually shoot. We go up to eleven.</p>
+  </div>
+</section>
+
+<!-- TRUCK -->
+<section class="block" id="truck">
+  <div class="wrap">
+    <div class="truck-grid">
+      <div class="truck-photo" style="background-image:url('media/truck-profile.webp');"></div>
+      <div>
+        <p class="eyebrow">The 3-Ton Grip Truck</p>
+        <h2 class="head">The rig that <span class="y">runs the show.</span></h2>
+        <p class="body">Capacity and mobility in one rig — modular shelving, all-terrain carts, a camera workstation, 15 outlets, and shore power.</p>
+        <ul class="features">
+          <li><span class="k">Lights in &amp; out</span><span class="v">LED inside and out — load in at dawn or wrap past midnight.</span></li>
+          <li><span class="k">Jockey boxes</span><span class="v">Lit under-truck boxes for sandbags, stingers, and grip.</span></li>
+          <li><span class="k">7' liftgate</span><span class="v">7-foot gate rated over 3,000 lbs — heavy carts on and off, easy.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INVENTORY -->
+<section class="block inv" id="inventory">
+  <div class="wrap">
+    <div class="inv-layout">
+      <div class="inv-intro">
+        <p class="eyebrow">The Kit</p>
+        <h2 class="head">The inventory <span class="y">runs deep.</span></h2>
+        <p class="body">RED Komodo. DZOFilm anamorphics. Nanlux 2400B. Aputure everything. Twenty-plus categories of camera, lighting, grip, and sound — browse by department, build your package.</p>
+        <a href="rentals.html" class="btn ghost" style="align-self:flex-start; margin-top:1.8rem;">Browse the full kit →</a>
+      </div>
+      <div class="inv-acc">
+        <a class="acol" href="camera.html" style="--img:url('media/products/red-komodo.webp')" aria-label="Camera rentals">
+          <span class="acol-img"></span><span class="acol-label">Camera</span>
+        </a>
+        <a class="acol" href="camera.html" style="--img:url('media/products/laowa-ranger.webp')" aria-label="Lens rentals">
+          <span class="acol-img"></span><span class="acol-label">Lenses</span>
+        </a>
+        <a class="acol" href="rentals.html" style="--img:url('media/products/nanlux-2400b-cut.webp')" aria-label="Lighting rentals">
+          <span class="acol-img"></span><span class="acol-label">Lighting</span>
+        </a>
+        <a class="acol soon" href="grip-truck.html" aria-label="Grip rentals">
+          <span class="acol-img"><svg class="acol-bolt" viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg><span class="acol-soon">photo soon</span></span><span class="acol-label">Grip</span>
+        </a>
+        <a class="acol soon" href="sound.html" aria-label="Sound rentals">
+          <span class="acol-img"><svg class="acol-bolt" viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg><span class="acol-soon">photo soon</span></span><span class="acol-label">Sound</span>
+        </a>
+      </div>
+    </div>
+    <p class="inv-note">Inventory updated regularly. Looking for something not on the list? We partner with the biggest houses in the country — we'll get it. <span style="color:#8b96a1;">(Product photos &amp; shopping cart coming with the gear shoot.)</span></p>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="block" id="why">
+  <div class="wrap">
+    <p class="eyebrow" style="text-align:center;">Why Thunderstruck</p>
+    <h2 class="head" style="text-align:center; max-width:18ch; margin:0 auto 3rem;">Filmmakers first. <span class="y">Rental house second.</span></h2>
+    <div class="why-grid">
+      <div class="col">
+        <div class="num">/ 01</div>
+        <h3>Large Inventory</h3>
+        <p>The same selection you'd find in LA or New York — our inventory runs deep, and what we don't stock, we source from the biggest houses in the country. No dead ends.</p>
+      </div>
+      <div class="col">
+        <div class="num">/ 02</div>
+        <h3>New Technology</h3>
+        <p>When the newest gear drops, we go get it. Our staff trains constantly, so what arrives on your set works like it should. No lemons.</p>
+      </div>
+      <div class="col">
+        <div class="num">/ 03</div>
+        <h3>Friendly Support</h3>
+        <p>We're filmmakers, and we've been at this a long time. Need crew recommendations, a demo, or a production problem solved? Give us a call.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK -->
+<section class="block book" id="book">
+  <div class="wrap">
+    <p class="eyebrow" style="text-align:center;">Book / Hire</p>
+    <h2 class="head">There's a storm coming. <span class="y">Let's make something.</span></h2>
+    <p class="sub">Tell us your dates and what you need — gear, the truck, or the whole package. We'll get back fast.</p>
+    <a href="rentals.html" class="btn" style="font-size:0.95rem; padding:0.95rem 2rem;">Check Availability</a>
+    <div class="meta-row">
+      <span>Austin, TX</span>
+      <a href="https://www.instagram.com/nightowlmartin/">Instagram</a>
+      <a href="https://www.facebook.com/MartinShapiro/">Facebook</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-in">
+    <span class="brand">Thunderstruck Pictures</span>
+    <span class="small">© 2026 Thunderstruck Pictures LLC · Austin, TX · Stories that hit like lightning</span>
+  </div>
+</footer>
+
+
+
+
+<!-- Reflect the shared quote cart count in the nav (cart lives on the rental pages). -->
+<script>
+(function(){
+  try{
+    var r=localStorage.getItem('ts-cart'); var n=0;
+    if(r){ var c=(JSON.parse(r)||{}).cart||{}; n=Object.values(c).reduce(function(a,b){return a+(b||0);},0); }
+    var el=document.getElementById('cartCount');
+    if(el){ el.textContent=n; el.classList.toggle('zero', n===0); }
+  }catch(e){}
+})();
+</script>
+
+</body>
+</html>
