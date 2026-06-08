@@ -21,8 +21,8 @@
   .pagehead p{ color:var(--muted); max-width:70ch; margin-top:1rem; }
   .pagehead p strong{ color:var(--text); font-weight:500; }
 
-  .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; padding:clamp(2.5rem,5vw,3.5rem) 0 clamp(3rem,6vw,5rem); }
-  @media (max-width:920px){ .grid{ grid-template-columns:1fr; max-width:520px; } }
+  .grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:1.4rem; padding:clamp(2.5rem,5vw,3.5rem) 0 clamp(3rem,6vw,5rem); max-width:880px; margin:0 auto; }
+  @media (max-width:760px){ .grid{ grid-template-columns:1fr; max-width:520px; } }
 
   .opt{ display:flex; flex-direction:column; background:var(--panel); border:1px solid var(--line); border-radius:10px; overflow:hidden;
     text-decoration:none; color:inherit; transition:border-color .2s, transform .2s, box-shadow .2s; }
@@ -71,7 +71,7 @@
   <div class="wrap">
     <p class="eyebrow">Thunderstruck · Home page directions</p>
     <h1>Choose the <span class="y">hero.</span></h1>
-    <p>Three ways the home page can open. <strong>Two are scroll experiences</strong> — open them and scroll the hero to feel the motion. <strong>The third just plays</strong> on landing, no scroll required. They all lead to the same site underneath; only the opening sequence changes. Each opens in a new tab.</p>
+    <p>Two ways the home page can open. <strong>01 is a scroll experience</strong> — open it and scroll the hero to feel the motion. <strong>02 just plays</strong> on landing, no scroll required. Both lead to the same site underneath; only the opening sequence changes. Each opens in a new tab.</p>
   </div>
 </header>
 
@@ -94,30 +94,14 @@
       </div>
     </a>
 
-    <!-- 02 — Cinematic Film (scroll-scrubbed) -->
-    <a class="opt" href="home-reveal-3.html" target="_blank" rel="noopener">
-      <div class="preview">
-        <div class="bg" style="background-image:url('assets/hero-frames/frame-105.webp')"></div>
-        <div class="scrim"></div>
-        <div class="word">Thunderstruck</div>
-        <span class="tag">Scroll</span>
-        <span class="num">02</span>
-      </div>
-      <div class="body">
-        <div class="name">Cinematic Film</div>
-        <p class="desc">You land on the truck in the storm. As you scroll, a full cinematic shot plays — the lightning rolls through, the sky breaks open, and it clears to a sunlit rainbow over the rig, where your calls-to-action resolve.</p>
-        <span class="view">View this version ↗</span>
-      </div>
-    </a>
-
-    <!-- 03 — Video Hero (autoplay, no scroll) -->
+    <!-- 02 — Video Hero (autoplay, no scroll) -->
     <a class="opt" href="home-video.html" target="_blank" rel="noopener">
       <div class="preview">
         <div class="bg" style="background-image:url('media/hero-truck-poster.webp')"></div>
         <div class="scrim"></div>
         <div class="word">Thunderstruck</div>
         <span class="tag">No scroll</span>
-        <span class="num">03</span>
+        <span class="num">02</span>
       </div>
       <div class="body">
         <div class="name">Video Hero</div>
@@ -131,7 +115,7 @@
 
 <footer>
   <div class="wrap">
-    Open each option, watch the hero (scroll on 01 and 02), then tell us the number you prefer — we'll lock it in as the home page.
+    Open both options, watch the hero (scroll on 01), then tell us the number you prefer — we'll lock it in as the home page.
   </div>
 </footer>
 
