@@ -289,6 +289,18 @@
   .foot-in .brand{ font-style:italic; }
   h2.head .y, .eyebrow { color:#9fc4ee; }
   .hero-content h1{ font-style:italic; }
+
+  /* ---------- SCROLL REVEALS (subtle fade + slide as sections enter view) ---------- */
+  .reveal { opacity: 0; transform: translateY(22px);
+    transition: opacity .7s cubic-bezier(.22,.85,.25,1), transform .7s cubic-bezier(.22,.85,.25,1);
+    transition-delay: var(--reveal-d, 0s); will-change: opacity, transform; }
+  .reveal.from-left  { transform: translate(-32px, 0); }
+  .reveal.from-right { transform: translate(32px, 0); }
+  .reveal.scale-in   { transform: scale(.97); }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal.from-left, .reveal.from-right, .reveal.scale-in { opacity:1; transform:none; transition:none; }
+  }
 </style>
 </head>
 <body>
@@ -357,9 +369,9 @@
 <!-- INTRO -->
 <section class="block intro" id="top">
   <div class="wrap">
-    <div class="bolt-rule"><svg viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg></div>
-    <h2 class="head" style="margin-top:1.6rem;">Big-city kit. <span class="y">Small-town hustle.</span></h2>
-    <p class="lead" style="margin:0 auto;">Austin's grip &amp; lighting truck — owned and run by working filmmakers, not a warehouse counter. The same gear you'd find in LA or New York, delivered on a 3-ton truck and operated by people who actually shoot. We go up to eleven.</p>
+    <div class="bolt-rule reveal scale-in"><svg viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg></div>
+    <h2 class="head reveal" style="margin-top:1.6rem; --reveal-d:.08s;">Big-city kit. <span class="y">Small-town hustle.</span></h2>
+    <p class="lead reveal" style="margin:0 auto; --reveal-d:.16s;">Austin's grip &amp; lighting truck — owned and run by working filmmakers, not a warehouse counter. The same gear you'd find in LA or New York, delivered on a 3-ton truck and operated by people who actually shoot. We go up to eleven.</p>
   </div>
 </section>
 
@@ -367,15 +379,15 @@
 <section class="block" id="truck">
   <div class="wrap">
     <div class="truck-grid">
-      <div class="truck-photo" style="background-image:url('media/truck-profile.webp');"></div>
-      <div>
+      <div class="truck-photo reveal from-left" style="background-image:url('media/truck-profile.webp');"></div>
+      <div class="reveal from-right" style="--reveal-d:.1s;">
         <p class="eyebrow">The 3-Ton Grip Truck</p>
         <h2 class="head">The rig that <span class="y">runs the show.</span></h2>
         <p class="body">Capacity and mobility in one rig — modular shelving, all-terrain carts, a camera workstation, 15 outlets, and shore power.</p>
         <ul class="features">
-          <li><span class="k">Lights in &amp; out</span><span class="v">LED inside and out — load in at dawn or wrap past midnight.</span></li>
-          <li><span class="k">Jockey boxes</span><span class="v">Lit under-truck boxes for sandbags, stingers, and grip.</span></li>
-          <li><span class="k">7' liftgate</span><span class="v">7-foot gate rated over 3,000 lbs — heavy carts on and off, easy.</span></li>
+          <li class="reveal" style="--reveal-d:.32s;"><span class="k">Lights in &amp; out</span><span class="v">LED inside and out — load in at dawn or wrap past midnight.</span></li>
+          <li class="reveal" style="--reveal-d:.42s;"><span class="k">Jockey boxes</span><span class="v">Lit under-truck boxes for sandbags, stingers, and grip.</span></li>
+          <li class="reveal" style="--reveal-d:.52s;"><span class="k">7' liftgate</span><span class="v">7-foot gate rated over 3,000 lbs — heavy carts on and off, easy.</span></li>
         </ul>
       </div>
     </div>
@@ -386,26 +398,26 @@
 <section class="block inv" id="inventory">
   <div class="wrap">
     <div class="inv-layout">
-      <div class="inv-intro">
+      <div class="inv-intro reveal from-left">
         <p class="eyebrow">The Kit</p>
         <h2 class="head">The inventory <span class="y">runs deep.</span></h2>
         <p class="body">RED Komodo. DZOFilm anamorphics. Nanlux 2400B. Aputure everything. Twenty-plus categories of camera, lighting, grip, and sound — browse by department, build your package.</p>
         <a href="rentals.html" class="btn ghost" style="align-self:flex-start; margin-top:1.8rem;">Browse the full kit →</a>
       </div>
       <div class="inv-acc">
-        <a class="acol" href="camera.html" style="--img:url('media/products/red-komodo.webp')" aria-label="Camera rentals">
+        <a class="acol reveal" href="camera.html" style="--img:url('media/products/red-komodo.webp'); --reveal-d:.05s;" aria-label="Camera rentals">
           <span class="acol-img"></span><span class="acol-label">Camera</span>
         </a>
-        <a class="acol" href="camera.html" style="--img:url('media/products/laowa-ranger.webp')" aria-label="Lens rentals">
+        <a class="acol reveal" href="camera.html" style="--img:url('media/products/laowa-ranger.webp'); --reveal-d:.13s;" aria-label="Lens rentals">
           <span class="acol-img"></span><span class="acol-label">Lenses</span>
         </a>
-        <a class="acol" href="rentals.html" style="--img:url('media/products/nanlux-2400b-cut.webp')" aria-label="Lighting rentals">
+        <a class="acol reveal" href="rentals.html" style="--img:url('media/products/nanlux-2400b-cut.webp'); --reveal-d:.21s;" aria-label="Lighting rentals">
           <span class="acol-img"></span><span class="acol-label">Lighting</span>
         </a>
-        <a class="acol soon" href="grip-truck.html" aria-label="Grip rentals">
+        <a class="acol soon reveal" href="grip-truck.html" style="--reveal-d:.29s;" aria-label="Grip rentals">
           <span class="acol-img"><svg class="acol-bolt" viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg><span class="acol-soon">photo soon</span></span><span class="acol-label">Grip</span>
         </a>
-        <a class="acol soon" href="sound.html" aria-label="Sound rentals">
+        <a class="acol soon reveal" href="sound.html" style="--reveal-d:.37s;" aria-label="Sound rentals">
           <span class="acol-img"><svg class="acol-bolt" viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg><span class="acol-soon">photo soon</span></span><span class="acol-label">Sound</span>
         </a>
       </div>
@@ -417,20 +429,20 @@
 <!-- WHY -->
 <section class="block" id="why">
   <div class="wrap">
-    <p class="eyebrow" style="text-align:center;">Why Thunderstruck</p>
-    <h2 class="head" style="text-align:center; max-width:18ch; margin:0 auto 3rem;">Filmmakers first. <span class="y">Rental house second.</span></h2>
+    <p class="eyebrow reveal" style="text-align:center;">Why Thunderstruck</p>
+    <h2 class="head reveal" style="text-align:center; max-width:18ch; margin:0 auto 3rem; --reveal-d:.08s;">Filmmakers first. <span class="y">Rental house second.</span></h2>
     <div class="why-grid">
-      <div class="col">
+      <div class="col reveal" style="--reveal-d:.16s;">
         <div class="num">/ 01</div>
         <h3>Large Inventory</h3>
         <p>The same selection you'd find in LA or New York — our inventory runs deep, and what we don't stock, we source from the biggest houses in the country. No dead ends.</p>
       </div>
-      <div class="col">
+      <div class="col reveal" style="--reveal-d:.28s;">
         <div class="num">/ 02</div>
         <h3>New Technology</h3>
         <p>When the newest gear drops, we go get it. Our staff trains constantly, so what arrives on your set works like it should. No lemons.</p>
       </div>
-      <div class="col">
+      <div class="col reveal" style="--reveal-d:.40s;">
         <div class="num">/ 03</div>
         <h3>Friendly Support</h3>
         <p>We're filmmakers, and we've been at this a long time. Need crew recommendations, a demo, or a production problem solved? Give us a call.</p>
@@ -442,11 +454,11 @@
 <!-- BOOK -->
 <section class="block book" id="book">
   <div class="wrap">
-    <p class="eyebrow" style="text-align:center;">Book / Hire</p>
-    <h2 class="head">There's a storm coming. <span class="y">Let's make something.</span></h2>
-    <p class="sub">Tell us your dates and what you need — gear, the truck, or the whole package. We'll get back fast.</p>
-    <a href="rentals.html" class="btn" style="font-size:0.95rem; padding:0.95rem 2rem;">Check Availability</a>
-    <div class="meta-row">
+    <p class="eyebrow reveal" style="text-align:center;">Book / Hire</p>
+    <h2 class="head reveal" style="--reveal-d:.08s;">There's a storm coming. <span class="y">Let's make something.</span></h2>
+    <p class="sub reveal" style="--reveal-d:.18s;">Tell us your dates and what you need — gear, the truck, or the whole package. We'll get back fast.</p>
+    <a href="rentals.html" class="btn reveal" style="font-size:0.95rem; padding:0.95rem 2rem; --reveal-d:.28s;">Check Availability</a>
+    <div class="meta-row reveal" style="--reveal-d:.38s;">
       <span>Austin, TX</span>
       <a href="https://www.instagram.com/nightowlmartin/">Instagram</a>
       <a href="https://www.facebook.com/MartinShapiro/">Facebook</a>
@@ -535,6 +547,23 @@
     var el=document.getElementById('cartCount');
     if(el){ el.textContent=n; el.classList.toggle('zero', n===0); }
   }catch(e){}
+})();
+</script>
+
+<!-- Scroll-driven reveals: fade + slide as sections enter the viewport. -->
+<script>
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    els.forEach(function(el){ el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.18, rootMargin: '0px 0px -6% 0px' });
+  els.forEach(function(el){ io.observe(el); });
 })();
 </script>
 
