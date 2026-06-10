@@ -382,10 +382,10 @@ function renderCatalog(){
 function cardHtml(i){
   const inCart = cart[i.id] > 0;
   return `<article class="card ${inCart?'in-cart':''}" data-id="${i.id}">
-    <a href="product.html?id=${i.id}" class="image ${i.photo?'':'image-soon'}" aria-label="View ${i.name}"><span class="badge">${i.tag}</span>${i.photo?`<img src="media/products/${i.id}.webp" alt="${i.name}" loading="lazy">`:`<svg viewBox="0 0 24 32" fill="currentColor" class="soon-ico"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg>`}</a>
+    <div class="image ${i.photo?'':'image-soon'}"><span class="badge">${i.tag}</span>${i.photo?`<img src="media/products/${i.id}.webp" alt="${i.name}" loading="lazy">`:`<svg viewBox="0 0 24 32" fill="currentColor" class="soon-ico"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg>`}</div>
     <div class="body">
       <div class="brand-label">${i.brand}</div>
-      <div class="name"><a href="product.html?id=${i.id}">${i.name}</a></div>
+      <div class="name">${i.name}</div>
       <div class="spec">${i.spec}</div>
       <div class="pricing"><span class="day">$${i.day}</span><span class="unit">/ day</span></div>
       ${inCart
