@@ -88,6 +88,6 @@ const INVENTORY = [
   { dept:'sound', id:'dpa4061', cat:'mics', brand:'DPA', tag:'Lavalier', name:'DPA 4061 Lav', spec:'Low-sensitivity omni lavalier for louder sources.', day:30, photo:true },
   { dept:'sound', id:'lectro-smdwb', cat:'wireless', brand:'Lectrosonics', tag:'Wireless · Recorder', name:'Lectrosonics SMDWB', spec:'Wireless transmitter/recorder (B1: 537–614 MHz).', day:65, photo:true },
   { dept:'sound', id:'mm1', cat:'wireless', brand:'Sound Devices', tag:'Boom Preamp', name:'Sound Devices MM-1', spec:'Single-channel mic preamp for the boom operator.', day:35, photo:true },
-  { dept:'sound', id:'tentacle-track-e', cat:'wireless', brand:'Tentacle', tag:'Timecode', name:'Tentacle TRACK E', spec:'Pocket timecode audio recorder for camera/sound sync.', day:20, photo:true }
+  { dept:'sound', id:'tentacle-track-e', cat:'wireless', brand:'Tentacle', tag:'Timecode', name:'Tentacle TRACK E', spec:'Pocket timecode audio recorder for camera/sound sync.', day:20, photo:true },
   { dept:'sound', id:'ath-m50x', cat:'recording', brand:'Audio-Technica', tag:'Headphones', name:'Audio-Technica ATH-M50x Headphones', spec:'Industry-standard closed-back monitoring headphones for sound mixers and boom ops.', day:12, photo:true },
 ];
