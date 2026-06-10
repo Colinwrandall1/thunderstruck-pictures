@@ -83,6 +83,62 @@
   .tabsC .stage .caption a{display:inline-block;margin-top:1rem;padding:0.55rem 1.1rem;font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:0.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,0.4);border-radius:4px;transition:border-color .15s,color .15s;}
   .tabsC .stage .caption a:hover{border-color:var(--yellow);color:var(--yellow);}
 
+  /* ============ OPTION D: REFINED ACCORDION (same shape as live, thin pillars now show composite) ============ */
+  .accD{--h:clamp(240px,28vw,320px);--exp:calc(var(--h) * 1.6);--thin:clamp(72px,8vw,100px);--gap:10px;
+    display:flex;gap:var(--gap);align-items:stretch;height:var(--h);
+    flex:0 0 auto;}
+  .accD .pill{position:relative;flex:0 0 var(--thin);height:var(--h);overflow:hidden;
+    border:1px solid var(--line);border-radius:6px;background:#04060c;text-decoration:none;cursor:pointer;
+    transition:flex-basis .55s cubic-bezier(.22,.85,.25,1),border-color .3s;}
+  .accD .pill .img{position:absolute;inset:0;background:var(--img) center/cover no-repeat;
+    transition:opacity .4s ease, filter .4s ease;opacity:.7;filter:saturate(.8) brightness(.85);}
+  .accD .pill.full .img{opacity:1;filter:none;background:var(--img) center/cover no-repeat #04060c;}
+  .accD .pill:hover, .accD .pill:focus-visible{flex-basis:var(--exp);border-color:var(--yellow);outline:none;}
+  .accD .pill:hover .img, .accD .pill:focus-visible .img{opacity:1;filter:none;}
+  /* Dark gradient overlay so the label is legible against any image */
+  .accD .pill::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(4,6,12,0) 30%,rgba(4,6,12,.78) 90%);pointer-events:none;}
+  .accD .pill .lbl{position:absolute;left:0;right:0;bottom:0;padding:.9rem 1rem;z-index:2;
+    font-family:'Saira Condensed',sans-serif;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text);}
+  .accD .pill .lbl small{display:block;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.18em;color:var(--yellow);margin-bottom:.25rem;font-weight:500;opacity:0;transition:opacity .35s;}
+  .accD .pill:hover .lbl small, .accD .pill.full .lbl small{opacity:1;}
+  .accD .pill .lbl .name{font-size:1.05rem;}
+  /* All starts expanded, collapses when another is hovered (modern :has) */
+  .accD .pill.full{flex-basis:var(--exp);border-color:var(--line-bright);}
+  .accD:has(.pill:not(.full):hover) .pill.full,
+  .accD:has(.pill:not(.full):focus-visible) .pill.full{flex-basis:var(--thin);border-color:var(--line);}
+  .accD:has(.pill:not(.full):hover) .pill.full .img,
+  .accD:has(.pill:not(.full):focus-visible) .pill.full .img{opacity:.65;}
+  @media (max-width:880px){
+    .accD{flex-wrap:wrap;height:auto;}
+    .accD .pill{flex:0 0 calc(50% - 5px);height:160px;}
+    .accD .pill .img{opacity:1;filter:none;}
+    .accD .pill .lbl small{opacity:1;}
+  }
+
+  /* ============ OPTION E: HERO + STRIP (vertical stack — All on top, 5 across below) ============ */
+  .heroE{display:flex;flex-direction:column;gap:1rem;}
+  .heroE .featured{position:relative;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#04060c;aspect-ratio:3/1;}
+  .heroE .featured:hover{border-color:var(--yellow);}
+  .heroE .featured .img{position:absolute;inset:0;background:var(--img) center/cover no-repeat;}
+  .heroE .featured::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(90deg,rgba(4,6,12,.78) 0%,rgba(4,6,12,.3) 40%,rgba(4,6,12,0) 65%);pointer-events:none;}
+  .heroE .featured .meta{position:absolute;left:0;top:0;bottom:0;padding:clamp(1.5rem,3vw,2.4rem);z-index:2;display:flex;flex-direction:column;justify-content:center;max-width:50%;}
+  .heroE .featured .meta small{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--yellow);margin-bottom:.6rem;}
+  .heroE .featured .meta h3{font-family:'Saira Condensed',sans-serif;font-weight:700;font-style:italic;font-size:clamp(1.8rem,3vw,2.6rem);text-transform:uppercase;letter-spacing:.01em;line-height:1;margin-bottom:.8rem;}
+  .heroE .featured .meta p{color:#cdd6df;font-size:.95rem;max-width:34ch;}
+  .heroE .row{display:grid;grid-template-columns:repeat(5,1fr);gap:.6rem;}
+  .heroE .row .cell{position:relative;aspect-ratio:3/2;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#e9e6df;transition:border-color .2s,transform .2s;}
+  .heroE .row .cell:hover{border-color:var(--yellow);transform:translateY(-2px);}
+  .heroE .row .cell .img{position:absolute;inset:0;background:var(--img) center/cover no-repeat;}
+  .heroE .row .cell::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(4,6,12,0) 55%,rgba(4,6,12,.85));pointer-events:none;}
+  .heroE .row .cell .lbl{position:absolute;left:0;right:0;bottom:0;padding:.65rem .85rem;z-index:2;
+    font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:.92rem;letter-spacing:.14em;text-transform:uppercase;}
+  @media (max-width:880px){
+    .heroE .row{grid-template-columns:repeat(2,1fr);}
+  }
+
 </style>
 </head>
 <body>
@@ -183,8 +239,61 @@
   </div>
 </section>
 
+<!-- ============ OPTION D — REFINED ACCORDION ============ -->
+<section class="variant">
+  <div class="wrap">
+    <div class="variant-label"><span class="badge">Option D</span><h2>Refined accordion (current shape, less empty)</h2></div>
+    <p class="variant-note">Keeps the 1-wide + 5-thin shape you already have. Fixes the "blank dark pillars" feel: the 5 thin pillars now show their composite as a dimmed background, so they read as real cards even when collapsed. Thin width bumped up so labels breathe. Hover any pillar → image goes full-color and pillar expands.</p>
+
+    <p class="intro-eyebrow">The Kit</p>
+    <h2 class="intro-head">The inventory <span class="y">runs deep.</span></h2>
+    <p class="intro-body">RED Komodo. DZOFilm anamorphics. Nanlux 2400B. Aputure everything. Twenty-plus categories of camera, lighting, grip, and sound — browse by department, build your package.</p>
+    <a href="rentals.html" class="browse-btn" style="margin-bottom:2rem;">Browse the full kit →</a>
+
+    <div class="accD">
+      <a class="pill full" href="all.html" style="--img:url(media/products/all-inventory.webp)"><span class="img"></span><span class="lbl"><small>Everything</small><span class="name">All</span></span></a>
+      <a class="pill" href="camera.html" style="--img:url(media/products/cat-camera.webp)"><span class="img"></span><span class="lbl"><small>Bodies · support</small><span class="name">Camera</span></span></a>
+      <a class="pill" href="camera.html" style="--img:url(media/products/cat-lenses.webp)"><span class="img"></span><span class="lbl"><small>Cine glass</small><span class="name">Lenses</span></span></a>
+      <a class="pill" href="rentals.html" style="--img:url(media/products/cat-lighting.webp)"><span class="img"></span><span class="lbl"><small>LED · HMI · tungsten</small><span class="name">Lighting</span></span></a>
+      <a class="pill" href="grip-truck.html" style="--img:url(media/products/cat-grip.webp)"><span class="img"></span><span class="lbl"><small>Stands · flags · power</small><span class="name">Grip</span></span></a>
+      <a class="pill" href="sound.html" style="--img:url(media/products/cat-sound.webp)"><span class="img"></span><span class="lbl"><small>Recorders · mics · wireless</small><span class="name">Sound</span></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OPTION E — HERO + STRIP ============ -->
+<section class="variant">
+  <div class="wrap">
+    <div class="variant-label"><span class="badge">Option E</span><h2>Hero strip + 5 cards below</h2></div>
+    <p class="variant-note">Take the accordion idea and stack it vertically. "All" gets a wide 3:1 hero on top with overlay copy. The five departments sit in a horizontal row of equal cards underneath. Keeps the asymmetry (All is bigger) but solves the visual imbalance by giving All its own line.</p>
+
+    <p class="intro-eyebrow">The Kit</p>
+    <h2 class="intro-head">The inventory <span class="y">runs deep.</span></h2>
+    <p class="intro-body">RED Komodo. DZOFilm anamorphics. Nanlux 2400B. Aputure everything. Twenty-plus categories of camera, lighting, grip, and sound — browse by department, build your package.</p>
+    <a href="rentals.html" class="browse-btn" style="margin-bottom:2rem;">Browse the full kit →</a>
+
+    <div class="heroE">
+      <a class="featured" href="all.html" style="--img:url(media/products/all-inventory.webp)">
+        <span class="img"></span>
+        <div class="meta">
+          <small>The whole kit</small>
+          <h3>All inventory</h3>
+          <p>Camera, lighting, grip, sound — all in one quote. Twenty-plus departments delivered on a 3-ton truck.</p>
+        </div>
+      </a>
+      <div class="row">
+        <a class="cell" href="camera.html" style="--img:url(media/products/cat-camera.webp)"><span class="img"></span><span class="lbl">Camera</span></a>
+        <a class="cell" href="camera.html" style="--img:url(media/products/cat-lenses.webp)"><span class="img"></span><span class="lbl">Lenses</span></a>
+        <a class="cell" href="rentals.html" style="--img:url(media/products/cat-lighting.webp)"><span class="img"></span><span class="lbl">Lighting</span></a>
+        <a class="cell" href="grip-truck.html" style="--img:url(media/products/cat-grip.webp)"><span class="img"></span><span class="lbl">Grip</span></a>
+        <a class="cell" href="sound.html" style="--img:url(media/products/cat-sound.webp)"><span class="img"></span><span class="lbl">Sound</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer style="padding:3rem 1.2rem 5rem;text-align:center;color:var(--dim);font-family:'JetBrains Mono',monospace;font-size:0.78rem;letter-spacing:0.08em;">
-  Tell me <b style="color:var(--text)">A</b>, <b style="color:var(--text)">B</b>, or <b style="color:var(--text)">C</b> and I'll wire it into the live home.
+  Tell me <b style="color:var(--text)">A</b>, <b style="color:var(--text)">B</b>, <b style="color:var(--text)">C</b>, <b style="color:var(--text)">D</b>, or <b style="color:var(--text)">E</b> and I'll wire it into the live home.
 </footer>
 
 <script>
