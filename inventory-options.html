@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thunderstruck — Inventory Section Options</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--bg:#04060c;--panel:#0e141c;--panel-2:#121a24;--line:#1f2a38;--line-bright:#33485f;--text:#f4f8ff;--muted:#9fb4ce;--dim:#6b7681;--yellow:#9fc4ee;}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;line-height:1.55;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1240px;margin:0 auto;padding:clamp(2rem,4vw,3rem) clamp(1.2rem,4vw,3rem);}
+
+  /* page header */
+  .page-head{text-align:center;padding:clamp(3rem,6vw,5rem) 1.2rem 1.5rem;border-bottom:1px solid var(--line);}
+  .page-head h1{font-family:'Saira Condensed',sans-serif;font-weight:700;font-style:italic;font-size:clamp(2rem,4vw,3rem);text-transform:uppercase;letter-spacing:0.02em;}
+  .page-head h1 .y{color:var(--yellow);}
+  .page-head p{color:var(--muted);max-width:60ch;margin:1rem auto 0;}
+
+  /* variant divider */
+  .variant{padding:clamp(2.5rem,5vw,4rem) 0;border-bottom:1px dashed var(--line);}
+  .variant-label{display:flex;align-items:center;gap:1rem;margin-bottom:1.6rem;}
+  .variant-label .badge{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;color:#0a0f16;background:var(--yellow);padding:0.45rem 0.85rem;border-radius:999px;}
+  .variant-label h2{font-family:'Saira Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:1.5rem;letter-spacing:0.04em;}
+  .variant-note{color:var(--muted);font-size:0.92rem;margin-bottom:2rem;max-width:64ch;}
+
+  /* shared intro */
+  .intro-eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--yellow);margin-bottom:1rem;}
+  .intro-head{font-family:'Saira Condensed',sans-serif;font-weight:700;font-style:italic;font-size:clamp(2rem,3.5vw,2.8rem);text-transform:uppercase;letter-spacing:0.01em;line-height:1;margin-bottom:1rem;}
+  .intro-head .y{color:var(--yellow);}
+  .intro-body{color:var(--muted);font-size:1rem;margin-bottom:1.4rem;max-width:62ch;}
+  .browse-btn{display:inline-block;padding:0.65rem 1.3rem;font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:0.85rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text);border:1px solid var(--line-bright);border-radius:4px;transition:border-color .15s,color .15s;}
+  .browse-btn:hover{border-color:var(--yellow);color:var(--yellow);}
+
+  /* ============ OPTION A: GRID — 3x2 equal cards ============ */
+  .gridA{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+  .gridA .card{position:relative;aspect-ratio:3/2;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#e9e6df;transition:border-color .2s,transform .2s;}
+  .gridA .card:hover{border-color:var(--yellow);transform:translateY(-3px);}
+  .gridA .card .img{position:absolute;inset:0;background:var(--img) center/cover no-repeat;}
+  .gridA .card.full .img{background:var(--img) center/cover no-repeat #04060c;}
+  .gridA .card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(4,6,12,0.85));pointer-events:none;}
+  .gridA .card .lbl{position:absolute;left:0;right:0;bottom:0;padding:0.9rem 1.1rem;font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--text);z-index:2;}
+  .gridA .card .lbl small{display:block;font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.16em;color:var(--yellow);margin-bottom:0.25rem;font-weight:500;}
+  @media (max-width:760px){.gridA{grid-template-columns:repeat(2,1fr);}}
+
+  /* ============ OPTION B: FEATURED HERO + GRID ============ */
+  .heroB{display:grid;grid-template-columns:1.4fr 1fr;gap:1rem;}
+  .heroB .featured{position:relative;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#04060c;aspect-ratio:1.4/1;}
+  .heroB .featured:hover{border-color:var(--yellow);}
+  .heroB .featured .img{position:absolute;inset:0;background:var(--img) center/cover no-repeat;}
+  .heroB .featured::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,6,12,0.25) 0%,rgba(4,6,12,0) 30%,rgba(4,6,12,0.5) 70%,rgba(4,6,12,0.9));pointer-events:none;}
+  .heroB .featured .meta{position:absolute;left:0;right:0;bottom:0;padding:1.5rem;z-index:2;}
+  .heroB .featured .meta small{font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--yellow);display:block;margin-bottom:0.4rem;}
+  .heroB .featured .meta h3{font-family:'Saira Condensed',sans-serif;font-weight:700;font-style:italic;font-size:2rem;text-transform:uppercase;letter-spacing:0.01em;line-height:1;}
+  .heroB .featured .meta p{color:var(--muted);font-size:0.9rem;margin-top:0.6rem;max-width:38ch;}
+  .heroB .grid{display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;}
+  .heroB .grid .cell{position:relative;aspect-ratio:1/1;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#e9e6df;transition:border-color .2s,transform .2s;}
+  .heroB .grid .cell:hover{border-color:var(--yellow);transform:translateY(-2px);}
+  .heroB .grid .cell .img{position:absolute;inset:0;background:var(--img) center/cover no-repeat;}
+  .heroB .grid .cell::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(4,6,12,0.85));pointer-events:none;}
+  .heroB .grid .cell .lbl{position:absolute;left:0;right:0;bottom:0;padding:0.7rem 0.9rem;font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:0.95rem;letter-spacing:0.14em;text-transform:uppercase;z-index:2;}
+  @media (max-width:760px){.heroB{grid-template-columns:1fr;}}
+
+  /* ============ OPTION C: TABBED SHOWCASE ============ */
+  .tabsC{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--panel);}
+  .tabsC .tabbar{display:flex;border-bottom:1px solid var(--line);background:rgba(6,8,11,0.6);overflow-x:auto;}
+  .tabsC .tabbar button{flex:1;background:transparent;border:none;color:var(--muted);font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:0.92rem;letter-spacing:0.12em;text-transform:uppercase;padding:1.05rem 0.6rem;cursor:pointer;border-bottom:2px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap;}
+  .tabsC .tabbar button:hover{color:var(--text);}
+  .tabsC .tabbar button.active{color:var(--yellow);border-bottom-color:var(--yellow);}
+  .tabsC .stage{position:relative;aspect-ratio:2/1;background:#04060c;}
+  .tabsC .stage .img{position:absolute;inset:0;background:var(--img) center/cover no-repeat;opacity:0;transition:opacity .35s ease;}
+  .tabsC .stage .img.active{opacity:1;}
+  .tabsC .stage::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,6,12,0.15) 0%,rgba(4,6,12,0) 30%,rgba(4,6,12,0.4) 70%,rgba(4,6,12,0.92));pointer-events:none;}
+  .tabsC .stage .caption{position:absolute;left:0;right:0;bottom:0;padding:1.6rem clamp(1.2rem,3vw,2rem);z-index:2;display:none;}
+  .tabsC .stage .caption.active{display:block;}
+  .tabsC .stage .caption small{font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--yellow);display:block;margin-bottom:0.4rem;}
+  .tabsC .stage .caption h3{font-family:'Saira Condensed',sans-serif;font-weight:700;font-style:italic;font-size:clamp(1.6rem,2.6vw,2.2rem);text-transform:uppercase;letter-spacing:0.01em;line-height:1;}
+  .tabsC .stage .caption p{color:#cdd6df;font-size:0.95rem;margin-top:0.6rem;max-width:54ch;}
+  .tabsC .stage .caption a{display:inline-block;margin-top:1rem;padding:0.55rem 1.1rem;font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:0.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,0.4);border-radius:4px;transition:border-color .15s,color .15s;}
+  .tabsC .stage .caption a:hover{border-color:var(--yellow);color:var(--yellow);}
+
+</style>
+</head>
+<body>
+
+<header class="page-head">
+  <h1>Inventory section — <span class="y">three directions.</span></h1>
+  <p>Same data, three layouts. Each fixes the "one big photo, five thin pillars" asymmetry you flagged. Browse and tell me the letter.</p>
+</header>
+
+<!-- ============ OPTION A ============ -->
+<section class="variant">
+  <div class="wrap">
+    <div class="variant-label"><span class="badge">Option A</span><h2>Grid of 6 equal cards (3 × 2)</h2></div>
+    <p class="variant-note">Predictable, balanced, no expand-on-hover. Every card is the same size. "All" is the first card; visitors scan the row, click in. Cleanest, most CMS-like. Works equally well on mobile as a 2-col stack.</p>
+
+    <p class="intro-eyebrow">The Kit</p>
+    <h2 class="intro-head">The inventory <span class="y">runs deep.</span></h2>
+    <p class="intro-body">RED Komodo. DZOFilm anamorphics. Nanlux 2400B. Aputure everything. Twenty-plus categories of camera, lighting, grip, and sound — browse by department, build your package.</p>
+    <a href="rentals.html" class="browse-btn" style="margin-bottom:2rem;">Browse the full kit →</a>
+
+    <div class="gridA">
+      <a class="card full" href="all.html" style="--img:url(media/products/all-inventory.webp)"><span class="img"></span><span class="lbl"><small>Everything</small>All inventory</span></a>
+      <a class="card" href="camera.html" style="--img:url(media/products/cat-camera.webp)"><span class="img"></span><span class="lbl"><small>Bodies · support</small>Camera</span></a>
+      <a class="card" href="camera.html" style="--img:url(media/products/cat-lenses.webp)"><span class="img"></span><span class="lbl"><small>Cine glass</small>Lenses</span></a>
+      <a class="card" href="rentals.html" style="--img:url(media/products/cat-lighting.webp)"><span class="img"></span><span class="lbl"><small>LED · HMI · tungsten</small>Lighting</span></a>
+      <a class="card" href="grip-truck.html" style="--img:url(media/products/cat-grip.webp)"><span class="img"></span><span class="lbl"><small>Stands · flags · power</small>Grip</span></a>
+      <a class="card" href="sound.html" style="--img:url(media/products/cat-sound.webp)"><span class="img"></span><span class="lbl"><small>Recorders · mics · wireless</small>Sound</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OPTION B ============ -->
+<section class="variant">
+  <div class="wrap">
+    <div class="variant-label"><span class="badge">Option B</span><h2>Featured hero + 5-card grid</h2></div>
+    <p class="variant-note">"All inventory" gets a big editorial-style hero on the left with overlay copy ("Twenty-plus departments. One quote."). Five smaller dept cards on the right in a 2-col grid. Magazine layout — clear hierarchy: "All" is the headline, the others are supporting acts.</p>
+
+    <p class="intro-eyebrow">The Kit</p>
+    <h2 class="intro-head">The inventory <span class="y">runs deep.</span></h2>
+    <p class="intro-body">RED Komodo. DZOFilm anamorphics. Nanlux 2400B. Aputure everything. Twenty-plus categories of camera, lighting, grip, and sound — browse by department, build your package.</p>
+    <a href="rentals.html" class="browse-btn" style="margin-bottom:2rem;">Browse the full kit →</a>
+
+    <div class="heroB">
+      <a class="featured" href="all.html" style="--img:url(media/products/all-inventory.webp)">
+        <span class="img"></span>
+        <div class="meta">
+          <small>The whole kit</small>
+          <h3>All inventory</h3>
+          <p>Camera, lighting, grip, sound — all in one quote. Twenty-plus departments delivered on a 3-ton truck.</p>
+        </div>
+      </a>
+      <div class="grid">
+        <a class="cell" href="camera.html" style="--img:url(media/products/cat-camera.webp)"><span class="img"></span><span class="lbl">Camera</span></a>
+        <a class="cell" href="camera.html" style="--img:url(media/products/cat-lenses.webp)"><span class="img"></span><span class="lbl">Lenses</span></a>
+        <a class="cell" href="rentals.html" style="--img:url(media/products/cat-lighting.webp)"><span class="img"></span><span class="lbl">Lighting</span></a>
+        <a class="cell" href="grip-truck.html" style="--img:url(media/products/cat-grip.webp)"><span class="img"></span><span class="lbl">Grip</span></a>
+        <a class="cell" href="sound.html" style="--img:url(media/products/cat-sound.webp)"><span class="img"></span><span class="lbl">Sound</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OPTION C ============ -->
+<section class="variant">
+  <div class="wrap">
+    <div class="variant-label"><span class="badge">Option C</span><h2>Tabbed showcase</h2></div>
+    <p class="variant-note">A single large 2:1 stage with tabs across the top. Click a tab → the stage swaps to that department's photo and a short caption with a CTA. One image at a time, big and cinematic. Feels like a featured-story carousel; most "wow" for a single section.</p>
+
+    <p class="intro-eyebrow">The Kit</p>
+    <h2 class="intro-head">The inventory <span class="y">runs deep.</span></h2>
+    <p class="intro-body">RED Komodo. DZOFilm anamorphics. Nanlux 2400B. Aputure everything. Twenty-plus categories of camera, lighting, grip, and sound — browse by department, build your package.</p>
+    <a href="rentals.html" class="browse-btn" style="margin-bottom:2rem;">Browse the full kit →</a>
+
+    <div class="tabsC" id="tabsC">
+      <div class="tabbar">
+        <button class="active" data-i="0">All</button>
+        <button data-i="1">Camera</button>
+        <button data-i="2">Lenses</button>
+        <button data-i="3">Lighting</button>
+        <button data-i="4">Grip</button>
+        <button data-i="5">Sound</button>
+      </div>
+      <div class="stage" id="stage">
+        <span class="img active" style="--img:url(media/products/all-inventory.webp)"></span>
+        <span class="img" style="--img:url(media/products/cat-camera.webp)"></span>
+        <span class="img" style="--img:url(media/products/cat-lenses.webp)"></span>
+        <span class="img" style="--img:url(media/products/cat-lighting.webp)"></span>
+        <span class="img" style="--img:url(media/products/cat-grip.webp)"></span>
+        <span class="img" style="--img:url(media/products/cat-sound.webp)"></span>
+        <div class="caption active"><small>The whole kit</small><h3>All inventory</h3><p>Camera, lighting, grip, sound — all in one quote. Twenty-plus departments delivered on a 3-ton truck.</p><a href="all.html">See everything →</a></div>
+        <div class="caption"><small>RED · DZOFilm · Tilta · DJI</small><h3>Camera</h3><p>RED Komodo 6K and our PAVO + VESPID lens sets. Sachtler support. Wireless follow focus.</p><a href="camera.html">Browse camera →</a></div>
+        <div class="caption"><small>Anamorphic · primes · zoom</small><h3>Lenses</h3><p>DZOFilm PAVO 2× anamorphics and VESPID full-frame primes. Laowa Ranger 17–50mm zoom.</p><a href="camera.html">Browse lenses →</a></div>
+        <div class="caption"><small>Nanlux · Aputure · Astera</small><h3>Lighting</h3><p>Nanlux 2400B. Aputure Storm 1200x. Astera Titan tubes. Forty-plus fixtures + control.</p><a href="rentals.html">Browse lighting →</a></div>
+        <div class="caption"><small>Stands · flags · frames · power</small><h3>Grip</h3><p>Twenty-plus grip items + the 3-ton grip truck package. C-stands, overheads, sandbags, distro.</p><a href="grip-truck.html">Browse grip →</a></div>
+        <div class="caption"><small>Sound Devices · Sennheiser · Lectro</small><h3>Sound</h3><p>SD 633 + ORCA bag. Sennheiser MKH 50. Sanken COS-11D lavs. Lectrosonics wireless.</p><a href="sound.html">Browse sound →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer style="padding:3rem 1.2rem 5rem;text-align:center;color:var(--dim);font-family:'JetBrains Mono',monospace;font-size:0.78rem;letter-spacing:0.08em;">
+  Tell me <b style="color:var(--text)">A</b>, <b style="color:var(--text)">B</b>, or <b style="color:var(--text)">C</b> and I'll wire it into the live home.
+</footer>
+
+<script>
+// Option C — tab switching
+(function(){
+  var t = document.getElementById('tabsC');
+  if (!t) return;
+  var btns = t.querySelectorAll('.tabbar button');
+  var imgs = t.querySelectorAll('.stage .img');
+  var caps = t.querySelectorAll('.stage .caption');
+  btns.forEach(function(b){
+    b.addEventListener('click', function(){
+      var i = +b.dataset.i;
+      btns.forEach(function(x,j){ x.classList.toggle('active', i===j); });
+      imgs.forEach(function(x,j){ x.classList.toggle('active', i===j); });
+      caps.forEach(function(x,j){ x.classList.toggle('active', i===j); });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
