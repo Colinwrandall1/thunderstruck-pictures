@@ -56,7 +56,12 @@ const INVENTORY = [
   { dept:'camera', id:'smallhd-1303', photo:true, cat:'monitor', brand:'SmallHD', tag:'Monitor · 13"', name:'SmallHD 1303 HDR 13"', spec:'Bright 13-inch HDR production monitor. Director-friendly.', day:85 },
   { dept:'camera', id:'smallhd-ultra5', cat:'monitor', brand:'SmallHD', tag:'Monitor · 5"', name:'SmallHD ULTRA 5', spec:'5-inch on-camera touchscreen. V-mount plate included.', day:55, photo:true },
   { dept:'camera', id:'portkeys-bm5', cat:'monitor', brand:'PortKeys', tag:'Monitor · Control', name:'PortKeys BM5WR 5.5"', spec:'5.5-inch monitor with camera control for RED Komodo.', day:45, photo:true },
-  { dept:'camera', id:'mavic-mini', cat:'support', brand:'DJI', tag:'Drone · 2.7K', name:'DJI Mavic Mini Drone', spec:'2.7K aerial camera. Fly More Combo — 3 batteries, charging hub, propeller cage, carrying case.', day:75, photo:true },
+  { dept:'camera', id:'mavic-mini', cat:'camera', brand:'DJI', tag:'Drone · 2.7K', name:'DJI Mavic Mini Drone', spec:'2.7K aerial camera. Fly More Combo — 3 batteries, charging hub, propeller cage, carrying case.', day:75, photo:true },
+  { dept:'camera', id:'metabones', cat:'lens', brand:'Metabones', tag:'RF→PL Adapter', name:'Metabones EF-RF to PL Mount Adapter', spec:'Mount PL cine lenses on RF-mount bodies. Sturdy locking PL ring with NATO-rail base for support.', day:35, photo:true },
+  { dept:'camera', id:'directors-cage', cat:'monitor', brand:'Thunderstruck', tag:'Director Cage', name:'Director\'s Monitor Cage', spec:'Director\'s monitoring rig — battery + monitor mount with leather handgrips and shoulder strap.', day:30, photo:true },
+  { dept:'camera', id:'yaeger-cart', cat:'support', brand:'YaegerPro', tag:'Camera Cart', name:'YaegerPro Cart with Mitchell Mast', spec:'Two-tier studio cart with Mitchell mount mast. Dovetail spinner, tripod mast, steadicam mast, V-mount battery box.', day:85, photo:true },
+  { dept:'camera', id:'tilta-float', cat:'support', brand:'Patriot/Tilta', tag:'Gimbal Support', name:'Tilta Float Gimbal Support System', spec:'Steadicam-style support arm + vest for gimbal work. Carbon fiber post, V-mount counterweight, monitor mount.', day:65, photo:true },
+  { dept:'camera', id:'dinkum-pod', cat:'support', brand:'Dinkum', tag:'Magic Arm', name:'Dinkum ActionPod PRO 10"', spec:'Heavy-duty 10" magic-arm clamp. Holds 5+ lb at any angle. 1/4"-20 and 3/8"-16 threads.', day:12, photo:true },
   { dept:'grip', id:'high-roller', cat:'stands', brand:'American Grip', tag:'Overhead · 18′', name:'High Roller Overhead 18′ (×2)', spec:'Rocky Mountain leg, 4.5" grip head, Junior receiver, 60 lb max. Pair.', day:70, photo:true },
   { dept:'grip', id:'kupo-roller', cat:'stands', brand:'Kupo', tag:'Overhead · 19′', name:'Kupo High Roller 19′ (×2)', spec:'4.5" grip head, Junior receiver, 88 lb max. Pair.', day:70, photo:true },
   { dept:'grip', id:'combo-triple', cat:'stands', brand:'Matthews', tag:'Combo · 14′', name:'Combo Triple Riser 14′', spec:'Rocky Mountain leg, 68 lb max, Junior pin.', day:30, photo:true },
@@ -84,4 +89,5 @@ const INVENTORY = [
   { dept:'sound', id:'lectro-smdwb', cat:'wireless', brand:'Lectrosonics', tag:'Wireless · Recorder', name:'Lectrosonics SMDWB', spec:'Wireless transmitter/recorder (B1: 537–614 MHz).', day:65, photo:true },
   { dept:'sound', id:'mm1', cat:'wireless', brand:'Sound Devices', tag:'Boom Preamp', name:'Sound Devices MM-1', spec:'Single-channel mic preamp for the boom operator.', day:35, photo:true },
   { dept:'sound', id:'tentacle-track-e', cat:'wireless', brand:'Tentacle', tag:'Timecode', name:'Tentacle TRACK E', spec:'Pocket timecode audio recorder for camera/sound sync.', day:20, photo:true }
+  { dept:'sound', id:'ath-m50x', cat:'recording', brand:'Audio-Technica', tag:'Headphones', name:'Audio-Technica ATH-M50x Headphones', spec:'Industry-standard closed-back monitoring headphones for sound mixers and boom ops.', day:12, photo:true },
 ];

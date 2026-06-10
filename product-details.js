@@ -797,4 +797,96 @@ const PRODUCT_DETAILS = {
       'Side Handles with NATO Clamp',
     ],
   },
+
+  // --- More PDF audit additions (drone moved to camera, plus 6 items I'd previously skipped) ---
+
+  'metabones': {
+    blurb: 'Lets you mount any PL-mount cine lens (our DZOFilm PAVO and VESPID sets, the Laowa Ranger) on a Canon EF or RF camera body.',
+    description: [
+      "Lets you mount any PL-mount cine lens (our DZOFilm PAVO and VESPID sets, the Laowa Ranger) on a Canon EF or RF camera body. The integrated NATO-rail base supports heavier lenses so the load isn't transferred to the camera mount.",
+      'We rent it alongside the RED Komodo when shooters bring their own glass.',
+    ],
+    kit: [
+      'Metabones EF/RF-to-PL adapter',
+      'PL locking ring',
+      'NATO-rail support base',
+    ],
+  },
+
+  'directors-cage': {
+    blurb: 'Built for client monitoring on the move.',
+    description: [
+      "Built for client monitoring on the move. The cage holds your director's monitor (SmallHD or similar) and a V-mount battery on the back, with two leather grip handles and a padded shoulder strap.",
+      "Pairs with the SmallHD 1303 or ULTRA 5 for a complete handheld director's pack.",
+    ],
+    kit: [
+      "Director's monitor cage",
+      'Dual leather hand grips',
+      'Shoulder strap',
+      'V-mount battery plate',
+      '15mm rod mounts',
+    ],
+  },
+
+  'yaeger-cart': {
+    blurb: 'The cart that lives on a long-form set.',
+    description: [
+      'The cart that lives on a long-form set. Two padded shelves for camera build, monitors, batteries, and accessories. The integrated Mitchell mount mast accepts a tripod head for high-mode setups, a steadicam vest for dynamic moves, or a boxed dovetail spinner for high-low transitions.',
+      'All-terrain wheels with brakes handle stages, locations, and rough pavement equally well.',
+    ],
+    kit: [
+      'YaegerPro 2-tier cart',
+      'Mitchell mount mast',
+      'Boxed dovetail spinner',
+      'Tripod mast (75mm/100mm)',
+      'Steadicam mast',
+      'V-mount battery box',
+      'All-terrain wheels with brakes',
+    ],
+  },
+
+  'tilta-float': {
+    blurb: 'Turns a gimbal into an all-day rig.',
+    description: [
+      'Turns a gimbal into an all-day rig. The padded vest transfers the load to your hips, the spring arm absorbs sway, and the carbon post keeps the gimbal at eye level for hours instead of minutes.',
+      "Works with the DJI RS 3 Pro out of the box. Pairs naturally with the RED Komodo + our PAVO or VESPID lens sets for handheld work that doesn't read as handheld.",
+    ],
+    kit: [
+      'Tilta Float vest with padded back support',
+      'Carbon-fiber center post',
+      'Spring-loaded support arm',
+      'V-mount battery counterweight base',
+      'Monitor cage',
+      'Mounts a DJI RS 3 Pro or similar gimbal',
+    ],
+  },
+
+  'dinkum-pod': {
+    blurb: 'A heavy-duty magic-arm clamp that mounts a monitor, light, or microphone to a stand, doorframe, c-stand, or any tubular grip.',
+    description: [
+      'A heavy-duty magic-arm clamp that mounts a monitor, light, or microphone to a stand, doorframe, c-stand, or any tubular grip. The 10" reach gets you where a friction arm can\'t, and it holds 5+ lbs without sag.',
+      "Standard rental for any setup where you need a quick accessory mount that doesn't require a c-stand.",
+    ],
+    kit: [
+      'Dinkum ActionPod PRO 10" arm',
+      'Heavy-duty spring clamp jaw',
+      '1/4"-20 male tip',
+      '3/8"-16 male tip',
+      'Padded jaw inserts',
+    ],
+  },
+
+  'ath-m50x': {
+    blurb: "The closed-back monitoring headphones you've seen on every production sound mixer for the last decade.",
+    description: [
+      "The closed-back monitoring headphones you've seen on every production sound mixer for the last decade. Flat response across the spectrum so what you hear is what's hitting the recorder, and the closed-back design isolates from boom-op room noise.",
+      'We rent these as a backup or second pair for video village monitoring; the mixer typically has their own.',
+    ],
+    kit: [
+      'Audio-Technica ATH-M50x',
+      'Detachable straight cable',
+      'Detachable coiled cable',
+      'Carry pouch',
+    ],
+  },
 };
