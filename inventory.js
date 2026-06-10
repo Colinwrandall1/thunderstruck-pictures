@@ -56,6 +56,7 @@ const INVENTORY = [
   { dept:'camera', id:'smallhd-1303', photo:true, cat:'monitor', brand:'SmallHD', tag:'Monitor · 13"', name:'SmallHD 1303 HDR 13"', spec:'Bright 13-inch HDR production monitor. Director-friendly.', day:85 },
   { dept:'camera', id:'smallhd-ultra5', cat:'monitor', brand:'SmallHD', tag:'Monitor · 5"', name:'SmallHD ULTRA 5', spec:'5-inch on-camera touchscreen. V-mount plate included.', day:55, photo:true },
   { dept:'camera', id:'portkeys-bm5', cat:'monitor', brand:'PortKeys', tag:'Monitor · Control', name:'PortKeys BM5WR 5.5"', spec:'5.5-inch monitor with camera control for RED Komodo.', day:45, photo:true },
+  { dept:'camera', id:'mavic-mini', cat:'support', brand:'DJI', tag:'Drone · 2.7K', name:'DJI Mavic Mini Drone', spec:'2.7K aerial camera. Fly More Combo — 3 batteries, charging hub, propeller cage, carrying case.', day:75, photo:true },
   { dept:'grip', id:'high-roller', cat:'stands', brand:'American Grip', tag:'Overhead · 18′', name:'High Roller Overhead 18′ (×2)', spec:'Rocky Mountain leg, 4.5" grip head, Junior receiver, 60 lb max. Pair.', day:70, photo:true },
   { dept:'grip', id:'kupo-roller', cat:'stands', brand:'Kupo', tag:'Overhead · 19′', name:'Kupo High Roller 19′ (×2)', spec:'4.5" grip head, Junior receiver, 88 lb max. Pair.', day:70, photo:true },
   { dept:'grip', id:'combo-triple', cat:'stands', brand:'Matthews', tag:'Combo · 14′', name:'Combo Triple Riser 14′', spec:'Rocky Mountain leg, 68 lb max, Junior pin.', day:30, photo:true },

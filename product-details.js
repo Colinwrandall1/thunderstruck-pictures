@@ -106,6 +106,24 @@ const PRODUCT_DETAILS = {
     ],
   },
 
+  'mavic-mini': {
+    blurb: 'A pocket-sized 2.7K drone that flies under the 250g registration threshold — fast to launch, easy to ship, and a working second-unit camera in your back seat.',
+    description: [
+      'The Mavic Mini is our go-to drone for B-roll on documentary, narrative, and music video work where pulling out a Phantom or Inspire is overkill. Under 250g means no FAA registration for hobby flight, easier permitting in many locations, and a more discreet presence on set.',
+      'Comes as the Fly More Combo: three batteries (~30 min flight each), a propeller cage for tight indoor flights, a charging hub that tops all three batteries in sequence, and a carry case that fits everything. The 3-axis gimbal stabilizes the 2.7K camera for clean, broadcast-usable B-roll right out of the box.'
+    ],
+    kit: [
+      'DJI Mavic Mini drone (under 250g)',
+      'Remote controller',
+      '3× intelligent flight batteries (~30 min each)',
+      'Charging hub',
+      '360° propeller cage',
+      'Spare propellers',
+      'Carrying case',
+      'Cables + chargers'
+    ],
+  },
+
   'mirage-mattebox': {
     blurb: 'A clamp-on matte box with built-in variable ND — flag the lens, kill reflections, and dial exposure all from one box.',
     description: [
