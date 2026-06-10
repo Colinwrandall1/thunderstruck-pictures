@@ -107,7 +107,21 @@
   .related-head{ display:flex; align-items:baseline; justify-content:space-between; gap:1rem; margin-bottom:1.4rem; }
   .related-head a{ font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--yellow); }
   .related-head a:hover{ text-decoration:underline; }
-  .rel-row{ display:flex; gap:1rem; overflow-x:auto; padding-bottom:0.6rem; scroll-snap-type:x mandatory; }
+  /* arrow-scrolled row — native scrollbar hidden, prev/next chevrons take over */
+  .rel-shell{ position:relative; }
+  .rel-row{ display:flex; gap:1rem; overflow-x:auto; padding:0.2rem 0 0.6rem; scroll-snap-type:x mandatory;
+    scroll-behavior:smooth; scrollbar-width:none; -ms-overflow-style:none; }
+  .rel-row::-webkit-scrollbar{ display:none; }
+  .rel-nav{ position:absolute; top:50%; transform:translateY(-50%); z-index:2;
+    width:42px; height:42px; border-radius:999px; background:rgba(14,20,28,0.92); border:1px solid var(--line-bright);
+    color:var(--text); display:flex; align-items:center; justify-content:center; cursor:pointer;
+    backdrop-filter:blur(6px); transition:opacity .25s, border-color .2s, background .2s, transform .15s; }
+  .rel-nav:hover{ border-color:var(--yellow); color:var(--yellow); background:rgba(14,20,28,1); transform:translateY(-50%) scale(1.05); }
+  .rel-nav.prev{ left:-12px; }
+  .rel-nav.next{ right:-12px; }
+  .rel-nav.disabled{ opacity:0; pointer-events:none; }
+  .rel-nav svg{ width:18px; height:18px; }
+  @media (max-width:560px){ .rel-nav.prev{ left:4px; } .rel-nav.next{ right:4px; } }
   .rel-card{ flex:0 0 220px; background:var(--panel); border:1px solid var(--line); border-radius:6px; overflow:hidden; scroll-snap-align:start;
     transition:border-color .2s, transform .2s; text-decoration:none; color:inherit; }
   .rel-card:hover{ border-color:var(--yellow); transform:translateY(-3px); }
@@ -196,15 +210,28 @@ function render(){
   const photoClass = item.photo ? '' : 'soon';
 
   const blurbHtml = det.blurb ? `<p class="blurb">${det.blurb}</p>` : '';
-  const kitHtml = (det.kit && det.kit.length) ?
-    det.kit.map(k => `<li>${k}</li>`).join('') :
-    `<li style="color:var(--dim); font-style:italic;">Kit list coming soon.</li>`;
-  const descHtml = (det.description && det.description.length) ?
-    det.description.map(p => `<p>${p}</p>`).join('') :
-    `<p style="color:var(--dim); font-style:italic;">Full description coming soon.</p>`;
+  // Only render kit + story sections that actually have content.
+  // For accessory / commodity items, the page just skips straight from the hero
+  // block to the related row — cleaner than a "coming soon" placeholder.
+  const hasKit  = !!(det.kit && det.kit.length);
+  const hasDesc = !!(det.description && det.description.length);
+  const kitBlock = hasKit ? `
+    <div>
+      <p class="sec-eyebrow">In the kit</p>
+      <h2 class="sec-h">What's <span class="y">included.</span></h2>
+      <ul class="kit-list">${det.kit.map(k => `<li>${k}</li>`).join('')}</ul>
+    </div>` : '';
+  const descBlock = hasDesc ? `
+    <div>
+      <p class="sec-eyebrow">The story</p>
+      <h2 class="sec-h">Why this <span class="y">gear.</span></h2>
+      <div class="descr">${det.description.map(p => `<p>${p}</p>`).join('')}</div>
+    </div>` : '';
+  const pdetailBlock = (hasKit || hasDesc) ?
+    `<div class="pdetail" ${(hasKit ^ hasDesc) ? 'style="grid-template-columns:1fr; max-width:760px;"' : ''}>${kitBlock}${descBlock}</div>` : '';
 
-  // Related: up to 4 other items in the same department, excluding self
-  const related = INVENTORY.filter(i => i.dept === item.dept && i.id !== id).slice(0, 6);
+  // Related: other items in the same department, excluding self
+  const related = INVENTORY.filter(i => i.dept === item.dept && i.id !== id);
 
   document.getElementById('app').innerHTML = `
     <section class="rhero">
@@ -242,42 +269,61 @@ function render(){
         </aside>
       </div>
 
-      <div class="pdetail">
-        <div>
-          <p class="sec-eyebrow">In the kit</p>
-          <h2 class="sec-h">What's <span class="y">included.</span></h2>
-          <ul class="kit-list">${kitHtml}</ul>
-        </div>
-        <div>
-          <p class="sec-eyebrow">The story</p>
-          <h2 class="sec-h">Why this <span class="y">gear.</span></h2>
-          <div class="descr">${descHtml}</div>
-        </div>
-      </div>
+      ${pdetailBlock}
 
       <div class="related">
         <div class="related-head">
-          <h2 class="sec-h">More from the <span class="y">${DEPT_LABEL[item.dept]} package.</span></h2>
+          <h2 class="sec-h">More from the <span class="y">${DEPT_LABEL[item.dept]} department.</span></h2>
           <a href="${DEPT_PAGE[item.dept]}">See all ${DEPT_LABEL[item.dept]} →</a>
         </div>
-        <div class="rel-row">
-          ${related.map(r => `
-            <a class="rel-card" href="product.html?id=${r.id}">
-              <div class="thumb ${r.photo?'':'soon'}">${
-                r.photo ? `<img src="media/products/${r.id}.webp" alt="${r.name}" loading="lazy">` :
-                          `<svg viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg>`}</div>
-              <div class="b">
-                <div class="bn">${r.brand}</div>
-                <div class="nm">${r.name}</div>
-                <div class="pr">$${r.day} / day</div>
-              </div>
-            </a>`).join('')}
+        <div class="rel-shell">
+          <button class="rel-nav prev disabled" id="relPrev" aria-label="Scroll left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+          <div class="rel-row" id="relRow">
+            ${related.map(r => `
+              <a class="rel-card" href="product.html?id=${r.id}">
+                <div class="thumb ${r.photo?'':'soon'}">${
+                  r.photo ? `<img src="media/products/${r.id}.webp" alt="${r.name}" loading="lazy">` :
+                            `<svg viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg>`}</div>
+                <div class="b">
+                  <div class="bn">${r.brand}</div>
+                  <div class="nm">${r.name}</div>
+                  <div class="pr">$${r.day} / day</div>
+                </div>
+              </a>`).join('')}
+          </div>
+          <button class="rel-nav next" id="relNext" aria-label="Scroll right"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
         </div>
       </div>
     </main>
   `;
   renderAction();
   updateNavCount();
+  wireRelatedScroll();
+}
+
+function wireRelatedScroll(){
+  const row = document.getElementById('relRow');
+  const prev = document.getElementById('relPrev');
+  const next = document.getElementById('relNext');
+  if (!row || !prev || !next) return;
+  // step = one card width + gap
+  const card = row.querySelector('.rel-card');
+  const gap = parseFloat(getComputedStyle(row).gap) || 16;
+  const step = card ? card.getBoundingClientRect().width + gap : 240;
+  function refresh(){
+    const max = row.scrollWidth - row.clientWidth;
+    // tolerate snap nudging — only flag boundary when we're really there
+    prev.classList.toggle('disabled', row.scrollLeft <= 8);
+    next.classList.toggle('disabled', row.scrollLeft >= max - 8);
+    if (max <= 8){ prev.classList.add('disabled'); next.classList.add('disabled'); }
+  }
+  // start at left
+  row.scrollLeft = 0;
+  prev.onclick = () => row.scrollBy({ left: -step * 2, behavior: 'smooth' });
+  next.onclick = () => row.scrollBy({ left:  step * 2, behavior: 'smooth' });
+  row.addEventListener('scroll', refresh, { passive: true });
+  window.addEventListener('resize', refresh);
+  refresh();
 }
 
 function renderNotFound(msg){
