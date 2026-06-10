@@ -138,6 +138,11 @@ const PRODUCT_DETAILS = {
       'Side flags (×2)',
       '95mm, 86mm, 80mm, 77mm step-up rings'
     ],
+    gallery: [
+      { src: 'mirage-mattebox.webp', caption: '' },
+      { src: 'mirage-mattebox-2.webp', caption: '' },
+      { src: 'mirage-mattebox-3.webp', caption: '' },
+    ],
   },
 
   // ========== LIGHTING (from Martin's deck verbatim) ==========
@@ -159,6 +164,12 @@ const PRODUCT_DETAILS = {
       'AC Power Cable',
       'Flight Case and Reflector Bag'
     ],
+    gallery: [
+      { src: 'nanlux-2400b.webp', caption: '' },
+      { src: 'nanlux-2400b-2.webp', caption: '' },
+      { src: 'nanlux-2400b-3.webp', caption: '' },
+      { src: 'nanlux-2400b-4.webp', caption: '' },
+    ],
   },
 
   'aputure-1200x': {
@@ -177,6 +188,11 @@ const PRODUCT_DETAILS = {
       'Skid',
       'Rolling Case and Reflector Bag'
     ],
+    gallery: [
+      { src: 'aputure-1200x.webp', caption: '' },
+      { src: 'aputure-1200x-2.webp', caption: '' },
+      { src: 'aputure-1200x-3.webp', caption: '' },
+    ],
   },
 
   'aputure-f10': {
@@ -188,6 +204,10 @@ const PRODUCT_DETAILS = {
     kit: [
       'Aputure CF12 Fresnel',
       'Aputure CF12 Barndoors'
+    ],
+    gallery: [
+      { src: 'aputure-f10.webp', caption: '' },
+      { src: 'aputure-f10-2.webp', caption: '' },
     ],
   },
 
@@ -205,6 +225,11 @@ const PRODUCT_DETAILS = {
       'Weatherproof Head Cable',
       'Power Cable'
     ],
+    gallery: [
+      { src: 'aputure-600x.webp', caption: '' },
+      { src: 'aputure-600x-2.webp', caption: '' },
+      { src: 'aputure-600x-3.webp', caption: '' },
+    ],
   },
 
   'aputure-spot': {
@@ -219,6 +244,10 @@ const PRODUCT_DETAILS = {
       'Gobo Holder with 3 x B-Size Gobos',
       'Gel Frame',
       'Lens Pen, Blower, & Cleaning Cloth'
+    ],
+    gallery: [
+      { src: 'aputure-spot.webp', caption: '' },
+      { src: 'aputure-spot-2.webp', caption: '' },
     ],
   },
 
@@ -249,6 +278,11 @@ const PRODUCT_DETAILS = {
       'Grid',
       'Control Box with V-Mount Battery Plates',
       'Head Extension Cable 26\''
+    ],
+    gallery: [
+      { src: 'mega-6fc.webp', caption: '' },
+      { src: 'mega-6fc-2.webp', caption: '' },
+      { src: 'mega-6fc-3.webp', caption: '' },
     ],
   },
 
@@ -336,6 +370,10 @@ const PRODUCT_DETAILS = {
       'Godox C7R RGBWW LED Bulb',
       'USB-C Cable',
       'Round Cup Light Bouncer'
+    ],
+    gallery: [
+      { src: 'c7r.webp', caption: '' },
+      { src: 'c7r-2.webp', caption: '' },
     ],
   },
 
@@ -426,6 +464,13 @@ const PRODUCT_DETAILS = {
       'Porta Brace harness',
       'AC power adapter'
     ],
+    gallery: [
+      { src: 'sd-633.webp', caption: '' },
+      { src: 'sd-633-2.webp', caption: '' },
+      { src: 'sd-633-3.webp', caption: '' },
+      { src: 'sd-633-4.webp', caption: '' },
+      { src: 'sd-633-5.webp', caption: '' },
+    ],
   },
 
   'mkh50': {
@@ -441,6 +486,10 @@ const PRODUCT_DETAILS = {
       'Rycote pistol grip',
       'Rycote windjammer',
       'XLR cable'
+    ],
+    gallery: [
+      { src: 'mkh50.webp', caption: '' },
+      { src: 'mkh50-2.webp', caption: '' },
     ],
   },
 
@@ -504,6 +553,14 @@ const PRODUCT_DETAILS = {
       'D-Tap to DC Barrel Power Cable',
       'Mini ProLock to Bowens Mount Adapter',
     ],
+    gallery: [
+      { src: 'storm-80c.webp', caption: '' },
+      { src: 'storm-80c-2.webp', caption: '' },
+      { src: 'storm-80c-3.webp', caption: '' },
+      { src: 'storm-80c-4.webp', caption: '' },
+      { src: 'storm-80c-5.webp', caption: '' },
+      { src: 'storm-80c-6.webp', caption: '' },
+    ],
   },
 
   'spot-mini': {
@@ -517,6 +574,11 @@ const PRODUCT_DETAILS = {
       'Gobo Holder',
       '10 x Gobos (M-Size)',
       'Gel Holder',
+    ],
+    gallery: [
+      { src: 'spot-mini.webp', caption: '' },
+      { src: 'spot-mini-2.webp', caption: '' },
+      { src: 'spot-mini-3.webp', caption: '' },
     ],
   },
 
@@ -545,6 +607,10 @@ const PRODUCT_DETAILS = {
       'Removable Yoke with Junior Pin',
       "AC Power Cable (19.6')",
       'Rolling Hard Case',
+    ],
+    gallery: [
+      { src: 'nova-ii.webp', caption: '' },
+      { src: 'nova-ii-2.webp', caption: '' },
     ],
   },
 
@@ -587,6 +653,12 @@ const PRODUCT_DETAILS = {
       'AC Power Cable',
       "Head Extension Cable 24.6'",
     ],
+    gallery: [
+      { src: 'pavoslim-120c.webp', caption: '' },
+      { src: 'pavoslim-120c-2.webp', caption: '' },
+      { src: 'pavoslim-120c-3.webp', caption: '' },
+      { src: 'pavoslim-120c-4.webp', caption: '' },
+    ],
   },
 
   'pavoslim-coupler': {
@@ -598,6 +670,11 @@ const PRODUCT_DETAILS = {
       '2 Nanlite Folding Softboxes with Egg Crate',
       "2'x2' Mounting Bracket",
       "1'x4' Mounting Bracket",
+    ],
+    gallery: [
+      { src: 'pavoslim-coupler.webp', caption: '' },
+      { src: 'pavoslim-coupler-2.webp', caption: '' },
+      { src: 'pavoslim-coupler-3.webp', caption: '' },
     ],
   },
 
@@ -736,6 +813,11 @@ const PRODUCT_DETAILS = {
       'Single Scrim',
       'Double Scrim',
     ],
+    gallery: [
+      { src: 'arri-650.webp', caption: '' },
+      { src: 'arri-650-2.webp', caption: '' },
+      { src: 'arri-650-3.webp', caption: '' },
+    ],
   },
 
   'chimera-xs': {
@@ -746,6 +828,10 @@ const PRODUCT_DETAILS = {
     kit: [
       'Chimera XS Softbox',
       'Chimera Speed Ring',
+    ],
+    gallery: [
+      { src: 'chimera-xs.webp', caption: '' },
+      { src: 'chimera-xs-2.webp', caption: '' },
     ],
   },
 
@@ -795,6 +881,11 @@ const PRODUCT_DETAILS = {
       'Blackout App Subscription',
       'iPad Cage',
       'Side Handles with NATO Clamp',
+    ],
+    gallery: [
+      { src: 'ipad-blackout.webp', caption: '' },
+      { src: 'ipad-blackout-2.webp', caption: '' },
+      { src: 'ipad-blackout-3.webp', caption: '' },
     ],
   },
 
@@ -993,6 +1084,104 @@ const PRODUCT_DETAILS = {
       'Rain hood',
       'Side cable passthroughs',
       'Standard harness loops'
+    ],
+  },
+
+  // --- Auto-added galleries (auxiliary photos) ---
+
+  'smallhd-ultra5': {
+    gallery: [
+      { src: 'smallhd-ultra5.webp', caption: '' },
+      { src: 'smallhd-ultra5-2.webp', caption: '' },
+      { src: 'smallhd-ultra5-3.webp', caption: '' },
+    ],
+  },
+
+  'teradek-bolt6': {
+    gallery: [
+      { src: 'teradek-bolt6.webp', caption: '' },
+      { src: 'teradek-bolt6-2.webp', caption: '' },
+    ],
+  },
+
+  'dana-dolly': {
+    gallery: [
+      { src: 'dana-dolly.webp', caption: '' },
+      { src: 'dana-dolly-2.webp', caption: '' },
+    ],
+  },
+
+  'combo-triple': {
+    gallery: [
+      { src: 'combo-triple.webp', caption: '' },
+      { src: 'combo-triple-2.webp', caption: '' },
+    ],
+  },
+
+  'menace-arm': {
+    gallery: [
+      { src: 'menace-arm.webp', caption: '' },
+      { src: 'menace-arm-2.webp', caption: '' },
+    ],
+  },
+
+  'flag-kit': {
+    gallery: [
+      { src: 'flag-kit.webp', caption: '' },
+      { src: 'flag-kit-2.webp', caption: '' },
+    ],
+  },
+
+  'floppy-cutters': {
+    gallery: [
+      { src: 'floppy-cutters.webp', caption: '' },
+      { src: 'floppy-cutters-2.webp', caption: '' },
+    ],
+  },
+
+  'clamp-package': {
+    gallery: [
+      { src: 'clamp-package.webp', caption: '' },
+      { src: 'clamp-package-2.webp', caption: '' },
+      { src: 'clamp-package-3.webp', caption: '' },
+      { src: 'clamp-package-4.webp', caption: '' },
+      { src: 'clamp-package-5.webp', caption: '' },
+      { src: 'clamp-package-6.webp', caption: '' },
+    ],
+  },
+
+  'sandbags': {
+    gallery: [
+      { src: 'sandbags.webp', caption: '15 lb' },
+      { src: 'sandbags-2.webp', caption: '25 lb' },
+      { src: 'sandbags-3.webp', caption: '35 lb' },
+      { src: 'sandbags-4.webp', caption: '10 lb shot bag' },
+      { src: 'sandbags-5.webp', caption: 'Filled set' },
+    ],
+  },
+
+  'apple-boxes': {
+    gallery: [
+      { src: 'apple-boxes.webp', caption: 'Full' },
+      { src: 'apple-boxes-2.webp', caption: 'Half' },
+      { src: 'apple-boxes-3.webp', caption: 'Quarter' },
+      { src: 'apple-boxes-4.webp', caption: '1/8 (pancake)' },
+    ],
+  },
+
+  'boom-pole': {
+    gallery: [
+      { src: 'boom-pole.webp', caption: '' },
+      { src: 'boom-pole-2.webp', caption: '' },
+      { src: 'boom-pole-3.webp', caption: '' },
+    ],
+  },
+
+  'orca-bag': {
+    gallery: [
+      { src: 'orca-bag.webp', caption: '' },
+      { src: 'orca-bag-2.webp', caption: '' },
+      { src: 'orca-bag-3.webp', caption: '' },
     ],
   },
 };
