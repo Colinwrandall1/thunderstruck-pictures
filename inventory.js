@@ -47,6 +47,7 @@ const INVENTORY = [
   { dept:'camera', id:'red-komodo', photo:true, cat:'camera', brand:'RED', tag:'Cinema · 6K', name:'RED Komodo 6K Body Kit', spec:'Super-35 global-shutter 6K. Built up with cage, top/side plates, Wooden Camera V-mount plate &amp; NATO handles.', day:450 },
   { dept:'camera', id:'nucleus-m', cat:'accessories', brand:'Tilta', tag:'Wireless FIZ', name:'Tilta Nucleus-M Follow Focus', spec:'Wireless follow focus — hand unit + motors. Rosette FIZ ready.', day:75, photo:true },
   { dept:'camera', id:'tentacle-sync', cat:'accessories', brand:'Tentacle', tag:'Timecode', name:'Tentacle Sync E Mk2 Timecode', spec:'Bluetooth timecode with Komodo &amp; 5-pin LEMO cables.', day:25, photo:true },
+  { dept:'camera', id:'arri-signature-zoom-24-75', cat:'lens', brand:'ARRI', tag:'Signature Zoom · T2.8', name:'ARRI Signature Zoom 24-75mm T2.8', spec:'Full-frame LPL-mount cine zoom — covers Super-35 to large-format. Constant T2.8 throughout the range. Pairs with the ALEXA 35.', day:475, photo:true },
   { dept:'camera', id:'pavo-set', cat:'lens', brand:'DZOFilm', tag:'Anamorphic · 2×', name:'PAVO 2× Anamorphic Set', spec:'Super-35 anamorphic primes — 28 · 40 · 75 · 135mm. T2.1–2.5, PL.', day:350, photo:true },
   { dept:'camera', id:'vespid-set', cat:'lens', brand:'DZOFilm', tag:'Prime Set', name:'VESPID Full-Frame Prime Set', spec:'T2.1 primes — 16 · 25 · 35 · 75mm with 4-lens hard case. PL.', day:175, photo:true },
   { dept:'camera', id:'laowa-ranger', photo:true, cat:'lens', brand:'Laowa', tag:'Cine Zoom', name:'Laowa Ranger 17–50mm T2.9', spec:'Super-35 lightweight cine zoom. PL-mount.', day:85 },
@@ -98,6 +99,7 @@ const INVENTORY = [
   { dept:'sound', id:'lectro-smdwb', cat:'wireless', brand:'Lectrosonics', tag:'Wireless · Recorder', name:'Lectrosonics SMDWB', spec:'Wireless transmitter/recorder (B1: 537–614 MHz).', day:65, photo:true },
   { dept:'sound', id:'mm1', cat:'wireless', brand:'Sound Devices', tag:'Boom Preamp', name:'Sound Devices MM-1', spec:'Single-channel mic preamp for the boom operator.', day:35, photo:true },
   { dept:'sound', id:'tentacle-track-e', cat:'wireless', brand:'Tentacle', tag:'Timecode', name:'Tentacle TRACK E', spec:'Pocket timecode audio recorder for camera/sound sync.', day:20, photo:true },
+  { dept:'sound', id:'hollyland-solidcom-c1pro', cat:'wireless', brand:'Hollyland', tag:'Intercom · 8-User', name:'Hollyland Solidcom C1 Pro 8-User Intercom', spec:'Full-duplex DECT wireless intercom with ENC noise cancellation — 8 headsets + hub, 1100\' range, dual-mic. AD/DP/grip/sound on one comms loop.', day:95, photo:true },
   { dept:'sound', id:'ath-m50x', cat:'recording', brand:'Audio-Technica', tag:'Headphones', name:'Audio-Technica ATH-M50x Headphones', spec:'Industry-standard closed-back monitoring headphones for sound mixers and boom ops.', day:12, photo:true },
   { dept:'sound', id:'ktek-bag', cat:'recording', brand:'K-Tek', tag:'Mixer Bag', name:'K-Tek Stingray Junior X Sound Mixer Bag', spec:'Compact mixer bag with rain hood. Alternative to the ORCA bag for smaller recorders.', day:30, photo:true },
 ];

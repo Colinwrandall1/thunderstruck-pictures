@@ -61,6 +61,21 @@ const PRODUCT_DETAILS = {
     ],
   },
 
+  'arri-signature-zoom-24-75': {
+    blurb: 'ARRI\'s flagship full-frame cine zoom — covers Super-35 through large-format at a constant T2.8, with the same organic Signature look as the primes.',
+    description: [
+      'The Signature Zoom 24-75mm T2.8 is the lens we reach for when a project needs zoom versatility without compromising on the ARRI Signature look. Full-frame coverage on the wide end, large-format coverage across the range, and a constant T2.8 aperture mean exposure stays locked while you zoom — no compromise on quick-turnaround commercial or documentary work.',
+      'LPL mount makes it a native pair for the ALEXA 35; LBUS connectors carry lens metadata for VFX and post. Internal focus with no front-rotation simplifies matte box and filter work. We ship the zoom in a Pelican case with front/rear caps and shims for matching focus marks across our other Signature glass.'
+    ],
+    kit: [
+      'ARRI Signature Zoom 24-75mm T2.8',
+      'LPL mount + LBUS',
+      'Front + rear lens caps',
+      'Pelican carrying case',
+      'PL mount available on request'
+    ],
+  },
+
   'pavo-set': {
     blurb: 'A complete two-lens DZOFilm PAVO 2x anamorphic set — classic anamorphic character on a modern PL-mount cine body.',
     description: [
@@ -504,6 +519,22 @@ const PRODUCT_DETAILS = {
       { src: 'sd-633-3.webp', caption: '' },
       { src: 'sd-633-4.webp', caption: '' },
       { src: 'sd-633-5.webp', caption: '' },
+    ],
+  },
+
+  'hollyland-solidcom-c1pro': {
+    blurb: 'A full-duplex 8-user wireless intercom — get the director, 1st AD, DP, gaffer, key grip, sound mixer, and script all on the same comms loop, no bodypack required.',
+    description: [
+      'The Solidcom C1 Pro is the comms system we deploy when a set needs to move fast — feature pickups, commercial gigs, multi-camera live events. Full-duplex DECT 6.0 transmits in the 1.9 GHz spectrum, secure and clean of cellular interference, with a line-of-sight range of 1,100 feet. Dual-mic ENC kills set noise so a whisper from video village reaches the boom op clearly.',
+      'Each headset is true-wireless — battery and radio are built into the unit, no bodypack, no antenna in the way of harnesses or grip gear. The included hub charges the headsets and gives the master a clear visual of who\'s connected. AD, DP, key grip, sound, and the director all run on one loop instead of three different walkie channels.'
+    ],
+    kit: [
+      'Hollyland Solidcom C1 Pro hub (master)',
+      '8 × Solidcom C1 Pro headsets (1 master + 7 remote)',
+      'Rechargeable Li-ion batteries (in-headset)',
+      'Hub charging dock',
+      'USB-C charging cables',
+      'Carrying case'
     ],
   },
 
