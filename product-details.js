@@ -931,4 +931,68 @@ const PRODUCT_DETAILS = {
       'D-Tap adapter cables (on request)'
     ],
   },
+  'fat-gecko': {
+    blurb: "Three industrial-strength suction cups with a ball-head camera mount — sticks a DSLR or mirrorless to a car, boat, or any smooth surface.",
+    description: [
+      "When a car-mount rig isn't needed but you still want a camera locked to the hood, window, fender, or a boat hull, the Fat Gecko triples up suction cups with a built-in lever-tightener that doesn't loosen at 70mph.",
+      "Holds a typical DSLR or mirrorless build. Heavier setups (RED Komodo with matte box) should use a proper car-mount rig instead."
+    ],
+    kit: [
+      'Delkin Fat Gecko Triple Suction Cup Mount',
+      'Ball-head with 1/4"-20 tip',
+      'Safety tether'
+    ],
+  },
+
+  'liteflow': {
+    blurb: "20\"×20\" Godox LiteFlow mirror reflectors — Medium-Light and Hard-Light — for bouncing a hard source into the actor's eye.",
+    description: [
+      "The film-style mirror reflector kit. Bounces a sun source or a 1200x/2400B around corners and into actor positions without sending light spilling everywhere. The Hard-Light reflector keeps the source direction crisp; the Medium-Light softens it slightly.",
+      "Both reflectors mount on the included rail mount for boom-arm or c-stand rigging."
+    ],
+    kit: [
+      'Godox LiteFlow 50 (20"×20") Hard-Light reflector',
+      'Godox LiteFlow 50 (20"×20") Medium-Light reflector',
+      'Rail mount'
+    ],
+  },
+
+  'baby-boom': {
+    blurb: "An adjustable baby-pin boom arm — booms a flag, scrim, or light from a c-stand at any angle.",
+    description: [
+      "Standard grip kit item. Mounts on a c-stand and extends a flag, silk, or small fixture out to a position the stand itself can't reach. Two pivot points let you boom up, down, sideways, or angle through a window."
+    ],
+    kit: [
+      'Steel Baby Boom Arm',
+      'Two adjustable pivots',
+      'Baby-pin tip + baby-pin receiver'
+    ],
+  },
+
+  'varipole': {
+    blurb: "Vertical pressure poles between floor and ceiling — rig a c-stand head or grip clamp where a stand footprint won't fit.",
+    description: [
+      "When you need to hang a small fixture, flag, or microphone above the actor but a c-stand would block the camera, varipoles pressure-fit between floor and ceiling and accept any baby-pin or 5/8\" grip head.",
+      "Standard rental as a pair. Maximum extension depends on ceiling height — works in residential interiors up to about 10ft."
+    ],
+    kit: [
+      'Varipole Polecat (×2)',
+      'Pressure-pad ends',
+      '5/8" grip head receivers'
+    ],
+  },
+
+  'ktek-bag': {
+    blurb: "Compact K-Tek Stingray Junior X mixer bag — rain hood, harness loops, side mic-cable passthroughs.",
+    description: [
+      "Alternative bag for a smaller recorder build — Sound Devices 633 or MixPre series. Less bulky than the ORCA OR-28; better for run-and-gun documentary work where the bag itself needs to disappear under a jacket or off to the side.",
+      "Built-in rain hood unzips for outdoor weather. Pairs with the Porta Brace harness or any standard sound-bag belt."
+    ],
+    kit: [
+      'K-Tek Stingray Junior X bag',
+      'Rain hood',
+      'Side cable passthroughs',
+      'Standard harness loops'
+    ],
+  },
 };
