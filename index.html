@@ -204,46 +204,57 @@
   .inv-intro { max-width:64ch; display:flex; flex-direction:column; }
   .inv-intro .head { max-width: none; }
   .inv-intro .body { max-width: 64ch; }
-  .inv-acc { --h: clamp(220px,24vw,280px); --exp: calc(var(--h) * 1.5);
-    --thin: clamp(52px,6vw,72px); --gap:10px;
-    flex:0 0 calc(var(--exp) + 5 * (var(--thin) + var(--gap)));
-    display:flex; gap:var(--gap); justify-content:flex-end; align-items:stretch; height:var(--h); }
-  .acol { position:relative; flex:0 0 var(--thin); height:var(--h); overflow:hidden;
-    border:1px solid var(--line); background:var(--panel); text-decoration:none; cursor:pointer;
-    transition: flex-basis .55s cubic-bezier(.22,.85,.25,1), border-color .3s; }
-  .acol:hover, .acol:focus-visible { flex-basis: var(--exp); border-color: var(--yellow); outline:none; }
-  .acol .acol-img { position:absolute; inset:0; opacity:0; transition: opacity .5s ease .05s;
-    background: var(--img) center/cover no-repeat, #e9e6df; }
-  .acol:hover .acol-img, .acol:focus-visible .acol-img { opacity:1; }
+  .inv-acc { --h: clamp(260px,30vw,360px); --grow-exp:4; --grow-thin:1; --gap:8px;
+    display:flex; gap:var(--gap); align-items:stretch; height:var(--h);
+    width:100%; padding: 0 clamp(1rem,2.5vw,1.6rem); box-sizing:border-box; }
+  .acol { position:relative; flex:var(--grow-thin) 1 0; height:var(--h); overflow:hidden;
+    border:1px solid var(--line); background:#070f1e; text-decoration:none; cursor:pointer;
+    min-width:0;
+    transition: flex-grow .55s cubic-bezier(.22,.85,.25,1), border-color .3s; }
+  .acol:hover, .acol:focus-visible { flex-grow: var(--grow-exp); border-color: var(--yellow); outline:none; }
+  /* Composite image — always present, dimmed in thin state */
+  .acol .acol-img { position:absolute; inset:0; transition: opacity .5s ease, filter .5s ease;
+    background: var(--img) center/cover no-repeat #070f1e;
+    opacity:.55; filter:saturate(.55) brightness(.55) contrast(1.05); }
+  /* Navy tint overlay sits over the dimmed composite in thin state */
+  .acol::before { content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
+    background: linear-gradient(180deg, rgba(7,15,30,.55) 0%, rgba(7,15,30,.88) 100%);
+    transition: opacity .5s ease; }
+  .acol:hover .acol-img, .acol:focus-visible .acol-img { opacity:1; filter:none; }
+  .acol:hover::before, .acol:focus-visible::before { opacity:0; }
   .acol.soon .acol-img { background:#10161e; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.6rem; }
   /* "All" pillar — scene shot, always visible by default (expanded) */
-  .acol.full .acol-img { background: var(--img) center/cover no-repeat #04060c; opacity:1; }
-  .acol.full { flex-basis: var(--exp); border-color: var(--line-bright); }
+  .acol.full { flex-grow: var(--grow-exp); border-color: var(--line-bright); }
+  .acol.full .acol-img { opacity:1; filter:none; }
+  .acol.full::before { opacity:0; }
   /* When ANY other pillar is hovered/focused, the All pillar collapses to thin */
   .inv-acc:has(.acol:not(.full):hover) .acol.full,
-  .inv-acc:has(.acol:not(.full):focus-visible) .acol.full { flex-basis: var(--thin); border-color: var(--line); }
+  .inv-acc:has(.acol:not(.full):focus-visible) .acol.full { flex-grow: var(--grow-thin); border-color: var(--line); }
   .inv-acc:has(.acol:not(.full):hover) .acol.full .acol-img,
-  .inv-acc:has(.acol:not(.full):focus-visible) .acol.full .acol-img { opacity:.55; }
+  .inv-acc:has(.acol:not(.full):focus-visible) .acol.full .acol-img { opacity:.55; filter:saturate(.55) brightness(.55) contrast(1.05); }
+  .inv-acc:has(.acol:not(.full):hover) .acol.full::before,
+  .inv-acc:has(.acol:not(.full):focus-visible) .acol.full::before { opacity:1; }
   .acol .acol-bolt { width:32px; height:44px; fill:#33404c; }
   .acol .acol-soon { font-family:'JetBrains Mono',monospace; font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; color:#3a4651; }
-  .acol .acol-label { position:absolute; z-index:2; right:0; top:0; bottom:0; width:var(--thin);
+  .acol .acol-label { position:absolute; z-index:2; left:0; right:0; top:0; bottom:0;
     display:flex; align-items:center; justify-content:center; white-space:nowrap;
     writing-mode: vertical-rl; transform: rotate(180deg);
     font-family:'Saira Condensed',sans-serif; font-weight:700; text-transform:uppercase;
     letter-spacing:0.14em; font-size:clamp(.92rem,1.4vw,1.1rem); color:var(--text); transition: opacity .35s; }
-  /* when expanded, drop the label (and its gradient) for a clean image-only square */
+  /* when expanded, drop the label for a clean image-only frame */
   .acol:hover .acol-label, .acol:focus-visible .acol-label { opacity:0; }
   @media (max-width:880px){
     .inv-layout { flex-direction:column; align-items:stretch; gap:2.4rem; }
-    .inv-acc { flex:0 0 auto; }
+    .inv-acc { padding: 0 1rem; }
   }
   @media (max-width:680px){
-    .inv-acc { flex-wrap:wrap; height:auto; align-items:stretch; justify-content:space-between; }
-    .acol { flex:0 0 calc(50% - 5px); height:auto; aspect-ratio:1/1; }
-    .acol .acol-img { opacity:1; }
+    .inv-acc { flex-wrap:wrap; height:auto; align-items:stretch; gap:6px; }
+    .acol { flex:0 0 calc(50% - 3px); height:auto; aspect-ratio:3/2; }
+    .acol .acol-img { opacity:1; filter:none; }
+    .acol::before { background:linear-gradient(180deg, rgba(7,15,30,0) 40%, rgba(7,15,30,.85)); opacity:1; }
     .acol .acol-label, .acol:hover .acol-label, .acol:focus-visible .acol-label { opacity:1;
-      writing-mode:horizontal-tb; transform:none; inset:auto 0 0 0; top:auto; width:auto; height:auto;
-      justify-content:flex-start; padding:.7rem .85rem; background:linear-gradient(0deg, rgba(8,11,16,0.92) 30%, rgba(8,11,16,0)); }
+      writing-mode:horizontal-tb; transform:none; justify-content:flex-start; align-items:flex-end;
+      padding:.7rem .85rem; }
   }
   .inv-note { margin-top: 1.6rem; color:#6b7681; font-size: 0.85rem; }
 
@@ -425,34 +436,34 @@
 <!-- INVENTORY -->
 <section class="block inv" id="inventory">
   <div class="wrap">
-    <div class="inv-layout">
-      <div class="inv-intro reveal from-left">
-        <p class="eyebrow">The Kit</p>
-        <h2 class="head">The inventory <span class="y">runs deep.</span></h2>
-        <p class="body">RED Komodo. DZOFilm anamorphics. Nanlux 2400B. Aputure everything. Twenty-plus categories of camera, lighting, grip, and sound — browse by department, build your package.</p>
-        <a href="rentals.html" class="btn ghost" style="align-self:flex-start; margin-top:1.8rem;">Browse the full kit →</a>
-      </div>
-      <div class="inv-acc">
-        <a class="acol full reveal" href="all.html" style="--img:url(media/products/all-inventory.webp); --reveal-d:0s;" aria-label="See all inventory">
-          <span class="acol-img"></span><span class="acol-label">All</span>
-        </a>
-        <a class="acol reveal" href="camera.html" style="--img:url(media/products/cat-camera.webp); --reveal-d:.08s;" aria-label="Camera rentals">
-          <span class="acol-img"></span><span class="acol-label">Camera</span>
-        </a>
-        <a class="acol reveal" href="camera.html" style="--img:url(media/products/cat-lenses.webp); --reveal-d:.16s;" aria-label="Lens rentals">
-          <span class="acol-img"></span><span class="acol-label">Lenses</span>
-        </a>
-        <a class="acol reveal" href="rentals.html" style="--img:url(media/products/cat-lighting.webp); --reveal-d:.24s;" aria-label="Lighting rentals">
-          <span class="acol-img"></span><span class="acol-label">Lighting</span>
-        </a>
-        <a class="acol reveal" href="grip-truck.html" style="--img:url(media/products/cat-grip.webp); --reveal-d:.32s;" aria-label="Grip rentals">
-          <span class="acol-img"></span><span class="acol-label">Grip</span>
-        </a>
-        <a class="acol reveal" href="sound.html" style="--img:url(media/products/cat-sound.webp); --reveal-d:.40s;" aria-label="Sound rentals">
-          <span class="acol-img"></span><span class="acol-label">Sound</span>
-        </a>
-      </div>
+    <div class="inv-intro reveal from-left">
+      <p class="eyebrow">The Kit</p>
+      <h2 class="head">The inventory <span class="y">runs deep.</span></h2>
+      <p class="body">RED Komodo. DZOFilm anamorphics. Nanlux 2400B. Aputure everything. Twenty-plus categories of camera, lighting, grip, and sound — browse by department, build your package.</p>
+      <a href="rentals.html" class="btn ghost" style="align-self:flex-start; margin-top:1.8rem;">Browse the full kit →</a>
     </div>
+  </div>
+  <div class="inv-acc">
+    <a class="acol full reveal" href="all.html" style="--img:url(media/products/all-inventory.webp); --reveal-d:0s;" aria-label="See all inventory">
+      <span class="acol-img"></span><span class="acol-label">All</span>
+    </a>
+    <a class="acol reveal" href="camera.html" style="--img:url(media/products/cat-camera.webp); --reveal-d:.08s;" aria-label="Camera rentals">
+      <span class="acol-img"></span><span class="acol-label">Camera</span>
+    </a>
+    <a class="acol reveal" href="camera.html" style="--img:url(media/products/cat-lenses.webp); --reveal-d:.16s;" aria-label="Lens rentals">
+      <span class="acol-img"></span><span class="acol-label">Lenses</span>
+    </a>
+    <a class="acol reveal" href="rentals.html" style="--img:url(media/products/cat-lighting.webp); --reveal-d:.24s;" aria-label="Lighting rentals">
+      <span class="acol-img"></span><span class="acol-label">Lighting</span>
+    </a>
+    <a class="acol reveal" href="grip-truck.html" style="--img:url(media/products/cat-grip.webp); --reveal-d:.32s;" aria-label="Grip rentals">
+      <span class="acol-img"></span><span class="acol-label">Grip</span>
+    </a>
+    <a class="acol reveal" href="sound.html" style="--img:url(media/products/cat-sound.webp); --reveal-d:.40s;" aria-label="Sound rentals">
+      <span class="acol-img"></span><span class="acol-label">Sound</span>
+    </a>
+  </div>
+  <div class="wrap" style="margin-top:1.6rem;">
     <p class="inv-note">Inventory updated regularly. Looking for something not on the list? We partner with the biggest houses in the country — we'll get it. <span style="color:#8b96a1;">(Product photos &amp; shopping cart coming with the gear shoot.)</span></p>
   </div>
 </section>
