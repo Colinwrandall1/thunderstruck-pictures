@@ -13,10 +13,10 @@
 <style>
   *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --bg: #0a1730;
-    --panel: #142340;
-    --panel-2: #1a2b50;
-    --line: #293f65;
+    --bg: #070f1e;
+    --panel: #111b2e;
+    --panel-2: #16233a;
+    --line: #24354e;
     --text: #f4f8ff;
     --muted: #9fb4ce;
     --yellow: #9fc4ee;
@@ -37,7 +37,7 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 50;
     display: flex; align-items: center; justify-content: space-between;
     padding: 0.85rem clamp(1.2rem, 4vw, 3rem);
-    background: rgba(10,23,48,0.92);
+    background: rgba(8,15,30,0.91);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--line);
     /* Hidden through the entire storm reveal; slides in only once the hero
@@ -69,19 +69,19 @@
     transition: border-color 0.15s, color 0.15s;
   }
   .cart-trigger:hover { border-color: var(--yellow); color: var(--yellow); }
-  .cart-trigger .count { background: var(--yellow); color: #0c1830; padding: 0.1rem 0.5rem; font-size: 0.8rem; min-width: 1.5rem; text-align: center; }
+  .cart-trigger .count { background: var(--yellow); color: #0b111d; padding: 0.1rem 0.5rem; font-size: 0.8rem; min-width: 1.5rem; text-align: center; }
   .cart-trigger .count.zero { background: var(--line); color: var(--muted); }
   .btn {
     display:inline-block; cursor:pointer;
     background:linear-gradient(180deg,#ffffff,#cdddf0 45%,#9fb4ce 55%,#eaf2fb);
-    color:#0e1a32; font-family:'Saira Condensed',sans-serif; font-weight:700;
+    color:#0c1524; font-family:'Saira Condensed',sans-serif; font-weight:700;
     font-size:0.92rem; letter-spacing:0.14em; text-transform:uppercase;
     padding:0.72rem 1.5rem; border:none; border-radius:3px;
     box-shadow:0 0 18px rgba(150,190,255,0.3), inset 0 1px 0 rgba(255,255,255,0.85);
     transition:transform .15s, box-shadow .2s;
   }
   .btn:hover { transform:translateY(-1px); box-shadow:0 0 26px rgba(150,190,255,0.5), inset 0 1px 0 rgba(255,255,255,0.95); }
-  .btn.ghost { background:transparent; color:var(--text); border:1px solid #3d567e; box-shadow:none; }
+  .btn.ghost { background:transparent; color:var(--text); border:1px solid #384f6f; box-shadow:none; }
   .btn.ghost:hover { border-color:#9fc4ee; box-shadow:0 0 16px rgba(159,196,238,0.25); }
   @media (max-width: 960px) { .nav .links a:not(.cart-trigger) { display: none; } }
 
@@ -95,12 +95,12 @@
   }
   .hero-plate, .hero-plate-lit {
     position: absolute; inset: 0;
-    background-color: #091324; background-size: cover; background-position: center center; background-repeat: no-repeat;
+    background-color: #070d17; background-size: cover; background-position: center center; background-repeat: no-repeat;
   }
   .hero-plate {
     background-image:
       url("assets/hero-plate.webp"),
-      linear-gradient(180deg, #0f1c34 0%, #0d1830 55%, #08111f 100%);
+      linear-gradient(180deg, #0d1626 0%, #0a1120 55%, #060b15 100%);
   }
   .hero-plate-lit { background-image: url("assets/hero-plate-lit.webp"); opacity: var(--reveal, 0); will-change: opacity; }
   .hero-bolt {
@@ -188,7 +188,7 @@
   @media (max-width: 880px){ .truck-grid{ grid-template-columns: 1fr; } }
   .truck-photo {
     position: relative; aspect-ratio: 1800/1018; border: 1px solid var(--line); overflow: hidden;
-    background: #091324 center/cover no-repeat;
+    background: #070d17 center/cover no-repeat;
   }
   .features { list-style: none; margin-top: 2rem; display: grid; gap: 0.2rem; }
   .features li { display:flex; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--line); align-items:flex-start; }
@@ -197,7 +197,7 @@
   .features .v { color: var(--muted); font-size: 0.95rem; line-height: 1.5; }
 
   /* INVENTORY */
-  .inv { background: linear-gradient(180deg, #0d1830 0%, #101e3a 100%); }
+  .inv { background: linear-gradient(180deg, #0a1120 0%, #0e1728 100%); }
   .inv-head { display:flex; justify-content:space-between; align-items:flex-end; gap:2rem; flex-wrap:wrap; margin-bottom: 2.5rem; }
   /* INVENTORY — two-column: heading left, expanding accordion right */
   .inv-layout { display:flex; align-items:center; gap:clamp(2rem,5vw,4.5rem); }
@@ -244,7 +244,7 @@
   .why-grid .col p { color: var(--muted); line-height:1.65; font-size:0.95rem; }
 
   /* CREW */
-  .crew { background: linear-gradient(180deg, #101e3a 0%, #0a1426 100%); }
+  .crew { background: linear-gradient(180deg, #0e1728 0%, #080e19 100%); }
   .crew-grid { display:grid; grid-template-columns:1fr 1fr; gap: clamp(1.5rem,4vw,3rem); }
   @media (max-width: 760px){ .crew-grid{ grid-template-columns:1fr; gap:2.5rem; } }
   .person .role { font-family:'JetBrains Mono',monospace; color:var(--yellow); font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:0.6rem; }
@@ -261,20 +261,20 @@
   .academy p.lead { margin: 0 auto; }
   .notify { margin-top: 2rem; display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap; }
   .notify input {
-    background:#0d1830; border:1px solid var(--line); color:#fff; padding:0.7rem 1rem; border-radius:2px;
+    background:#0a1120; border:1px solid var(--line); color:#fff; padding:0.7rem 1rem; border-radius:2px;
     font-family:'Inter',sans-serif; font-size:0.9rem; min-width: 240px;
   }
   .notify input:focus { outline:none; border-color: var(--yellow); }
 
   /* BOOK / CONTACT */
-  .book { background: linear-gradient(180deg, #0d1830, #091324); text-align:center; }
+  .book { background: linear-gradient(180deg, #0a1120, #070d17); text-align:center; }
   .book h2.head { max-width: 18ch; margin: 0 auto 1.6rem; }
   .book .sub { color:var(--muted); margin-bottom: 2.2rem; }
   .book .meta-row { margin-top:2.5rem; display:flex; gap:2rem; justify-content:center; flex-wrap:wrap; color:var(--muted); font-family:'JetBrains Mono',monospace; font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase; }
   .book .meta-row a:hover { color: var(--yellow); }
 
   /* FOOTER */
-  footer { background: #08111f; border-top:1px solid var(--line); padding: 2.5rem clamp(1.2rem,4vw,3rem); }
+  footer { background: #060b15; border-top:1px solid var(--line); padding: 2.5rem clamp(1.2rem,4vw,3rem); }
   .foot-in { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap; }
   .foot-in .brand { font-family:'Saira Condensed',sans-serif; text-transform:uppercase; letter-spacing:0.04em; font-size:1.1rem; }
   .foot-in .brand .spark{ color:var(--yellow);}
@@ -294,7 +294,7 @@
 
   /* ---------- SHOWCASE — full-bleed brand inventory shot ---------- */
   .showcase { position: relative; width: 100%; overflow: hidden;
-    background: #0a1730; border-top: 1px solid #142340; border-bottom: 1px solid #142340;
+    background: #070f1e; border-top: 1px solid #111b2e; border-bottom: 1px solid #111b2e;
     aspect-ratio: 1654 / 951; }
   .showcase img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
     will-change: transform;
@@ -302,7 +302,7 @@
   /* Subtle vignette so the dark stage edges blend with surrounding sections */
   .showcase::after { content:""; position:absolute; inset:0; pointer-events:none;
     background:
-      linear-gradient(180deg, rgba(10,23,48,0.45) 0%, rgba(10,23,48,0) 14%, rgba(10,23,48,0) 86%, rgba(10,23,48,0.55) 100%); }
+      linear-gradient(180deg, rgba(8,15,30,0.45) 0%, rgba(8,15,30,0) 14%, rgba(8,15,30,0) 86%, rgba(8,15,30,0.55) 100%); }
   /* On very tall narrow screens the 16:9-ish shot looks tiny — cap at content width
      so it always feels like a deliberate cinema moment, not a stretched poster. */
   @media (max-aspect-ratio: 1/1) { .showcase { aspect-ratio: 4 / 3; } }
@@ -354,9 +354,9 @@
         <svg viewBox="0 0 1600 250" role="img" aria-label="Thunderstruck" preserveAspectRatio="xMidYMid meet">
           <defs>
             <radialGradient id="tsScrim" cx="50%" cy="54%" r="60%">
-              <stop offset="0%" stop-color="#0a1730" stop-opacity="0.78"/>
-              <stop offset="52%" stop-color="#0a1730" stop-opacity="0.55"/>
-              <stop offset="100%" stop-color="#0a1730" stop-opacity="0"/>
+              <stop offset="0%" stop-color="#070f1e" stop-opacity="0.78"/>
+              <stop offset="52%" stop-color="#070f1e" stop-opacity="0.55"/>
+              <stop offset="100%" stop-color="#070f1e" stop-opacity="0"/>
             </radialGradient>
             <mask id="tsMask">
               <rect x="0" y="0" width="1600" height="250" fill="#fff"/>
