@@ -2,10 +2,13 @@
    inventory.js provides the catalog index (name, price, spec, photo, dept, cat).
    This file adds the long description, kit list, and optional gallery shots.
    Items without an entry here still render fine — they just show the basics
-   (hero block + related row), skipping the kit/story section entirely. */
+   (hero block + related row), skipping the kit/story section entirely.
+
+   Lighting + power copy is from Martin's Google Slides deck verbatim
+   ("Thunderstruck Pictures Website Product Pages Content for Lighting Category"). */
 const PRODUCT_DETAILS = {
 
-  // ========== CAMERA ==========
+  // ========== CAMERA (Martin doesn't have a camera deck yet — copy is mine) ==========
 
   'red-komodo': {
     blurb: 'A workhorse 6K Super-35 cinema body that punches well above its weight — Vista Vision color science in a body small enough to fly, gimbal, or rig anywhere.',
@@ -103,83 +106,206 @@ const PRODUCT_DETAILS = {
     ],
   },
 
-  // ========== LIGHTING ==========
+  // ========== LIGHTING (from Martin's deck verbatim) ==========
 
   'nanlux-2400b': {
-    blurb: 'The Nanlux Evoke 2400B — a robust 2400W bi-color LED that throws like a 4K HMI but runs on a 120V household outlet.',
+    blurb: 'A robust and versatile beast comparable to a 4K HMI — the most powerful LED spotlight that runs on a 120V household outlet, with wireless CRMX control.',
     description: [
-      'The most powerful single-fixture LED in our kit. Output is comparable to a 4K HMI, but power draw fits a 20A circuit, so you can run it off house power without a generator. Wireless CRMX control means you can dim, change color, or fire pulses from the cart.',
-      'Three reflectors (30°, 45°, 60°) cover every common beam spread, with barndoors for clean cutting. The included flight case carries everything — head, control box, reflectors, and cables — and breaks down for travel.'
+      'This robust and versatile beast is comparable to a 4K HMI light. It\'s the most powerful LED spotlight capable of running on a 120V household outlet. It can be wirelessly controlled via CRMX.'
     ],
     kit: [
-      'Nanlux Evoke 2400B LED head',
-      '45° reflector',
-      '30° reflector',
-      '60° reflector',
+      'Nanlux Evoke 2400B LED Light',
+      '45° Reflector',
+      '30° Reflector',
+      '60° Reflector',
       'Barndoors',
-      'Power supply',
-      'Quick release clamp',
-      'DC connection cable',
-      'AC power cable',
-      'Flight case + reflector bag'
+      'Power Supply',
+      'Quick Release Clamp',
+      'DC Connection Cable',
+      'AC Power Cable',
+      'Flight Case and Reflector Bag'
     ],
   },
 
   'aputure-1200x': {
-    blurb: 'Aputure\'s Storm 1200x — a 1200W bi-color LED with the BLAIR engine and built-in CRMX, equivalent to an 1800W HMI.',
+    blurb: 'A 1,200W bi-color lamp with Aputure\'s BLAIR light engine and built-in CRMX — output equivalent to an 1,800W HMI.',
     description: [
-      'The Storm 1200x delivers breakthrough color accuracy from Aputure\'s BLAIR light engine. Output equals an 1800W HMI without the noise, heat, or ballast hassle. CRMX is built into the head — no extra receiver to rig.',
-      'Two reflectors cover most setups: 15° for a tight punch, 45° for a wider spread. The 30° is a clean middle-of-the-road key option. The rolling case carries everything one PA can move.'
+      'This 1200 watt bi-color lamp features the BLAIR light engine for breakthrough color accuracy and built-in wireless CRMX control. The light output is equivalent to a 1800-watt HMI.'
     ],
     kit: [
-      'Aputure Storm 1200x LED head',
-      'Control box',
-      '45° reflector',
-      '30° reflector',
-      '15° reflector',
-      'Weatherproof head cable',
-      'AC power cable',
+      'Aputure Storm 1200x LED Light',
+      '45° Reflector',
+      '15° Reflector',
+      '30° Reflector',
+      'Control Box',
+      'Weatherproof Head Cable',
+      'AC Power Cable',
       'Skid',
-      'Rolling case + reflector bag'
+      'Rolling Case and Reflector Bag'
+    ],
+  },
+
+  'aputure-f10': {
+    blurb: 'The CF12 Fresnel + Barndoors set for the Storm 1200x — intensifies output up to 9× to 60,000 lux, with 8-leaf barndoors for clean cutting.',
+    description: [
+      'The CF12 Fresnel is designed for the STORM 1200x. It intensifies the light output by up to 9 times, producing up to 60,000 lux. It focuses the light\'s beam spread from a tight 15° to a 45° medium flood with smooth falloff from the center to the edge.',
+      'The CF12 Barndoors are designed for the CF12 Fresnel. The 8-leaf barndoors enable you to quickly shape and/or cut the light output.'
+    ],
+    kit: [
+      'Aputure CF12 Fresnel',
+      'Aputure CF12 Barndoors'
     ],
   },
 
   'aputure-600x': {
-    blurb: 'The Aputure LS 600x Pro — a daylight-to-tungsten-tunable 600W LED that runs on V-mount when AC isn\'t around.',
+    blurb: 'The LS 600x Pro — variable color temperature 2700–6500K with impressive output, Sidus Link + CRMX control, and V-Mount battery options.',
     description: [
-      'A full bi-color tunable range from 2700K to 6500K, with output strong enough to be a key on most narrative interiors. Sidus Link wireless control and CRMX let you adjust the head from across the set without a runner.',
-      'V-mount battery plate on the control box means you can take this fixture into vans, cars, or anywhere off-AC. Water-resistant for outdoor work — daylight key for exteriors, with no scrim cart to wrangle.'
+      'The LS 600x Pro boasts a variable color temperature range of 2700 to 6500K while still maintaining an impressive output. Adjustments can be made locally on the fixture or wirelessly from a distance via the Sidus Link mobile app and CRMX. The light can be powered by optional V-Mount batteries when AC power is unavailable. The 600x Pro is water-resistant.'
     ],
     kit: [
-      'Aputure LS 600x Pro LED head',
-      'F10 Fresnel',
-      'F10 barndoors',
-      'Hyper reflector',
-      'Control box (V-mount plates)',
-      'Weatherproof head cable',
-      'AC power cable'
+      'Aputure LS 600x Pro LED Light',
+      'Aputure F10 Fresnel',
+      'Aputure F10 Barndoors',
+      'Hyper Reflector',
+      'Control Box w/ V-Mount Battery Plates',
+      'Weatherproof Head Cable',
+      'Power Cable'
+    ],
+  },
+
+  'aputure-spot': {
+    blurb: 'The Aputure Spotlight Mount — dual drop-in slot for gobos, gels, or iris, with 36° and 19° interchangeable lenses for ellipsoidal-style control.',
+    description: [
+      'The spotlight\'s design incorporates a dual drop-in slot, which can accept the included B-size gobo holder, gel holder, or an adjustable iris for further control over the shape and size of the light beam. Like an ellipsoidal light, the 36° and 19° lenses can be easily swapped to achieve a different beam angle.'
+    ],
+    kit: [
+      'Aputure Spotlight Mount',
+      '36° Lens',
+      '19° Lens',
+      'Gobo Holder with 3 x B-Size Gobos',
+      'Gel Frame',
+      'Lens Pen, Blower, & Cleaning Cloth'
+    ],
+  },
+
+  'aputure-60x': {
+    blurb: 'The LS 60x — bi-color 2700–6500K with a 15–45° focusing beam, NP-F or V-mount battery power for off-grid setups.',
+    description: [
+      'The LS 60x has a color temperature range of 2700 to 6500K. The light\'s beam spread ranges from a tight 15 degrees to medium flood of 45 degrees and can be further modified by the barndoors. It can run on NP-F-type batteries or a V-mount battery in situations where AC electric is undesirable.'
+    ],
+    kit: [
+      'Aputure LS 60x LED Light',
+      'Barndoors',
+      'Power Supply with Cable',
+      'NP-F Battery Plate Adapter',
+      'D-Tap Cable',
+      'Bowens Mount Adapter'
+    ],
+  },
+
+  'mega-6fc': {
+    blurb: 'A 320W full-color RGB mat light (4\' × 3\') with CRI/TLCI 97+, 16-bit dimming, 20 effects, and wired or wireless DMX control.',
+    description: [
+      'This large 320-watt, full-color RGB mat light boasts a high color accuracy with CRI/TLCI ratings of 97+ and offers smooth 16-bit dimming between 0-100% and 20 lighting effects. The LED mat fits into a 3\' x 4\' softbox and frame for quick assembly in minutes. It can be powered with the AC adapter or two optional V-mount batteries. Control options include wired DMX via 5-pin DMX ports, or a wireless DMX receiver.'
+    ],
+    kit: [
+      'LED Flexible Mat',
+      'Mounting Frame with Clamp',
+      'Softbox with Diffuser',
+      'Grid',
+      'Control Box with V-Mount Battery Plates',
+      'Head Extension Cable 26\''
     ],
   },
 
   'astera-titan': {
-    blurb: 'An 8-tube Astera Titan kit — wireless, battery-powered RGB tubes that go anywhere a stand or a piece of gaff tape can.',
+    blurb: 'An 8-tube Astera Titan kit — wireless RGB tubes with 20-hour battery life, CRMX + Astera App control, and a charging case that powers them inside.',
     description: [
-      'Titan tubes have become the rigging-tape Swiss Army knife of modern lighting. Each 3.4-foot tube runs 20 hours off its internal battery, controls via CRMX or the Astera app, and produces a usable amount of light at the full RGB+CCT range.',
-      'Use them as practical replacements (under cabinets, behind shelves), as set decoration (built into walls), or as a soft 8-light grid hanging from C-stands. The charging case stores and charges all 8 simultaneously.'
+      'With a wide 120° beam spread, the Titan Tube is ideal for creating a soft direct light on your subject for use as an accent light or design element on set. The wireless tube is powered by an integrated battery that will give you 20 hours of runtime. It features 16 LED emitters in a 3.4\' long tube that you can mount onto a set or on a stand, hang from a grid, or even hold in your hand. The hard case features a power box that can charge the tubes inside. The lights can be controlled by CRMX or the Astera App.'
     ],
     kit: [
-      '8× Astera Titan tubes',
-      'Charging power box',
-      '8× foldable stands',
-      '16× baby pin spigots',
-      '16× metal holders + cotter pins',
-      '16× M5 eyebolts',
-      '8× waterproof charging port covers',
-      'Charging case'
+      '8 x Astera Titan Tubes',
+      'Power Box',
+      '8 x Foldable Stands',
+      '16 x Baby Pin Double-Ended Spigots',
+      '16 x Metal Holders + Cotter Pins',
+      '16 x M5 Eyebolts',
+      '8 x Waterproof Covers for Charging Ports',
+      'Charging Case'
     ],
   },
 
-  // ========== GRIP / POWER ==========
+  'infinibar': {
+    blurb: 'A 4ft RGB LED tube with 96 pixel zones — built directly into sets or rigged with the connector ecosystem to make custom shapes.',
+    description: [
+      'The Infinibar is designed to be a key light, built directly into sets, or used with its connector ecosystem to create new shapes and designs. The light\'s RGBWW chipset produces color temperature light of 2000 to 10,000K and has 96 individual pixels (or lighting zones). It can be wirelessly controlled by CRMX or the Sidus Link App. The unit features 9 built-in lighting effects.'
+    ],
+    kit: [
+      'Aputure Infinibar',
+      'DC Power Adapter (9.8\')',
+      'AC Locking Power Cable (4.9\')',
+      'Clamp to Baby Pin Adapter',
+      '2 x Magnetic Spacers',
+      'Straight Connector'
+    ],
+  },
+
+  'mc-pro': {
+    blurb: 'A palm-size RGB LED with 2,000–10,000K range, 45° tight beam, CRMX + Sidus Link control, IP65, USB-rechargeable, with built-in magnets.',
+    description: [
+      'The MC Pro has an impressive color temperature range from 2,000 to 10,000K and a tight beam spread of 45° for increased intensity. This light allows you to add color to your production and can be used for in-camera practical effects or as a portable accent light.',
+      'You can control it remotely using the Sidus Link app or CRMX. The fixture is rated IP65 for wet weather resistance. Its USB-rechargeable battery lasts up to two hours at maximum output and quickly recharges in 90 minutes. It easily fits in the palm of your hand and attaches to various metal objects via its built-in magnets. Additionally, a 1/4"-20 thread allows you to utilize other mounting options.'
+    ],
+    kit: [
+      'Aputure MC Pro',
+      'MC Pro Flat Diffuser',
+      'MC Pro Dome Diffuser',
+      'MC Pro Light Control Grid (30°)',
+      'Cold Shoe Ball Head',
+      '1/4"-20 Screw to Magnetic Plate Adapter',
+      'USB-C Charging Cable',
+      '4 x Adhesive Magnetic Plates'
+    ],
+  },
+
+  'mc': {
+    blurb: 'A palm-size multifunction RGBWW light with built-in magnets, OLED display, 9 effects, and Sidus Link remote control.',
+    description: [
+      'This small, palm-size multifunction light can be mounted via a 1/4"-20 thread or attached to metal objects via its built-in magnets. It features RGB LEDs as well as tungsten- and daylight-balanced LEDs. The compact light also packs 9 built-in special effects. You can control it with its native buttons, control wheels, and a small OLED display in the top corner, or remotely using the Aputure Sidus Link.'
+    ],
+    kit: [
+      'Aputure MC LED Light',
+      'Silicone Rubber Diffuser',
+      'Magic Tape',
+      'USB-C Charging Cable'
+    ],
+  },
+
+  'b7c': {
+    blurb: 'A 7W RGBWW smart bulb with standard E26/E27 base, 2,000–10,000K white range, Bluetooth control via Sidus Link, and a 70-min internal battery.',
+    description: [
+      'This 7W RGBWW LED smart bulb has a standard E26/E27 household light bulb socket screw-in base. The white light range of 2000 to 10,000K blends in seamlessly in any ambient light situation, and you can match other light fixtures.',
+      'The bulb can be controlled with onboard buttons or wirelessly via Bluetooth up to 164\' using the Sidus Link app, and it has 9 lighting special effects. It has a built-in rechargeable battery that will give you 70 minutes of runtime per charge.'
+    ],
+    kit: [
+      'Aputure B7C RGBWW LED Bulb'
+    ],
+  },
+
+  'c7r': {
+    blurb: 'A 10W RGBWW smart bulb with standard E26/E27 base, 2,000–10,000K white range, Bluetooth control via Godox Light app, and internal rechargeable battery.',
+    description: [
+      'This 10W RGBWW LED smart bulb has a standard E26/E27 household light bulb socket screw-in base. The white light range of 2000 to 10,000K blends in seamlessly in any ambient light situation, and you can match other light fixtures.',
+      'The bulb is controlled wirelessly via Bluetooth using the Godox Light app. It has a internal rechargeable battery.'
+    ],
+    kit: [
+      'Godox C7R RGBWW LED Bulb',
+      'USB-C Cable',
+      'Round Cup Light Bouncer'
+    ],
+  },
+
+  // ========== GRIP / POWER (from Martin's deck verbatim where present) ==========
 
   'grip-truck-package': {
     blurb: 'The whole rig — 3-ton grip truck, full lighting + grip package, distro, generator, and a working grip to deliver and operate it.',
@@ -198,29 +324,37 @@ const PRODUCT_DETAILS = {
   },
 
   'honda-eu2200': {
-    blurb: 'A quiet 2,200-watt Honda inverter generator — the same clean power as your wall outlet, in a portable case.',
+    blurb: 'Honda\'s advanced inverter technology — 2,200W of super quiet, lightweight, fuel-efficient power that\'s as reliable as your wall outlet.',
     description: [
-      'Honda\'s commercial-grade EU2200i is our go-to silent power source for location work. Inverter technology means the output is genuinely clean — safe for any LED fixture, monitor, or battery charger. Fuel-efficient enough to run a Storm 1200x all day on a 5-gallon can.',
-      'Lightweight enough that one person can lift it in and out of a vehicle. Quiet enough to sit just off-frame on a dialogue scene without anyone noticing.'
+      'Honda\'s advanced inverter technology provides 2,200 watts of super quiet, lightweight and fuel-efficient power that is as reliable as the power you get from your outlets at home. The commercial-grade EU2200i engine can power a wide variety of light fixtures on your production.'
     ],
     kit: [
-      'Honda EU2200i 2,200W inverter generator',
-      '5-gallon gas can',
-      'Quick-start instructions'
+      'Honda EU2200i Generator',
+      '5-Gallon Gas Can'
     ],
   },
 
   'delta-pro': {
-    blurb: 'A 3,600W EcoFlow Delta Pro — silent battery power that can run the Aputure 1200x or Nanlux 2400B for hours.',
+    blurb: 'The ultimate portable power station for filmmakers — 3,600W AC output that powers a 1200x or 2400B, recharges from a wall outlet in 2.7 hours.',
     description: [
-      'When even a quiet Honda isn\'t quiet enough — dialogue interiors, libraries, hospitals — the Delta Pro is the silent option. 3,600W continuous AC output handles the biggest fixtures in our kit, and the battery charges back up in 2.7 hours from any wall outlet.',
-      'Built-in wheels and a retractable handle mean one person moves it. Multiple AC outlets, USB, and 12V outputs cover everything from a Komodo charger to a tea kettle for craft.'
+      'Powered by EcoFlow, the Aputure Delta Pro is the ultimate portable power station for filmmakers. The unit offers a 3,600W AC output to power high-output light fixtures on location such as the Aputure 1200x and Nanlux 2400B. The battery can be fully charged from a standard AC wall outlet in 2.7 hours. The 99 lb unit features wheels and a retractable handle for easy transport.'
     ],
     kit: [
-      'Aputure EcoFlow Delta Pro battery (3,600W)',
-      'AC charging cable',
-      'Car charging cable',
-      'Solar charging cable'
+      'Aputure Ecoflow Delta Pro Battery',
+      'AC Charging Cable',
+      'Car Charging Cable',
+      'Solar Charging Cable'
+    ],
+  },
+
+  'jackery-880': {
+    blurb: 'High-powered with 2,000W peak / 1,000W continuous output and 880Wh capacity — charges 7 devices simultaneously on location.',
+    description: [
+      'High-powered with 2000W peak/1000W continuous output and an 880Wh capacity, the Jackery Explorer can handle most outdoor situations. It can charge 7 different devices simultaneously on location, such as a LED light, drone, mobile phone, iPad, laptop, camera battery, and fan.'
+    ],
+    kit: [
+      'Jackery Power Station 880 Battery',
+      'AC Charging Cable'
     ],
   },
 
@@ -241,7 +375,7 @@ const PRODUCT_DETAILS = {
     ],
   },
 
-  // ========== SOUND ==========
+  // ========== SOUND (Martin doesn't have a sound deck yet — copy is mine) ==========
 
   'sd-633': {
     blurb: 'The Sound Devices 633 — a 6-input mixer/recorder that\'s been the workhorse of indie production sound for a decade.',
