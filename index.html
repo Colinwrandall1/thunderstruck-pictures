@@ -206,7 +206,7 @@
   .inv-intro .body { max-width: 64ch; }
   .inv-acc { --h: clamp(260px,30vw,360px); --grow-exp:4; --grow-thin:1; --gap:8px;
     display:flex; gap:var(--gap); align-items:stretch; height:var(--h);
-    width:100%; padding: 0 clamp(1rem,2.5vw,1.6rem); box-sizing:border-box; }
+    width:100%; margin-top:2.4rem; box-sizing:border-box; }
   .acol { position:relative; flex:var(--grow-thin) 1 0; height:var(--h); overflow:hidden;
     border:1px solid var(--line); background:#070f1e; text-decoration:none; cursor:pointer;
     min-width:0;
@@ -245,7 +245,6 @@
   .acol:hover .acol-label, .acol:focus-visible .acol-label { opacity:0; }
   @media (max-width:880px){
     .inv-layout { flex-direction:column; align-items:stretch; gap:2.4rem; }
-    .inv-acc { padding: 0 1rem; }
   }
   @media (max-width:680px){
     .inv-acc { flex-wrap:wrap; height:auto; align-items:stretch; gap:6px; }
@@ -442,29 +441,27 @@
       <p class="body">RED Komodo. DZOFilm anamorphics. Nanlux 2400B. Aputure everything. Twenty-plus categories of camera, lighting, grip, and sound — browse by department, build your package.</p>
       <a href="rentals.html" class="btn ghost" style="align-self:flex-start; margin-top:1.8rem;">Browse the full kit →</a>
     </div>
-  </div>
-  <div class="inv-acc">
-    <a class="acol full reveal" href="all.html" style="--img:url(media/products/all-inventory.webp); --reveal-d:0s;" aria-label="See all inventory">
-      <span class="acol-img"></span><span class="acol-label">All</span>
-    </a>
-    <a class="acol reveal" href="camera.html" style="--img:url(media/products/cat-camera.webp); --reveal-d:.08s;" aria-label="Camera rentals">
-      <span class="acol-img"></span><span class="acol-label">Camera</span>
-    </a>
-    <a class="acol reveal" href="camera.html" style="--img:url(media/products/cat-lenses.webp); --reveal-d:.16s;" aria-label="Lens rentals">
-      <span class="acol-img"></span><span class="acol-label">Lenses</span>
-    </a>
-    <a class="acol reveal" href="rentals.html" style="--img:url(media/products/cat-lighting.webp); --reveal-d:.24s;" aria-label="Lighting rentals">
-      <span class="acol-img"></span><span class="acol-label">Lighting</span>
-    </a>
-    <a class="acol reveal" href="grip-truck.html" style="--img:url(media/products/cat-grip.webp); --reveal-d:.32s;" aria-label="Grip rentals">
-      <span class="acol-img"></span><span class="acol-label">Grip</span>
-    </a>
-    <a class="acol reveal" href="sound.html" style="--img:url(media/products/cat-sound.webp); --reveal-d:.40s;" aria-label="Sound rentals">
-      <span class="acol-img"></span><span class="acol-label">Sound</span>
-    </a>
-  </div>
-  <div class="wrap" style="margin-top:1.6rem;">
-    <p class="inv-note">Inventory updated regularly. Looking for something not on the list? We partner with the biggest houses in the country — we'll get it. <span style="color:#8b96a1;">(Product photos &amp; shopping cart coming with the gear shoot.)</span></p>
+    <div class="inv-acc">
+      <a class="acol full reveal" href="all.html" style="--img:url(media/products/all-inventory.webp); --reveal-d:0s;" aria-label="See all inventory">
+        <span class="acol-img"></span><span class="acol-label">All</span>
+      </a>
+      <a class="acol reveal" href="camera.html" style="--img:url(media/products/cat-camera.webp); --reveal-d:.08s;" aria-label="Camera rentals">
+        <span class="acol-img"></span><span class="acol-label">Camera</span>
+      </a>
+      <a class="acol reveal" href="camera.html" style="--img:url(media/products/cat-lenses.webp); --reveal-d:.16s;" aria-label="Lens rentals">
+        <span class="acol-img"></span><span class="acol-label">Lenses</span>
+      </a>
+      <a class="acol reveal" href="rentals.html" style="--img:url(media/products/cat-lighting.webp); --reveal-d:.24s;" aria-label="Lighting rentals">
+        <span class="acol-img"></span><span class="acol-label">Lighting</span>
+      </a>
+      <a class="acol reveal" href="grip-truck.html" style="--img:url(media/products/cat-grip.webp); --reveal-d:.32s;" aria-label="Grip rentals">
+        <span class="acol-img"></span><span class="acol-label">Grip</span>
+      </a>
+      <a class="acol reveal" href="sound.html" style="--img:url(media/products/cat-sound.webp); --reveal-d:.40s;" aria-label="Sound rentals">
+        <span class="acol-img"></span><span class="acol-label">Sound</span>
+      </a>
+    </div>
+    <p class="inv-note" style="margin-top:1.6rem;">Inventory updated regularly. Looking for something not on the list? We partner with the biggest houses in the country — we'll get it. <span style="color:#8b96a1;">(Product photos &amp; shopping cart coming with the gear shoot.)</span></p>
   </div>
 </section>
 
