@@ -43,7 +43,8 @@ const PRODUCT_DETAILS = {
       'Hard case'
     ],
     gallery: [
-      { src: 'pavo-set.webp',   caption: '28mm T2.1' },
+      { src: 'pavo-set.webp',   caption: 'All four lenses' },
+      { src: 'pavo-set-1.webp', caption: '28mm T2.1' },
       { src: 'pavo-set-2.webp', caption: '40mm T2.1' },
       { src: 'pavo-set-3.webp', caption: '75mm T2.1' },
       { src: 'pavo-set-4.webp', caption: '135mm T2.5' },
@@ -65,7 +66,8 @@ const PRODUCT_DETAILS = {
       'DZOFilm 4-lens hard case'
     ],
     gallery: [
-      { src: 'vespid-set.webp',      caption: '16mm T2.1' },
+      { src: 'vespid-set.webp',      caption: 'All four lenses' },
+      { src: 'vespid-set-1.webp',    caption: '16mm T2.1' },
       { src: 'vespid-set-2.webp',    caption: '25mm T2.1' },
       { src: 'vespid-set-3.webp',    caption: '35mm T2.1' },
       { src: 'vespid-set-4.webp',    caption: '75mm T2.1' },
