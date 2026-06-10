@@ -226,14 +226,23 @@
   /* "All" pillar — scene shot, always visible by default (expanded) */
   .acol.full { flex-grow: var(--grow-exp); border-color: var(--line-bright); }
   .acol.full .acol-img { opacity:1; filter:none; }
-  .acol.full::before { opacity:0; }
+  /* Light blue brand tint over the All pillar's scene shot in its static state */
+  .acol.full::before {
+    background: linear-gradient(180deg, rgba(159,196,238,.18) 0%, rgba(159,196,238,.36) 100%);
+    transition: opacity .5s ease, background .5s ease;
+  }
+  /* On hover of the All pillar itself, fade the tint so the image shows clean */
+  .acol.full:hover::before, .acol.full:focus-visible::before { opacity:0; }
   /* When ANY other pillar is hovered/focused, the All pillar collapses to thin */
   .inv-acc:has(.acol:not(.full):hover) .acol.full,
   .inv-acc:has(.acol:not(.full):focus-visible) .acol.full { flex-grow: var(--grow-thin); border-color: var(--line); }
   .inv-acc:has(.acol:not(.full):hover) .acol.full .acol-img,
   .inv-acc:has(.acol:not(.full):focus-visible) .acol.full .acol-img { opacity:.55; filter:saturate(.55) brightness(.55) contrast(1.05); }
+  /* In the collapsed thin state, swap the blue tint back to the standard navy tint to match the other thin pillars */
   .inv-acc:has(.acol:not(.full):hover) .acol.full::before,
-  .inv-acc:has(.acol:not(.full):focus-visible) .acol.full::before { opacity:1; }
+  .inv-acc:has(.acol:not(.full):focus-visible) .acol.full::before {
+    background: linear-gradient(180deg, rgba(7,15,30,.55) 0%, rgba(7,15,30,.88) 100%);
+  }
   .acol .acol-bolt { width:32px; height:44px; fill:#33404c; }
   .acol .acol-soon { font-family:'JetBrains Mono',monospace; font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; color:#3a4651; }
   .acol .acol-label { position:absolute; z-index:2; left:0; right:0; top:0; bottom:0;
