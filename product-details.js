@@ -889,4 +889,46 @@ const PRODUCT_DETAILS = {
       'Carry pouch',
     ],
   },
+  'core-vmount-batt': {
+    blurb: 'V-Mount cinema batteries — Helix Max 360Wh down to NEO Slim 98Wh, plus 50Wh micros for accessory power.',
+    description: [
+      'Standard V-mount battery package for the RED Komodo and the rest of the camera build. The Helix Max 360Wh runs a Komodo build all day; the NANO Micro 50Wh slips behind a monitor for clean handheld weight.',
+      'Mix and match per shoot — flagship Helix Max for the body, NEO Minis for monitors and follow focus, NANOs for accessory power. Charging is handled by the matching Mach4 + Mini Dual chargers (rented separately).'
+    ],
+    kit: [
+      'Core Helix Max 360Wh Dual-Voltage',
+      'Core NEO Mini 147Wh V-Mount',
+      'Core NEO Mini 98Wh V-Mount (×2)',
+      'Core NANO X Micro 98Wh',
+      'Core NANO Micro 147Wh (×4)',
+      'Core NANO Micro 50Wh',
+      'Core NEO Slim 98Wh'
+    ],
+  },
+
+  'core-vmount-charger': {
+    blurb: "Core SWX Mach4 4-position V-mount rapid charger, plus two Core Mini Dual chargers — enough to keep an all-day shoot running.",
+    description: [
+      'The Mach4 charges four V-mounts simultaneously at a 4A rate — fully charges a Helix Max overnight, tops up smaller packs in under two hours. Two Core Mini Dual chargers cover smaller batteries on a cart.',
+      'Standard inclusion with any V-mount battery package. No extra rental cost; quoted alongside the batteries.'
+    ],
+    kit: [
+      'Core SWX Mach4 4-Position Charger (4A Rapid)',
+      'Core Mini Dual V-Mount Chargers (×2)',
+      'AC cables'
+    ],
+  },
+
+  'npf-batteries': {
+    blurb: 'NP-F750 batteries + travel chargers for monitors, on-camera LEDs, and audio gear. Sony L-series compatible.',
+    description: [
+      "The smaller batteries that power everything else on set — SmallHD on-camera monitors, the Aputure LS 60x and other Sony NP-F compatible LEDs, and audio recorders that accept L-series.",
+      'Includes wall-plug travel chargers so the swing set or motel can recharge overnight.'
+    ],
+    kit: [
+      'GVM / Sony NP-F750 batteries (multiple)',
+      'Travel chargers (wall-plug)',
+      'D-Tap adapter cables (on request)'
+    ],
+  },
 };

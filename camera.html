@@ -264,11 +264,13 @@
 
 <div class="tabs">
   <div class="tabs-inner">
-    <button class="tab active" data-filter="all">All <span class="count">20</span></button>
-    <button class="tab" data-filter="camera">Camera <span class="count">4</span></button>
+    <button class="tab active" data-filter="all">All <span class="count">23</span></button>
+    <button class="tab" data-filter="camera">Camera <span class="count">2</span></button>
     <button class="tab" data-filter="lens">Lenses <span class="count">5</span></button>
-    <button class="tab" data-filter="support">Support <span class="count">6</span></button>
+    <button class="tab" data-filter="support">Support <span class="count">5</span></button>
     <button class="tab" data-filter="monitor">Monitoring <span class="count">5</span></button>
+    <button class="tab" data-filter="accessories">Accessories <span class="count">3</span></button>
+    <button class="tab" data-filter="power">Power <span class="count">3</span></button>
   </div>
 </div>
 
@@ -279,8 +281,12 @@
   <div class="grid" id="grid-lens"></div>
   <div class="subcat-head" data-section="support"><h2>Support &amp; <span class="y">movement.</span></h2><span class="tag">Heads · dolly · gimbal</span></div>
   <div class="grid" id="grid-support"></div>
-  <div class="subcat-head" data-section="monitor"><h2>Monitoring &amp; <span class="y">wireless.</span></h2><span class="tag">Teradek · SmallHD</span></div>
+  <div class="subcat-head" data-section="monitor"><h2>Monitoring &amp; <span class="y">wireless.</span></h2><span class="tag">Teradek · SmallHD · PortKeys</span></div>
   <div class="grid" id="grid-monitor"></div>
+  <div class="subcat-head" data-section="accessories"><h2><span class="y">Accessories.</span></h2><span class="tag">Wireless FF · timecode · mounts</span></div>
+  <div class="grid" id="grid-accessories"></div>
+  <div class="subcat-head" data-section="power"><h2><span class="y">Power.</span></h2><span class="tag">V-Mount &amp; NP-F batteries · chargers</span></div>
+  <div class="grid" id="grid-power"></div>
   <div class="note-strip"><strong>About these rates.</strong> Daily rates shown are indicative — multi-day and weekly rates (3-day equivalent) calculate automatically at quote stage. Pickup &amp; delivery across Greater Austin; longer hauls quoted separately. <strong>Product photography for the camera package lands with the gear shoot.</strong></div>
 </main>
 
@@ -378,7 +384,7 @@ const DEPT='camera';
 let cart = {}; let days = 1;
 
 function renderCatalog(){
-  ['camera','lens','support','monitor'].forEach(cat=>{
+  ['camera','lens','support','monitor','accessories','power'].forEach(cat=>{
     document.getElementById('grid-'+cat).innerHTML = INVENTORY.filter(i=>i.dept===DEPT&&i.cat===cat).map(cardHtml).join('');
   });
 }
@@ -501,7 +507,7 @@ ${data.notes||'(none)'}`;
 function resetAfterSuccess(){ cart={}; days=1; save(); setDays(1); renderCatalog(); renderCart(); updateNav(); document.getElementById('quoteForm').reset(); document.getElementById('drawerTitle').innerHTML='Your <span class="y">quote.</span>'; closeDrawer(); }
 function applyFilter(f){
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.filter===f));
-  ['camera','lens','support','monitor'].forEach(cat=>{
+  ['camera','lens','support','monitor','accessories','power'].forEach(cat=>{
     const show=(f==='all'||f===cat);
     document.querySelector(`[data-section="${cat}"]`).style.display=show?'':'none';
     document.getElementById('grid-'+cat).style.display=show?'':'none';
