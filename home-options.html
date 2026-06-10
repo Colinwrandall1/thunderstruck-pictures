@@ -24,7 +24,7 @@
   .grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:1.4rem; padding:clamp(2.5rem,5vw,3.5rem) 0 clamp(3rem,6vw,5rem); max-width:880px; margin:0 auto; }
   @media (max-width:760px){ .grid{ grid-template-columns:1fr; max-width:520px; } }
 
-  .opt{ display:flex; flex-direction:column; background:var(--panel); border:1px solid var(--line); border-radius:10px; overflow:hidden;
+  .opt{ display:flex; flex-direction:column; background:var(--panel); border:1px solid var(--line); border-radius:8px; overflow:hidden;
     text-decoration:none; color:inherit; transition:border-color .2s, transform .2s, box-shadow .2s; }
   .opt:hover{ border-color:var(--accent); transform:translateY(-4px); box-shadow:0 18px 50px rgba(0,0,0,0.4), 0 0 30px rgba(159,196,238,0.07); }
   .opt .preview{ position:relative; height:300px; overflow:hidden; background:#05070a; }
