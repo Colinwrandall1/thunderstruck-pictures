@@ -10,6 +10,40 @@ const PRODUCT_DETAILS = {
 
   // ========== CAMERA (Martin doesn't have a camera deck yet — copy is mine) ==========
 
+  'arri-alexa-35': {
+    blurb: 'The flagship Super-35 cinema body — 17 stops of dynamic range, REVEAL Color Science, and the rental-house gold standard for episodic and feature work.',
+    description: [
+      'The ALEXA 35 is ARRI\'s first new sensor in twelve years — a Super-35 4.6K CMOS with 17 stops of dynamic range, 2.5 stops more than any previous ALEXA, and a sensitivity range from EI 160 to EI 6400. REVEAL Color Science delivers the look the industry has trusted for fifteen years, now with richer skin tones and cleaner shadows.',
+      'Our production set ships fully built — top handle, side handles, top cheese plate, V-mount battery plate adapter, PL mount, and the high-bright multi viewfinder. Pairs cleanly with our PAVO anamorphics or VESPID primes for narrative work where dynamic range, color, and a recognizable ARRI texture matter.'
+    ],
+    kit: [
+      'ARRI ALEXA 35 Super-35 4.6K body',
+      'ARRI MVF-2 Multi Viewfinder',
+      'PL mount + LBUS contacts',
+      'Top handle + cheese plate',
+      'Side handle (right)',
+      '15mm bridge plate baseplate',
+      'V-mount battery plate adapter (2×)',
+      'CFexpress Type B media'
+    ],
+  },
+
+  'sony-a7iv': {
+    blurb: 'Our default B-camera — 33MP full-frame, 4K60 10-bit, and the autofocus most projects expect for run-and-gun work.',
+    description: [
+      'The Sony A7 IV is the workhorse hybrid we reach for whenever the shoot calls for a small, fast, full-frame body — BTS, second-unit, doc, social, or pickup days. 33MP stills and 4K60 10-bit video in S-Log3 share the same body, and the real-time AF (human, animal, bird, vehicle) means you can hand it to a one-person crew without worrying about focus.',
+      'Our kit ships with the Sony FE 24–105mm f/4 G OSS — the most versatile single-lens option Sony makes — plus dual card slots (CFexpress Type A + SD UHS-II). Add a battery and you\'re shooting in under two minutes.'
+    ],
+    kit: [
+      'Sony α7 IV full-frame body (33MP)',
+      'Sony FE 24–105mm f/4 G OSS lens',
+      'NP-FZ100 battery × 2',
+      'Dual battery charger',
+      'CFexpress Type A card',
+      'Body cap + lens cap'
+    ],
+  },
+
   'red-komodo': {
     blurb: 'A workhorse 6K Super-35 cinema body that punches well above its weight — Vista Vision color science in a body small enough to fly, gimbal, or rig anywhere.',
     description: [
