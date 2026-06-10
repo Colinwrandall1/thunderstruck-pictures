@@ -426,4 +426,341 @@ const PRODUCT_DETAILS = {
     ],
   },
 
+
+  // --- New lighting + accessories (from Martin's deck, slides 7-40) ---
+
+  'light-dome-ii': {
+    blurb: 'This 16-sided modifier renders soft light with a wraparound quality.',
+    description: [
+      'This 16-sided modifier renders soft light with a wraparound quality. Its silver interior maximizes your light source\'s output. Its 24" depth produces a focused light with directional control that can be narrowed further with the 40° grid. It includes a removable inner diffuser and both 1.5-stop and 2.5-stop front diffusers. The dome uses the popular Bowens mount.',
+    ],
+    kit: [
+      'Aputure Light Dome II',
+      '1.5-Stop Front Diffuser',
+      '2.5-Stop Front Diffuser',
+      'Inner Diffuser',
+      '40° Grid',
+      'Gel Filter Holder',
+    ],
+  },
+
+  'lantern-90': {
+    blurb: 'The Lantern 90 has a 3-foot diameter and casts a near 360° soft light that spreads evenly over a large area.',
+    description: [
+      'The Lantern 90 has a 3-foot diameter and casts a near 360° soft light that spreads evenly over a large area. You can mount it horizontally or hang it overhead on a boom to raise the ambient light level, open up shadows, and let more focused fixtures work their magic. To add versatility, it includes a skirt to control the light. The lantern has a Bowens mount.',
+    ],
+    kit: [
+      'Aputure Lantern 90',
+      'Barndoor Skirt',
+    ],
+  },
+
+  'storm-80c': {
+    blurb: "The STORM 80c's BLAIR-CG chipset features blue, lime, amber, indigo, and red LEDs to deliver higher brightness levels and color accuracy levels.",
+    description: [
+      "The STORM 80c's BLAIR-CG chipset features blue, lime, amber, indigo, and red LEDs to deliver higher brightness levels and color accuracy levels. It produces an impressive CCT range of 1800 to 20,000K. The light can be controlled wirelessly via CRMX. It's rated IP65 for weather resistance.",
+    ],
+    kit: [
+      'Aputure 80c LED Light',
+      'Aputure CF4 Fresnel',
+      'Aputure CF4 Barndoors',
+      'Mini ProLock Hyper Reflector',
+      'Mini Lantern Diffuser',
+      'AC Power Cable',
+      'D-Tap to DC Barrel Power Cable',
+      'Mini ProLock to Bowens Mount Adapter',
+    ],
+  },
+
+  'spot-mini': {
+    blurb: 'This compact ellipsoidal projector is designed for the STORM 80c.',
+    description: [
+      'This compact ellipsoidal projector is designed for the STORM 80c. With a rotating barrel that allows for orientation of the integrated 4-leaf cutter, this Spotlight Mini comes with a 19° interchangeable lens. The kit also includes a gobo holder and 10 M-sized gobos for unique light projection shapes.',
+    ],
+    kit: [
+      'Aputure Spotlight Mini with 19° Lens',
+      '18-Blade Iris (M-Size)',
+      'Gobo Holder',
+      '10 x Gobos (M-Size)',
+      'Gel Holder',
+    ],
+  },
+
+  'dome-mini-iii': {
+    blurb: 'Armed with an upgraded foldable quick release mechanism, the 22.8" Light Dome Mini III accelerates the set-up time for its 16-sided circular softbox.',
+    description: [
+      'Armed with an upgraded foldable quick release mechanism, the 22.8" Light Dome Mini III accelerates the set-up time for its 16-sided circular softbox. Optimized for lightweight portability, the parabolic structure is fortified by 16 durable steel support rods, which now snap into place with the downward press of its widely-compatible Bowens Mount bracket.',
+    ],
+    kit: [
+      'Light Dome',
+      'Front Diffusion Cloth',
+      'Gold/Silver Inner Baffle',
+      '40° Light Control Grid',
+    ],
+  },
+
+  'nova-ii': {
+    blurb: 'This new 1000-watt light panel is brighter than the comparable Creamsource Vortex 8.',
+    description: [
+      'This new 1000-watt light panel is brighter than the comparable Creamsource Vortex 8. Its BLAIR-CG light engine covers the greatest range of saturated colors of any panel light on the market. It has a phenomenal CCT range from 1800 to 20,000K. The native 35º beam is tight enough to make reflecting this light more efficient. Use the flat diffuser to gain a 95º spread to soften the NOVA II, perfect for cyc walls, green screen work, and soft color washes.',
+      'The light can be controlled wirelessly via CRMX and Sidus Link app. The rugged IP65 body is engineered for demanding productions in wet weather.',
+    ],
+    kit: [
+      "Aputure NOVA II Color Light Panel 2' x 1'",
+      'Flat Diffuser',
+      'Removable Yoke with Junior Pin',
+      "AC Power Cable (19.6')",
+      'Rolling Hard Case',
+    ],
+  },
+
+  'nova-ii-softbox': {
+    blurb: 'This Aputure softbox diffuses the hard output of the NOVA II light panel.',
+    description: [
+      'This Aputure softbox diffuses the hard output of the NOVA II light panel. It has a silver interior to maximize output. It comes with one- and two-stop diffusion cloths plus a 45° grid for further light-shaping capabilities.',
+    ],
+    kit: [
+      'Aputure NOVA II 2x1 Softbox',
+      'Diffusion Cloth (1-Stop)',
+      'Diffusion Cloth (2-Stop)',
+      'Fabric Grid (45º)',
+    ],
+  },
+
+  'truss-clamps': {
+    blurb: 'Quickly and safely rig your NOVA II 2x1 LED fixture to trusses.',
+    description: [
+      "Quickly and safely rig your NOVA II 2x1 LED fixture to trusses. This sturdy set of two adapters features quick release latches and a truss clamp that fits into the mounting slots of the fixture's removable yoke.",
+    ],
+    kit: [
+      '2 Truss Clamps',
+    ],
+  },
+
+  'pavoslim-120c': {
+    blurb: 'The PavoSlim mat light is extremely thin and lightweight.',
+    description: [
+      'The PavoSlim mat light is extremely thin and lightweight. It provides bright and accurate RGBWW light with CRMX control. Stick it on the end of boom arm or C-clamp for a far-side key light. It offers 15 built-in special effects. The control box has built-in battery plates for V-mount batteries.',
+    ],
+    kit: [
+      'Nanlite PavoSlim LED Panel',
+      'Control Unit',
+      'Universal Holder & Baby Pin Holder',
+      'Quick Release Clamp',
+      'Softbox with Standard Diffuser',
+      'Egg Crate Grid',
+      'DC Connection Cable',
+      'AC Power Cable',
+      "Head Extension Cable 24.6'",
+    ],
+  },
+
+  'pavoslim-coupler': {
+    blurb: "This coupler and softbox kit provides the hardware needed to join two PavoSlim 120C LED panels together in either a 2'x2' or a 1'x4' configuration.",
+    description: [
+      "This coupler and softbox kit provides the hardware needed to join two PavoSlim 120C LED panels together in either a 2'x2' or a 1'x4' configuration. Included with the kit are two folding softboxes, two sets of dual-layer diffusion, and two egg crate grids to accommodate both size configurations.",
+    ],
+    kit: [
+      '2 Nanlite Folding Softboxes with Egg Crate',
+      "2'x2' Mounting Bracket",
+      "1'x4' Mounting Bracket",
+    ],
+  },
+
+  'astera-titan-4': {
+    blurb: 'With a wide 120° beam spread, the Titan Tube is ideal for creating a soft direct light on your subject for use as an accent light or design element on set.',
+    description: [
+      "With a wide 120° beam spread, the Titan Tube is ideal for creating a soft direct light on your subject for use as an accent light or design element on set. The wireless tube is powered by an integrated battery that will give you 20 hours of runtime. It features 16 LED emitters in a 3.4' long tube that you can mount onto a set or on a stand, hang from a grid, or even hold in your hand. The hard case features a power box that can charge the tubes inside. The lights can be controlled by CRMX or the Astera App.",
+    ],
+    kit: [
+      '4 x Astera Titan Tubes',
+      '4 x Astera Chargers for Titan',
+      '4 x Foldable Stands',
+      '8 x Baby Pin Double-Ended Spigots',
+      '8 x Metal Holders + Cotter Pins',
+      '8 x M5 Eyebolts',
+      '4 x Waterproof Covers for Charging Ports',
+      'Soft Bag',
+    ],
+  },
+
+  'astera-box': {
+    blurb: 'The Astera Box is designed to support Wi-Fi connectivity that works with Astera lights when using your phone or iPad tablet.',
+    description: [
+      'The Astera Box is designed to support Wi-Fi connectivity that works with Astera lights when using your phone or iPad tablet. It can be used either as a transmitter or receiver of wireless DMX. It offers CRMX, Bluetooth, and Wi-Fi protocols to control Astera lights via the Astera App or CRMX. Thanks to its integrated battery and compact design, the box is easy to carry.',
+    ],
+    kit: [
+      'Astera Box Wi-Fi CRMX Transmitter',
+      'Power Supply',
+      'DMX Adapter Cable',
+    ],
+  },
+
+  'titan-grid': {
+    blurb: 'This 40-Degree grid for Titan Tubes is a fabric light-shaper that eliminates spill light and provides the directional control necessary for selective lighting..',
+    description: [
+      'This 40-Degree grid for Titan Tubes is a fabric light-shaper that eliminates spill light and provides the directional control necessary for selective lighting.',
+    ],
+    kit: [
+      'Grid for Astera Titan Tube',
+    ],
+  },
+
+  'anker-bank': {
+    blurb: 'This powerful 10,000mAh power bank has a built-in USB-C cable and delivers up to 2 full charges for an Aputure MC Pro.',
+    description: [
+      "This powerful 10,000mAh power bank has a built-in USB-C cable and delivers up to 2 full charges for an Aputure MC Pro. It's small enough that you can velcro it to your MC Pro when you deploy the light for longer run times. It features speedy 30W fast charging technology.",
+    ],
+    kit: [
+      'Anker Power Bank with USB-C Cable',
+    ],
+  },
+
+  'mc-pro-bubble': {
+    blurb: 'This Bubble Diffuser is designed for the MC Pro LED light.',
+    description: [
+      'This Bubble Diffuser is designed for the MC Pro LED light. It attaches directly to the front of the panel and helps you create a wider and softer spread of light with your panel. Great as an eye light. The included mounting bracket secures to your light via a 1/4"-20 screw and provides one 3/8"-16 and two 1/4"-20 mounting sockets, creating a variety of mounting options.',
+    ],
+    kit: [
+      'Bubble Diffuser',
+      'L-Bracket',
+    ],
+  },
+
+  'mcsocket': {
+    blurb: 'The McSocket is a clever and simple mounting option that uses ferromagnetic plates to place puck lights into traditional lamps or any fixture with a standard medium base E26 soc...',
+    description: [
+      'The McSocket is a clever and simple mounting option that uses ferromagnetic plates to place puck lights into traditional lamps or any fixture with a standard medium base E26 socket.',
+    ],
+    kit: [
+      'McSocket',
+    ],
+  },
+
+  'oben-mount': {
+    blurb: 'Mount a hockey puck light, action camera, or smartphone mount onto a flat metal surface such as a car, boat, or refrigerator.',
+    description: [
+      'Mount a hockey puck light, action camera, or smartphone mount onto a flat metal surface such as a car, boat, or refrigerator. The kit includes a magnetic mount with a 1/4"-20 mounting screw and a mini ball head that can tilt up to 90° and support up to 6.6 lb. The magnetic mount uses a rare-earth magnet to provide pull resistance of up to 44 lb, and it is rubber-coated for extra grip and to protect the mounting surface.',
+    ],
+    kit: [
+      'Oben Magnetic Mount with 1/4"-20 Mounting Screw',
+      'Oben BD-02 Mini Ball Head',
+    ],
+  },
+
+  'lunabulb-8': {
+    blurb: 'This convenient kit is made up of 8 LunaBulbs custom-fitted into a rugged travel case for easy storage and transport to locations.',
+    description: [
+      'This convenient kit is made up of 8 LunaBulbs custom-fitted into a rugged travel case for easy storage and transport to locations. It includes the PrepInlay carrier, which has a built-in rechargeable battery for programming of the LunaBulbs. The bulbs may be set individually or in groups.',
+      'The light bulbs can be used on set as a practical light source. It has a standard A19 bulb shape and an E26 base to fit into traditional lamps of any kind. The LunaBulb is driven by the 5-color Titan LED engine. It has built-in DMX and CRMX.',
+    ],
+    kit: [
+      '8 x Astera LunaBulbs',
+      'Prepinlay Kit',
+      'PrepCase',
+      'Astera Charger for Titan',
+      'Astera ARC3 White Remote',
+      'Astera ARC1 Black Remote',
+    ],
+  },
+
+  'bulb-mount-kit': {
+    blurb: 'We assembled this customized collection of various mounts and magnets to help you rig light bulbs in a variety of production situations..',
+    description: [
+      'We assembled this customized collection of various mounts and magnets to help you rig light bulbs in a variety of production situations.',
+    ],
+    kit: [
+      'Magnet Mount with Power Cable',
+      'Matthews Bulb Mount',
+      'Baby Pin to 1/4-20" M',
+      'Androokie 66mm Magnet with 1/4-20" M',
+      'Adapter 5/8" F Baby to 1/4-20" M',
+      'Scissor Clamp',
+    ],
+  },
+
+  'arrilite-1000': {
+    blurb: 'This open face tungsten light is a versatile location lighting fixture.',
+    description: [
+      "This open face tungsten light is a versatile location lighting fixture. It offers robust construction, and the ability to be easily adjusted for both spot and flood lighting. The high light output is ideal for bouncing or diffusing. The light includes barndoors, providing control over the light's shape. It's also compact and lightweight, making it ideal for use in locations where space and weight are often limited.",
+    ],
+    kit: [
+      'Arrilite Tungsten Light',
+      'Barndoors',
+      'Extra Ushio DXW Lamp 1000W',
+    ],
+  },
+
+  'arri-650': {
+    blurb: 'The classic ARRI 650W Fresnel is a compact, lightweight tungsten fresnel spotlight that delivers impressive output.',
+    description: [
+      "The classic ARRI 650W Fresnel is a compact, lightweight tungsten fresnel spotlight that delivers impressive output. Perfect for a key light, back light, or accent light. The high-quality lens and reflector are engineered for excellent optical performance, giving you a predictable fresnel look and consistent coverage over the full beam area. Plus tungsten always looks good on an actor's skin. The focus adjustment allows for fine-tuning the beam angle from a narrow 14° to a fully flooded 52°. The light is dimmable when paired with an AC dimmer.",
+    ],
+    kit: [
+      'Arri 650 Plus Tungsten Fresnel Light',
+      'Barndoors',
+      'Single Scrim',
+      'Double Scrim',
+    ],
+  },
+
+  'chimera-xs': {
+    blurb: 'The Chimera XS Softbox (16" x 22") with silver interior is ideal for work in small spaces when medium softening of the light is desired.',
+    description: [
+      'The Chimera XS Softbox (16" x 22") with silver interior is ideal for work in small spaces when medium softening of the light is desired. The front face of the softbox is removable and comes with a one stop diffuser. It can be used with hot lights up to 750 Watts.',
+    ],
+    kit: [
+      'Chimera XS Softbox',
+      'Chimera Speed Ring',
+    ],
+  },
+
+  'sidus-four': {
+    blurb: 'The Sidus Four is a 4-universe CRMX transmitter with a built-in wireless router and Ethernet node that supports up to 4 additional wired DMX universes with its bidirectional 5-p...',
+    description: [
+      'The Sidus Four is a 4-universe CRMX transmitter with a built-in wireless router and Ethernet node that supports up to 4 additional wired DMX universes with its bidirectional 5-pin DMX ports. With both wired and wireless in operation, it can transmit up to 8 DMX universes. Combined with its high-output dual-band antennas, the Sidus Four is a powerful transmitter for all the popular lighting protocols including CRMX, DMX Sidus, Art-Net, and sACN.',
+      'It has a V-mount battery plate and an 80-minute internal backup battery. Made for professional filmmakers, the Sidus Four is built with an IP65-rated water-resistant construction for outdoor use.',
+    ],
+    kit: [
+      'Aputure Sidus Four CRMX Transmitter',
+      '5 x Dual-Band Antennas',
+      '3/8" to Baby Pin Receiver Adapter',
+      '18W / 9V Power Adapter',
+      'Power Plug Set',
+      '5-Pin XLR Male to 5-Pin XLR Male Adapter',
+    ],
+  },
+
+  'ratpac-satellite': {
+    blurb: "RatPac's Satellite is the all-in-one Art-Net to CRMX transmitter, with splash resistant enclosure, tactile membrane LED buttons and a rugged micro USB connection.",
+    description: [
+      "RatPac's Satellite is the all-in-one Art-Net to CRMX transmitter, with splash resistant enclosure, tactile membrane LED buttons and a rugged micro USB connection. It features ethernet or WiFi operation, and Intelligent 2.4 GHZ frequency hopping. It is compatible with all WiFi tablets and smart phones and can transmit up to 300 meters away.",
+    ],
+    kit: [
+      'RatPac Satellite CRMX Transmitter',
+    ],
+  },
+
+  'timolink-rx': {
+    blurb: 'Built with CRMX modules from LumenRadio, the TimoLink RX converts a wired DMX console to wireless by receiving signals from CRMX-compatible light fixtures or transmitters at a r...',
+    description: [
+      "Built with CRMX modules from LumenRadio, the TimoLink RX converts a wired DMX console to wireless by receiving signals from CRMX-compatible light fixtures or transmitters at a range of up to 984'. The five-pin female XLR connector rotates up to 270° for wider compatibility with different interface designs.",
+    ],
+    kit: [
+      'Godox TimoLink RX CRMX Receiver',
+    ],
+  },
+
+  'ipad-blackout': {
+    blurb: 'Rent our Apple iPad Pro preloaded with a variety of lighting apps including a monthly subscription to the very popular Blackout lighting control app that works with nearly all b...',
+    description: [
+      'Rent our Apple iPad Pro preloaded with a variety of lighting apps including a monthly subscription to the very popular Blackout lighting control app that works with nearly all brands of LED light fixtures including Astera, Aputure, Nanlux, Godox, Creamsource, Arri, and more.',
+    ],
+    kit: [
+      'Apple iPad Pro M4 11"',
+      'Blackout App Subscription',
+      'iPad Cage',
+      'Side Handles with NATO Clamp',
+    ],
+  },
 };
