@@ -61,6 +61,18 @@
   .pimage.soon{ background:#10161e; }
   .pimage.soon svg{ width:46px; height:62px; color:#33404c; }
 
+  /* GALLERY — thumbnails below the hero, click to swap main image */
+  .pgallery{ margin-top:0.7rem; display:flex; gap:0.5rem; overflow-x:auto; padding:0.15rem 0.05rem 0.45rem; scrollbar-width:thin; }
+  .pgallery::-webkit-scrollbar{ height:6px; }
+  .pgallery::-webkit-scrollbar-thumb{ background:var(--line-bright); border-radius:3px; }
+  .pgthumb{ flex:0 0 64px; aspect-ratio:1/1; background:#e9e6df; border:1.5px solid var(--line); border-radius:4px; cursor:pointer;
+    padding:5px; display:flex; align-items:center; justify-content:center; overflow:hidden; transition:border-color .15s, transform .15s; }
+  .pgthumb img{ max-width:100%; max-height:100%; object-fit:contain; mix-blend-mode:multiply; }
+  .pgthumb:hover{ border-color:var(--line-bright); transform:translateY(-1px); }
+  .pgthumb.active{ border-color:var(--yellow); box-shadow:0 0 0 1px var(--yellow); }
+  .pimage-caption{ position:absolute; bottom:0.9rem; right:0.9rem; font-family:'JetBrains Mono',monospace; font-size:0.62rem; letter-spacing:0.16em;
+    text-transform:uppercase; color:#555; background:rgba(255,255,255,0.85); border:1px solid rgba(0,0,0,0.12); padding:0.25rem 0.55rem; }
+
   /* INFO COLUMN */
   .pinfo{ display:flex; flex-direction:column; gap:1.4rem; }
   .brand-label{ font-family:'JetBrains Mono',monospace; font-size:0.66rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); }
@@ -230,6 +242,15 @@ function render(){
   const pdetailBlock = (hasKit || hasDesc) ?
     `<div class="pdetail" ${(hasKit ^ hasDesc) ? 'style="grid-template-columns:1fr; max-width:760px;"' : ''}>${kitBlock}${descBlock}</div>` : '';
 
+  // Gallery: optional list of additional product shots (e.g. each lens in a set).
+  // Thumbnails render below the main image; clicking one swaps the hero shot + caption.
+  const hasGallery = !!(det.gallery && det.gallery.length > 1);
+  const galleryHtml = hasGallery ?
+    `<div class="pgallery" id="pgallery">${det.gallery.map((g,i) => `
+      <button class="pgthumb ${i===0?'active':''}" data-src="media/products/${g.src}" data-caption="${g.caption||''}" type="button" aria-label="${g.caption||'View'}">
+        <img src="media/products/${g.src}" alt="${g.caption||''}" loading="lazy">
+      </button>`).join('')}</div>` : '';
+
   // Related: other items in the same department, excluding self
   const related = INVENTORY.filter(i => i.dept === item.dept && i.id !== id);
 
@@ -250,9 +271,13 @@ function render(){
 
     <main>
       <div class="pgrid">
-        <div class="pimage ${photoClass}">
-          <span class="badge">${item.tag}</span>
-          ${photo}
+        <div>
+          <div class="pimage ${photoClass}" id="pimage">
+            <span class="badge">${item.tag}</span>
+            ${photo}
+            <span class="pimage-caption" id="pimageCaption" ${hasGallery?'':'hidden'}>${hasGallery?det.gallery[0].caption:''}</span>
+          </div>
+          ${galleryHtml}
         </div>
         <aside class="pinfo">
           <div>
@@ -299,6 +324,26 @@ function render(){
   renderAction();
   updateNavCount();
   wireRelatedScroll();
+  wireGallery();
+}
+
+function wireGallery(){
+  const gal = document.getElementById('pgallery');
+  if (!gal) return;
+  const main = document.querySelector('#pimage img');
+  const cap  = document.getElementById('pimageCaption');
+  if (!main) return;
+  gal.addEventListener('click', e => {
+    const t = e.target.closest('.pgthumb');
+    if (!t) return;
+    const src = t.dataset.src;
+    const caption = t.dataset.caption || '';
+    if (src && main.getAttribute('src') !== src) {
+      main.setAttribute('src', src);
+      if (cap) { cap.textContent = caption; cap.hidden = !caption; }
+      gal.querySelectorAll('.pgthumb').forEach(b => b.classList.toggle('active', b === t));
+    }
+  });
 }
 
 function wireRelatedScroll(){

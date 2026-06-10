@@ -34,12 +34,19 @@ const PRODUCT_DETAILS = {
       'Pairs naturally with the RED Komodo 6K for a Super-35 anamorphic capture path. Both lenses are matched in size, weight, and gear positions — quick lens swaps on set, predictable follow-focus marks.'
     ],
     kit: [
-      'DZOFilm PAVO 2x 32mm T2.1',
-      'DZOFilm PAVO 2x 55mm T2.1',
-      'PL mount',
-      'Front diameter 95mm (matches matte box)',
+      'DZOFilm PAVO 2x 28mm T2.1',
+      'DZOFilm PAVO 2x 40mm T2.1',
+      'DZOFilm PAVO 2x 75mm T2.1',
+      'DZOFilm PAVO 2x 135mm T2.5',
+      'PL mount on all four lenses',
       'Standard 0.8 mod focus + iris gears',
       'Hard case'
+    ],
+    gallery: [
+      { src: 'pavo-set.webp',   caption: '28mm T2.1' },
+      { src: 'pavo-set-2.webp', caption: '40mm T2.1' },
+      { src: 'pavo-set-3.webp', caption: '75mm T2.1' },
+      { src: 'pavo-set-4.webp', caption: '135mm T2.5' },
     ],
   },
 
@@ -50,12 +57,19 @@ const PRODUCT_DETAILS = {
       'Color matches the PAVO anamorphics if you want to mix anamorphic and spherical on the same project. Standard 0.8 mod gears and a 95mm front diameter mean follow focus and matte box swap in seconds.'
     ],
     kit: [
+      'DZOFilm VESPID 16mm T2.1',
       'DZOFilm VESPID 25mm T2.1',
       'DZOFilm VESPID 35mm T2.1',
-      'DZOFilm VESPID 50mm T2.1',
       'DZOFilm VESPID 75mm T2.1',
-      'PL mount on all lenses',
-      'Hard case'
+      'PL mount on all four lenses',
+      'DZOFilm 4-lens hard case'
+    ],
+    gallery: [
+      { src: 'vespid-set.webp',      caption: '16mm T2.1' },
+      { src: 'vespid-set-2.webp',    caption: '25mm T2.1' },
+      { src: 'vespid-set-3.webp',    caption: '35mm T2.1' },
+      { src: 'vespid-set-4.webp',    caption: '75mm T2.1' },
+      { src: 'vespid-set-case.webp', caption: 'Hard case' },
     ],
   },
 
