@@ -291,6 +291,21 @@
   h2.head .y, .eyebrow { color:#9fc4ee; }
   .hero-content h1{ font-style:italic; }
 
+  /* ---------- SHOWCASE — full-bleed brand inventory shot ---------- */
+  .showcase { position: relative; width: 100%; overflow: hidden;
+    background: #04060c; border-top: 1px solid #0e141c; border-bottom: 1px solid #0e141c;
+    aspect-ratio: 1654 / 951; }
+  .showcase img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    will-change: transform;
+    transition: transform .6s cubic-bezier(.22,.85,.25,1); }
+  /* Subtle vignette so the dark stage edges blend with surrounding sections */
+  .showcase::after { content:""; position:absolute; inset:0; pointer-events:none;
+    background:
+      linear-gradient(180deg, rgba(4,6,12,0.45) 0%, rgba(4,6,12,0) 14%, rgba(4,6,12,0) 86%, rgba(4,6,12,0.55) 100%); }
+  /* On very tall narrow screens the 16:9-ish shot looks tiny — cap at content width
+     so it always feels like a deliberate cinema moment, not a stretched poster. */
+  @media (max-aspect-ratio: 1/1) { .showcase { aspect-ratio: 4 / 3; } }
+
   /* ---------- SCROLL REVEALS (subtle fade + slide as sections enter view) ---------- */
   .reveal { opacity: 0; transform: translateY(22px);
     transition: opacity .7s cubic-bezier(.22,.85,.25,1), transform .7s cubic-bezier(.22,.85,.25,1);
@@ -425,6 +440,11 @@
     </div>
     <p class="inv-note">Inventory updated regularly. Looking for something not on the list? We partner with the biggest houses in the country — we'll get it. <span style="color:#8b96a1;">(Product photos &amp; shopping cart coming with the gear shoot.)</span></p>
   </div>
+</section>
+
+<!-- SHOWCASE — full-bleed brand inventory shot -->
+<section class="showcase reveal" aria-label="The full Thunderstruck inventory, staged">
+  <img src="assets/inventory-shot.webp" alt="The full Thunderstruck inventory staged in front of the grip truck — lights, stands, Astera tubes, flight cases" loading="lazy">
 </section>
 
 <!-- WHY -->
@@ -565,6 +585,37 @@
     });
   }, { threshold: 0.18, rootMargin: '0px 0px -6% 0px' });
   els.forEach(function(el){ io.observe(el); });
+})();
+</script>
+
+<!-- Showcase parallax — image rises slightly slower than scroll for cinema feel. -->
+<script>
+(function(){
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var section = document.querySelector('.showcase');
+  if (!section) return;
+  var img = section.querySelector('img');
+  if (!img) return;
+  var ticking = false;
+  function update(){
+    var rect = section.getBoundingClientRect();
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    // Only run when in/near viewport
+    if (rect.bottom < -100 || rect.top > vh + 100) { ticking = false; return; }
+    // 0 when section's top hits the bottom of viewport, 1 when bottom hits top
+    var p = (vh - rect.top) / (vh + rect.height);
+    p = Math.max(0, Math.min(1, p));
+    // Translate image -8% to +8% over the scroll range
+    var ty = (p - 0.5) * -16; // negative so image rises as you scroll down
+    img.style.transform = 'translate3d(0,' + ty.toFixed(2) + '%, 0) scale(1.08)';
+    ticking = false;
+  }
+  function onScroll(){
+    if (!ticking) { requestAnimationFrame(update); ticking = true; }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
 })();
 </script>
 
