@@ -201,19 +201,26 @@
   /* INVENTORY — two-column: heading left, expanding accordion right */
   .inv-layout { display:flex; align-items:center; gap:clamp(2rem,5vw,4.5rem); }
   .inv-intro { flex:1 1 0; min-width:0; display:flex; flex-direction:column; }
-  .inv-acc { --sq: clamp(220px,26vw,300px); --thin: clamp(52px,6vw,72px); --gap:10px;
-    flex:0 0 calc(var(--sq) + 5 * (var(--thin) + var(--gap)));
-    display:flex; gap:var(--gap); justify-content:flex-end; align-items:stretch; height:var(--sq); }
-  .acol { position:relative; flex:0 0 var(--thin); height:var(--sq); overflow:hidden;
+  .inv-acc { --h: clamp(220px,24vw,280px); --exp: calc(var(--h) * 1.5);
+    --thin: clamp(52px,6vw,72px); --gap:10px;
+    flex:0 0 calc(var(--exp) + 5 * (var(--thin) + var(--gap)));
+    display:flex; gap:var(--gap); justify-content:flex-end; align-items:stretch; height:var(--h); }
+  .acol { position:relative; flex:0 0 var(--thin); height:var(--h); overflow:hidden;
     border:1px solid var(--line); background:var(--panel); text-decoration:none; cursor:pointer;
     transition: flex-basis .55s cubic-bezier(.22,.85,.25,1), border-color .3s; }
-  .acol:hover, .acol:focus-visible { flex-basis: var(--sq); border-color: var(--yellow); outline:none; }
+  .acol:hover, .acol:focus-visible { flex-basis: var(--exp); border-color: var(--yellow); outline:none; }
   .acol .acol-img { position:absolute; inset:0; opacity:0; transition: opacity .5s ease .05s;
-    background: var(--img) center/64% no-repeat, #e9e6df; }
+    background: var(--img) center/cover no-repeat, #e9e6df; }
   .acol:hover .acol-img, .acol:focus-visible .acol-img { opacity:1; }
   .acol.soon .acol-img { background:#10161e; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.6rem; }
-  /* "All" pillar uses a real scene shot — fill the frame instead of light-plate sizing */
-  .acol.full .acol-img { background: var(--img) center/cover no-repeat #04060c; }
+  /* "All" pillar — scene shot, always visible by default (expanded) */
+  .acol.full .acol-img { background: var(--img) center/cover no-repeat #04060c; opacity:1; }
+  .acol.full { flex-basis: var(--exp); border-color: var(--line-bright); }
+  /* When ANY other pillar is hovered/focused, the All pillar collapses to thin */
+  .inv-acc:has(.acol:not(.full):hover) .acol.full,
+  .inv-acc:has(.acol:not(.full):focus-visible) .acol.full { flex-basis: var(--thin); border-color: var(--line); }
+  .inv-acc:has(.acol:not(.full):hover) .acol.full .acol-img,
+  .inv-acc:has(.acol:not(.full):focus-visible) .acol.full .acol-img { opacity:.55; }
   .acol .acol-bolt { width:32px; height:44px; fill:#33404c; }
   .acol .acol-soon { font-family:'JetBrains Mono',monospace; font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; color:#3a4651; }
   .acol .acol-label { position:absolute; z-index:2; right:0; top:0; bottom:0; width:var(--thin);
@@ -426,20 +433,20 @@
         <a class="acol full reveal" href="all.html" style="--img:url('media/products/all-inventory.webp'); --reveal-d:0s;" aria-label="See all inventory">
           <span class="acol-img"></span><span class="acol-label">All</span>
         </a>
-        <a class="acol reveal" href="camera.html" style="--img:url('media/products/red-komodo.webp'); --reveal-d:.08s;" aria-label="Camera rentals">
+        <a class="acol reveal" href="camera.html" style="--img:url('media/products/cat-camera.webp'); --reveal-d:.08s;" aria-label="Camera rentals">
           <span class="acol-img"></span><span class="acol-label">Camera</span>
         </a>
-        <a class="acol reveal" href="camera.html" style="--img:url('media/products/laowa-ranger.webp'); --reveal-d:.16s;" aria-label="Lens rentals">
+        <a class="acol reveal" href="camera.html" style="--img:url('media/products/cat-lenses.webp'); --reveal-d:.16s;" aria-label="Lens rentals">
           <span class="acol-img"></span><span class="acol-label">Lenses</span>
         </a>
-        <a class="acol reveal" href="rentals.html" style="--img:url('media/products/nanlux-2400b-cut.webp'); --reveal-d:.24s;" aria-label="Lighting rentals">
+        <a class="acol reveal" href="rentals.html" style="--img:url('media/products/cat-lighting.webp'); --reveal-d:.24s;" aria-label="Lighting rentals">
           <span class="acol-img"></span><span class="acol-label">Lighting</span>
         </a>
-        <a class="acol soon reveal" href="grip-truck.html" style="--reveal-d:.32s;" aria-label="Grip rentals">
-          <span class="acol-img"><svg class="acol-bolt" viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg><span class="acol-soon">photo soon</span></span><span class="acol-label">Grip</span>
+        <a class="acol reveal" href="grip-truck.html" style="--img:url('media/products/cat-grip.webp'); --reveal-d:.32s;" aria-label="Grip rentals">
+          <span class="acol-img"></span><span class="acol-label">Grip</span>
         </a>
-        <a class="acol soon reveal" href="sound.html" style="--reveal-d:.40s;" aria-label="Sound rentals">
-          <span class="acol-img"><svg class="acol-bolt" viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg><span class="acol-soon">photo soon</span></span><span class="acol-label">Sound</span>
+        <a class="acol reveal" href="sound.html" style="--img:url('media/products/cat-sound.webp'); --reveal-d:.40s;" aria-label="Sound rentals">
+          <span class="acol-img"></span><span class="acol-label">Sound</span>
         </a>
       </div>
     </div>
