@@ -39,7 +39,11 @@ body.storm-off .storm-static { display: block; }
   background: rgba(14,20,28,0.55) !important;
   border-color: rgba(159,196,238,0.15) !important;
   border-radius: 4px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
 }
+.cart-trigger .count { border-radius: 2px; }
+.cart-trigger .count.zero { background: rgba(31,42,56,0.9); }
 
 /* ---------- HERO STRIP: open to the storm ---------- */
 .rhero { border-bottom: 1px solid rgba(159,196,238,0.12) !important; }
