@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thunderstruck Pictures — Lighting Rentals · Build a Quote</title>
+<title>Thunderstruck Pictures — Grip Truck Rentals · Build a Gear List (Storm)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -235,52 +235,95 @@
     background:linear-gradient(180deg,#ffffff,#dbe8f7 45%,#aac1da 55%,#f2f8ff);
     box-shadow:0 0 26px rgba(150,190,255,0.45), inset 0 1px 0 rgba(255,255,255,0.95);
   }
+  .card .image.image-soon{ background:#e4e1d9; }
+  .image-soon .soon-ico{ width:30px; height:40px; color:#bbb5a8; opacity:.8; }
+
+  /* ---------- Whole-truck hero item ---------- */
+  .truck-hero{ display:grid; grid-template-columns:1.85fr 1fr; align-items:stretch; gap:0; background:var(--panel);
+    border:1px solid color-mix(in srgb, var(--yellow) 42%, var(--line)); border-radius:8px; overflow:hidden; margin:0 0 2.6rem;
+    box-shadow:0 0 30px rgba(159,196,238,0.06); }
+  @media(max-width:900px){ .truck-hero{ grid-template-columns:1fr; } }
+  .truck-hero .th-photo{ position:relative; aspect-ratio:1800/1018; background:#05070a; }
+  .truck-hero .th-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .truck-hero .th-photo::after{ content:""; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(90deg, transparent 72%, rgba(14,20,28,0.5) 100%); }
+  @media(max-width:900px){ .truck-hero .th-photo::after{ background:linear-gradient(180deg, transparent 64%, rgba(14,20,28,0.55) 100%);} }
+  .truck-hero .th-body{ padding:clamp(1.2rem,2.4vw,1.9rem); display:flex; flex-direction:column; justify-content:center; gap:0.55rem; }
+  .th-eyebrow{ font-family:'JetBrains Mono',monospace; font-size:0.66rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--yellow); }
+  .th-title{ font-family:'Saira Condensed',sans-serif; font-weight:700; font-style:italic; font-size:clamp(1.8rem,3.4vw,2.7rem); text-transform:uppercase; line-height:0.95; }
+  .th-title .y{ color:var(--yellow); }
+  .th-desc{ color:var(--muted); font-size:0.95rem; line-height:1.55; max-width:48ch; }
+  .th-foot{ display:flex; align-items:center; gap:1.4rem; flex-wrap:wrap; margin-top:0.5rem; }
+  .th-price{ display:flex; align-items:baseline; gap:0.4rem; }
+  .th-day{ font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:2rem; color:var(--yellow); }
+  .th-unit{ font-family:'JetBrains Mono',monospace; font-size:0.64rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--dim); }
+  .th-add{ cursor:pointer; background:linear-gradient(180deg,#ffffff,#cdddf0 45%,#9fb4ce 55%,#eaf2fb); color:#0a0f16;
+    font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:0.92rem; letter-spacing:0.12em; text-transform:uppercase;
+    padding:0.8rem 1.5rem; border:none; border-radius:4px; box-shadow:0 0 18px rgba(150,190,255,.25), inset 0 1px 0 rgba(255,255,255,.85); transition:filter .15s; }
+  .th-add:hover{ filter:brightness(1.06); }
+  .th-add.added{ background:var(--panel-2); color:var(--yellow); border:1px solid var(--yellow); box-shadow:none; }
+  .al-acarte{ font-family:'JetBrains Mono',monospace; font-size:0.72rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--dim); margin:0 0 0.6rem; }
 </style>
+<link rel="stylesheet" href="design-explorations/storm-theme.css">
+<script defer src="design-explorations/storm-theme.js"></script>
 </head>
 <body>
 
 <nav class="nav">
-  <a href="index.html" class="brand">Thunderstruck</a>
+  <a href="design-explorations/09-stormflight.html" class="brand">Thunderstruck</a>
   <div class="links">
-    <a href="camera.html">Camera</a>
-    <a href="rentals.html" class="current">Lighting</a>
-    <a href="grip-truck.html">Grip</a>
-    <a href="sound.html">Audio</a>
+    <a href="camera-storm.html">Camera</a>
+    <a href="rentals-storm.html">Lighting</a>
+    <a href="grip-truck-storm.html" class="current">Grip</a>
+    <a href="sound-storm.html">Audio</a>
     <a href="production.html">Production</a>
     <a href="contact.html">Contact</a>
-    <button class="cart-trigger" id="cartBtn" aria-label="Open quote"><span>Quote</span><span class="count zero" id="cartCount">0</span></button>
+    <button class="cart-trigger" id="cartBtn" aria-label="Open gear list"><span>Gear List</span><span class="count zero" id="cartCount">0</span></button>
   </div>
 </nav>
 
 <section class="rhero">
   <div class="bg" aria-hidden="true"></div>
   <div class="inner wrap">
-    <div class="breadcrumb"><a href="index.html">Home</a> <span class="sep">/</span> <span style="color:#cdd6df;">Lighting &amp; Grip</span></div>
-    <h1>The lighting <span class="y">department.</span></h1>
-    <p class="lede"><strong>HMI-equivalent LEDs from 600W to 4000W</strong>, tube kits, RGB panels, and accent lights — all CRMX-controllable. Build your package below; we respond within 24 hours with availability and a firm rate. No card, no commitment.</p>
+    <div class="breadcrumb"><a href="design-explorations/09-stormflight.html">Home</a> <span class="sep">/</span> <span style="color:#cdd6df;">Grip Truck</span></div>
+    <h1>The grip <span class="y">department.</span></h1>
+    <p class="lede"><strong>A full grip &amp; electric package on a 3-ton truck</strong> — C-stands to 19′ overheads, flags, frames, distro and a Honda generator, delivered and operated by a working grip. Build your package below; we respond within 24 hours with availability and a firm rate. No card, no commitment.</p>
   </div>
 </section>
 
 <div class="tabs">
   <div class="tabs-inner">
-    <button class="tab active" data-filter="all">All <span class="count">39</span></button>
-    <button class="tab" data-filter="big">Big Fixtures <span class="count">10</span></button>
-    <button class="tab" data-filter="mid">Mid &amp; Small <span class="count">14</span></button>
-    <button class="tab" data-filter="tubes">Tubes &amp; Panels <span class="count">10</span></button>
-    <button class="tab" data-filter="control">Control <span class="count">5</span></button>
+    <button class="tab active" data-filter="all">All <span class="count">19</span></button>
+    <button class="tab" data-filter="stands">Stands <span class="count">5</span></button>
+    <button class="tab" data-filter="grip">Grip &amp; Flags <span class="count">7</span></button>
+    <button class="tab" data-filter="frames">Frames <span class="count">4</span></button>
+    <button class="tab" data-filter="power">Power &amp; Distro <span class="count">3</span></button>
   </div>
 </div>
 
 <main class="catalog">
-  <div class="subcat-head" data-section="big"><h2>Big <span class="y">fixtures.</span></h2><span class="tag">600W–4000W HMI eq.</span></div>
-  <div class="grid" id="grid-big"></div>
-  <div class="subcat-head" data-section="mid"><h2>Mid &amp; <span class="y">small.</span></h2><span class="tag">Accent &amp; practicals</span></div>
-  <div class="grid" id="grid-mid"></div>
-  <div class="subcat-head" data-section="tubes"><h2>Tubes &amp; <span class="y">panels.</span></h2><span class="tag">RGB · CRMX · DMX</span></div>
-  <div class="grid" id="grid-tubes"></div>
-  <div class="subcat-head" data-section="control"><h2>Lighting <span class="y">control.</span></h2><span class="tag">CRMX transmitters &amp; receivers</span></div>
-  <div class="grid" id="grid-control"></div>
-  <div class="note-strip"><strong>About these rates.</strong> Daily rates shown are placeholders for this demo. Multi-day discounts and weekly rates (3-day equivalent) calculate automatically at quote stage. Pickup &amp; delivery across Greater Austin; longer hauls quoted separately. <strong>More departments — camera, lenses, grip, sound — come online as product photos land.</strong></div>
+  <section class="truck-hero">
+    <div class="th-photo"><img src="media/truck-profile.webp" alt="Thunderstruck grip truck in profile, liftgate down with the grip and electric package staged"></div>
+    <div class="th-body">
+      <div class="th-eyebrow">The whole rig</div>
+      <h2 class="th-title">The truck, <span class="y">fully loaded.</span></h2>
+      <p class="th-desc">Don’t want to build it piece by piece? Take the entire 3-ton truck — every department, delivered and operated by a working grip.</p>
+      <div class="th-foot">
+        <div class="th-price"><span class="th-day">$1,250</span><span class="th-unit">/ day · full package</span></div>
+        <button class="th-add" onclick="addToCart('grip-truck-package'); this.textContent='✓ Added to quote'; this.classList.add('added');">Add the truck to quote →</button>
+      </div>
+    </div>
+  </section>
+  <p class="al-acarte">Or build your own — add exactly what you need below.</p>
+  <div class="subcat-head" data-section="stands"><h2>Stands &amp; <span class="y">rollers.</span></h2><span class="tag">C-stands to 19′ overheads</span></div>
+  <div class="grid" id="grid-stands"></div>
+  <div class="subcat-head" data-section="grip"><h2>Grip &amp; <span class="y">flags.</span></h2><span class="tag">Flags · clamps · apple boxes</span></div>
+  <div class="grid" id="grid-grip"></div>
+  <div class="subcat-head" data-section="frames"><h2>Frames &amp; <span class="y">overhead.</span></h2><span class="tag">12×12 · 8×8 · skins</span></div>
+  <div class="grid" id="grid-frames"></div>
+  <div class="subcat-head" data-section="power"><h2>Power &amp; <span class="y">distro.</span></h2><span class="tag">Generator · battery stations</span></div>
+  <div class="grid" id="grid-power"></div>
+  <div class="note-strip"><strong>About these rates.</strong> Daily rates shown are indicative — multi-day and weekly rates (3-day equivalent) calculate automatically at quote stage. The full grip &amp; electric package is delivered on our 3-ton truck and operated by a working grip. Pickup &amp; delivery across Greater Austin; longer hauls quoted separately.</div>
 </main>
 
 <footer>
@@ -294,7 +337,7 @@
 <div class="drawer-backdrop" id="backdrop"></div>
 <aside class="drawer" id="drawer" aria-hidden="true">
   <div class="drawer-head">
-    <h3 id="drawerTitle">Your <span class="y">quote.</span></h3>
+    <h3 id="drawerTitle">Your <span class="y">gear list.</span></h3>
     <button class="close" id="closeDrawer" aria-label="Close">✕</button>
   </div>
 
@@ -372,27 +415,27 @@
 
 <script src="inventory.js"></script>
 <script>
-const DEPT='lighting';
+const DEPT='grip';
 
 let cart = {}; let days = 1;
 
 function renderCatalog(){
-  ['big','mid','tubes','control'].forEach(cat=>{
+  ['stands','grip','frames','power'].forEach(cat=>{
     document.getElementById('grid-'+cat).innerHTML = INVENTORY.filter(i=>i.dept===DEPT&&i.cat===cat).map(cardHtml).join('');
   });
 }
 function cardHtml(i){
   const inCart = cart[i.id] > 0;
   return `<article class="card ${inCart?'in-cart':''}" data-id="${i.id}">
-    <a href="product.html?id=${i.id}" class="image" aria-label="View ${i.name}"><span class="badge">${i.tag}</span><img src="media/products/${i.id}${i.photo?'.webp':'.jpg'}" alt="${i.name}" loading="lazy" onerror="this.style.display='none'"></a>
+    <a href="product-storm.html?id=${i.id}" class="image ${i.photo?'':'image-soon'}" aria-label="View ${i.name}"><span class="badge">${i.tag}</span>${i.photo?`<img src="media/products/${i.id}.webp" alt="${i.name}" loading="lazy">`:`<svg viewBox="0 0 24 32" fill="currentColor" class="soon-ico"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg>`}</a>
     <div class="body">
       <div class="brand-label">${i.brand}</div>
-      <div class="name"><a href="product.html?id=${i.id}">${i.name}</a></div>
+      <div class="name"><a href="product-storm.html?id=${i.id}">${i.name}</a></div>
       <div class="spec">${i.spec}</div>
       <div class="pricing"><span class="day">$${i.day}</span><span class="unit">/ day</span></div>
       ${inCart
-        ? `<div class="stepper"><button onclick="changeQty('${i.id}',-1)">−</button><span class="qty-display">${cart[i.id]} in quote</span><button onclick="changeQty('${i.id}',1)">+</button></div>`
-        : `<button class="add-btn" onclick="addToCart('${i.id}')">+ Add to Quote</button>`}
+        ? `<div class="stepper"><button onclick="changeQty('${i.id}',-1)">−</button><span class="qty-display">${cart[i.id]} on gear list</span><button onclick="changeQty('${i.id}',1)">+</button></div>`
+        : `<button class="add-btn" onclick="addToCart('${i.id}')">+ Add to Gear List</button>`}
     </div></article>`;
 }
 function addToCart(id){
@@ -411,7 +454,7 @@ function lineCalc(item,qty){ return item.day*qty*calcEffDays(days); }
 function renderCart(){
   const body=document.getElementById('drawerBody'); const ids=Object.keys(cart);
   if(ids.length===0){
-    body.innerHTML=`<div class="empty-state"><div class="icon">⚡</div><h4>Empty quote</h4><p>Add gear from the catalog and it'll show up here.<br>No payment, no commitment — just a quote request.</p></div>`;
+    body.innerHTML=`<div class="empty-state"><div class="icon">⚡</div><h4>Empty gear list</h4><p>Add gear from the catalog and it'll show up here.<br>No payment, no commitment — just a quote request.</p></div>`;
     document.getElementById('cartTotal').innerHTML='$0<span class="est">est.</span>';
     document.getElementById('continueBtn').disabled=true; return;
   }
@@ -439,7 +482,7 @@ function goToForm(){
   document.getElementById('drawer').classList.add('form-mode');
   document.getElementById('drawerTitle').innerHTML='Your <span class="y">details.</span>';
 }
-function backToCart(){ document.getElementById('drawer').classList.remove('form-mode'); document.getElementById('drawerTitle').innerHTML='Your <span class="y">quote.</span>'; }
+function backToCart(){ document.getElementById('drawer').classList.remove('form-mode'); document.getElementById('drawerTitle').innerHTML='Your <span class="y">gear list.</span>'; }
 async function submitQuote(e){
   e.preventDefault();
   const form=e.target;
@@ -497,10 +540,10 @@ ${data.notes||'(none)'}`;
   }
   return false;
 }
-function resetAfterSuccess(){ cart={}; days=1; save(); setDays(1); renderCatalog(); renderCart(); updateNav(); document.getElementById('quoteForm').reset(); document.getElementById('drawerTitle').innerHTML='Your <span class="y">quote.</span>'; closeDrawer(); }
+function resetAfterSuccess(){ cart={}; days=1; save(); setDays(1); renderCatalog(); renderCart(); updateNav(); document.getElementById('quoteForm').reset(); document.getElementById('drawerTitle').innerHTML='Your <span class="y">gear list.</span>'; closeDrawer(); }
 function applyFilter(f){
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.filter===f));
-  ['big','mid','tubes','control'].forEach(cat=>{
+  ['stands','grip','frames','power'].forEach(cat=>{
     const show=(f==='all'||f===cat);
     document.querySelector(`[data-section="${cat}"]`).style.display=show?'':'none';
     document.getElementById('grid-'+cat).style.display=show?'':'none';

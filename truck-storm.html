@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thunderstruck Pictures — The 3-Ton Grip Truck (Storm)</title>
+<meta name="description" content="Austin's 3-ton grip &amp; lighting truck — rent it loaded with the full grip department, or the full grip + lighting package.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:ital,wght@0,500;0,700;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script defer src="nav-mobile.js"></script>
+<script defer src="inventory.js"></script>
+<style>
+  *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+  :root{
+    --bg:#04060c; --panel:#0e141c; --line:#1f2a38; --line-bright:#33485f;
+    --text:#f4f8ff; --muted:#9fb4ce; --dim:#6b7681; --yellow:#9fc4ee;
+    --glass-line: rgba(159,196,238,0.15);
+  }
+  html{ scroll-behavior:smooth; }
+  body{ background:var(--bg); color:var(--text); font-family:'Inter',system-ui,sans-serif; line-height:1.55; overflow-x:hidden; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1200px; margin:0 auto; padding:0 clamp(1.2rem,4vw,3rem); }
+
+  /* NAV — same pattern as interior pages (storm-theme.css glassifies it) */
+  .nav{ position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between;
+    padding:0.85rem clamp(1.2rem,4vw,3rem); background:rgba(6,8,11,0.9); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  .nav .brand{ font-family:'Saira Condensed',sans-serif; font-weight:700; font-style:italic; text-transform:uppercase; font-size:1.35rem; letter-spacing:0.06em; }
+  .nav .links{ display:flex; align-items:center; gap:1.25rem; flex-wrap:nowrap; }
+  .nav .links a{ font-size:0.78rem; letter-spacing:0.04em; text-transform:uppercase; color:#c7d0da; transition:color 0.2s; white-space:nowrap; }
+  .nav .links a:hover{ color:#fff; }
+  .nav .links a.current{ color:var(--yellow); }
+  @media (max-width:960px){ .nav .links a:not(.cart-trigger){ display:none; } }
+  .cart-trigger{ display:inline-flex; align-items:center; gap:0.55rem; background:var(--panel); border:1px solid var(--line);
+    padding:0.5rem 0.9rem; font-family:'Saira Condensed',sans-serif; font-size:0.85rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text); transition:border-color 0.15s,color 0.15s; }
+  .cart-trigger:hover{ border-color:var(--yellow); color:var(--yellow); }
+  .cart-trigger .count{ background:var(--yellow); color:#0a0a0a; padding:0.1rem 0.5rem; font-size:0.8rem; min-width:1.5rem; text-align:center; }
+  .cart-trigger .count.zero{ background:var(--line); color:var(--muted); }
+
+  /* HERO STRIP */
+  .rhero{ position:relative; overflow:hidden; border-bottom:1px solid var(--line); isolation:isolate; }
+  .rhero .bg{ position:absolute; inset:0; z-index:0; }
+  .rhero .inner{ position:relative; z-index:2; padding:clamp(2.4rem,5vw,3.8rem) 0 clamp(1.6rem,3vw,2.4rem); }
+  .breadcrumb{ font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:1rem; }
+  .breadcrumb a:hover{ color:var(--yellow); }
+  .breadcrumb .sep{ color:var(--line-bright); margin:0 0.5rem; }
+  .rhero h1{ font-family:'Saira Condensed',sans-serif; font-weight:700; font-style:italic; font-size:clamp(2.2rem,5.2vw,3.8rem); line-height:0.95; text-transform:uppercase; letter-spacing:0.01em; max-width:18ch; text-shadow:0 2px 28px rgba(4,6,12,0.95); }
+  .rhero h1 .y{ color:var(--yellow); }
+  .rhero .blurb{ margin-top:1.1rem; font-size:1.02rem; line-height:1.6; color:#cdd6df; max-width:62ch; text-shadow:0 1px 16px rgba(4,6,12,0.95); }
+
+  main{ max-width:1200px; margin:0 auto; padding:clamp(2rem,4vw,3rem) clamp(1.2rem,4vw,3rem) clamp(3rem,6vw,5rem); }
+
+  /* GLASS CARD (shared language with product-storm) */
+  .gcard{
+    background:linear-gradient(160deg, rgba(13,20,32,0.5), rgba(8,13,22,0.36));
+    -webkit-backdrop-filter:blur(16px) saturate(1.35); backdrop-filter:blur(16px) saturate(1.35);
+    border:1px solid var(--glass-line); border-radius:14px;
+    padding:clamp(1.8rem,3.5vw,2.8rem); position:relative;
+    box-shadow:0 24px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
+  }
+  .gcard::before{ content:""; position:absolute; top:0; left:8%; right:8%; height:1px; pointer-events:none;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.35) 30%, rgba(159,196,238,0.5) 50%, rgba(255,255,255,0.3) 70%, transparent); }
+
+  /* TRUCK INTRO CARD */
+  .truck-grid{ display:grid; grid-template-columns:1.2fr 1fr; gap:clamp(2rem,4vw,3.5rem); align-items:center; }
+  @media (max-width:880px){ .truck-grid{ grid-template-columns:1fr; gap:2rem; } }
+  .truck-photo{ position:relative; aspect-ratio:1800/1018; border-radius:10px; overflow:hidden;
+    background:#05070a center/cover no-repeat; border:1px solid rgba(159,196,238,0.18);
+    box-shadow:0 18px 50px rgba(0,0,0,0.5); }
+  .sec-eyebrow{ font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--yellow); margin-bottom:1rem; }
+  h2.sec-h{ font-family:'Saira Condensed',sans-serif; font-weight:700; font-style:italic; font-size:clamp(1.7rem,3vw,2.4rem); line-height:0.95; text-transform:uppercase; letter-spacing:0.01em; margin-bottom:1.2rem; }
+  h2.sec-h .y{ color:var(--yellow); }
+  .body-copy{ color:var(--muted); line-height:1.7; max-width:62ch; }
+  .features{ list-style:none; margin-top:1.8rem; display:grid; gap:0.2rem; }
+  .features li{ display:flex; gap:1rem; padding:0.9rem 0; border-bottom:1px solid rgba(159,196,238,0.10); align-items:flex-start; }
+  .features li:last-child{ border-bottom:none; }
+  .features .k{ font-family:'Saira Condensed',sans-serif; font-weight:700; text-transform:uppercase; font-size:1.1rem; letter-spacing:0.02em; color:#fff; min-width:9.5rem; }
+  .features .v{ color:var(--muted); font-size:0.93rem; line-height:1.5; }
+
+  /* PACKAGES */
+  .pkg-head{ text-align:center; margin:clamp(3rem,6vw,4.5rem) auto clamp(1.8rem,3.5vw,2.6rem); max-width:60ch; }
+  .pkg-head .sec-h{ margin-bottom:0.8rem; }
+  .pkg-grid{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(1.2rem,2.5vw,2rem); align-items:start; }
+  @media (max-width:880px){ .pkg-grid{ grid-template-columns:1fr; } }
+  .pkg{ display:flex; flex-direction:column; gap:1.2rem; transition:border-color .35s, box-shadow .35s; }
+  .pkg:hover{ border-color:rgba(159,196,238,0.32); box-shadow:0 24px 60px rgba(0,0,0,0.45), 0 0 38px rgba(159,196,238,0.10), inset 0 1px 0 rgba(255,255,255,0.1); }
+  .pkg .num{ font-family:'JetBrains Mono',monospace; color:var(--yellow); font-size:0.72rem; letter-spacing:0.22em; text-transform:uppercase; }
+  .pkg h3{ font-family:'Saira Condensed',sans-serif; font-weight:700; font-style:italic; font-size:clamp(1.5rem,2.4vw,2rem); text-transform:uppercase; letter-spacing:0.01em; line-height:0.95; }
+  .pkg h3 .y{ color:var(--yellow); }
+  .pkg .pitch{ color:var(--muted); font-size:0.95rem; line-height:1.65; }
+  .pkg .stat-row{ display:flex; gap:1.6rem; flex-wrap:wrap; padding:0.9rem 0; border-top:1px solid rgba(159,196,238,0.12); border-bottom:1px solid rgba(159,196,238,0.12); }
+  .pkg .stat .n{ font-family:'Saira Condensed',sans-serif; font-weight:700; font-style:italic; font-size:1.6rem; color:var(--yellow); line-height:1; }
+  .pkg .stat .l{ font-family:'JetBrains Mono',monospace; font-size:0.6rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--dim); margin-top:0.3rem; }
+  .pkg .rate-note{ color:var(--dim); font-size:0.8rem; line-height:1.5; }
+  .pkg-price{ display:flex; align-items:baseline; gap:0.6rem; flex-wrap:wrap; }
+  .pkg-price .day{ font-family:'Saira Condensed',sans-serif; font-weight:700; font-style:italic; font-size:2.3rem; color:var(--yellow); line-height:1; }
+  .pkg-price .unit{ font-family:'JetBrains Mono',monospace; font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); }
+  .pkg-price .anchor{ flex-basis:100%; color:var(--dim); font-size:0.8rem; }
+  .pkg-price .anchor s{ color:#8b9aac; }
+  .btn{ display:flex; align-items:center; justify-content:center; gap:.5rem; cursor:pointer;
+    background:linear-gradient(180deg,#ffffff,#cdddf0 45%,#9fb4ce 55%,#eaf2fb); color:#0a0f16;
+    font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:1rem; letter-spacing:0.14em; text-transform:uppercase;
+    padding:0.95rem 1.5rem; border:none; border-radius:4px;
+    box-shadow:0 0 18px rgba(150,190,255,.25), inset 0 1px 0 rgba(255,255,255,.85); transition:filter .15s, transform .15s; }
+  .btn:hover{ filter:brightness(1.05); transform:translateY(-1px); }
+
+  /* ACCORDIONS — full department manifests */
+  .accs{ display:grid; gap:0.6rem; }
+  .acc{ border:1px solid rgba(159,196,238,0.16); border-radius:8px; background:rgba(8,13,22,0.35); overflow:hidden; }
+  .acc summary{
+    list-style:none; cursor:pointer; display:flex; align-items:center; gap:0.7rem;
+    padding:0.9rem 1.1rem; font-family:'Saira Condensed',sans-serif; font-weight:700; font-style:italic;
+    font-size:1rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--text); transition:color .15s;
+  }
+  .acc summary::-webkit-details-marker{ display:none; }
+  .acc summary:hover{ color:var(--yellow); }
+  .acc summary .cnt{ margin-left:auto; font-family:'JetBrains Mono',monospace; font-style:normal; font-weight:400; font-size:0.66rem; letter-spacing:0.14em; color:var(--dim); }
+  .acc-ico{ position:relative; width:18px; height:18px; flex:0 0 18px; border-radius:999px;
+    border:1px solid var(--yellow); box-shadow:0 0 10px rgba(159,196,238,0.25); }
+  .acc-ico::before, .acc-ico::after{ content:""; position:absolute; background:var(--yellow);
+    top:50%; left:50%; transform:translate(-50%,-50%); transition:transform .25s; }
+  .acc-ico::before{ width:8px; height:1.5px; }
+  .acc-ico::after{ width:1.5px; height:8px; }
+  .acc[open] .acc-ico::after{ transform:translate(-50%,-50%) scaleY(0); }
+  .acc-body{ padding:0.2rem 1.1rem 1.1rem; border-top:1px solid rgba(159,196,238,0.10); }
+  .manifest{ list-style:none; display:grid; }
+  .manifest li{ border-bottom:1px solid rgba(159,196,238,0.08); }
+  .manifest li:last-child{ border-bottom:none; }
+  .manifest a{ display:flex; justify-content:space-between; align-items:baseline; gap:1rem; padding:0.6rem 0; transition:color .15s; }
+  .manifest .nm{ font-size:0.9rem; color:#cdd6df; }
+  .manifest .tg{ font-family:'JetBrains Mono',monospace; font-size:0.62rem; letter-spacing:0.1em; color:var(--dim); white-space:nowrap; text-transform:uppercase; }
+  .manifest a:hover .nm{ color:var(--yellow); }
+
+  /* DEPT LINKS FOOTER ROW */
+  .browse-row{ margin-top:clamp(2.5rem,5vw,3.5rem); display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+  .btn.ghost{ background:rgba(10,16,26,0.4); color:var(--text); border:1px solid rgba(159,196,238,0.28);
+    -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); box-shadow:none; }
+  .btn.ghost:hover{ border-color:#9fc4ee; box-shadow:0 0 16px rgba(159,196,238,0.25); filter:none; }
+
+  /* FOOTER */
+  footer{ background:#04060a; border-top:1px solid var(--line); padding:2.5rem clamp(1.2rem,4vw,3rem); }
+  .foot-in{ max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap; }
+  .foot-in .brand{ font-family:'Saira Condensed',sans-serif; font-weight:700; font-style:italic; text-transform:uppercase; letter-spacing:0.04em; font-size:1.1rem; }
+  .foot-in .small{ color:#6b7681; font-size:0.75rem; font-family:'JetBrains Mono',monospace; letter-spacing:0.1em; }
+</style>
+<link rel="stylesheet" href="design-explorations/storm-theme.css">
+<script defer src="design-explorations/storm-theme.js"></script>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="design-explorations/09-stormflight.html" class="brand">Thunderstruck</a>
+  <div class="links">
+    <a href="camera-storm.html">Camera</a>
+    <a href="rentals-storm.html">Lighting</a>
+    <a href="grip-truck-storm.html" class="current">Grip</a>
+    <a href="sound-storm.html">Audio</a>
+    <a href="production.html">Production</a>
+    <a href="contact.html">Contact</a>
+    <a href="rentals-storm.html" class="cart-trigger" aria-label="View gear list"><span>Gear List</span><span class="count zero" id="cartCount">0</span></a>
+  </div>
+</nav>
+
+<section class="rhero">
+  <div class="bg" aria-hidden="true"></div>
+  <div class="inner wrap">
+    <div class="breadcrumb">
+      <a href="design-explorations/09-stormflight.html">Home</a> <span class="sep">/</span>
+      <a href="grip-truck-storm.html">Grip</a> <span class="sep">/</span>
+      <span style="color:#cdd6df;">The 3-Ton Grip Truck</span>
+    </div>
+    <h1>The rig that <span class="y">runs the show.</span></h1>
+    <p class="blurb">Capacity and mobility in one rig — modular shelving, all-terrain carts, a camera workstation, 15 outlets, and shore power. Rent it loaded with the full grip department, or the full grip <em>and</em> lighting departments. It shows up, the show happens.</p>
+  </div>
+</section>
+
+<main>
+  <!-- THE TRUCK -->
+  <div class="gcard">
+    <div class="truck-grid">
+      <div class="truck-photo" style="background-image:url('media/truck-profile.webp');"></div>
+      <div>
+        <p class="sec-eyebrow">The 3-Ton Grip Truck</p>
+        <h2 class="sec-h">Built to work <span class="y">out of.</span></h2>
+        <p class="body-copy">This isn't a box with gear in it — it's a rolling staging department. Everything has a home, everything's labeled, and the truck is lit so wrap doesn't slow down when the sun goes.</p>
+        <ul class="features">
+          <li><span class="k">Lights in &amp; out</span><span class="v">LED inside and out — load in at dawn or wrap past midnight.</span></li>
+          <li><span class="k">Jockey boxes</span><span class="v">Lit under-truck boxes for sandbags, stingers, and grip.</span></li>
+          <li><span class="k">7' liftgate</span><span class="v">7-foot gate rated over 3,000 lbs — heavy carts on and off, easy.</span></li>
+          <li><span class="k">Power on board</span><span class="v">15 outlets and shore power — the truck runs your staging area.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PACKAGES -->
+  <div class="pkg-head">
+    <p class="sec-eyebrow">Two ways to take it out</p>
+    <h2 class="sec-h">Pick your <span class="y">package.</span></h2>
+    <p class="body-copy" style="margin:0 auto;">Both packages put the truck and a working department on your location. Not a curated subset — <strong style="color:#cdd6df;">every item</strong> from each department listed below rides along.</p>
+  </div>
+
+  <div class="pkg-grid">
+    <!-- PACKAGE 01 — GRIP -->
+    <div class="gcard pkg">
+      <div>
+        <p class="num">/ Package 01</p>
+        <h3>The Grip <span class="y">Package.</span></h3>
+      </div>
+      <p class="pitch">The truck, loaded with the entire grip department — stands, frames, flags, clamps, dollies, apple boxes, sandbags, the lot. If our grip catalog lists it, it's on the truck when it parks. Delivery and pickup are part of the package.</p>
+      <div class="stat-row" id="gripStats"></div>
+      <div class="accs">
+        <details class="acc">
+          <summary><span class="acc-ico" aria-hidden="true"></span>Everything on board — Grip<span class="cnt" id="gripCnt"></span></summary>
+          <div class="acc-body"><ul class="manifest" id="gripList"></ul></div>
+        </details>
+      </div>
+      <!-- Suggested pricing — placeholder until Martin confirms package rates -->
+      <div class="pkg-price">
+        <span class="day">$850</span><span class="unit">per day</span>
+        <span class="anchor">Booked à la carte this gear runs <s>$2,244/day</s> — the package saves you over 60%.</span>
+      </div>
+      <p class="rate-note">Multi-day &amp; weekly rates quoted per production — tell us your dates and we'll come back fast with a number.</p>
+      <a class="btn" href="contact.html">Request the Grip Package →</a>
+    </div>
+
+    <!-- PACKAGE 02 — GRIP + LIGHTING -->
+    <div class="gcard pkg">
+      <div>
+        <p class="num">/ Package 02</p>
+        <h3>The Grip + Lighting <span class="y">Package.</span></h3>
+      </div>
+      <p class="pitch">The whole rig. Every item from the grip department <em>and</em> every item from the lighting department — Nanlux, Aputure, Astera tubes, wireless control, batteries and distro — staged, cabled, and ready to fly.</p>
+      <div class="stat-row" id="fullStats"></div>
+      <div class="accs">
+        <details class="acc">
+          <summary><span class="acc-ico" aria-hidden="true"></span>Everything on board — Grip<span class="cnt" id="gripCnt2"></span></summary>
+          <div class="acc-body"><ul class="manifest" id="gripList2"></ul></div>
+        </details>
+        <details class="acc">
+          <summary><span class="acc-ico" aria-hidden="true"></span>Everything on board — Lighting<span class="cnt" id="lightCnt"></span></summary>
+          <div class="acc-body"><ul class="manifest" id="lightList"></ul></div>
+        </details>
+      </div>
+      <!-- Suggested pricing — placeholder until Martin confirms package rates -->
+      <div class="pkg-price">
+        <span class="day">$1,450</span><span class="unit">per day</span>
+        <span class="anchor">Booked à la carte this gear runs <s>$3,890/day</s> — the package saves you over 60%.</span>
+      </div>
+      <p class="rate-note">Multi-day &amp; weekly rates quoted per production — tell us your dates and we'll come back fast with a number.</p>
+      <a class="btn" href="contact.html">Request the Full Package →</a>
+    </div>
+  </div>
+
+  <div class="browse-row">
+    <a class="btn ghost" href="grip-truck-storm.html">Browse grip à la carte →</a>
+    <a class="btn ghost" href="rentals-storm.html">Browse lighting à la carte →</a>
+  </div>
+</main>
+
+<footer>
+  <div class="foot-in">
+    <span class="brand">Thunderstruck Pictures</span>
+    <span class="small">© 2026 Thunderstruck Pictures LLC · Austin, TX · Stories that hit like lightning</span>
+  </div>
+</footer>
+
+<script defer>
+// Build the package manifests straight from the live inventory, so "every item"
+// stays literally true as the catalog changes.
+window.addEventListener('DOMContentLoaded', () => {
+  if (typeof INVENTORY === 'undefined') return;
+  const grip = INVENTORY.filter(i => i.dept === 'grip');
+  const lighting = INVENTORY.filter(i => i.dept === 'lighting');
+
+  const row = i => `<li><a href="product-storm.html?id=${i.id}"><span class="nm">${i.name}</span><span class="tg">${i.tag || ''}</span></a></li>`;
+  const fill = (listId, cntId, items) => {
+    const l = document.getElementById(listId); if (l) l.innerHTML = items.map(row).join('');
+    const c = document.getElementById(cntId); if (c) c.textContent = items.length + ' items';
+  };
+  fill('gripList', 'gripCnt', grip);
+  fill('gripList2', 'gripCnt2', grip);
+  fill('lightList', 'lightCnt', lighting);
+
+  const stat = (n, l) => `<div class="stat"><div class="n">${n}</div><div class="l">${l}</div></div>`;
+  const gs = document.getElementById('gripStats');
+  if (gs) gs.innerHTML = stat(grip.length, 'Grip items') + stat('3-ton', 'Truck included');
+  const fs = document.getElementById('fullStats');
+  if (fs) fs.innerHTML = stat(grip.length, 'Grip items') + stat(lighting.length, 'Lighting items') + stat('3-ton', 'Truck included');
+});
+</script>
+
+<!-- Shared gear list count -->
+<script>
+(function(){
+  try{
+    var r=localStorage.getItem('ts-cart'); var n=0;
+    if(r){ var c=(JSON.parse(r)||{}).cart||{}; n=Object.values(c).reduce(function(a,b){return a+(b||0);},0); }
+    var el=document.getElementById('cartCount');
+    if(el){ el.textContent=n; el.classList.toggle('zero', n===0); }
+  }catch(e){}
+})();
+</script>
+
+</body>
+</html>

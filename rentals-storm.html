@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thunderstruck Pictures — Lighting Rentals · Build a Quote</title>
+<title>Thunderstruck Pictures — Lighting Rentals · Build a Gear List (Storm)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -236,26 +236,28 @@
     box-shadow:0 0 26px rgba(150,190,255,0.45), inset 0 1px 0 rgba(255,255,255,0.95);
   }
 </style>
+<link rel="stylesheet" href="design-explorations/storm-theme.css">
+<script defer src="design-explorations/storm-theme.js"></script>
 </head>
 <body>
 
 <nav class="nav">
-  <a href="index.html" class="brand">Thunderstruck</a>
+  <a href="design-explorations/09-stormflight.html" class="brand">Thunderstruck</a>
   <div class="links">
-    <a href="camera.html">Camera</a>
-    <a href="rentals.html" class="current">Lighting</a>
-    <a href="grip-truck.html">Grip</a>
-    <a href="sound.html">Audio</a>
+    <a href="camera-storm.html">Camera</a>
+    <a href="rentals-storm.html" class="current">Lighting</a>
+    <a href="grip-truck-storm.html">Grip</a>
+    <a href="sound-storm.html">Audio</a>
     <a href="production.html">Production</a>
     <a href="contact.html">Contact</a>
-    <button class="cart-trigger" id="cartBtn" aria-label="Open quote"><span>Quote</span><span class="count zero" id="cartCount">0</span></button>
+    <button class="cart-trigger" id="cartBtn" aria-label="Open gear list"><span>Gear List</span><span class="count zero" id="cartCount">0</span></button>
   </div>
 </nav>
 
 <section class="rhero">
   <div class="bg" aria-hidden="true"></div>
   <div class="inner wrap">
-    <div class="breadcrumb"><a href="index.html">Home</a> <span class="sep">/</span> <span style="color:#cdd6df;">Lighting &amp; Grip</span></div>
+    <div class="breadcrumb"><a href="design-explorations/09-stormflight.html">Home</a> <span class="sep">/</span> <span style="color:#cdd6df;">Lighting &amp; Grip</span></div>
     <h1>The lighting <span class="y">department.</span></h1>
     <p class="lede"><strong>HMI-equivalent LEDs from 600W to 4000W</strong>, tube kits, RGB panels, and accent lights — all CRMX-controllable. Build your package below; we respond within 24 hours with availability and a firm rate. No card, no commitment.</p>
   </div>
@@ -294,7 +296,7 @@
 <div class="drawer-backdrop" id="backdrop"></div>
 <aside class="drawer" id="drawer" aria-hidden="true">
   <div class="drawer-head">
-    <h3 id="drawerTitle">Your <span class="y">quote.</span></h3>
+    <h3 id="drawerTitle">Your <span class="y">gear list.</span></h3>
     <button class="close" id="closeDrawer" aria-label="Close">✕</button>
   </div>
 
@@ -384,15 +386,15 @@ function renderCatalog(){
 function cardHtml(i){
   const inCart = cart[i.id] > 0;
   return `<article class="card ${inCart?'in-cart':''}" data-id="${i.id}">
-    <a href="product.html?id=${i.id}" class="image" aria-label="View ${i.name}"><span class="badge">${i.tag}</span><img src="media/products/${i.id}${i.photo?'.webp':'.jpg'}" alt="${i.name}" loading="lazy" onerror="this.style.display='none'"></a>
+    <a href="product-storm.html?id=${i.id}" class="image" aria-label="View ${i.name}"><span class="badge">${i.tag}</span><img src="media/products/${i.id}${i.photo?'.webp':'.jpg'}" alt="${i.name}" loading="lazy" onerror="this.style.display='none'"></a>
     <div class="body">
       <div class="brand-label">${i.brand}</div>
-      <div class="name"><a href="product.html?id=${i.id}">${i.name}</a></div>
+      <div class="name"><a href="product-storm.html?id=${i.id}">${i.name}</a></div>
       <div class="spec">${i.spec}</div>
       <div class="pricing"><span class="day">$${i.day}</span><span class="unit">/ day</span></div>
       ${inCart
-        ? `<div class="stepper"><button onclick="changeQty('${i.id}',-1)">−</button><span class="qty-display">${cart[i.id]} in quote</span><button onclick="changeQty('${i.id}',1)">+</button></div>`
-        : `<button class="add-btn" onclick="addToCart('${i.id}')">+ Add to Quote</button>`}
+        ? `<div class="stepper"><button onclick="changeQty('${i.id}',-1)">−</button><span class="qty-display">${cart[i.id]} on gear list</span><button onclick="changeQty('${i.id}',1)">+</button></div>`
+        : `<button class="add-btn" onclick="addToCart('${i.id}')">+ Add to Gear List</button>`}
     </div></article>`;
 }
 function addToCart(id){
@@ -411,7 +413,7 @@ function lineCalc(item,qty){ return item.day*qty*calcEffDays(days); }
 function renderCart(){
   const body=document.getElementById('drawerBody'); const ids=Object.keys(cart);
   if(ids.length===0){
-    body.innerHTML=`<div class="empty-state"><div class="icon">⚡</div><h4>Empty quote</h4><p>Add gear from the catalog and it'll show up here.<br>No payment, no commitment — just a quote request.</p></div>`;
+    body.innerHTML=`<div class="empty-state"><div class="icon">⚡</div><h4>Empty gear list</h4><p>Add gear from the catalog and it'll show up here.<br>No payment, no commitment — just a quote request.</p></div>`;
     document.getElementById('cartTotal').innerHTML='$0<span class="est">est.</span>';
     document.getElementById('continueBtn').disabled=true; return;
   }
@@ -439,7 +441,7 @@ function goToForm(){
   document.getElementById('drawer').classList.add('form-mode');
   document.getElementById('drawerTitle').innerHTML='Your <span class="y">details.</span>';
 }
-function backToCart(){ document.getElementById('drawer').classList.remove('form-mode'); document.getElementById('drawerTitle').innerHTML='Your <span class="y">quote.</span>'; }
+function backToCart(){ document.getElementById('drawer').classList.remove('form-mode'); document.getElementById('drawerTitle').innerHTML='Your <span class="y">gear list.</span>'; }
 async function submitQuote(e){
   e.preventDefault();
   const form=e.target;
@@ -497,7 +499,7 @@ ${data.notes||'(none)'}`;
   }
   return false;
 }
-function resetAfterSuccess(){ cart={}; days=1; save(); setDays(1); renderCatalog(); renderCart(); updateNav(); document.getElementById('quoteForm').reset(); document.getElementById('drawerTitle').innerHTML='Your <span class="y">quote.</span>'; closeDrawer(); }
+function resetAfterSuccess(){ cart={}; days=1; save(); setDays(1); renderCatalog(); renderCart(); updateNav(); document.getElementById('quoteForm').reset(); document.getElementById('drawerTitle').innerHTML='Your <span class="y">gear list.</span>'; closeDrawer(); }
 function applyFilter(f){
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.filter===f));
   ['big','mid','tubes','control'].forEach(cat=>{

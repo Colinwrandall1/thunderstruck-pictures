@@ -44,6 +44,11 @@
 
     .nav-cluster { display: flex; align-items: center; gap: 0.55rem; }
 
+    /* Desktop: the cluster only exists to host the burger + hoisted cart on
+       mobile. Hide it >960px so it doesn't claim a flex slot and push the
+       .links group toward the center (it broke space-between alignment). */
+    @media (min-width: 961px) { .nav-cluster { display: none; } }
+
     @media (max-width: 960px) {
       .nav-burger { display: inline-flex; align-items: center; justify-content: center; }
 

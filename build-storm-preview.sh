@@ -1,0 +1,44 @@
+#!/bin/sh
+# Build the storm-variant preview site into storm-public/ for deploy to its own
+# Netlify URL. The storm home (design-explorations/09-stormflight.html) becomes
+# index.html at the root; supporting non-storm pages (all, product, production,
+# contact) ride along with their nav links rewired to the storm set.
+set -e
+cd "$(dirname "$0")"
+rm -rf storm-public
+mkdir -p storm-public/assets storm-public/media storm-public/design-explorations
+
+# Storm home -> root index.html (strip ../ repo-root refs)
+sed 's|\.\./||g' design-explorations/09-stormflight.html > storm-public/index.html
+
+# Storm pages + shared scripts/data
+cp camera-storm.html rentals-storm.html grip-truck-storm.html sound-storm.html \
+   product-storm.html truck-storm.html \
+   nav-mobile.js inventory.js product-details.js inventory.js storm-public/
+cp design-explorations/storm-theme.css design-explorations/storm-theme.js storm-public/design-explorations/
+
+# Point the storm pages' home links at the root index
+for f in storm-public/camera-storm.html storm-public/rentals-storm.html \
+         storm-public/grip-truck-storm.html storm-public/sound-storm.html \
+         storm-public/product-storm.html storm-public/truck-storm.html; do
+  sed -i '' 's|href="design-explorations/09-stormflight.html"|href="index.html"|g' "$f"
+done
+
+# Supporting non-storm pages, nav rewired to the storm set
+for f in all.html product.html production.html contact.html; do
+  sed -e 's|href="camera.html"|href="camera-storm.html"|g' \
+      -e 's|href="rentals.html"|href="rentals-storm.html"|g' \
+      -e 's|href="grip-truck.html"|href="grip-truck-storm.html"|g' \
+      -e 's|href="sound.html"|href="sound-storm.html"|g' \
+      -e "s|camera:'camera.html', lighting:'rentals.html', grip:'grip-truck.html', sound:'sound.html'|camera:'camera-storm.html', lighting:'rentals-storm.html', grip:'grip-truck-storm.html', sound:'sound-storm.html'|" \
+      -e "s|'rentals.html'|'rentals-storm.html'|g" \
+      "$f" > "storm-public/$f"
+done
+
+# Only the assets the storm set actually references
+cp assets/clouds-bg.jpg assets/hero-plate-lit.webp storm-public/assets/
+cp media/truck-profile.webp storm-public/media/
+cp -R media/products storm-public/media/products
+
+echo "Built storm-public/ ($(du -sh storm-public | cut -f1))"
+echo "Deploy: netlify deploy --prod --dir storm-public --site <storm-site-id>"

@@ -194,6 +194,46 @@ const PRODUCT_DETAILS = {
     ],
   },
 
+  'nucleus-m': {
+    blurb: 'Wireless follow focus with real torque — hand unit plus motors, 1,000 feet of range, and no MDR brick to rig.',
+    description: [
+      'The Nucleus-M is our standard wireless lens control package. Three channels — focus, iris, zoom — run from a hand unit with a hard-stop calibrated wheel and a marking disc your 1st AC will actually use. Range is rated to 1,000 feet, so it covers everything from a dolly-side pull to a car-rig follow. Each motor has its drive built in, so there\'s no separate MDR box to power or velcro to the cage.',
+      'The motors clamp to 15mm or 19mm rods and ship with standard 0.8 pitch gears, so they land straight onto our DZOFilm PAVO anamorphics, VESPID primes, or the Laowa Ranger zoom. On gimbal days it plays nicely with the DJI RS 3 Pro for run/stop and focus from the grips. Calibrate the lens, set your marks, and pull from anywhere on set.'
+    ],
+  },
+
+  'tentacle-sync': {
+    blurb: 'Bluetooth timecode in a matchbox — jam every camera and recorder once, and dailies sync themselves.',
+    description: [
+      'The Sync E Mk2 is how we keep multi-camera days out of post-production purgatory. The temperature-compensated oscillator drifts less than one frame in 24 hours, so a morning jam holds through wrap. Thirty-five hours of battery on a USB-C charge means it outlasts the crew, and the whole unit weighs 30 grams — light enough to stick to a Komodo with the built-in hook-and-loop and forget.',
+      'Setup and monitoring happen over Bluetooth in the Tentacle app, so you can confirm every unit on set is jammed without touching a camera. We include the RED Komodo and 5-pin LEMO cables so it plugs straight into our camera packages, and it speaks the same SMPTE language as the Sound Devices 633 and Tentacle TRACK E on the audio side. One jam in the morning; matching timecode in every file at night.'
+    ],
+  },
+
+  'rs3-pro': {
+    blurb: 'DJI\'s flagship handheld gimbal — 10 pounds of payload, automated axis locks, and carbon arms that balance a fully built cinema camera.',
+    description: [
+      'The RS 3 Pro carries 10 pounds, which in practice means a RED Komodo with a VESPID prime, wireless video, and a follow-focus motor still balances with headroom. The extended carbon-fiber arms clear taller builds, and the automated axis locks release and unfold the moment you power on — rebalancing between setups takes seconds instead of minutes. A 1.8-inch OLED touchscreen puts modes and motor tuning right on the body.',
+      'Our combo adds the wireless lens and gimbal control handles, so one operator runs the move while a focus puller works remotely — or pair it with our Tilta Float vest system for all-day handheld that doesn\'t read as handheld. Third-gen stabilization keeps the horizon locked through running shots, stairs, and vehicle work. Balance it, lock it, go.'
+    ],
+  },
+
+  'smallhd-1303': {
+    blurb: 'The 13-inch director\'s monitor — 1,500 nits of HDR-ready brightness that stays readable outside at noon.',
+    description: [
+      'The 1303 HDR is our standard video-village and director\'s monitor. Thirteen inches of full-HD IPS panel at 1,500 nits means it stays daylight-viewable without a hood — a real consideration on Texas exteriors. Dual 3G-SDI ins and outs plus HDMI let it sit mid-chain, looping program out to a client monitor while the director works off the front.',
+      'It pairs naturally with the Teradek Bolt 6 LT receiver for a wireless village, or drops into our Director\'s Monitor Cage with a V-mount for a walking director\'s rig. SmallHD\'s toolset — false color, focus assist, frame guides, LUTs — runs onboard, so the image you\'re judging is the image you\'re grading toward. Add a stand and you\'re watching.'
+    ],
+  },
+
+  'portkeys-bm5': {
+    blurb: 'A 2,200-nit 5.5-inch touchscreen that runs the RED Komodo over Wi-Fi — monitor and camera assistant in one.',
+    description: [
+      'The BM5WR earns its place in our Komodo packages by doing two jobs. As a monitor, it\'s a 2,200-nit 1080p panel with 3G-SDI and HDMI inputs — daylight-bright and wrapped in an aluminum shell that survives life on the front of a camera. As a controller, it talks to the Komodo over Wi-Fi: record start/stop, ISO, shutter, white balance, and touch-to-focus straight from the screen.',
+      'That control matters most on gimbal and rig days — when the camera is on the RS 3 Pro, a car mount, or flying overhead on a menace arm, you change settings from the monitor instead of breaking down the rig. At 376 grams it adds little to a balanced build, and the SDI out feeds a Teradek for village. Mount it, link it, and stop touching the camera.'
+    ],
+  },
+
   // ========== LIGHTING (from Martin's deck verbatim) ==========
 
   'nanlux-2400b': {
@@ -278,6 +318,14 @@ const PRODUCT_DETAILS = {
       { src: 'aputure-600x.webp', caption: '' },
       { src: 'aputure-600x-2.webp', caption: '' },
       { src: 'aputure-600x-3.webp', caption: '' },
+    ],
+  },
+
+  'amaran-200x': {
+    blurb: 'A 200W bi-color Bowens-mount point source that sets up in seconds — the interview light that fits in one hand.',
+    description: [
+      'The Amaran 200x is the light we reach for on interview and small-crew days — 200 watts of bi-color COB output from 2700 to 6500K, so it matches tungsten practicals or daylight windows without gelling. CRI 95+ keeps skin tones honest, and stepless 0–100% dimming from the onboard dial or the Sidus Link app means you trim exposure without ever moving the stand.',
+      'The Bowens mount takes the same modifiers as our 600-series — Light Dome Mini III, Lantern 90 — and our kit includes barndoors, a grid, and a gel holder for quick hard-light shaping. At this weight it rides a C-stand instead of a combo, which matters in tight locations. Pair two with an Aputure 600x key and you\'ve lit a two-person interview from one cart. Plugs into a wall; no distro required.'
     ],
   },
 
@@ -496,6 +544,46 @@ const PRODUCT_DETAILS = {
     ],
   },
 
+  'high-roller': {
+    blurb: 'A pair of 18-foot American Grip high rollers — the stands that keep your 12×12 rags and biggest heads steady in a Texas gust.',
+    description: [
+      'High rollers are the backbone of any overhead rig. These American Grip 18-footers roll on wheels, so two grips can reposition a rigged 12×12 without striking it — the difference between a five-minute move and a thirty-minute one. The Rocky Mountain leg adjusts independently for stairs, curbs, and uneven lots, and the Junior receiver takes our biggest fixtures, from the Nanlux 2400B to the Aputure 1200x.',
+      'Each stand carries up to 60 pounds and includes a 4.5-inch grip head for arms and frame ears. We rent them as a pair because overheads need two points of contact — fly a 12×12 silk, a solid, or digital green between them and you\'ve changed the light over an entire scene. Bag the legs generously; the sandbag package is built for exactly this.'
+    ],
+  },
+
+  'kupo-roller': {
+    blurb: 'Kupo\'s 19-foot high rollers, rated to 88 pounds — the extra margin you want under a big rag or a heavy head, rented as a pair.',
+    description: [
+      'When the rig is heavier or higher, these are the rollers we send. Nineteen feet of working height and an 88-pound capacity give real margin over a standard high roller — enough for a fully dressed 12×12 frame on a windy day, or a Nanlux 2400B flown at full height. The wheels mean repositioning happens without a strike, and the leg locks are positive and glove-friendly.',
+      'Each includes a 4.5-inch grip head and a Junior receiver, so they pull double duty: overhead frame support on one setup, big-light stand on the next. Order them alongside the 12×12 frame system, the overhead skins set, and sandbags and you\'ve got the complete exterior soft-light package on one quote. Bag every leg; physics isn\'t negotiable.'
+    ],
+  },
+
+  'cstand-kit': {
+    blurb: 'Six 40-inch Matthews C-stands with grip heads and arms — the grip department\'s alphabet, in one order.',
+    description: [
+      'Nothing on set works without C-stands, so we rent them six at a time. Each Matthews 40-inch stand comes complete with a grip head and arm — flag duty, floppy duty, boom-a-light-over-the-couch duty. The mix includes sliding-leg stands for stairs and uneven ground plus turtle-base stands, where the removable base lets you rig a fixture inches off the floor.',
+      'Six covers a typical interview or small narrative day: two flags on the key, a floppy for negative fill, a stand for the backlight, and spares — because there are never spares for long. Knuckles to the right so gravity tightens the grip, and bag every stand; our sandbag package quotes alongside this kit for a reason. The set that holds everything else up.'
+    ],
+  },
+
+  'scrim-jim': {
+    blurb: 'Westcott\'s Scrim Jim Cine 8×8 — a modular frame that breaks down to a 4×4 and builds back up in minutes, with cine clamps and bag.',
+    description: [
+      'The Scrim Jim is the overhead frame for crews without a grip truck. The anodized tubes snap together into an 8×8 or a 4×4 with no tools, no ears, no speed rail — one person can build it in under ten minutes. Fabrics tension onto the frame with touch fasteners, so swapping a diffusion for a bounce takes seconds instead of a re-rig.',
+      'At 8×8 it\'s big enough to soften the sun over a two-shot or turn the Aputure 600x into a genuine soft key; at 4×4 it works handheld as a bounce or flies on a single C-stand arm. The included cine clamps grab any grip head, and the whole system packs into one shoulder bag. Big-frame results, hatchback footprint.'
+    ],
+  },
+
+  'overhead-skins': {
+    blurb: 'The full textile wardrobe for overhead frames — grid cloth, muslin, UltraBounce, silk, magic cloth, single net, and digital green.',
+    description: [
+      'Skins are where the look actually happens — the frame is just the hanger. This set covers the full menu: grid cloth for clean diffusion that holds up in wind, silk for a softer roll-off, magic cloth for diffusion-plus-bounce in one fabric, and unbleached muslin for a warm bounce that flatters skin. UltraBounce gives you white on one side and black on the other — fill and negative fill on the same rag.',
+      'The single net pulls roughly half a stop off a source without changing its quality — the move when the light is right but hot. Digital green turns the same frame into an instant VFX backing for car work or window comps. Everything pairs with our 12×12/6×6 frame system and high rollers, and ships in labeled bags so the right rag comes off the truck first.'
+    ],
+  },
+
   // ========== SOUND (Martin doesn't have a sound deck yet — copy is mine) ==========
 
   'sd-633': {
@@ -571,6 +659,46 @@ const PRODUCT_DETAILS = {
       'Standard tie clip',
       'Mounts + tape',
       'Carrying case'
+    ],
+  },
+
+  'sound-blanket': {
+    blurb: 'Two 72×80" sound blankets — the cheapest fix in the truck for a room that rings like a bathroom.',
+    description: [
+      'Hang two sound blankets in a reflective room and the dialogue track changes immediately — the flutter echo off parallel drywall dies, the boom tightens, and post stops fighting the room. We send them in pairs because reflections come in pairs: treat the wall behind camera and the hard surface nearest talent first. Drape them over C-stands, clip them to a doorframe, or lay one over a tile floor just out of frame.',
+      'They moonlight all over set, too: the black side works as a quick flag or negative fill, the white side as a soft bounce, and between locations they pad camera cases like the moving blankets they secretly are. Cheap to rent, impossible to regret. If the room sounds bad, the fix costs less than lunch — not a new location.'
+    ],
+  },
+
+  'dpa4061': {
+    blurb: 'The DPA 4061 — the low-sensitivity sibling of the world\'s favorite lav, built for talent who project, shout, or sing.',
+    description: [
+      'The 4061 is the lav we reach for when the source is loud — stage performances, raised-voice scenes, vocalists, a preacher mid-sermon. The low-sensitivity capsule handles peaks up to 144 dB SPL before clipping, so the take survives the exact moment the take is about. The omnidirectional pattern forgives head turns and wardrobe shift, and DPA\'s flat, open response is the closest a lav gets to sounding like a boom.',
+      'Physically it\'s tiny and sweat-resistant, so it hides under wardrobe through a full day of body heat. It complements the Sanken COS-11D in our kit: the Sanken for standard dialogue, the DPA when the meters are going to slam. Terminated for our Lectrosonics SMDWB transmitters, so the talent package goes out as one line. When the scene gets loud, this is the mic still recording cleanly.'
+    ],
+  },
+
+  'lectro-smdwb': {
+    blurb: 'Lectrosonics\' SMDWB — a wideband bodypack that transmits and records simultaneously, so the wireless take always has a backup.',
+    description: [
+      'Lectrosonics is the wireless production sound trusts, and the SMDWB adds two upgrades that matter on real sets. Wideband tuning covers the entire B1 block — 537 to 614 MHz — so finding clean spectrum in RF-noisy locations is a scan, not a gamble. And it records: a Broadcast Wave file writes to a microSD card inside the pack while it transmits, so a dropout in the RF chain no longer means a lost line.',
+      'Selectable 25/50/100 mW output trades range against battery life, and two AA batteries run a full shoot day at 50 mW. Digital Hybrid Wireless keeps latency low and the noise floor clean into our Sound Devices 633. We terminate our Sanken COS-11D and DPA 4061 lavs for these packs. Wire the talent, jam timecode, and stop worrying about RF.'
+    ],
+  },
+
+  'mm1': {
+    blurb: 'The Sound Devices MM-1 — a beltpack preamp that gives the boom op their own gain, headphones, and confidence.',
+    description: [
+      'On bigger sets the boom operator works far from the mixer, and the MM-1 is how they stay self-sufficient. It\'s a single-channel preamp that lives on the boom op\'s belt: up to 66 dB of clean gain, 48V phantom power for the MKH 50, and a dedicated headphone output so the operator hears exactly what the mic hears — boom placement by ear instead of by hand signal.',
+      'Sound Devices\' dual-stage limiter is effectively unclippable, catching the door slam or sudden shout before it ruins the channel, and the high-pass filter strips handling rumble before it reaches the bag. Two AA batteries run it roughly eight hours. It slots between our Ambient boom pole and the 633 with two XLRs. Small box, noticeably better boom track.'
+    ],
+  },
+
+  'tentacle-track-e': {
+    blurb: 'A timecode-stamped pocket recorder with 32-bit float — clip it to talent and clipping becomes mathematically impossible.',
+    description: [
+      'The TRACK E is the simplest path to wireless-quality talent audio without wireless: a recorder the size of a matchbox that clips to a belt, takes a lav, and writes 32-bit float WAV files with embedded timecode. Float math means there\'s no gain to set and no clipping to fear — a whisper and a scream land in the same file, both recoverable. The battery runs up to ten hours; the card records far longer.',
+      'Because every file carries SMPTE timecode, the post workflow is drag, sync, done — it speaks the same language as our Tentacle Sync E Mk2 units on camera. We use it where RF fails or doesn\'t fit: car interiors, crowd scenes, run-and-gun days, or as a body-pack backup under a Lectrosonics rig. Pair it with a lav, jam it once, and forget it\'s rolling.'
     ],
   },
 
@@ -773,7 +901,7 @@ const PRODUCT_DETAILS = {
   },
 
   'titan-grid': {
-    blurb: 'This 40-Degree grid for Titan Tubes is a fabric light-shaper that eliminates spill light and provides the directional control necessary for selective lighting..',
+    blurb: 'This 40-Degree grid for Titan Tubes is a fabric light-shaper that eliminates spill light and provides the directional control necessary for selective lighting.',
     description: [
       'This 40-Degree grid for Titan Tubes is a fabric light-shaper that eliminates spill light and provides the directional control necessary for selective lighting.',
     ],
@@ -804,7 +932,7 @@ const PRODUCT_DETAILS = {
   },
 
   'mcsocket': {
-    blurb: 'The McSocket is a clever and simple mounting option that uses ferromagnetic plates to place puck lights into traditional lamps or any fixture with a standard medium base E26 soc...',
+    blurb: 'The McSocket is a clever and simple mounting option that uses ferromagnetic plates to place puck lights into traditional lamps or any fixture with a standard medium base E26 socket.',
     description: [
       'The McSocket is a clever and simple mounting option that uses ferromagnetic plates to place puck lights into traditional lamps or any fixture with a standard medium base E26 socket.',
     ],
@@ -824,24 +952,8 @@ const PRODUCT_DETAILS = {
     ],
   },
 
-  'lunabulb-8': {
-    blurb: 'This convenient kit is made up of 8 LunaBulbs custom-fitted into a rugged travel case for easy storage and transport to locations.',
-    description: [
-      'This convenient kit is made up of 8 LunaBulbs custom-fitted into a rugged travel case for easy storage and transport to locations. It includes the PrepInlay carrier, which has a built-in rechargeable battery for programming of the LunaBulbs. The bulbs may be set individually or in groups.',
-      'The light bulbs can be used on set as a practical light source. It has a standard A19 bulb shape and an E26 base to fit into traditional lamps of any kind. The LunaBulb is driven by the 5-color Titan LED engine. It has built-in DMX and CRMX.',
-    ],
-    kit: [
-      '8 x Astera LunaBulbs',
-      'Prepinlay Kit',
-      'PrepCase',
-      'Astera Charger for Titan',
-      'Astera ARC3 White Remote',
-      'Astera ARC1 Black Remote',
-    ],
-  },
-
   'bulb-mount-kit': {
-    blurb: 'We assembled this customized collection of various mounts and magnets to help you rig light bulbs in a variety of production situations..',
+    blurb: 'We assembled this customized collection of various mounts and magnets to help you rig light bulbs in a variety of production situations.',
     description: [
       'We assembled this customized collection of various mounts and magnets to help you rig light bulbs in a variety of production situations.',
     ],
@@ -901,7 +1013,7 @@ const PRODUCT_DETAILS = {
   },
 
   'sidus-four': {
-    blurb: 'The Sidus Four is a 4-universe CRMX transmitter with a built-in wireless router and Ethernet node that supports up to 4 additional wired DMX universes with its bidirectional 5-p...',
+    blurb: 'The Sidus Four is a 4-universe CRMX transmitter with a built-in wireless router and Ethernet node that supports up to 4 additional wired DMX universes with its bidirectional 5-pin DMX ports.',
     description: [
       'The Sidus Four is a 4-universe CRMX transmitter with a built-in wireless router and Ethernet node that supports up to 4 additional wired DMX universes with its bidirectional 5-pin DMX ports. With both wired and wireless in operation, it can transmit up to 8 DMX universes. Combined with its high-output dual-band antennas, the Sidus Four is a powerful transmitter for all the popular lighting protocols including CRMX, DMX Sidus, Art-Net, and sACN.',
       'It has a V-mount battery plate and an 80-minute internal backup battery. Made for professional filmmakers, the Sidus Four is built with an IP65-rated water-resistant construction for outdoor use.',
@@ -927,7 +1039,7 @@ const PRODUCT_DETAILS = {
   },
 
   'timolink-rx': {
-    blurb: 'Built with CRMX modules from LumenRadio, the TimoLink RX converts a wired DMX console to wireless by receiving signals from CRMX-compatible light fixtures or transmitters at a r...',
+    blurb: 'Built with CRMX modules from LumenRadio, the TimoLink RX converts a wired DMX console to wireless by receiving signals from CRMX-compatible light fixtures or transmitters at a range of up to 984\'.',
     description: [
       "Built with CRMX modules from LumenRadio, the TimoLink RX converts a wired DMX console to wireless by receiving signals from CRMX-compatible light fixtures or transmitters at a range of up to 984'. The five-pin female XLR connector rotates up to 270° for wider compatibility with different interface designs.",
     ],
@@ -937,7 +1049,7 @@ const PRODUCT_DETAILS = {
   },
 
   'ipad-blackout': {
-    blurb: 'Rent our Apple iPad Pro preloaded with a variety of lighting apps including a monthly subscription to the very popular Blackout lighting control app that works with nearly all b...',
+    blurb: 'Rent our Apple iPad Pro preloaded with a variety of lighting apps including a monthly subscription to the very popular Blackout lighting control app that works with nearly all brands of LED light fixtures including Astera, Aputure, Nanlux, Godox, Creamsource, Arri, and more.',
     description: [
       'Rent our Apple iPad Pro preloaded with a variety of lighting apps including a monthly subscription to the very popular Blackout lighting control app that works with nearly all brands of LED light fixtures including Astera, Aputure, Nanlux, Godox, Creamsource, Arri, and more.',
     ],
@@ -1155,6 +1267,11 @@ const PRODUCT_DETAILS = {
   // --- Auto-added galleries (auxiliary photos) ---
 
   'smallhd-ultra5': {
+    blurb: 'A 3,000-nit 5-inch touchscreen that doubles as a camera controller — bright enough for full sun, smart enough to run the Komodo.',
+    description: [
+      'The ULTRA 5 is the on-camera monitor we send when the operator needs to actually see in daylight — 3,000 nits is roughly double most on-camera panels, so no more cupping a hand over the screen between takes. The 1080p touchscreen runs SmallHD\'s PageOS with the full toolset: false color, focus peaking, custom LUTs, and anamorphic de-squeeze for our PAVO set.',
+      'Beyond monitoring, it\'s a control surface — with the camera-control license and cable it drives RED KOMODO and ARRI settings from the screen: record, ISO, white balance, shutter, without touching the body. Physical front buttons mean gloved hands still work. We include a V-mount plate so power is one battery, with no cables snaking across the build.'
+    ],
     gallery: [
       { src: 'smallhd-ultra5.webp', caption: '' },
       { src: 'smallhd-ultra5-2.webp', caption: '' },
@@ -1163,6 +1280,11 @@ const PRODUCT_DETAILS = {
   },
 
   'teradek-bolt6': {
+    blurb: 'Zero-delay wireless video to 750 feet — what the director sees is what the lens sees, the same instant.',
+    description: [
+      'The Bolt 6 LT 750 sends 1080p60 10-bit 4:2:2 video with effectively zero latency — under a millisecond — so a focus puller can pull off the receiver and a director can call action off a monitor that isn\'t lying to them. The 6GHz band is the headline: clean spectrum, free of the Wi-Fi congestion that plagues 5GHz links around buildings and busy locations.',
+      'Rated to 750 feet line of sight, which covers video village across a parking lot or a process-trailer rig. AES-256 encryption keeps client feeds private. Both ends are V-mount ready, so the transmitter rides the camera battery plate and the receiver powers a director\'s monitor build — it pairs naturally with our SmallHD 1303 and the Director\'s Monitor Cage. Mount, pair, roll.'
+    ],
     gallery: [
       { src: 'teradek-bolt6.webp', caption: '' },
       { src: 'teradek-bolt6-2.webp', caption: '' },
@@ -1170,6 +1292,11 @@ const PRODUCT_DETAILS = {
   },
 
   'dana-dolly': {
+    blurb: 'The universal-track dolly that delivers real camera moves without a dolly truck — built and rolling in fifteen minutes.',
+    description: [
+      'The Dana Dolly is the most production value per pound in our camera support room. The dual-wheel carriage rides standard 1-1/4" speed rail, so your track can run three feet across a tabletop or twenty feet down a location hallway. The Mitchell riser takes a fluid head directly — our Sachtler Video 18 drops straight on — and the platform happily carries a fully built ALEXA 35 or Komodo.',
+      'We ship it with the riser and slider stands for waist-height runs, and low mode goes straight onto apple boxes for ground-skimming moves. On interview days, a slow four-foot push-in reads like a jib shot at a fraction of the setup time. Add speed rail to the order and you\'re rolling by the first setup of the day.'
+    ],
     gallery: [
       { src: 'dana-dolly.webp', caption: '' },
       { src: 'dana-dolly-2.webp', caption: '' },
@@ -1177,6 +1304,11 @@ const PRODUCT_DETAILS = {
   },
 
   'combo-triple': {
+    blurb: 'A Matthews triple-riser combo stand — 14 feet of solid steel support with a Junior pin for fixtures that matter.',
+    description: [
+      'The combo stand is what you put under a light you can\'t afford to have move. This Matthews triple riser reaches 14 feet and carries 68 pounds on its Junior pin, so the Aputure 1200x, the Nanlux 2400B, or an Arrilite with a chimera rides without flex or wobble. The Rocky Mountain leg adjusts to stairs and slopes — set it on a curb or a hillside and the stand stays plumb.',
+      'Unlike rollers, the combo plants and stays planted — the right call for a key light that holds position all day, or a backlight rigged high outside a window. The Junior receiver also takes baby adapters for smaller fixtures, so it scales from an Arri 650 up to the 2400B. Bag it according to height; the 35-pounders exist for stands like this.'
+    ],
     gallery: [
       { src: 'combo-triple.webp', caption: '' },
       { src: 'combo-triple-2.webp', caption: '' },
@@ -1184,6 +1316,11 @@ const PRODUCT_DETAILS = {
   },
 
   'menace-arm': {
+    blurb: 'The Matthews menace arm kit — boom a light or small frame out over the set from a stand that stays out of frame.',
+    description: [
+      'The menace arm solves the oldest problem in lighting: the light needs to be where a stand can\'t. A pipe cantilevers off a high roller or combo stand, counterweighted at the back, putting a fixture directly over the dinner table, the car hood, or the actor\'s head with nothing in the shot. It\'s how you hang a Lantern 90 over a table scene or rig an Astera Titan down a hallway ceiling.',
+      'The kit includes the clamps and hardware to mount fixtures or fly a small frame off the end. Rig it with real counterweight — this is what the 35-pound sandbags and a second pair of hands are for — and always safety the fixture. Done right, it replaces a condor for low-ceiling overhead work. The most cinematic light on set usually hangs from one of these.'
+    ],
     gallery: [
       { src: 'menace-arm.webp', caption: '' },
       { src: 'menace-arm-2.webp', caption: '' },
@@ -1191,6 +1328,11 @@ const PRODUCT_DETAILS = {
   },
 
   'flag-kit': {
+    blurb: 'A full Matthews 24×36 scrim-and-flag kit — singles, doubles, silks, solids, and floppies, in studio and run-and-gun configurations.',
+    description: [
+      'This is the toolset that turns raw light into shaped light. The 24×36 size is the workhorse format: big enough to cut a key off a wall or flag a lens, small enough that one C-stand and one grip handle it. Singles and doubles pull half and full stops without changing the light\'s quality; silks soften the edge of a source; the solid kills it dead; the floppy unfolds to double its cut.',
+      'We pack it two ways — the full studio kit for stage days, and a tighter run-and-gun selection when the whole package needs to fit in a van with the camera gear. It pairs with our C-stand package one-to-one: every flag wants a stand, and every stand wants a sandbag. The cheapest fix for almost any lighting problem is somewhere in this kit.'
+    ],
     gallery: [
       { src: 'flag-kit.webp', caption: '' },
       { src: 'flag-kit-2.webp', caption: '' },
@@ -1198,6 +1340,11 @@ const PRODUCT_DETAILS = {
   },
 
   'floppy-cutters': {
+    blurb: 'A pair of 4×4 floppy cutters — top-hinged solids that open to 4×8 for cutting big sources and building fast negative fill.',
+    description: [
+      'The 4×4 floppy is the big stick of light control. Closed, it\'s a solid that takes the 1200x or the sun off your talent; unfold the top hinge and it becomes a 4×8 wall of black — enough to wrap an actor in negative fill or kill the bounce off a white building across the street. On interiors, two floppies build an instant corridor of contrast around your key.',
+      'We rent them as a pair because they work in pairs: one cutting the source, one shaping the fill side. Each wants a C-stand or combo with a real bag on it — 4×8 of fabric is a sail in any breeze. Add our scrim-and-flag kit for the smaller cuts and you\'ve got the full light-shaping arsenal. Black is a lighting tool; this is the big one.'
+    ],
     gallery: [
       { src: 'floppy-cutters.webp', caption: '' },
       { src: 'floppy-cutters-2.webp', caption: '' },
@@ -1205,6 +1352,11 @@ const PRODUCT_DETAILS = {
   },
 
   'clamp-package': {
+    blurb: 'The full grab-bag of grip clamps — Cardellinis, Mafers, super clamps, cheeseboros, baby pins, and adapters in one case.',
+    description: [
+      'Every rigging problem on set ends with someone calling for a clamp, and this case is the answer. Cardellinis bite onto shelving, doors, and round or square stock without marring the location; Mafer clamps with baby pins put a light anywhere a jaw fits; super clamps handle speed rail; cheeseboros join pipe to pipe for quick rail builds off a fence or scaffold.',
+      'The baby pins and adapter collection bridges every thread and receiver standard on set — 5/8" baby to Junior, 1/4"-20 and 3/8"-16 for monitors and accessories. This is the kit that mounts an Astera Titan to a doorframe, an Aputure MC Pro inside a car, or a flag arm off set dressing with no stand in frame. We never send a truck out without it.'
+    ],
     gallery: [
       { src: 'clamp-package.webp', caption: '' },
       { src: 'clamp-package-2.webp', caption: '' },
@@ -1216,6 +1368,11 @@ const PRODUCT_DETAILS = {
   },
 
   'sandbags': {
+    blurb: 'A full sandbag package — 10s, 15s, 25s, and 35s — because every stand on set wants ballast before it gets a fixture.',
+    description: [
+      'Sandbags are the cheapest insurance on any call sheet. This package mixes weights to match the job: 10- and 15-pounders for C-stands carrying flags, 25s for combos under real fixtures, and 35s for high rollers flying 12×12 rags that catch wind like sails. The rule of thumb is one bag minimum per stand, doubled outdoors — and Austin afternoons produce gusts that enforce the rule.',
+      'The saddle design drapes over knuckles and leg junctions so the weight loads the stand, not the ground beside it. They double as camera-department utility too — steadying a hi-hat, weighting a slider base, propping a lens case in a moving van. Quote them alongside any stand, frame, or overhead order. The gear they protect costs a lot more than they do.'
+    ],
     gallery: [
       { src: 'sandbags.webp', caption: '15 lb' },
       { src: 'sandbags-2.webp', caption: '25 lb' },
@@ -1226,6 +1383,11 @@ const PRODUCT_DETAILS = {
   },
 
   'apple-boxes': {
+    blurb: 'A full family of apple boxes — full, half, quarter, and pancake, four of each — the most-borrowed item on any set.',
+    description: [
+      'Apple boxes are the duct tape of the grip department. Sixteen total — four each of full, half, quarter, and pancake — handle leveling dolly track, raising an actor to a matching eyeline, propping a couch off its casters, building a low camera platform, or seating a director at the monitor. Stacked combinations get you to almost any height in small, predictable increments.',
+      'They\'re rigging hardware, too: a pancake under a turtle-base C-stand puts a light at floor level, a full on end is an instant side table for the DIT, and two fulls plus a half makes the classic low-mode platform for the Dana Dolly. Solid construction means each box holds a standing adult without complaint. Nobody ever rented too many apple boxes.'
+    ],
     gallery: [
       { src: 'apple-boxes.webp', caption: 'Full' },
       { src: 'apple-boxes-2.webp', caption: 'Half' },
@@ -1235,6 +1397,11 @@ const PRODUCT_DETAILS = {
   },
 
   'boom-pole': {
+    blurb: 'Ambient\'s QP480-SCM carbon boom — 11 feet of reach with an internal coiled cable, light enough for a twelve-hour day.',
+    description: [
+      'Ambient\'s carbon-fiber poles are what working boom ops buy with their own money, and this one extends to 11 feet — enough to reach over a wide two-shot or down into a car window. Carbon matters at hour ten: ounces at the grip become pounds at the mic end, and this pole stays steady when arms get tired. The friction collets lock fast and don\'t creep mid-take.',
+      'The internal coiled cable is the quiet hero — no external XLR slapping the pole between takes, no loose loop snagging a doorframe on a walking shot. It terminates at the base, so the boom op cables up once and forgets it. We include an Auray holder so the pole has a home on a C-stand between setups. Pairs with our MKH 50 blimp package and the Sound Devices MM-1 preamp.'
+    ],
     gallery: [
       { src: 'boom-pole.webp', caption: '' },
       { src: 'boom-pole-2.webp', caption: '' },
@@ -1243,6 +1410,11 @@ const PRODUCT_DETAILS = {
   },
 
   'orca-bag': {
+    blurb: 'The ORCA OR-28 sound bag with a Porta Brace harness — the mobile home your mixer\'s 633 lives in all day.',
+    description: [
+      'A bag rig is the difference between production sound that follows the action and a cart stuck at video village. The OR-28 carries a Sound Devices 633 or similar with clear sight lines to faders and screen, internal routing for antennas and power, and pouches for transmitters, spare lavs, and batteries. The rigid internal frame keeps its shape fully loaded.',
+      'The included Porta Brace harness spreads the weight across the shoulders and lower back — which your mixer will appreciate by hour eleven. We also include the K-Tek Stingray Junior X for days when a smaller footprint matters, like doc work where the bag rides under a jacket. Pairs with our 633, Lectrosonics SMDWB wireless, and the MKH 50 boom package for a complete bag-based sound department.'
+    ],
     gallery: [
       { src: 'orca-bag.webp', caption: '' },
       { src: 'orca-bag-2.webp', caption: '' },

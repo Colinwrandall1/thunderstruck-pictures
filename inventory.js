@@ -1,15 +1,14 @@
 // Shared inventory across all rental departments. Loaded by every catalog page;
 // the cart looks items up here so one quote can span camera + lighting + grip.
 const INVENTORY = [
-  { dept:'lighting', id:'nanlux-2400b', cat:'big', brand:'Nanlux', tag:'LED · Key', name:'Nanlux Evoke 2400B', spec:'Bi-Color LED · 4000W HMI equivalent. Kit includes case, softbox, accessories.', day:250, photo:true },
+  { dept:'lighting', id:'nanlux-2400b', cat:'big', brand:'Nanlux', tag:'LED · Key', name:'Nanlux Evoke 2400B', spec:'Bi-Color LED · 4000W HMI equivalent. Kit includes case, reflectors, barndoors.', day:250, photo:true },
   { dept:'lighting', id:'aputure-1200x', cat:'big', brand:'Aputure', tag:'LED · Key', name:'Aputure Storm 1200x', spec:'Bi-Color LED Kit · 1800W HMI eq · Fresnel 15–45°, barndoors, skid support.', day:175, photo:true },
-  { dept:'lighting', id:'aputure-600d', cat:'big', brand:'Aputure', tag:'LED · Daylight', name:'Aputure 600d Pro', spec:'Daylight LED · 1200W HMI eq. 24\' weatherproof head cable. 50% on 2 V-Mounts.', day:185, photo:true },
   { dept:'lighting', id:'aputure-600x', cat:'big', brand:'Aputure', tag:'LED · Bi-Color', name:'Aputure 600x Pro', spec:'Bi-Color LED · 2700–6500K. 24\' weatherproof head cable. 50% on 2 V-Mounts.', day:85, photo:true },
   { dept:'lighting', id:'aputure-f10', cat:'big', brand:'Aputure', tag:'Fresnel', name:'Aputure F10 Fresnel + Barndoors', spec:'Fresnel attachment for 600-series fixtures. Barndoors included.', day:30, photo:true },
   { dept:'lighting', id:'aputure-spot', cat:'big', brand:'Aputure', tag:'Optic', name:'Aputure Spotlight Mount 36°', spec:'Projection optic for 600-series — gobo-ready focused beam.', day:35, photo:true },
   { dept:'lighting', id:'amaran-200x', cat:'mid', brand:'Amaran', tag:'LED · Compact', name:'Amaran 200x Bi-Color', spec:'Compact LED with barndoors, grid &amp; gel holder.', day:65, photo:true },
   { dept:'lighting', id:'aputure-60x', cat:'mid', brand:'Aputure', tag:'Focusing LED', name:'Aputure LS 60x Bi-Color', spec:'Focusing LED — adjustable beam angle. Small footprint, big punch.', day:22, photo:true },
-  { dept:'lighting', id:'mc-pro', cat:'mid', brand:'Aputure', tag:'RGB · CRMX', name:'Aputure MC Pro RGB', spec:'CRMX-controllable RGBWW pocket light. Bubble diffuser included.', day:10, photo:true },
+  { dept:'lighting', id:'mc-pro', cat:'mid', brand:'Aputure', tag:'RGB · CRMX', name:'Aputure MC Pro RGB', spec:'CRMX-controllable RGBWW pocket light.', day:10, photo:true },
   { dept:'lighting', id:'mc', cat:'mid', brand:'Aputure', tag:'RGB · Pocket', name:'Aputure MC RGB', spec:'Pocket-sized RGBWW. Magnet mount, dual magnet light mount.', day:6, photo:true },
   { dept:'lighting', id:'b7c', cat:'mid', brand:'Aputure', tag:'Bulb · RGB', name:'Aputure B7C RGB Bulb', spec:'RGB practical bulb. E26 fit, app-controlled.', day:7, photo:true },
   { dept:'lighting', id:'c7r', cat:'mid', brand:'Godox', tag:'Bulb · RGB', name:'Godox C7R RGB Bulb', spec:'RGB practical bulb. Includes magnet mount &amp; bouncer.', day:7, photo:true },
@@ -33,7 +32,6 @@ const INVENTORY = [
   { dept:'lighting', id:'mc-pro-bubble', cat:'mid', brand:'Aputure', tag:'Bubble Diffuser', name:'Aputure MC Pro Bubble Diffuser', spec:'Bubble diffuser for the MC Pro — wider, softer spread. Great as eye light.', day:2, photo:true },
   { dept:'lighting', id:'mcsocket', cat:'mid', brand:'Aputure', tag:'Mount · E26', name:'McSocket for Aputure MC Pro', spec:'E26 socket adapter — place puck lights into traditional lamps.', day:1, photo:true },
   { dept:'lighting', id:'oben-mount', cat:'mid', brand:'Oben', tag:'Magnet Mount', name:'Oben Ball Head Magnet Mount for MC Pro', spec:'Rare-earth magnetic mount with mini ball head. 44 lb pull, 6.6 lb load.', day:2, photo:true },
-  { dept:'lighting', id:'lunabulb-8', cat:'mid', brand:'Astera', tag:'Bulb Kit · 8', name:'Astera LunaBulb 8-Light Kit', spec:'8× LunaBulb practical bulbs. A19/E26 base, Titan LED engine, DMX + CRMX.', day:50, photo:true },
   { dept:'lighting', id:'bulb-mount-kit', cat:'mid', brand:'Thunderstruck', tag:'Mount Kit', name:'Light Bulb Mounting Kit', spec:'Custom collection of mounts, magnets and adapters for rigging bulbs anywhere.', day:7, photo:true },
   { dept:'lighting', id:'arrilite-1000', cat:'big', brand:'Arri', tag:'Tungsten · 1000W', name:'Arri Arrilite 1000W Tungsten Light', spec:'1000W open-face tungsten. Spot/flood adjustable. High output for bounce.', day:15, photo:true },
   { dept:'lighting', id:'arri-650', cat:'big', brand:'Arri', tag:'Fresnel · 650W', name:'Arri 650 Plus Tungsten Fresnel', spec:'650W tungsten fresnel. 14°–52° beam, dimmable with AC dimmer.', day:12, photo:true },
