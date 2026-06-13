@@ -532,6 +532,8 @@ function load(){ try{ const r=localStorage.getItem(CART_KEY); if(r){ const p=JSO
   Object.keys(cart).forEach(id=>{ if(!INVENTORY.find(i=>i.id===id)) delete cart[id]; }); }
 
 load(); renderCatalog(); renderCart(); updateNav(); setDays(days);
+// Open the gear-list drawer when arriving via a '#gearlist' link (e.g. from a product page).
+if (location.hash === '#gearlist') { openDrawer(); history.replaceState(null, '', location.pathname + location.search); }
 document.getElementById('cartBtn').addEventListener('click', openDrawer);
 document.getElementById('closeDrawer').addEventListener('click', closeDrawer);
 document.getElementById('backdrop').addEventListener('click', closeDrawer);

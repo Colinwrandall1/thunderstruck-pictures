@@ -264,7 +264,7 @@ function cartTotal(c){ return Object.values(c.cart||{}).reduce((a,b)=>a+(b||0),0
 function updateNavCount(){
   const c=loadCart(); const n=cartTotal(c);
   const el=document.getElementById('cartCount'); if(el){ el.textContent=n; el.classList.toggle('zero', n===0); }
-  document.getElementById('navQuote').setAttribute('href', n>0 ? DEPT_PAGE[currentItem?.dept] || 'rentals-storm.html' : 'rentals-storm.html');
+  document.getElementById('navQuote').setAttribute('href', n>0 ? (DEPT_PAGE[currentItem?.dept] || 'rentals-storm.html') + '#gearlist' : 'rentals-storm.html');
 }
 
 let currentItem = null;
@@ -467,7 +467,7 @@ function renderAction(){
         <span class="qty">${qty} on gear list</span>
         <button data-act="inc">+</button>
       </div>
-      <a class="view-quote" href="${DEPT_PAGE[currentItem.dept]}">View gear list &amp; send request →</a>`;
+      <a class="view-quote" href="${DEPT_PAGE[currentItem.dept]}#gearlist">View gear list &amp; send request →</a>`;
     slot.querySelector('[data-act="inc"]').onclick = () => { change(+1); };
     slot.querySelector('[data-act="dec"]').onclick = () => { change(-1); };
   } else {
