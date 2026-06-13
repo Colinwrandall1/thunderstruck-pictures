@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thunderstruck Pictures — flat vector mark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700;1,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ background:#0a0e16; color:#f4f8ff; font-family:'Inter',system-ui,sans-serif; padding:3rem clamp(1rem,4vw,4rem) 6rem; }
+  h2.section{ font-family:'JetBrains Mono','Inter',monospace; font-size:0.7rem; letter-spacing:0.28em; text-transform:uppercase; color:#5e7089; margin:2.6rem 0 1.2rem; }
+  .row{ display:flex; flex-wrap:wrap; gap:1.4rem; align-items:stretch; }
+  .swatch{ border:1px solid rgba(159,196,238,0.12); border-radius:14px; display:flex; align-items:center; justify-content:center; padding:2.4rem; min-height:170px; }
+  .cap{ font-family:'JetBrains Mono',monospace; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:#6b7681; margin-top:0.6rem; }
+  .cell{ flex:1 1 240px; }
+
+  /* ---------- THE MARK ---------- */
+  /* The wordmark + bolt build as one flat lockup. Recolor via currentColor +
+     the --bolt variable, so it works one-ink or two-tone on any background. */
+  .ts-mark{ position:relative; display:inline-flex; flex-direction:column; align-items:center; line-height:1; }
+  .ts-bolt{ position:absolute; left:58%; top:50%; transform:translate(-50%,-54%);
+    height:168%; width:auto; z-index:0; pointer-events:none; color:var(--bolt,#9fc4ee); }
+  .ts-word{ position:relative; z-index:1; font-family:'Saira Condensed',sans-serif; font-weight:800; font-style:italic;
+    text-transform:uppercase; letter-spacing:0.005em; font-size:var(--size,5rem); line-height:0.8; white-space:nowrap; }
+  .ts-sub{ position:relative; z-index:1; font-family:'Saira Condensed',sans-serif; font-weight:600; font-style:normal;
+    text-transform:uppercase; text-align:center; width:100%;
+    font-size:calc(var(--size,5rem) * 0.205); letter-spacing:0.62em; text-indent:0.62em; margin-top:calc(var(--size,5rem) * 0.04); color:inherit; }
+
+  /* glow option for the hero treatment */
+  .glow .ts-bolt{ filter: drop-shadow(0 0 10px rgba(120,180,255,0.85)) drop-shadow(0 0 26px rgba(90,150,255,0.5)); }
+  .glow .ts-word{ text-shadow:0 1px 30px rgba(150,190,255,0.25); }
+
+  .hero-stage{ background:radial-gradient(120% 120% at 50% 35%, #16243c 0%, #0a0e16 70%); border-radius:18px; padding:4.5rem 2rem; text-align:center; }
+  .light{ background:#eef2f7; }
+  .light .ts-word, .light .ts-sub{ color:#0a0f16; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <!-- one clean vector bolt, reused everywhere -->
+  <symbol id="bolt" viewBox="0 0 120 340">
+    <path fill="currentColor" d="M70 2 L34 150 L60 150 L44 338 L104 132 L74 132 L98 2 Z"/>
+  </symbol>
+</defs></svg>
+
+<h2 class="section">Primary mark — flat, two-tone (everyday use, any size)</h2>
+<div class="hero-stage">
+  <span class="ts-mark" style="--size:6rem; --bolt:#9fc4ee;">
+    <svg class="ts-bolt"><use href="#bolt"/></svg>
+    <span class="ts-word">THUNDERSTRUCK</span>
+    <span class="ts-sub">Pictures</span>
+  </span>
+</div>
+
+<h2 class="section">Hero treatment — same vector, with glow (big / dark placements)</h2>
+<div class="hero-stage glow">
+  <span class="ts-mark" style="--size:6rem; --bolt:#bcd8ff;">
+    <svg class="ts-bolt"><use href="#bolt"/></svg>
+    <span class="ts-word">THUNDERSTRUCK</span>
+    <span class="ts-sub">Pictures</span>
+  </span>
+</div>
+
+<h2 class="section">One-ink versatility — survives anywhere, any single color</h2>
+<div class="row">
+  <div class="cell"><div class="swatch" style="background:#0a0e16; color:#f4f8ff;">
+    <span class="ts-mark" style="--size:2.6rem; --bolt:currentColor;"><svg class="ts-bolt"><use href="#bolt"/></svg><span class="ts-word">THUNDERSTRUCK</span><span class="ts-sub">Pictures</span></span>
+  </div><div class="cap">all white (knockout)</div></div>
+
+  <div class="cell"><div class="swatch" style="background:#0a0e16; color:#9fc4ee;">
+    <span class="ts-mark" style="--size:2.6rem; --bolt:currentColor;"><svg class="ts-bolt"><use href="#bolt"/></svg><span class="ts-word">THUNDERSTRUCK</span><span class="ts-sub">Pictures</span></span>
+  </div><div class="cap">all ice-blue</div></div>
+
+  <div class="cell"><div class="swatch" style="background:#0a0e16; color:#f4c24a;">
+    <span class="ts-mark" style="--size:2.6rem; --bolt:currentColor;"><svg class="ts-bolt"><use href="#bolt"/></svg><span class="ts-word">THUNDERSTRUCK</span><span class="ts-sub">Pictures</span></span>
+  </div><div class="cap">all gold</div></div>
+
+  <div class="cell"><div class="swatch light">
+    <span class="ts-mark" style="--size:2.6rem; --bolt:currentColor;"><svg class="ts-bolt"><use href="#bolt"/></svg><span class="ts-word">THUNDERSTRUCK</span><span class="ts-sub">Pictures</span></span>
+  </div><div class="cap">one-ink on light</div></div>
+</div>
+
+<h2 class="section">Small-size legibility (nav / business card)</h2>
+<div class="row">
+  <div class="swatch" style="background:#0a0e16; color:#f4f8ff;">
+    <span class="ts-mark" style="--size:1.4rem; --bolt:#9fc4ee;"><svg class="ts-bolt"><use href="#bolt"/></svg><span class="ts-word">THUNDERSTRUCK</span><span class="ts-sub">Pictures</span></span>
+  </div>
+</div>
+
+</body>
+</html>

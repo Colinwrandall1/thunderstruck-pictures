@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Design exploration 09 — "Storm Flight": continuous flight through a thunderstorm (real footage hero). -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thunderstruck Pictures — Storm Flight (Exploration 09)</title>
+<meta name="description" content="Design exploration: scroll-driven flight through a thunderstorm. Austin's grip &amp; lighting truck and production company.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:ital,wght@0,500;0,700;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script defer src="../nav-mobile.js"></script>
+<style>
+  *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #04060c;
+    --panel: #0e141c;
+    --line: #1f2a38;
+    --text: #f4f8ff;
+    --muted: #9fb4ce;
+    --yellow: #9fc4ee; /* brand electric ice-blue (legacy var name kept for nav-mobile.js) */
+    --glass-line: rgba(159,196,238,0.15);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  /* ---------- STORM VIDEO (fixed, behind everything) ----------
+     V3: real generated storm footage replaces the WebGL cloudscape. Two stacked
+     copies crossfade so the 7s clip loops without a visible seam. #boltfx +
+     .storm-flash add supplemental ice-blue lightning strikes on top. */
+  .storm-vid, #boltfx, .storm-flash {
+    position: fixed; inset: 0; width: 100%; height: 100%;
+    pointer-events: none;
+  }
+  .storm-vid { z-index: 0; object-fit: cover; opacity: 0; transition: opacity 1s linear; }
+  .storm-vid.show { opacity: 1; }
+  /* slight cool grade + darken so the bright footage sits behind glass + text */
+  .storm-tint {
+    position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    background:
+      radial-gradient(120% 90% at 50% 42%, rgba(4,6,12,0) 38%, rgba(4,6,12,0.55) 100%),
+      linear-gradient(180deg, rgba(4,6,12,0.35) 0%, rgba(4,6,12,0.12) 38%, rgba(4,6,12,0.62) 100%);
+  }
+  #boltfx { z-index: 2; mix-blend-mode: screen; }
+  .storm-flash { z-index: 2; mix-blend-mode: screen; opacity: 0;
+    background: radial-gradient(60% 50% at 50% 38%, rgba(180,210,255,0.9), rgba(120,170,255,0.35) 45%, rgba(80,130,230,0) 80%); }
+  /* Static fallback (no-autoplay / reduced-motion) — poster frame */
+  .sky-static {
+    position: fixed; inset: 0; z-index: 0; display: none;
+    background:
+      linear-gradient(180deg, rgba(4,6,12,0.5) 0%, rgba(4,6,12,0.15) 40%, rgba(4,6,12,0.7) 100%),
+      url('../media/storm-hero-poster.jpg') center center/cover no-repeat,
+      #04060c;
+  }
+  body.static .storm-vid, body.static #boltfx, body.static .storm-flash, body.static .storm-tint { display: none; }
+  body.static .sky-static { display: block; }
+
+  /* All page content rides above the storm */
+  .page { position: relative; z-index: 2; }
+
+  /* ---------- NAV (liquid glass, visible immediately) ---------- */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.85rem clamp(1.2rem, 4vw, 3rem);
+    background: linear-gradient(180deg, rgba(8,12,20,0.55), rgba(8,12,20,0.35));
+    -webkit-backdrop-filter: blur(14px) saturate(1.3);
+    backdrop-filter: blur(14px) saturate(1.3);
+    border-bottom: 1px solid rgba(159,196,238,0.12);
+  }
+  .nav::after { /* specular hairline along the bottom edge */
+    content:""; position:absolute; left:0; right:0; bottom:-1px; height:1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22) 30%, rgba(159,196,238,0.35) 50%, rgba(255,255,255,0.18) 70%, transparent);
+    pointer-events:none;
+  }
+  .nav .brand {
+    font-family: 'Saira Condensed', sans-serif; font-weight:700; font-style: italic;
+    text-transform: uppercase; font-size: 1.35rem; letter-spacing: 0.06em; line-height: 1;
+  }
+  .nav .links { display: flex; align-items: center; gap: 1.25rem; flex-wrap: nowrap; }
+  .nav .links a {
+    font-size: 0.78rem; letter-spacing: 0.04em; color: #c7d0da;
+    text-transform: uppercase; transition: color 0.2s; white-space: nowrap; }
+  .nav .links a:hover { color: #fff; }
+  .cart-trigger {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    background: rgba(14,20,28,0.55); border: 1px solid var(--glass-line);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    padding: 0.5rem 0.9rem; font-family: 'Saira Condensed', sans-serif; font-size: 0.85rem;
+    text-transform: uppercase; letter-spacing: 0.1em; color: var(--text);
+    transition: border-color 0.15s, color 0.15s, box-shadow 0.2s; border-radius: 4px;
+  }
+  .cart-trigger:hover { border-color: var(--yellow); color: var(--yellow); box-shadow: 0 0 18px rgba(159,196,238,0.18); }
+  .cart-trigger .count { background: #f4c24a; color: #0a0f16; padding: 0.1rem 0.5rem; font-size: 0.8rem; min-width: 1.5rem; text-align: center; border-radius: 2px; }
+  .cart-trigger .count.zero { background: rgba(31,42,56,0.9); color: var(--muted); }
+  @media (max-width: 960px) { .nav .links a:not(.cart-trigger) { display: none; } }
+
+  .btn {
+    display:inline-block; cursor:pointer;
+    background:linear-gradient(180deg,#ffffff,#cdddf0 45%,#9fb4ce 55%,#eaf2fb);
+    color:#0a0f16; font-family:'Saira Condensed',sans-serif; font-weight:700;
+    font-size:0.92rem; letter-spacing:0.14em; text-transform:uppercase;
+    padding:0.72rem 1.5rem; border:none; border-radius:4px;
+    box-shadow:0 0 18px rgba(150,190,255,0.3), inset 0 1px 0 rgba(255,255,255,0.85);
+    transition:transform .15s, box-shadow .2s;
+  }
+  .btn:hover { transform:translateY(-1px); box-shadow:0 0 26px rgba(150,190,255,0.5), inset 0 1px 0 rgba(255,255,255,0.95); }
+  .btn.ghost {
+    background: rgba(10,16,26,0.4); color:var(--text); border:1px solid rgba(159,196,238,0.28);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow:none;
+  }
+  .btn.ghost:hover { border-color:#9fc4ee; box-shadow:0 0 16px rgba(159,196,238,0.25); }
+
+  /* ---------- TYPE SYSTEM ---------- */
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--yellow); margin-bottom: 1.2rem;
+  }
+  h2.head {
+    font-family: 'Saira Condensed', sans-serif; font-weight:700; font-style: italic;
+    text-transform: uppercase; line-height: 0.95;
+    font-size: clamp(2.1rem, 6vw, 4.2rem); letter-spacing: 0.01em; margin-bottom: 1.4rem;
+  }
+  h2.head .y { color: var(--yellow); }
+  p.lead { font-size: clamp(1.05rem, 2.2vw, 1.3rem); color: #cdd6df; line-height: 1.6; max-width: 60ch; }
+  p.body { color: var(--muted); line-height: 1.7; max-width: 62ch; }
+  p.body + p.body { margin-top: 1rem; }
+
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 clamp(1.2rem, 4vw, 3rem); }
+  section.leg { position: relative; margin: clamp(16vh, 24vh, 26vh) 0; }
+
+  /* telemetry captions floating in the flight gaps */
+  .telemetry {
+    display:flex; align-items:center; justify-content:center; gap:0.9rem;
+    font-family:'JetBrains Mono',monospace; font-size:0.62rem; letter-spacing:0.32em;
+    text-transform:uppercase; color:#5e7089; text-align:center; padding: 0 1.2rem;
+  }
+  .telemetry::before, .telemetry::after {
+    content:""; height:1px; width:clamp(30px,8vw,90px);
+    background:linear-gradient(90deg, transparent, rgba(159,196,238,0.35));
+  }
+  .telemetry::after { background:linear-gradient(90deg, rgba(159,196,238,0.35), transparent); }
+
+  /* ---------- LIQUID GLASS PANEL ---------- */
+  .glass {
+    position: relative;
+    background: linear-gradient(160deg, rgba(13,20,32,0.52), rgba(8,13,22,0.36));
+    -webkit-backdrop-filter: blur(16px) saturate(1.35);
+    backdrop-filter: blur(16px) saturate(1.35);
+    border: 1px solid var(--glass-line);
+    border-radius: 14px;
+    box-shadow: 0 28px 70px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.08);
+    transition: border-color .35s, box-shadow .35s;
+  }
+  .glass::before { /* specular top edge */
+    content:""; position:absolute; top:0; left:8%; right:8%; height:1px; pointer-events:none;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.4) 30%, rgba(159,196,238,0.55) 50%, rgba(255,255,255,0.34) 70%, transparent);
+  }
+  .glass::after { /* faint refraction sheen */
+    content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+    background:
+      radial-gradient(120% 60% at 16% 0%, rgba(159,196,238,0.10), transparent 55%),
+      radial-gradient(80% 40% at 90% 100%, rgba(159,196,238,0.05), transparent 60%);
+  }
+  .glass:hover {
+    border-color: rgba(159,196,238,0.32);
+    box-shadow: 0 28px 70px rgba(0,0,0,0.5), 0 0 38px rgba(159,196,238,0.10), inset 0 1px 0 rgba(255,255,255,0.12);
+  }
+  .glass .pad { padding: clamp(2rem, 4.5vw, 3.6rem); position:relative; z-index:1; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    min-height: 100vh; display: grid; place-items: center; text-align: center;
+    position: relative; padding: 7rem 1.5rem 4rem;
+  }
+  .hero .eyebrow { letter-spacing: 0.42em; font-size: clamp(0.6rem,1.4vw,0.75rem); margin-bottom: 1.4rem; }
+  .hero h1 { margin: 0 auto; line-height: 0; filter: drop-shadow(0 3px 30px rgba(150,190,255,0.32)); }
+  .hero h1 svg { display: block; width: min(91vw, 1160px); height: auto; margin: 0 auto; }
+  .hero h1 .ts-text {
+    font-family: 'Saira Condensed', sans-serif; font-weight: 700; font-style: italic;
+    text-transform: uppercase;
+  }
+  .hero .sub { margin-top: 1.4rem; font-size: clamp(0.95rem,2.2vw,1.3rem); color: #dee6ef; font-weight: 500; letter-spacing: 0.01em;
+    text-shadow: 0 1px 18px rgba(4,6,12,0.9), 0 0 2px rgba(4,6,12,0.9); }
+  .hero .cta-row { margin-top: 2.3rem; display: flex; gap: 0.9rem; justify-content: center; flex-wrap: wrap; }
+  /* load choreography */
+  .hero .eyebrow, .hero h1, .hero .sub, .hero .cta-row {
+    opacity: 0; filter: blur(14px); transform: translateY(14px);
+    transition: opacity 1.1s cubic-bezier(.22,.85,.25,1), filter 1.1s cubic-bezier(.22,.85,.25,1), transform 1.1s cubic-bezier(.22,.85,.25,1);
+  }
+  body.loaded .hero .eyebrow { opacity:1; filter:none; transform:none; transition-delay:.15s; }
+  body.loaded .hero h1      { opacity:1; filter:none; transform:none; transition-delay:.4s; }
+  body.loaded .hero .sub    { opacity:1; filter:none; transform:none; transition-delay:.75s; }
+  body.loaded .hero .cta-row{ opacity:1; filter:none; transform:none; transition-delay:1.0s; }
+  .scroll-hint {
+    position: absolute; left: 0; right: 0; bottom: 3.4vh; margin: 0 auto; width: fit-content;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: #6f7d8c;
+    display: flex; flex-direction: column; align-items: center; gap: 0.55rem;
+    opacity:0; transition: opacity 1s ease 1.6s;
+  }
+  body.loaded .scroll-hint { opacity:1; }
+  .scroll-hint .arrow { width: 1px; height: 30px; overflow:hidden; position:relative; }
+  .scroll-hint .arrow::after { content:""; position:absolute; left:0; top:-100%; width:1px; height:100%;
+    background: linear-gradient(transparent, #9fc4ee, transparent); animation: hintDrop 2.2s ease-in-out infinite; }
+  @keyframes hintDrop { 0%{ top:-100%; } 60%{ top:100%; } 100%{ top:100%; } }
+
+  /* ---------- ENTRANCE FX (each section gets its own) ---------- */
+  /* mist: type condenses out of cloud — blur + tracking tighten */
+  .fx-mist { opacity:0; filter:blur(18px); letter-spacing:0.14em;
+    transition: opacity 1.2s cubic-bezier(.22,.85,.25,1), filter 1.2s cubic-bezier(.22,.85,.25,1), letter-spacing 1.2s cubic-bezier(.22,.85,.25,1); }
+  .fx-mist.in { opacity:1; filter:blur(0); letter-spacing:0.01em; }
+  /* generic soft condense for body text (no tracking shift) */
+  .fx-soft { opacity:0; filter:blur(10px); transform:translateY(14px);
+    transition: opacity 1s cubic-bezier(.22,.85,.25,1), filter 1s cubic-bezier(.22,.85,.25,1), transform 1s cubic-bezier(.22,.85,.25,1);
+    transition-delay: var(--d, 0s); }
+  .fx-soft.in { opacity:1; filter:none; transform:none; }
+  /* flash: revealed by a lightning strike — one hot frame, then settles */
+  .fx-flash { opacity:0; }
+  .fx-flash.in { animation: flashReveal 1.4s cubic-bezier(.22,.85,.25,1) forwards; }
+  @keyframes flashReveal {
+    0%   { opacity:0; filter: brightness(0.1) contrast(1.2); }
+    6%   { opacity:1; filter: brightness(2.6) contrast(1.15) saturate(0.7); }
+    11%  { opacity:1; filter: brightness(0.55); }
+    18%  { opacity:1; filter: brightness(1.9) saturate(0.85); }
+    100% { opacity:1; filter: brightness(1); }
+  }
+  /* sweep: light passes across — clip wipe.
+     NOTE: the hidden state's clip-path zeroes the element's visible area, which
+     Chromium's IntersectionObserver respects — so the parent list carries the
+     [data-fx] trigger and cascades .in to the swept children. */
+  .fx-sweep { clip-path: inset(0 100% 0 0); opacity:0;
+    transition: clip-path .9s cubic-bezier(.22,.85,.25,1), opacity .4s ease; transition-delay: var(--d, 0s); }
+  .fx-sweep.in, .in .fx-sweep { clip-path: inset(0 0 0 0); opacity:1; }
+  /* rise: emerges from cloud cover below */
+  .fx-rise { opacity:0; transform:translateY(46px); filter:blur(8px);
+    transition: opacity .9s cubic-bezier(.22,.85,.25,1), transform .9s cubic-bezier(.22,.85,.25,1), filter .9s cubic-bezier(.22,.85,.25,1);
+    transition-delay: var(--d, 0s); }
+  .fx-rise.in { opacity:1; transform:none; filter:none; }
+  /* ignite: flickers alive like a discharge */
+  .fx-ignite { opacity:0; transition-delay: var(--d, 0s); }
+  .fx-ignite.in { animation: ignite 1s steps(1,end) var(--d, 0s) forwards; }
+  @keyframes ignite {
+    0% { opacity:0; } 8% { opacity:0.9; } 14% { opacity:0.15; }
+    22% { opacity:1; } 30% { opacity:0.5; } 38% { opacity:1; } 100% { opacity:1; }
+  }
+  body.static .fx-mist, body.static .fx-soft, body.static .fx-flash,
+  body.static .fx-sweep, body.static .fx-rise, body.static .fx-ignite {
+    opacity:1 !important; transform:none !important; filter:none !important;
+    clip-path:none !important; animation:none !important; letter-spacing:0.01em;
+  }
+  body.static .hero .eyebrow, body.static .hero h1, body.static .hero .sub,
+  body.static .hero .cta-row, body.static .scroll-hint { opacity:1; filter:none; transform:none; transition:none; }
+  body.static .scroll-hint .arrow::after { animation:none; top:0; }
+
+  /* lightning divider */
+  .bolt-rule { display:flex; align-items:center; gap:0.8rem; color: var(--yellow); margin: 0 auto; width: fit-content; }
+  .bolt-rule::before, .bolt-rule::after { content:""; height:1px; width:60px;
+    background: linear-gradient(90deg, transparent, rgba(159,196,238,0.45));
+    transform: scaleX(0); transition: transform 1s cubic-bezier(.22,.85,.25,1) .2s; }
+  .bolt-rule::after { background: linear-gradient(90deg, rgba(159,196,238,0.45), transparent); transform-origin:left; }
+  .bolt-rule::before { transform-origin:right; }
+  .bolt-rule.in::before, .bolt-rule.in::after { transform: scaleX(1); }
+  .bolt-rule svg { width: 16px; height: 22px; }
+
+  /* ---------- INTRO (text floats raw over the storm) ---------- */
+  .intro { text-align: center; }
+  .intro h2.head { max-width: 16ch; margin: 1.6rem auto 1.4rem; text-shadow: 0 2px 30px rgba(4,6,12,0.95); }
+  .intro p.lead { margin: 0 auto; text-shadow: 0 1px 16px rgba(4,6,12,0.95); }
+  /* the full kit, floating — all four edges feathered to transparent so only the
+     gear and its light remain, dissolving into the surrounding storm (no frame) */
+  .intro-kit { position: relative; width: 100%; margin: clamp(1.5rem,4vw,2.6rem) auto 0; pointer-events: none;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 26%, #000 84%, transparent 100%),
+                        linear-gradient(90deg, transparent 0%, #000 9%, #000 91%, transparent 100%);
+            mask-image: linear-gradient(180deg, transparent 0%, #000 26%, #000 84%, transparent 100%),
+                        linear-gradient(90deg, transparent 0%, #000 9%, #000 91%, transparent 100%);
+    -webkit-mask-composite: source-in; mask-composite: intersect; }
+  .intro-kit img { display: block; width: 100%; height: auto; }
+
+  /* ---------- TRUCK ---------- */
+  .truck-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(2rem,5vw,4rem); align-items: center; }
+  @media (max-width: 880px){ .truck-grid{ grid-template-columns: 1fr; } }
+  .truck-photo {
+    position: relative; aspect-ratio: 1800/1018; border-radius: 10px; overflow: hidden;
+    background: #05070a center/cover no-repeat;
+    border: 1px solid rgba(159,196,238,0.18);
+    box-shadow: 0 18px 50px rgba(0,0,0,0.5);
+  }
+  .features { list-style: none; margin-top: 2rem; display: grid; gap: 0.2rem; }
+  .features li { display:flex; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid rgba(159,196,238,0.10); align-items:flex-start; }
+  .features li:last-child { border-bottom: none; }
+  .features .k { font-family:'Saira Condensed',sans-serif; font-weight:700; text-transform:uppercase; font-size:1.15rem; letter-spacing:0.02em; color:#fff; min-width: 9.5rem; }
+  .features .v { color: var(--muted); font-size: 0.95rem; line-height: 1.5; }
+
+  /* ---------- INVENTORY (accordion pillars kept, glass-framed) ---------- */
+  .inv-intro { max-width:64ch; display:flex; flex-direction:column; }
+  .inv-acc { --h: clamp(260px,30vw,360px); --grow-exp:4; --grow-thin:1; --gap:8px;
+    display:flex; gap:var(--gap); align-items:stretch; height:var(--h);
+    width:100%; margin-top:2.4rem; }
+  .acol { position:relative; flex:var(--grow-thin) 1 0; height:var(--h); overflow:hidden;
+    border:1px solid rgba(159,196,238,0.14); border-radius:8px; background:#070f1e; cursor:pointer;
+    min-width:0;
+    transition: flex-grow .55s cubic-bezier(.22,.85,.25,1), border-color .3s, box-shadow .3s; }
+  .acol:hover, .acol:focus-visible { flex-grow: var(--grow-exp); border-color: var(--yellow); outline:none;
+    box-shadow: 0 0 28px rgba(159,196,238,0.14); }
+  .acol .acol-img { position:absolute; inset:0; transition: opacity .5s ease, filter .5s ease;
+    background: var(--img) center/cover no-repeat #070f1e;
+    opacity:.55; filter:saturate(.55) brightness(.55) contrast(1.05); }
+  .acol::before { content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
+    background: linear-gradient(180deg, rgba(7,15,30,.55) 0%, rgba(7,15,30,.88) 100%);
+    transition: opacity .5s ease; }
+  .acol:hover .acol-img, .acol:focus-visible .acol-img { opacity:1; filter:none; }
+  .acol:hover::before, .acol:focus-visible::before { opacity:0; }
+  .acol.full { flex-grow: var(--grow-exp); }
+  .acol.full .acol-img { opacity:1; filter:none; }
+  .acol.full::before {
+    background: linear-gradient(180deg, rgba(159,196,238,.42) 0%, rgba(159,196,238,.7) 100%);
+    transition: opacity .5s ease, background .5s ease;
+  }
+  .acol.full:hover::before, .acol.full:focus-visible::before { opacity:0; }
+  .inv-acc:has(.acol:not(.full):hover) .acol.full,
+  .inv-acc:has(.acol:not(.full):focus-visible) .acol.full { flex-grow: var(--grow-thin); border-color: rgba(159,196,238,0.14); }
+  .inv-acc:has(.acol:not(.full):hover) .acol.full .acol-img,
+  .inv-acc:has(.acol:not(.full):focus-visible) .acol.full .acol-img { opacity:.55; filter:saturate(.55) brightness(.55) contrast(1.05); }
+  .inv-acc:has(.acol:not(.full):hover) .acol.full::before,
+  .inv-acc:has(.acol:not(.full):focus-visible) .acol.full::before {
+    background: linear-gradient(180deg, rgba(7,15,30,.55) 0%, rgba(7,15,30,.88) 100%);
+  }
+  .acol .acol-label { position:absolute; z-index:2; inset:0;
+    display:flex; align-items:center; justify-content:center; white-space:nowrap;
+    writing-mode: vertical-rl; transform: rotate(180deg);
+    font-family:'Saira Condensed',sans-serif; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.14em; font-size:clamp(.92rem,1.4vw,1.1rem); color:var(--text); transition: opacity .35s; }
+  .acol:hover .acol-label, .acol:focus-visible .acol-label { opacity:0; }
+
+  /* ----- "Browse the full kit" CTA on the All pillar -----
+     Expanded (static) state: horizontal text anchored at the bottom of the scene
+     shot — no button chrome, just type with a soft legibility shadow.
+     Collapsed (another pillar hovered): vertical text like the other thin pillars. */
+  .acol.full .acol-label { writing-mode: horizontal-tb; transform: none;
+    align-items: flex-end; padding-bottom: 1.5rem; }
+  .acol.full .lbl-pill {
+    display:inline-flex; align-items:center; gap:.6rem; white-space:nowrap;
+    font-size:clamp(1rem,1.6vw,1.25rem); letter-spacing:.16em; color:#fff;
+    text-shadow: 0 2px 18px rgba(4,6,12,.95), 0 1px 4px rgba(4,6,12,.85), 0 0 34px rgba(4,6,12,.7);
+    transition: color .3s, text-shadow .3s;
+  }
+  .acol.full .lbl-pill .arr { transition: transform .25s; }
+  /* the CTA stays visible (and brightens) when the All pillar itself is hovered */
+  .acol.full:hover .acol-label, .acol.full:focus-visible .acol-label { opacity:1; }
+  .acol.full:hover .lbl-pill, .acol.full:focus-visible .lbl-pill {
+    color: var(--yellow);
+    text-shadow: 0 2px 18px rgba(4,6,12,.95), 0 0 22px rgba(159,196,238,.45);
+  }
+  .acol.full:hover .lbl-pill .arr { transform: translateX(4px); }
+  /* collapsed to a thin pillar -> vertical, centered, arrow hidden */
+  .inv-acc:has(.acol:not(.full):hover) .acol.full .acol-label,
+  .inv-acc:has(.acol:not(.full):focus-visible) .acol.full .acol-label {
+    writing-mode: vertical-rl; transform: rotate(180deg); opacity:1;
+    align-items: center; padding-bottom: 0;
+  }
+  .inv-acc:has(.acol:not(.full):hover) .acol.full .lbl-pill,
+  .inv-acc:has(.acol:not(.full):focus-visible) .acol.full .lbl-pill {
+    gap:0; color:var(--text); text-shadow:none;
+    font-size:clamp(.92rem,1.4vw,1.1rem); letter-spacing:0.14em;
+  }
+  .inv-acc:has(.acol:not(.full):hover) .acol.full .lbl-pill .arr,
+  .inv-acc:has(.acol:not(.full):focus-visible) .acol.full .lbl-pill .arr { display:none; }
+
+  @media (max-width:680px){
+    .inv-acc { flex-wrap:wrap; height:auto; align-items:stretch; gap:6px; }
+    .acol { flex:0 0 calc(50% - 3px); height:auto; aspect-ratio:3/2; }
+    .acol .acol-img { opacity:1; filter:none; }
+    .acol::before { background:linear-gradient(180deg, rgba(7,15,30,0) 40%, rgba(7,15,30,.85)); opacity:1; }
+    .acol .acol-label, .acol:hover .acol-label, .acol:focus-visible .acol-label { opacity:1;
+      writing-mode:horizontal-tb; transform:none; justify-content:flex-start; align-items:flex-end;
+      padding:.7rem .85rem; }
+    .acol.full .acol-label { align-items:flex-end; padding-bottom:.7rem; }
+    .acol.full .lbl-pill { font-size:.88rem; gap:.45rem; }
+  }
+  .inv-note { margin-top: 1.6rem; color:#6b7681; font-size: 0.85rem; }
+
+  /* ---------- WHY (three glass cards) ---------- */
+  .why-grid { display:grid; grid-template-columns: repeat(3,1fr); gap: clamp(1rem,2.4vw,1.6rem); margin-top: 2.6rem; }
+  @media (max-width: 880px){ .why-grid{ grid-template-columns:1fr; } }
+  .why-grid .col { padding: clamp(1.6rem,3vw,2.2rem); }
+  .why-grid .col h3 { font-family:'Saira Condensed',sans-serif; font-weight:700; text-transform:uppercase; font-size:1.5rem; letter-spacing:0.02em; margin-bottom:0.8rem; }
+  .why-grid .col .num { font-family:'JetBrains Mono',monospace; color: var(--yellow); font-size:0.75rem; letter-spacing:0.2em; margin-bottom:1rem; }
+  .why-grid .col p { color: var(--muted); line-height:1.65; font-size:0.95rem; }
+
+  /* ---------- BOOK (the breakthrough — clean air, no glass) ---------- */
+  .book { text-align:center; }
+  .book h2.head { max-width: 18ch; margin: 0 auto 1.6rem; text-shadow: 0 2px 34px rgba(4,6,12,0.9); }
+  .book .sub { color:#c4d2e2; margin-bottom: 2.4rem; text-shadow: 0 1px 16px rgba(4,6,12,0.85); }
+  .book .btn.big { font-size:0.95rem; padding:0.95rem 2rem; }
+  .book .meta-row { margin-top:2.6rem; display:flex; gap:2rem; justify-content:center; flex-wrap:wrap; color:var(--muted); font-family:'JetBrains Mono',monospace; font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase; }
+  .book .meta-row a:hover { color: var(--yellow); }
+
+  /* ---------- FOOTER ---------- */
+  footer { position:relative; z-index:2; background: rgba(4,6,10,0.88);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    border-top:1px solid rgba(159,196,238,0.12); padding: 2.5rem clamp(1.2rem,4vw,3rem); margin-top: 18vh; }
+  .foot-in { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap; }
+  .foot-in .brand { font-family:'Saira Condensed',sans-serif; font-weight:700; font-style:italic; text-transform:uppercase; letter-spacing:0.04em; font-size:1.1rem; }
+  .foot-in .small { color:#6b7681; font-size:0.75rem; font-family:'JetBrains Mono',monospace; letter-spacing:0.1em; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<video class="storm-vid" id="vidA" muted autoplay playsinline preload="auto" poster="../media/storm-hero-poster.jpg" aria-hidden="true">
+  <source src="../media/storm-hero.mp4" type="video/mp4">
+</video>
+<video class="storm-vid" id="vidB" muted playsinline preload="auto" aria-hidden="true">
+  <source src="../media/storm-hero.mp4" type="video/mp4">
+</video>
+<div class="storm-tint" aria-hidden="true"></div>
+<canvas id="boltfx" aria-hidden="true"></canvas>
+<div class="storm-flash" id="flash" aria-hidden="true"></div>
+<div class="sky-static" aria-hidden="true"></div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="#top" class="brand">Thunderstruck</a>
+  <div class="links">
+    <a href="../camera-storm-v2.html">Camera</a>
+    <a href="../rentals-storm-v2.html">Lighting</a>
+    <a href="../grip-truck-storm-v2.html">Grip</a>
+    <a href="../sound-storm-v2.html">Audio</a>
+    <a href="../production.html">Production</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../rentals-storm-v2.html#gearlist" class="cart-trigger" aria-label="View gear list"><span>Gear List</span><span class="count zero" id="cartCount">0</span></a>
+  </div>
+</nav>
+
+<div class="page" id="top">
+
+  <!-- HERO — you are already inside the storm -->
+  <header class="hero" id="hero">
+    <div>
+      <p class="eyebrow">There's a storm coming</p>
+      <h1 aria-label="Thunderstruck">
+        <svg viewBox="0 0 1600 250" role="img" aria-label="Thunderstruck" preserveAspectRatio="xMidYMid meet" style="overflow:visible;">
+          <defs>
+            <!-- Halo painted on an oversized rect (overflow:visible) with the gradient
+                 reaching zero exactly at the rect bounds — no visible edges or seams. -->
+            <radialGradient id="tsScrim9" gradientUnits="userSpaceOnUse"
+                            cx="800" cy="359" r="1000" gradientTransform="matrix(1,0,0,0.32,0,0)">
+              <stop offset="0%" stop-color="#04060c" stop-opacity="0.8"/>
+              <stop offset="42%" stop-color="#04060c" stop-opacity="0.52"/>
+              <stop offset="78%" stop-color="#04060c" stop-opacity="0.16"/>
+              <stop offset="100%" stop-color="#04060c" stop-opacity="0"/>
+            </radialGradient>
+            <mask id="tsMask9" maskUnits="userSpaceOnUse" x="-200" y="-205" width="2000" height="660">
+              <rect x="-200" y="-205" width="2000" height="660" fill="#fff"/>
+              <text class="ts-text" x="800" y="186" text-anchor="middle" font-size="210"
+                    textLength="1520" lengthAdjust="spacingAndGlyphs" fill="#000">THUNDERSTRUCK</text>
+            </mask>
+          </defs>
+          <!-- dark halo with the letters punched out — the LIVE storm shows through the letterforms -->
+          <rect x="-200" y="-205" width="2000" height="660" fill="url(#tsScrim9)" mask="url(#tsMask9)"/>
+          <text class="ts-text" x="800" y="186" text-anchor="middle" font-size="210"
+                textLength="1520" lengthAdjust="spacingAndGlyphs"
+                fill="none" stroke="#e2ecfa" stroke-opacity="0.62" stroke-width="1.4">THUNDERSTRUCK</text>
+        </svg>
+      </h1>
+      <p class="sub">Stories that hit like lightning. Grip truck rental &amp; production — Austin, TX.</p>
+      <div class="cta-row">
+        <a href="#book" class="btn">Book / Hire</a>
+        <a href="#inventory" class="btn ghost">See the kit</a>
+      </div>
+    </div>
+    <div class="scroll-hint"><span>Fly into the storm</span><span class="arrow"></span></div>
+  </header>
+
+  <div class="telemetry fx-soft" data-fx>ALT 2,400 FT &nbsp;·&nbsp; CLIMBING &nbsp;·&nbsp; AUSTIN BELOW</div>
+
+  <!-- INTRO — raw text floating in the cloud space -->
+  <section class="leg intro" id="intro" data-strike>
+    <div class="wrap">
+      <div class="bolt-rule" data-fx><svg viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg></div>
+      <h2 class="head fx-mist" data-fx>Big-city kit. <span class="y">Small-town hustle.</span></h2>
+      <p class="lead fx-soft" data-fx style="--d:.25s;">Austin's grip &amp; lighting truck — owned and run by working filmmakers, not a warehouse counter. The same gear you'd find in LA or New York, delivered on a 3-ton truck and operated by people who actually shoot. We go up to eleven.</p>
+      <div class="intro-kit fx-flash" data-fx data-fx-strike>
+        <img src="../media/gear-lineup-storm.webp" alt="The full Thunderstruck grip, lighting, and camera kit laid out">
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUCK — photo revealed by a lightning strike -->
+  <section class="leg" id="truck" data-strike>
+    <div class="wrap">
+      <div class="glass"><div class="pad">
+        <div class="truck-grid">
+          <div class="truck-photo fx-flash" data-fx data-fx-strike style="background-image:url('../media/truck-profile.webp');"></div>
+          <div>
+            <p class="eyebrow fx-soft" data-fx>The 3-Ton Grip Truck</p>
+            <h2 class="head fx-mist" data-fx>The rig that <span class="y">runs the show.</span></h2>
+            <p class="body fx-soft" data-fx style="--d:.2s;">Capacity and mobility in one rig — modular shelving, all-terrain carts, a camera workstation, 15 outlets, and shore power.</p>
+            <ul class="features" data-fx>
+              <li class="fx-sweep" style="--d:.35s;"><span class="k">Lights in &amp; out</span><span class="v">LED inside and out — load in at dawn or wrap past midnight.</span></li>
+              <li class="fx-sweep" style="--d:.5s;"><span class="k">Jockey boxes</span><span class="v">Lit under-truck boxes for sandbags, stingers, and grip.</span></li>
+              <li class="fx-sweep" style="--d:.65s;"><span class="k">7' liftgate</span><span class="v">7-foot gate rated over 3,000 lbs — heavy carts on and off, easy.</span></li>
+            </ul>
+            <a href="../truck-storm.html" class="btn ghost fx-soft" data-fx style="display:inline-block; margin-top:1.8rem; --d:.8s;">The truck &amp; packages →</a>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- INVENTORY — pillars surface from the cloud deck -->
+  <section class="leg" id="inventory" data-strike>
+    <div class="wrap">
+      <div class="glass"><div class="pad">
+        <div class="inv-intro">
+          <p class="eyebrow fx-soft" data-fx>The Kit</p>
+          <h2 class="head fx-mist" data-fx>The inventory <span class="y">runs deep.</span></h2>
+          <p class="body fx-soft" data-fx style="--d:.2s;">RED Komodo. DZOFilm anamorphics. Nanlux 2400B. Aputure everything. Twenty-plus categories of camera, lighting, grip, and audio — browse by department, build your package.</p>
+        </div>
+        <div class="inv-acc">
+          <a class="acol full fx-rise" data-fx href="../all.html" style="--img:url(../media/products/all-inventory.webp); --d:0s;" aria-label="Browse the full kit">
+            <span class="acol-img"></span><span class="acol-label"><span class="lbl-pill">Browse the full kit<span class="arr" aria-hidden="true">→</span></span></span>
+          </a>
+          <a class="acol fx-rise" data-fx href="../camera-storm-v2.html" style="--img:url(../media/products/cat-camera.webp); --d:.1s;" aria-label="Camera rentals">
+            <span class="acol-img"></span><span class="acol-label">Camera</span>
+          </a>
+          <a class="acol fx-rise" data-fx href="../camera-storm-v2.html" style="--img:url(../media/products/cat-lenses.webp); --d:.2s;" aria-label="Lens rentals">
+            <span class="acol-img"></span><span class="acol-label">Lenses</span>
+          </a>
+          <a class="acol fx-rise" data-fx href="../rentals-storm-v2.html" style="--img:url(../media/products/cat-lighting.webp); --d:.3s;" aria-label="Lighting rentals">
+            <span class="acol-img"></span><span class="acol-label">Lighting</span>
+          </a>
+          <a class="acol fx-rise" data-fx href="../grip-truck-storm-v2.html" style="--img:url(../media/products/cat-grip.webp); --d:.4s;" aria-label="Grip rentals">
+            <span class="acol-img"></span><span class="acol-label">Grip</span>
+          </a>
+          <a class="acol fx-rise" data-fx href="../sound-storm-v2.html" style="--img:url(../media/products/cat-sound.webp); --d:.5s;" aria-label="Audio rentals">
+            <span class="acol-img"></span><span class="acol-label">Audio</span>
+          </a>
+        </div>
+        <p class="inv-note fx-soft" data-fx style="--d:.55s;">Inventory updated regularly. Looking for something not on the list? We partner with the biggest houses in the country — we'll get it.</p>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- WHY — three panels ignite in sequence -->
+  <section class="leg" id="why" data-strike>
+    <div class="wrap">
+      <p class="eyebrow fx-soft" data-fx style="text-align:center;">Why Thunderstruck</p>
+      <h2 class="head fx-mist" data-fx style="text-align:center; max-width:18ch; margin:0 auto; text-shadow:0 2px 30px rgba(4,6,12,0.95);">Filmmakers first. <span class="y">Rental house second.</span></h2>
+      <div class="why-grid">
+        <div class="col glass fx-ignite" data-fx style="--d:.1s;">
+          <div class="num">/ 01</div>
+          <h3>Large Inventory</h3>
+          <p>The same selection you'd find in LA or New York — our inventory runs deep, and what we don't stock, we source from the biggest houses in the country. No dead ends.</p>
+        </div>
+        <div class="col glass fx-ignite" data-fx style="--d:.32s;">
+          <div class="num">/ 02</div>
+          <h3>New Technology</h3>
+          <p>When the newest gear drops, we go get it. Our staff trains constantly, so what arrives on your set works like it should. No lemons.</p>
+        </div>
+        <div class="col glass fx-ignite" data-fx style="--d:.54s;">
+          <div class="num">/ 03</div>
+          <h3>Friendly Support</h3>
+          <p>We're filmmakers, and we've been at this a long time. Need crew recommendations, a demo, or a production problem solved? Give us a call.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="telemetry fx-soft" data-fx>BREAKING THROUGH &nbsp;·&nbsp; CLEAR AIR AHEAD</div>
+
+  <!-- BOOK — the breakthrough: the storm calms here (canvas-driven) -->
+  <section class="leg book" id="book">
+    <div class="wrap">
+      <p class="eyebrow fx-soft" data-fx>Book / Hire</p>
+      <h2 class="head fx-mist" data-fx>There's a storm coming. <span class="y">Let's make something.</span></h2>
+      <p class="sub fx-soft" data-fx style="--d:.2s;">Tell us your dates and what you need — gear, the truck, or the whole package. We'll get back fast.</p>
+      <a href="../rentals-storm-v2.html" class="btn big fx-soft" data-fx style="--d:.35s;">Check Availability</a>
+      <div class="meta-row fx-soft" data-fx style="--d:.5s;">
+        <span>Austin, TX</span>
+        <a href="https://www.instagram.com/nightowlmartin/">Instagram</a>
+        <a href="https://www.facebook.com/MartinShapiro/">Facebook</a>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /.page -->
+
+<footer>
+  <div class="foot-in">
+    <span class="brand">Thunderstruck Pictures</span>
+    <span class="small">© 2026 Thunderstruck Pictures LLC · Austin, TX · Stories that hit like lightning</span>
+  </div>
+</footer>
+
+<script>
+/* =========================================================================
+   STORM FLIGHT v3 — real footage hero
+   Two stacked copies of the generated clip crossfade for a seamless loop.
+   A 2D overlay (#boltfx) + ice-blue flash add supplemental lightning strikes
+   on top of the footage, on a lively ambient cadence + scroll-triggered hits.
+   ========================================================================= */
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const vA = document.getElementById('vidA');
+  const vB = document.getElementById('vidB');
+  const overlay = document.getElementById('boltfx');
+  const flashEl = document.getElementById('flash');
+  const isMobile = Math.min(innerWidth, innerHeight) < 700;
+
+  function goStatic(){ document.body.classList.add('static', 'loaded'); }
+  if (reduce) { goStatic(); return; }
+
+  /* ---------- crossfade loop ---------- */
+  const FADE = 0.9;
+  let active = vA, idle = vB, swapping = false, ok = false;
+  const tryPlay = v => { const p = v.play(); if (p) p.catch(()=>{}); };
+
+  vA.addEventListener('loadeddata', () => { ok = true; document.body.classList.add('loaded'); tryPlay(vA); });
+  vA.addEventListener('error', goStatic);
+  setTimeout(() => { if (!ok && !document.body.classList.contains('static')) document.body.classList.add('loaded'); }, 1500);
+  // some browsers/power-save modes block muted autoplay until first interaction
+  const kick = () => { tryPlay(vA); if (active !== vA) tryPlay(active); };
+  ['pointerdown','touchstart','scroll','keydown'].forEach(ev => addEventListener(ev, kick, { once:true, passive:true }));
+
+  vA.classList.add('show');
+  if (isMobile) { vA.loop = true; vB.style.display = 'none'; }   // mobile: single looped video, skip 2-decoder cost
+
+  // Drive the crossfade off the video clock (timeupdate), not rAF — survives
+  // background-tab rAF throttling so the loop never stalls.
+  function onTime(e){
+    if (isMobile || e.target !== active || !active.duration) return;
+    if (!swapping && active.currentTime >= active.duration - FADE) {
+      swapping = true;
+      idle.currentTime = 0; tryPlay(idle);
+      idle.classList.add('show'); active.classList.remove('show');
+      const t = active; active = idle; idle = t;
+      const clear = () => { if (active.currentTime > FADE) { swapping = false; active.removeEventListener('timeupdate', clear); } };
+      active.addEventListener('timeupdate', clear);
+    }
+  }
+  vA.addEventListener('timeupdate', onTime);
+  vB.addEventListener('timeupdate', onTime);
+
+  /* ---------- supplemental lightning overlay ---------- */
+  const octx = overlay.getContext('2d');
+  const clamp = (v,a,b) => Math.min(b, Math.max(a, v));
+  let W = 0, H = 0;
+  function resize(){
+    W = innerWidth; H = innerHeight;
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    overlay.width = Math.round(W*dpr); overlay.height = Math.round(H*dpr);
+    octx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  addEventListener('resize', resize); resize();
+
+  const strikes = [];
+  function makeBolt(px, py, len){
+    const pts = [{x:px,y:py},{x:px+(Math.random()-0.5)*60,y:py+len}];
+    for (let d=0; d<5; d++) for (let i=pts.length-2; i>=0; i--){
+      const a=pts[i], b=pts[i+1];
+      pts.splice(i+1,0,{x:(a.x+b.x)/2+(Math.random()-0.5)*(b.y-a.y)*0.55, y:(a.y+b.y)/2+(Math.random()-0.5)*14});
+    }
+    const branches=[];
+    for (let n=0; n<3; n++){
+      const at=pts[Math.floor(pts.length*(0.3+Math.random()*0.4))];
+      const bl=[{x:at.x,y:at.y}]; let bx=at.x, by=at.y; const dir=Math.random()<0.5?-1:1;
+      for (let s=0; s<9; s++){ bx+=dir*(6+Math.random()*20); by+=10+Math.random()*22; bl.push({x:bx,y:by}); }
+      branches.push(bl);
+    }
+    return {main:pts, branches};
+  }
+  function strike(o){
+    o = Object.assign({amp:1, sx:W*(0.3+Math.random()*0.4), sy:H*(0.1+Math.random()*0.2), bolt:false}, o);
+    strikes.push({t0:performance.now(), amp:o.amp, x:o.sx, y:o.sy, bolt:o.bolt?makeBolt(o.sx,o.sy,H*(0.42+Math.random()*0.34)):null});
+    if (strikes.length>6) strikes.shift();
+  }
+  window.__strike = strike;
+  function env(now){
+    let e=0;
+    for (const s of strikes){ const ph=(now-s.t0)/1000; if (ph<0||ph>1.5) continue;
+      let v=Math.exp(-ph*16); if (ph>0.1) v+=0.5*Math.exp(-(ph-0.1)*10); if (ph>0.27) v+=0.2*Math.exp(-(ph-0.27)*7);
+      e+=s.amp*v; }
+    return Math.min(e,1.7);
+  }
+  function path(pts,w,style,blur){ octx.beginPath(); octx.moveTo(pts[0].x,pts[0].y);
+    for (let i=1;i<pts.length;i++) octx.lineTo(pts[i].x,pts[i].y);
+    octx.lineWidth=w; octx.strokeStyle=style; octx.shadowBlur=blur; octx.shadowColor='rgba(159,196,238,0.9)'; octx.stroke(); }
+  function drawBolts(now){
+    octx.clearRect(0,0,W,H);
+    for (const s of strikes){ if (!s.bolt) continue; const ph=(now-s.t0)/1000; if (ph<0||ph>0.5) continue;
+      let a=Math.exp(-ph*18); if (ph>0.1) a+=0.45*Math.exp(-(ph-0.1)*12); a=Math.min(a*s.amp,1); if (a<0.03) continue;
+      octx.save(); octx.globalAlpha=a; octx.lineJoin='round'; octx.lineCap='round';
+      path(s.bolt.main, 16, 'rgba(159,196,238,0.32)', 48);
+      path(s.bolt.main, 5,  'rgba(205,224,250,0.8)', 20);
+      path(s.bolt.main, 2,  'rgba(255,255,255,1)', 0);
+      octx.globalAlpha=a*0.6;
+      for (const b of s.bolt.branches){ path(b,3,'rgba(190,214,245,0.6)',14); path(b,1.2,'rgba(255,255,255,0.95)',0); }
+      octx.restore();
+    }
+  }
+  let nextAmb = performance.now() + 900;
+  function frame(now){
+    if (now > nextAmb){ nextAmb = now + 1500 + Math.random()*2200;
+      strike({ amp: 0.45 + Math.random()*0.9, bolt: Math.random() < 0.5 }); }
+    const e = env(now);
+    flashEl.style.opacity = clamp(e*0.42, 0, 0.6).toFixed(3);
+    drawBolts(now);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  /* ---------- reveals + scroll-triggered strikes (ported from v1) ---------- */
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries){ if (!e.isIntersecting) continue;
+      e.target.classList.add('in'); io.unobserve(e.target);
+      if (e.target.hasAttribute('data-fx-strike')){ const r=e.target.getBoundingClientRect();
+        strike({ amp:1.5, sx:r.left+r.width*0.5, sy:Math.max(H*0.14, r.top*0.4), bolt:true }); }
+    }
+  }, { threshold: 0.3, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('[data-fx]').forEach(el => io.observe(el));
+
+  const sectionIO = new IntersectionObserver((entries) => {
+    for (const e of entries){ if (!e.isIntersecting) continue; sectionIO.unobserve(e.target);
+      strike({ amp: 1.0 + Math.random()*0.5, sx: W*(0.25+Math.random()*0.5), sy: H*(0.1+Math.random()*0.18), bolt: Math.random()<0.7 }); }
+  }, { threshold: 0.22 });
+  document.querySelectorAll('[data-strike]').forEach(el => sectionIO.observe(el));
+
+  /* arrival strikes */
+  setTimeout(() => strike({ amp:1.6, sx:W*0.5, sy:H*0.18, bolt:true }), 900);
+  setTimeout(() => strike({ amp:0.8, sx:W*0.66, sy:H*0.14, bolt:true }), 2300);
+})();
+</script>
+
+<!-- Reflect the shared quote cart count in the nav (cart lives on the rental pages). -->
+<script>
+(function(){
+  try{
+    var r=localStorage.getItem('ts-cart'); var n=0;
+    if(r){ var c=(JSON.parse(r)||{}).cart||{}; n=Object.values(c).reduce(function(a,b){return a+(b||0);},0); }
+    var el=document.getElementById('cartCount');
+    if(el){ el.textContent=n; el.classList.toggle('zero', n===0); }
+  }catch(e){}
+})();
+</script>
+
+</body>
+</html>

@@ -13,7 +13,11 @@ sed 's|\.\./||g' design-explorations/09-stormflight-v3.html > storm-public/index
 # Older homes kept as aliases for reference/comparison
 sed 's|\.\./||g' design-explorations/09-stormflight.html    > storm-public/v1.html
 sed 's|\.\./||g' design-explorations/09-stormflight-v2.html > storm-public/v2.html
-sed 's|\.\./||g' design-explorations/09-stormflight-v3.html > storm-public/v3.html
+sed 's|\.\./||g' design-explorations/09-stormflight-v3.html      > storm-public/v3.html
+# Photo-integration explorations: alt = gear plate in hero, alt2 = gear in intro section
+sed 's|\.\./||g' design-explorations/09-stormflight-v3-alt.html  > storm-public/v3-alt.html
+sed 's|\.\./||g' design-explorations/09-stormflight-v3-alt2.html > storm-public/v3-alt2.html
+sed 's|\.\./||g' design-explorations/09-stormflight-v3-alt3.html > storm-public/v3-alt3.html
 
 # Storm pages + shared scripts/data
 cp camera-storm.html rentals-storm.html grip-truck-storm.html sound-storm.html \
@@ -31,20 +35,31 @@ for f in storm-public/camera-storm.html storm-public/rentals-storm.html \
   sed -i '' 's|href="design-explorations/09-stormflight.html"|href="index.html"|g' "$f"
 done
 
-# Supporting non-storm pages, nav rewired to the storm set
+# Supporting pages -> into the V3 flow: nav/product links pointed at the
+# canonical -v2 set, and the storm video bg + glass theme + gold accent injected
+# (done here, NOT in the source files, which are shared with the live non-storm site).
 for f in all.html product.html production.html contact.html; do
-  sed -e 's|href="camera.html"|href="camera-storm.html"|g' \
-      -e 's|href="rentals.html"|href="rentals-storm.html"|g' \
-      -e 's|href="grip-truck.html"|href="grip-truck-storm.html"|g' \
-      -e 's|href="sound.html"|href="sound-storm.html"|g' \
-      -e "s|camera:'camera.html', lighting:'rentals.html', grip:'grip-truck.html', sound:'sound.html'|camera:'camera-storm.html', lighting:'rentals-storm.html', grip:'grip-truck-storm.html', sound:'sound-storm.html'|" \
-      -e "s|'rentals.html'|'rentals-storm.html'|g" \
+  sed -e 's|href="camera.html"|href="camera-storm-v2.html"|g' \
+      -e 's|href="rentals.html"|href="rentals-storm-v2.html"|g' \
+      -e 's|href="grip-truck.html"|href="grip-truck-storm-v2.html"|g' \
+      -e 's|href="sound.html"|href="sound-storm-v2.html"|g' \
+      -e 's|product.html?id=|product-storm.html?id=|g' \
+      -e 's|href="product.html"|href="product-storm.html"|g' \
+      -e "s|camera:'camera.html', lighting:'rentals.html', grip:'grip-truck.html', sound:'sound.html'|camera:'camera-storm-v2.html', lighting:'rentals-storm-v2.html', grip:'grip-truck-storm-v2.html', sound:'sound-storm-v2.html'|" \
+      -e "s|'rentals.html'|'rentals-storm-v2.html'|g" \
+      -e 's|<span>Quote</span>|<span>Gear List</span>|g' \
+      -e 's|aria-label="Open quote"|aria-label="Open gear list"|g' \
+      -e 's|+ Add to Quote|+ Add to Gear List|g' \
+      -e 's|} in quote</span>|} on gear list</span>|g' \
+      -e 's|Your <span class="y">quote.</span>|Your <span class="y">gear list.</span>|g' \
+      -e 's|<h4>Empty quote</h4>|<h4>Empty gear list</h4>|g' \
+      -e 's|</head>|<link rel="stylesheet" href="design-explorations/storm-theme.css"><script defer src="design-explorations/storm-theme-video.js"></script><link rel="stylesheet" href="design-explorations/accent-gold.css"></head>|' \
       "$f" > "storm-public/$f"
 done
 
 # Only the assets the storm set actually references
 cp assets/clouds-bg.jpg assets/hero-plate-lit.webp storm-public/assets/
-cp media/truck-profile.webp storm-public/media/
+cp media/truck-profile.webp media/gear-lineup-storm.webp storm-public/media/
 cp media/storm-hero.mp4 media/storm-hero-poster.jpg storm-public/media/
 cp -R media/products storm-public/media/products
 
