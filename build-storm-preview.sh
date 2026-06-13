@@ -18,17 +18,15 @@ sed 's|\.\./||g' design-explorations/09-stormflight-v3.html > storm-public/v3.ht
 # Storm pages + shared scripts/data
 cp camera-storm.html rentals-storm.html grip-truck-storm.html sound-storm.html \
    camera-storm-v2.html rentals-storm-v2.html grip-truck-storm-v2.html sound-storm-v2.html \
-   camera-video-demo.html \
    product-storm.html truck-storm.html \
    nav-mobile.js inventory.js product-details.js inventory.js storm-public/
-cp design-explorations/storm-theme.css design-explorations/storm-theme.js design-explorations/accent-gold.css storm-public/design-explorations/
+cp design-explorations/storm-theme.css design-explorations/storm-theme.js design-explorations/storm-theme-video.js design-explorations/accent-gold.css storm-public/design-explorations/
 
 # Point the storm pages' home links at the root index
 for f in storm-public/camera-storm.html storm-public/rentals-storm.html \
          storm-public/grip-truck-storm.html storm-public/sound-storm.html \
          storm-public/camera-storm-v2.html storm-public/rentals-storm-v2.html \
          storm-public/grip-truck-storm-v2.html storm-public/sound-storm-v2.html \
-         storm-public/camera-video-demo.html \
          storm-public/product-storm.html storm-public/truck-storm.html; do
   sed -i '' 's|href="design-explorations/09-stormflight.html"|href="index.html"|g' "$f"
 done
