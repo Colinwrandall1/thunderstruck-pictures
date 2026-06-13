@@ -60,6 +60,10 @@
   .person{ background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:clamp(1.6rem,3vw,2.2rem); transition:border-color .2s,transform .2s; }
   .person:hover{ border-color:var(--line-bright); transform:translateY(-3px); }
   .person .role{ font-family:'JetBrains Mono',monospace; font-size:0.66rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--yellow); margin-bottom:0.7rem; }
+  .phead{ display:flex; align-items:center; gap:1.1rem; margin-bottom:1.1rem; }
+  .headshot{ width:84px; height:84px; flex:0 0 84px; border-radius:50%; object-fit:cover; border:1px solid rgba(159,196,238,0.35); box-shadow:0 6px 18px rgba(0,0,0,0.45); }
+  .phead .role{ margin-bottom:0.3rem; }
+  .phead h3{ margin-bottom:0; }
   .person h3{ font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:clamp(1.6rem,3vw,1.95rem); text-transform:uppercase; letter-spacing:0.01em; margin-bottom:0.9rem; }
   .person .names{ color:#cdd6df; font-weight:500; margin-bottom:0.8rem; }
   .person p{ color:var(--muted); font-size:0.95rem; line-height:1.6; margin-bottom:0.8rem; }
@@ -110,14 +114,24 @@
 
   <div class="crew-grid">
     <div class="person">
-      <div class="role">Writer · Director · Producer</div>
-      <h3>Martin Shapiro</h3>
+      <div class="phead">
+        <img class="headshot" src="media/martin-shapiro.jpg" alt="Martin Shapiro" width="84" height="84" loading="lazy">
+        <div class="phead-txt">
+          <div class="role">Writer · Director · Producer</div>
+          <h3>Martin Shapiro</h3>
+        </div>
+      </div>
       <p>Wrote, directed, and produced the horror short <em>Chopper</em>, from his own comic series — its prequel became a web series starring Tyler Mane (Halloween, X-Men). His thriller <em>Lair of the Fox</em> sold to Ilya Salkind (producer of Superman).</p>
       <p>He's developed for HBO and MGM, including an adaptation of <em>Dragonlance</em>. MFA in Screenwriting, UCLA — where he won the Showcase award for his war drama <em>Crossfire</em>.</p>
     </div>
     <div class="person">
-      <div class="role">Director · Director of Photography</div>
-      <h3>Taylor Randall</h3>
+      <div class="phead">
+        <img class="headshot" src="media/taylor-randall.jpg" alt="Taylor Randall" width="84" height="84" loading="lazy">
+        <div class="phead-txt">
+          <div class="role">Director · Director of Photography</div>
+          <h3>Taylor Randall</h3>
+        </div>
+      </div>
       <p class="names">Music videos for Jennifer Lopez, Cardi B, Bad Bunny, DJ Khaled, Nipsey Hussle, John Legend, Enrique Iglesias, Becky G.</p>
       <p>From Chicago to LA at 17, Taylor learned the set from every seat. Twelve-plus years in, he's one of the rare few who directs and shoots at once — for Kodak Black, Sunny Malouf, Tahj Mowry, Dizzy Wright, and Mann.</p>
     </div>

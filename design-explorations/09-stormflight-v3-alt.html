@@ -214,13 +214,15 @@
      in clearer sky and the solid gear floats below it; where text does cross the
      plate (sub/CTAs), the top fade has it dissolving. Arrives last in the load
      cascade (after the CTAs), with a soft lightning flash. */
-  .hero-copy { position: relative; z-index: 2; transform: translateY(-10vh); }
+  .hero-copy { position: relative; z-index: 2; transform: translateY(-14vh); }
   .hero-kit {
     position: absolute; left: 50%; bottom: 0; z-index: 1;
-    width: min(1320px, 100vw); pointer-events: none;
-    -webkit-mask-image: linear-gradient(180deg, transparent 0%, transparent 28%, #000 48%, #000 84%, transparent 100%),
+    width: min(1040px, 94vw); pointer-events: none;
+    /* top fade reaches solid right at the truck's top edge (~f0.20) so the sky and
+       the thin boom lights above it dissolve, but the truck itself is never cut */
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, transparent 6%, #000 20%, #000 86%, transparent 100%),
                         linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
-            mask-image: linear-gradient(180deg, transparent 0%, transparent 28%, #000 48%, #000 84%, transparent 100%),
+            mask-image: linear-gradient(180deg, transparent 0%, transparent 6%, #000 20%, #000 86%, transparent 100%),
                         linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
     -webkit-mask-composite: source-in; mask-composite: intersect;
     opacity: 0; filter: blur(16px); transform: translate(-50%, 34px);
@@ -231,7 +233,7 @@
   .hero-kit img { display: block; width: 100%; height: auto; }
   body.loaded .hero-kit { opacity: 1; filter: none; transform: translate(-50%, 0); transition-delay: 1.3s; }
   body.static .hero-kit { opacity: 1; filter: none; transform: translateX(-50%); }
-  @media (max-width: 700px){ .hero-kit { width: 132vw; } .hero-copy { transform: translateY(-3vh); } }
+  @media (max-width: 700px){ .hero-kit { width: 132vw; } .hero-copy { transform: translateY(-4vh); } }
   .scroll-hint .arrow { width: 1px; height: 30px; overflow:hidden; position:relative; }
   .scroll-hint .arrow::after { content:""; position:absolute; left:0; top:-100%; width:1px; height:100%;
     background: linear-gradient(transparent, #9fc4ee, transparent); animation: hintDrop 2.2s ease-in-out infinite; }
