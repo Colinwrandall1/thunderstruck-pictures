@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Design exploration 09 — "Storm Flight": continuous WebGL flight through a thunderstorm. -->
+  <!-- Design exploration 09 — "Storm Flight": continuous flight through a thunderstorm (real footage hero). -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thunderstruck Pictures — Storm Flight (Exploration 09)</title>
@@ -99,7 +99,7 @@
     transition: border-color 0.15s, color 0.15s, box-shadow 0.2s; border-radius: 4px;
   }
   .cart-trigger:hover { border-color: var(--yellow); color: var(--yellow); box-shadow: 0 0 18px rgba(159,196,238,0.18); }
-  .cart-trigger .count { background: var(--yellow); color: #0a0a0a; padding: 0.1rem 0.5rem; font-size: 0.8rem; min-width: 1.5rem; text-align: center; border-radius: 2px; }
+  .cart-trigger .count { background: #f4c24a; color: #0a0f16; padding: 0.1rem 0.5rem; font-size: 0.8rem; min-width: 1.5rem; text-align: center; border-radius: 2px; }
   .cart-trigger .count.zero { background: rgba(31,42,56,0.9); color: var(--muted); }
   @media (max-width: 960px) { .nav .links a:not(.cart-trigger) { display: none; } }
 
@@ -425,13 +425,13 @@
 <nav class="nav" id="nav">
   <a href="#top" class="brand">Thunderstruck</a>
   <div class="links">
-    <a href="../camera-storm.html">Camera</a>
-    <a href="../rentals-storm.html">Lighting</a>
-    <a href="../grip-truck-storm.html">Grip</a>
-    <a href="../sound-storm.html">Audio</a>
+    <a href="../camera-storm-v2.html">Camera</a>
+    <a href="../rentals-storm-v2.html">Lighting</a>
+    <a href="../grip-truck-storm-v2.html">Grip</a>
+    <a href="../sound-storm-v2.html">Audio</a>
     <a href="../production.html">Production</a>
     <a href="../contact.html">Contact</a>
-    <a href="../rentals-storm.html" class="cart-trigger" aria-label="View gear list"><span>Gear List</span><span class="count zero" id="cartCount">0</span></a>
+    <a href="../rentals-storm-v2.html#gearlist" class="cart-trigger" aria-label="View gear list"><span>Gear List</span><span class="count zero" id="cartCount">0</span></a>
   </div>
 </nav>
 
@@ -521,19 +521,19 @@
           <a class="acol full fx-rise" data-fx href="../all.html" style="--img:url(../media/products/all-inventory.webp); --d:0s;" aria-label="Browse the full kit">
             <span class="acol-img"></span><span class="acol-label"><span class="lbl-pill">Browse the full kit<span class="arr" aria-hidden="true">→</span></span></span>
           </a>
-          <a class="acol fx-rise" data-fx href="../camera-storm.html" style="--img:url(../media/products/cat-camera.webp); --d:.1s;" aria-label="Camera rentals">
+          <a class="acol fx-rise" data-fx href="../camera-storm-v2.html" style="--img:url(../media/products/cat-camera.webp); --d:.1s;" aria-label="Camera rentals">
             <span class="acol-img"></span><span class="acol-label">Camera</span>
           </a>
-          <a class="acol fx-rise" data-fx href="../camera-storm.html" style="--img:url(../media/products/cat-lenses.webp); --d:.2s;" aria-label="Lens rentals">
+          <a class="acol fx-rise" data-fx href="../camera-storm-v2.html" style="--img:url(../media/products/cat-lenses.webp); --d:.2s;" aria-label="Lens rentals">
             <span class="acol-img"></span><span class="acol-label">Lenses</span>
           </a>
-          <a class="acol fx-rise" data-fx href="../rentals-storm.html" style="--img:url(../media/products/cat-lighting.webp); --d:.3s;" aria-label="Lighting rentals">
+          <a class="acol fx-rise" data-fx href="../rentals-storm-v2.html" style="--img:url(../media/products/cat-lighting.webp); --d:.3s;" aria-label="Lighting rentals">
             <span class="acol-img"></span><span class="acol-label">Lighting</span>
           </a>
-          <a class="acol fx-rise" data-fx href="../grip-truck-storm.html" style="--img:url(../media/products/cat-grip.webp); --d:.4s;" aria-label="Grip rentals">
+          <a class="acol fx-rise" data-fx href="../grip-truck-storm-v2.html" style="--img:url(../media/products/cat-grip.webp); --d:.4s;" aria-label="Grip rentals">
             <span class="acol-img"></span><span class="acol-label">Grip</span>
           </a>
-          <a class="acol fx-rise" data-fx href="../sound-storm.html" style="--img:url(../media/products/cat-sound.webp); --d:.5s;" aria-label="Audio rentals">
+          <a class="acol fx-rise" data-fx href="../sound-storm-v2.html" style="--img:url(../media/products/cat-sound.webp); --d:.5s;" aria-label="Audio rentals">
             <span class="acol-img"></span><span class="acol-label">Audio</span>
           </a>
         </div>
@@ -575,7 +575,7 @@
       <p class="eyebrow fx-soft" data-fx>Book / Hire</p>
       <h2 class="head fx-mist" data-fx>There's a storm coming. <span class="y">Let's make something.</span></h2>
       <p class="sub fx-soft" data-fx style="--d:.2s;">Tell us your dates and what you need — gear, the truck, or the whole package. We'll get back fast.</p>
-      <a href="../rentals-storm.html" class="btn big fx-soft" data-fx style="--d:.35s;">Check Availability</a>
+      <a href="../rentals-storm-v2.html" class="btn big fx-soft" data-fx style="--d:.35s;">Check Availability</a>
       <div class="meta-row fx-soft" data-fx style="--d:.5s;">
         <span>Austin, TX</span>
         <a href="https://www.instagram.com/nightowlmartin/">Instagram</a>

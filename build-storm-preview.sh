@@ -8,11 +8,11 @@ cd "$(dirname "$0")"
 rm -rf storm-public
 mkdir -p storm-public/assets storm-public/media storm-public/design-explorations
 
-# Storm home -> root index.html (strip ../ repo-root refs)
-sed 's|\.\./||g' design-explorations/09-stormflight.html > storm-public/index.html
-# v2 cloud/lightning iteration -> /v2.html for side-by-side client review
+# v3 (real-footage video hero) is the canonical home -> root index.html
+sed 's|\.\./||g' design-explorations/09-stormflight-v3.html > storm-public/index.html
+# Older homes kept as aliases for reference/comparison
+sed 's|\.\./||g' design-explorations/09-stormflight.html    > storm-public/v1.html
 sed 's|\.\./||g' design-explorations/09-stormflight-v2.html > storm-public/v2.html
-# v3 real-footage video hero -> /v3.html
 sed 's|\.\./||g' design-explorations/09-stormflight-v3.html > storm-public/v3.html
 
 # Storm pages + shared scripts/data
