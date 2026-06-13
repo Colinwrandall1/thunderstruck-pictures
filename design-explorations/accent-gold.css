@@ -16,6 +16,19 @@
   filter: none !important;
 }
 
+/* The PROMINENT single Add-to-Gear-List button (product detail + truck packages)
+   is gold by DEFAULT — gold owns "add to your list" and stands apart from the
+   chrome Book/Contact/Submit buttons. (Dense catalog cards stay outline -> gold
+   on hover, so grids don't get loud.) */
+.pinfo .add-btn, .pkg-cta .add-btn {
+  background: var(--gold) !important;
+  background-image: none !important;
+  border-color: var(--gold) !important;
+  color: var(--gold-ink) !important;
+  box-shadow: 0 0 22px rgba(244,194,74,0.28), inset 0 1px 0 rgba(255,255,255,0.25) !important;
+}
+.pinfo .add-btn:hover, .pkg-cta .add-btn:hover { filter: brightness(1.07); }
+
 /* Added-to-gear-list state -> gold (catalog card + steppers) */
 .card.in-cart { border-color: var(--gold) !important; }
 .stepper { border-color: var(--gold) !important; }
