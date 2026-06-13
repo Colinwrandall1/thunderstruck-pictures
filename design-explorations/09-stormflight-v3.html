@@ -304,26 +304,26 @@
     box-shadow: 0 0 28px rgba(159,196,238,0.14); }
   .acol .acol-img { position:absolute; inset:0; transition: opacity .5s ease, filter .5s ease;
     background: var(--img) center/cover no-repeat #070f1e;
-    opacity:.55; filter:saturate(.55) brightness(.55) contrast(1.05); }
+    opacity:.72; filter:saturate(.7) brightness(.72) contrast(1.04); }
   .acol::before { content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
-    background: linear-gradient(180deg, rgba(7,15,30,.55) 0%, rgba(7,15,30,.88) 100%);
+    background: linear-gradient(180deg, rgba(7,15,30,.22) 0%, rgba(7,15,30,.5) 52%, rgba(7,15,30,.9) 100%);
     transition: opacity .5s ease; }
   .acol:hover .acol-img, .acol:focus-visible .acol-img { opacity:1; filter:none; }
   .acol:hover::before, .acol:focus-visible::before { opacity:0; }
   .acol.full { flex-grow: var(--grow-exp); }
   .acol.full .acol-img { opacity:1; filter:none; }
   .acol.full::before {
-    background: linear-gradient(180deg, rgba(159,196,238,.42) 0%, rgba(159,196,238,.7) 100%);
+    background: linear-gradient(180deg, rgba(7,15,30,.1) 0%, rgba(7,15,30,.34) 52%, rgba(7,15,30,.9) 100%);
     transition: opacity .5s ease, background .5s ease;
   }
   .acol.full:hover::before, .acol.full:focus-visible::before { opacity:0; }
   .inv-acc:has(.acol:not(.full):hover) .acol.full,
   .inv-acc:has(.acol:not(.full):focus-visible) .acol.full { flex-grow: var(--grow-thin); border-color: rgba(159,196,238,0.14); }
   .inv-acc:has(.acol:not(.full):hover) .acol.full .acol-img,
-  .inv-acc:has(.acol:not(.full):focus-visible) .acol.full .acol-img { opacity:.55; filter:saturate(.55) brightness(.55) contrast(1.05); }
+  .inv-acc:has(.acol:not(.full):focus-visible) .acol.full .acol-img { opacity:.72; filter:saturate(.7) brightness(.72) contrast(1.04); }
   .inv-acc:has(.acol:not(.full):hover) .acol.full::before,
   .inv-acc:has(.acol:not(.full):focus-visible) .acol.full::before {
-    background: linear-gradient(180deg, rgba(7,15,30,.55) 0%, rgba(7,15,30,.88) 100%);
+    background: linear-gradient(180deg, rgba(7,15,30,.22) 0%, rgba(7,15,30,.5) 52%, rgba(7,15,30,.9) 100%);
   }
   .acol .acol-label { position:absolute; z-index:2; inset:0;
     display:flex; align-items:center; justify-content:center; white-space:nowrap;
