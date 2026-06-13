@@ -100,4 +100,7 @@ const INVENTORY = [
   { dept:'sound', id:'hollyland-solidcom-c1pro', cat:'wireless', brand:'Hollyland', tag:'Intercom · 8-User', name:'Hollyland Solidcom C1 Pro 8-User Intercom', spec:'Full-duplex DECT wireless intercom with ENC noise cancellation — 8 headsets + hub, 1100\' range, dual-mic. AD/DP/grip/sound on one comms loop.', day:95, photo:true },
   { dept:'sound', id:'ath-m50x', cat:'recording', brand:'Audio-Technica', tag:'Headphones', name:'Audio-Technica ATH-M50x Headphones', spec:'Industry-standard closed-back monitoring headphones for sound mixers and boom ops.', day:12, photo:true },
   { dept:'sound', id:'ktek-bag', cat:'recording', brand:'K-Tek', tag:'Mixer Bag', name:'K-Tek Stingray Junior X Sound Mixer Bag', spec:'Compact mixer bag with rain hood. Alternative to the ORCA bag for smaller recorders.', day:30, photo:true },
+  // Whole-truck packages — dept:'package' keeps them out of every catalog grid, the "All" page, and the truck manifests; they exist only so they can be added to the shared gear list.
+  { dept:'package', id:'pkg-grip', cat:'truck', brand:'Thunderstruck', tag:'Truck Package', name:'Grip Package — 3-Ton Truck', spec:'The full grip department on the 3-ton truck, delivered and operated by a working grip.', day:850, photo:false },
+  { dept:'package', id:'pkg-grip-lighting', cat:'truck', brand:'Thunderstruck', tag:'Truck Package', name:'Grip + Lighting Package — 3-Ton Truck', spec:'Every grip and lighting item on the 3-ton truck — staged, cabled, delivered and operated.', day:1450, photo:false },
 ];

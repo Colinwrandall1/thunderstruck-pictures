@@ -97,6 +97,9 @@
   .pkg-price .unit{ font-family:'JetBrains Mono',monospace; font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); }
   .pkg-price .anchor{ flex-basis:100%; color:var(--dim); font-size:0.8rem; }
   .pkg-price .anchor s{ color:#8b9aac; }
+  .pkg-cta{ display:flex; gap:0.7rem; flex-wrap:wrap; }
+  .pkg-cta .btn{ flex:1 1 12rem; }
+  .btn.added{ background:var(--panel); color:var(--gold,#f4c24a); border:1px solid var(--gold,#f4c24a); box-shadow:none; filter:none; }
   .btn{ display:flex; align-items:center; justify-content:center; gap:.5rem; cursor:pointer;
     background:linear-gradient(180deg,#ffffff,#cdddf0 45%,#9fb4ce 55%,#eaf2fb); color:#0a0f16;
     font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:1rem; letter-spacing:0.14em; text-transform:uppercase;
@@ -158,7 +161,7 @@
     <a href="sound-storm-v2.html">Audio</a>
     <a href="production.html">Production</a>
     <a href="contact.html">Contact</a>
-    <a href="rentals-storm-v2.html" class="cart-trigger" aria-label="View gear list"><span>Gear List</span><span class="count zero" id="cartCount">0</span></a>
+    <a href="rentals-storm-v2.html#gearlist" class="cart-trigger" aria-label="View gear list"><span>Gear List</span><span class="count zero" id="cartCount">0</span></a>
   </div>
 </nav>
 
@@ -222,7 +225,10 @@
         <span class="anchor">Booked à la carte this gear runs <s>$2,244/day</s> — the package saves you over 60%.</span>
       </div>
       <p class="rate-note">Multi-day &amp; weekly rates quoted per production — tell us your dates and we'll come back fast with a number.</p>
-      <a class="btn" href="contact.html">Request the Grip Package →</a>
+      <div class="pkg-cta">
+        <a class="btn add-btn" href="#" onclick="addPkg('pkg-grip', this); return false;">+ Add to Gear List</a>
+        <a class="btn ghost" href="contact.html">Contact us for booking details →</a>
+      </div>
     </div>
 
     <!-- PACKAGE 02 — GRIP + LIGHTING -->
@@ -249,7 +255,10 @@
         <span class="anchor">Booked à la carte this gear runs <s>$3,890/day</s> — the package saves you over 60%.</span>
       </div>
       <p class="rate-note">Multi-day &amp; weekly rates quoted per production — tell us your dates and we'll come back fast with a number.</p>
-      <a class="btn" href="contact.html">Request the Full Package →</a>
+      <div class="pkg-cta">
+        <a class="btn add-btn" href="#" onclick="addPkg('pkg-grip-lighting', this); return false;">+ Add to Gear List</a>
+        <a class="btn ghost" href="contact.html">Contact us for booking details →</a>
+      </div>
     </div>
   </div>
 
@@ -291,16 +300,27 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-<!-- Shared gear list count -->
+<!-- Shared gear list count + add-package-to-gear-list -->
 <script>
-(function(){
+function updateGearBadge(){
   try{
     var r=localStorage.getItem('ts-cart'); var n=0;
     if(r){ var c=(JSON.parse(r)||{}).cart||{}; n=Object.values(c).reduce(function(a,b){return a+(b||0);},0); }
     var el=document.getElementById('cartCount');
     if(el){ el.textContent=n; el.classList.toggle('zero', n===0); }
   }catch(e){}
-})();
+}
+function addPkg(id, el){
+  try{
+    var r=localStorage.getItem('ts-cart'); var c = r?(JSON.parse(r)||{}):{};
+    c.cart = c.cart||{}; c.days = c.days||1;
+    c.cart[id] = (c.cart[id]||0) + 1;
+    localStorage.setItem('ts-cart', JSON.stringify(c));
+  }catch(e){}
+  if(el){ el.textContent='✓ Added — view gear list'; el.classList.add('added'); el.setAttribute('href','rentals-storm-v2.html#gearlist'); el.setAttribute('onclick',''); }
+  updateGearBadge();
+}
+updateGearBadge();
 </script>
 
 </body>
