@@ -12,6 +12,8 @@ mkdir -p storm-public/assets storm-public/media storm-public/design-explorations
 sed 's|\.\./||g' design-explorations/09-stormflight.html > storm-public/index.html
 # v2 cloud/lightning iteration -> /v2.html for side-by-side client review
 sed 's|\.\./||g' design-explorations/09-stormflight-v2.html > storm-public/v2.html
+# v3 real-footage video hero -> /v3.html
+sed 's|\.\./||g' design-explorations/09-stormflight-v3.html > storm-public/v3.html
 
 # Storm pages + shared scripts/data
 cp camera-storm.html rentals-storm.html grip-truck-storm.html sound-storm.html \
@@ -40,6 +42,7 @@ done
 # Only the assets the storm set actually references
 cp assets/clouds-bg.jpg assets/hero-plate-lit.webp storm-public/assets/
 cp media/truck-profile.webp storm-public/media/
+cp media/storm-hero.mp4 media/storm-hero-poster.jpg storm-public/media/
 cp -R media/products storm-public/media/products
 
 echo "Built storm-public/ ($(du -sh storm-public | cut -f1))"
