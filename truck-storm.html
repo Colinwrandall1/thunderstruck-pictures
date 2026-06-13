@@ -80,7 +80,7 @@
   /* PACKAGES */
   .pkg-head{ text-align:center; margin:clamp(3rem,6vw,4.5rem) auto clamp(1.8rem,3.5vw,2.6rem); max-width:60ch; }
   .pkg-head .sec-h{ margin-bottom:0.8rem; }
-  .pkg-grid{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(1.2rem,2.5vw,2rem); align-items:start; }
+  .pkg-grid{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(1.2rem,2.5vw,2rem); align-items:stretch; }
   @media (max-width:880px){ .pkg-grid{ grid-template-columns:1fr; } }
   .pkg{ display:flex; flex-direction:column; gap:1.2rem; transition:border-color .35s, box-shadow .35s; }
   .pkg:hover{ border-color:rgba(159,196,238,0.32); box-shadow:0 24px 60px rgba(0,0,0,0.45), 0 0 38px rgba(159,196,238,0.10), inset 0 1px 0 rgba(255,255,255,0.1); }
@@ -88,7 +88,7 @@
   .pkg h3{ font-family:'Saira Condensed',sans-serif; font-weight:700; font-style:italic; font-size:clamp(1.5rem,2.4vw,2rem); text-transform:uppercase; letter-spacing:0.01em; line-height:0.95; }
   .pkg h3 .y{ color:var(--yellow); }
   .pkg .pitch{ color:var(--muted); font-size:0.95rem; line-height:1.65; }
-  .pkg .stat-row{ display:flex; gap:1.6rem; flex-wrap:wrap; padding:0.9rem 0; border-top:1px solid rgba(159,196,238,0.12); border-bottom:1px solid rgba(159,196,238,0.12); }
+  .pkg .stat-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; padding:0.9rem 0; border-top:1px solid rgba(159,196,238,0.12); border-bottom:1px solid rgba(159,196,238,0.12); }
   .pkg .stat .n{ font-family:'Saira Condensed',sans-serif; font-weight:700; font-style:italic; font-size:1.6rem; color:var(--yellow); line-height:1; }
   .pkg .stat .l{ font-family:'JetBrains Mono',monospace; font-size:0.6rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--dim); margin-top:0.3rem; }
   .pkg .rate-note{ color:var(--dim); font-size:0.8rem; line-height:1.5; }
@@ -97,7 +97,7 @@
   .pkg-price .unit{ font-family:'JetBrains Mono',monospace; font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); }
   .pkg-price .anchor{ flex-basis:100%; color:var(--dim); font-size:0.8rem; }
   .pkg-price .anchor s{ color:#8b9aac; }
-  .pkg-cta{ display:flex; flex-direction:column; gap:0.7rem; }
+  .pkg-cta{ display:flex; flex-direction:column; gap:0.7rem; margin-top:auto; }
   .pkg-cta .btn{ width:100%; }
   .btn.added{ background:var(--panel); color:var(--gold,#f4c24a); border:1px solid var(--gold,#f4c24a); box-shadow:none; filter:none; }
   .btn{ display:flex; align-items:center; justify-content:center; gap:.5rem; cursor:pointer;
@@ -294,7 +294,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const stat = (n, l) => `<div class="stat"><div class="n">${n}</div><div class="l">${l}</div></div>`;
   const gs = document.getElementById('gripStats');
-  if (gs) gs.innerHTML = stat(grip.length, 'Grip items') + stat('3-ton', 'Truck included');
+  if (gs) gs.innerHTML = stat(grip.length, 'Grip items') + stat('—', 'Lighting items') + stat('3-ton', 'Truck included');
   const fs = document.getElementById('fullStats');
   if (fs) fs.innerHTML = stat(grip.length, 'Grip items') + stat(lighting.length, 'Lighting items') + stat('3-ton', 'Truck included');
 });
