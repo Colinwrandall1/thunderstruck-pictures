@@ -26,3 +26,12 @@
 /* Nav gear-list badge -> gold once an item is added (zero stays muted) */
 .cart-trigger .count { background: var(--gold) !important; color: var(--gold-ink) !important; }
 .cart-trigger .count.zero { background: rgba(31,42,56,0.9) !important; color: var(--muted) !important; }
+
+/* Gear-list drawer: the panel IS your list, so its identity + running total go gold.
+   The "Continue to Quote" CTA, day-pills and line prices stay ice-blue/chrome —
+   gold keeps meaning "your committed gear," not "submit". */
+#drawerTitle .y { color: var(--gold) !important; }
+#cartTotal { color: var(--gold) !important; }
+#cartTotal .est { color: var(--muted) !important; }
+/* per-line quantity in the drawer = a count on your list -> gold (matches steppers) */
+.drawer .line .controls .qty { color: var(--gold) !important; border-color: var(--gold) !important; }
