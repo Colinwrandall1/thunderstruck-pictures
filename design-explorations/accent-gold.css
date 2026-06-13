@@ -1,0 +1,28 @@
+/* ============================================================
+   SECONDARY ACCENT — golden yellow, deliberately limited.
+   Ice-blue (#9fc4ee) stays the primary brand color everywhere.
+   Gold marks ONE thing: the "add equipment" affordance —
+   hover-to-add, the added/on-list state, and the nav badge
+   once something is on the gear list.
+   ============================================================ */
+:root { --gold: #f4c24a; --gold-ink: #0a0f16; }
+
+/* Hover on an add-equipment CTA -> gold */
+.add-btn:hover {
+  background: var(--gold) !important;
+  border-color: var(--gold) !important;
+  color: var(--gold-ink) !important;
+  box-shadow: 0 0 22px rgba(244,194,74,0.35), inset 0 1px 0 rgba(255,255,255,0.25) !important;
+  filter: none !important;
+}
+
+/* Added-to-gear-list state -> gold (catalog card + steppers) */
+.card.in-cart { border-color: var(--gold) !important; }
+.stepper { border-color: var(--gold) !important; }
+.stepper button { color: var(--gold) !important; }
+.stepper button:hover { background: rgba(244,194,74,0.12) !important; }
+.stepper .qty-display, .stepper .qty { color: var(--gold) !important; border-color: var(--gold) !important; }
+
+/* Nav gear-list badge -> gold once an item is added (zero stays muted) */
+.cart-trigger .count { background: var(--gold) !important; color: var(--gold-ink) !important; }
+.cart-trigger .count.zero { background: rgba(31,42,56,0.9) !important; color: var(--muted) !important; }
