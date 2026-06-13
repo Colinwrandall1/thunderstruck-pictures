@@ -306,14 +306,14 @@
     background: var(--img) center/cover no-repeat #070f1e;
     opacity:.72; filter:saturate(.7) brightness(.72) contrast(1.04); }
   .acol::before { content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
-    background: linear-gradient(180deg, rgba(7,15,30,.22) 0%, rgba(7,15,30,.5) 52%, rgba(7,15,30,.9) 100%);
+    background: linear-gradient(180deg, rgba(13,32,70,.22) 0%, rgba(13,32,70,.5) 52%, rgba(13,32,70,.9) 100%);
     transition: opacity .5s ease; }
   .acol:hover .acol-img, .acol:focus-visible .acol-img { opacity:1; filter:none; }
   .acol:hover::before, .acol:focus-visible::before { opacity:0; }
   .acol.full { flex-grow: var(--grow-exp); }
   .acol.full .acol-img { opacity:1; filter:none; }
   .acol.full::before {
-    background: linear-gradient(180deg, rgba(7,15,30,.1) 0%, rgba(7,15,30,.34) 52%, rgba(7,15,30,.9) 100%);
+    background: linear-gradient(180deg, rgba(13,32,70,.1) 0%, rgba(13,32,70,.34) 52%, rgba(13,32,70,.9) 100%);
     transition: opacity .5s ease, background .5s ease;
   }
   .acol.full:hover::before, .acol.full:focus-visible::before { opacity:0; }
@@ -323,7 +323,7 @@
   .inv-acc:has(.acol:not(.full):focus-visible) .acol.full .acol-img { opacity:.72; filter:saturate(.7) brightness(.72) contrast(1.04); }
   .inv-acc:has(.acol:not(.full):hover) .acol.full::before,
   .inv-acc:has(.acol:not(.full):focus-visible) .acol.full::before {
-    background: linear-gradient(180deg, rgba(7,15,30,.22) 0%, rgba(7,15,30,.5) 52%, rgba(7,15,30,.9) 100%);
+    background: linear-gradient(180deg, rgba(13,32,70,.22) 0%, rgba(13,32,70,.5) 52%, rgba(13,32,70,.9) 100%);
   }
   .acol .acol-label { position:absolute; z-index:2; inset:0;
     display:flex; align-items:center; justify-content:center; white-space:nowrap;
@@ -370,7 +370,7 @@
     .inv-acc { flex-wrap:wrap; height:auto; align-items:stretch; gap:6px; }
     .acol { flex:0 0 calc(50% - 3px); height:auto; aspect-ratio:3/2; }
     .acol .acol-img { opacity:1; filter:none; }
-    .acol::before { background:linear-gradient(180deg, rgba(7,15,30,0) 40%, rgba(7,15,30,.85)); opacity:1; }
+    .acol::before { background:linear-gradient(180deg, rgba(13,32,70,0) 40%, rgba(13,32,70,.85)); opacity:1; }
     .acol .acol-label, .acol:hover .acol-label, .acol:focus-visible .acol-label { opacity:1;
       writing-mode:horizontal-tb; transform:none; justify-content:flex-start; align-items:flex-end;
       padding:.7rem .85rem; }
