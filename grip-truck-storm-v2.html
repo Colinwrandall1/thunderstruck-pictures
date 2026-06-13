@@ -257,7 +257,7 @@
   .th-price{ display:flex; align-items:baseline; gap:0.4rem; }
   .th-day{ font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:2rem; color:var(--yellow); }
   .th-unit{ font-family:'JetBrains Mono',monospace; font-size:0.64rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--dim); }
-  .th-add{ cursor:pointer; background:linear-gradient(180deg,#ffffff,#cdddf0 45%,#9fb4ce 55%,#eaf2fb); color:#0a0f16;
+  .th-add{ display:inline-block; cursor:pointer; background:linear-gradient(180deg,#ffffff,#cdddf0 45%,#9fb4ce 55%,#eaf2fb); color:#0a0f16;
     font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:0.92rem; letter-spacing:0.12em; text-transform:uppercase;
     padding:0.8rem 1.5rem; border:none; border-radius:4px; box-shadow:0 0 18px rgba(150,190,255,.25), inset 0 1px 0 rgba(255,255,255,.85); transition:filter .15s; }
   .th-add:hover{ filter:brightness(1.06); }
@@ -327,8 +327,8 @@
       <h2 class="th-title">The truck, <span class="y">fully loaded.</span></h2>
       <p class="th-desc">Don’t want to build it piece by piece? Take the entire 3-ton truck — every department, delivered and operated by a working grip.</p>
       <div class="th-foot">
-        <div class="th-price"><span class="th-day">$1,250</span><span class="th-unit">/ day · full package</span></div>
-        <button class="th-add" onclick="addToCart('grip-truck-package'); this.textContent='✓ Added to quote'; this.classList.add('added');">Add the truck to quote →</button>
+        <div class="th-price"><span class="th-day">From $850</span><span class="th-unit">/ day · packages</span></div>
+        <a class="th-add" href="truck-storm.html">See truck packages →</a>
       </div>
     </div>
   </section>
