@@ -10,6 +10,8 @@ mkdir -p storm-public/assets storm-public/media storm-public/design-explorations
 
 # Storm home -> root index.html (strip ../ repo-root refs)
 sed 's|\.\./||g' design-explorations/09-stormflight.html > storm-public/index.html
+# v2 cloud/lightning iteration -> /v2.html for side-by-side client review
+sed 's|\.\./||g' design-explorations/09-stormflight-v2.html > storm-public/v2.html
 
 # Storm pages + shared scripts/data
 cp camera-storm.html rentals-storm.html grip-truck-storm.html sound-storm.html \
