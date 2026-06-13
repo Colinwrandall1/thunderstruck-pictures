@@ -61,7 +61,8 @@
   .person:hover{ border-color:var(--line-bright); transform:translateY(-3px); }
   .person .role{ font-family:'JetBrains Mono',monospace; font-size:0.66rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--yellow); margin-bottom:0.7rem; }
   .phead{ display:flex; align-items:center; gap:1.1rem; margin-bottom:1.1rem; }
-  .headshot{ width:84px; height:84px; flex:0 0 84px; border-radius:50%; object-fit:cover; border:1px solid rgba(159,196,238,0.35); box-shadow:0 6px 18px rgba(0,0,0,0.45); }
+  .headshot{ width:84px; height:84px; flex:0 0 84px; border-radius:50%; overflow:hidden; border:1px solid rgba(159,196,238,0.35); box-shadow:0 6px 18px rgba(0,0,0,0.45); }
+  .headshot img{ width:100%; height:100%; object-fit:cover; display:block; }
   .phead .role{ margin-bottom:0.3rem; }
   .phead h3{ margin-bottom:0; }
   .person h3{ font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:clamp(1.6rem,3vw,1.95rem); text-transform:uppercase; letter-spacing:0.01em; margin-bottom:0.9rem; }
@@ -115,7 +116,7 @@
   <div class="crew-grid">
     <div class="person">
       <div class="phead">
-        <img class="headshot" src="media/martin-shapiro.jpg" alt="Martin Shapiro" width="84" height="84" loading="lazy">
+        <span class="headshot"><img src="media/martin-shapiro.jpg" alt="Martin Shapiro" style="object-position:52% 14%; transform:scale(1.65);" loading="lazy"></span>
         <div class="phead-txt">
           <div class="role">Writer · Director · Producer</div>
           <h3>Martin Shapiro</h3>
@@ -126,7 +127,7 @@
     </div>
     <div class="person">
       <div class="phead">
-        <img class="headshot" src="media/taylor-randall.jpg" alt="Taylor Randall" width="84" height="84" loading="lazy">
+        <span class="headshot"><img src="media/taylor-randall.jpg" alt="Taylor Randall" style="object-position:66% 36%; transform:scale(1.34);" loading="lazy"></span>
         <div class="phead-txt">
           <div class="role">Director · Director of Photography</div>
           <h3>Taylor Randall</h3>
