@@ -73,10 +73,9 @@
 
   .cap{ font-size:0.95rem; color:#8fa1b5; max-width:46ch; line-height:1.5; }
 
-  @media (prefers-reduced-motion: reduce){
-    .ebolt, .ebolt .core, .ebolt .sheen { animation: none !important; }
-    .ebolt{ filter:drop-shadow(0 0 6px rgba(159,196,238,.55)) drop-shadow(0 0 18px rgba(120,170,255,.4)); }
-  }
+  /* NOTE: in production we'd gate the motion behind prefers-reduced-motion.
+     For this demo it always animates so the effect is visible even if your
+     system has "Reduce Motion" turned on. */
 </style>
 </head>
 <body>
