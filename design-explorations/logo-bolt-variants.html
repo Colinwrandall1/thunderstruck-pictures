@@ -19,9 +19,11 @@
 
   /* ---- lockup: real bolt image behind the exact wordmark ---- */
   .lockup{ position:relative; display:inline-flex; flex-direction:column; align-items:center; line-height:1; }
-  .bolt-img{ position:absolute; left:55%; top:50%; transform:translate(-50%,-52%); z-index:0; pointer-events:none; }
-  .bolt-img.glow{ height:480%; }
-  .bolt-img.vec{ height:500%; }
+  /* centered on each bolt's ACTUAL ink centroid (size-independent):
+     glow core sits at 30.9% across its PNG, vector at 49.5% -> translateX matches. */
+  .bolt-img{ position:absolute; left:50%; top:50%; z-index:0; pointer-events:none; }
+  .bolt-img.glow{ height:420%; transform:translate(-30.9%,-52%); }
+  .bolt-img.vec{ height:440%; transform:translate(-49.5%,-52%); }
   /* the vector bolt ships white (great on dark); flip it to ink on light backgrounds */
   .light .bolt-img.vec{ filter:brightness(0) opacity(0.82); }
 
@@ -38,19 +40,19 @@
 <div class="grid">
   <div class="cell dark">
     <span class="tag">Stylized · glow bolt · on dark</span>
-    <span class="lockup"><img class="bolt-img glow" src="../media/bolt-glow.png" alt=""><span class="word">THUNDERSTRUCK</span><span class="sub">Pictures</span></span>
+    <span class="lockup"><img class="bolt-img glow" src="../media/bolt-glow.png" alt=""><span class="word">THUNDERSTRUCK</span></span>
   </div>
   <div class="cell light">
     <span class="tag">Stylized · glow bolt · on grey</span>
-    <span class="lockup"><img class="bolt-img glow" src="../media/bolt-glow.png" alt=""><span class="word">THUNDERSTRUCK</span><span class="sub">Pictures</span></span>
+    <span class="lockup"><img class="bolt-img glow" src="../media/bolt-glow.png" alt=""><span class="word">THUNDERSTRUCK</span></span>
   </div>
   <div class="cell dark">
     <span class="tag">Simple · vector bolt · on dark</span>
-    <span class="lockup"><img class="bolt-img vec" src="../media/bolt-vector.png" alt=""><span class="word">THUNDERSTRUCK</span><span class="sub">Pictures</span></span>
+    <span class="lockup"><img class="bolt-img vec" src="../media/bolt-vector.png" alt=""><span class="word">THUNDERSTRUCK</span></span>
   </div>
   <div class="cell light">
     <span class="tag">Simple · vector bolt · on grey</span>
-    <span class="lockup"><img class="bolt-img vec" src="../media/bolt-vector.png" alt=""><span class="word">THUNDERSTRUCK</span><span class="sub">Pictures</span></span>
+    <span class="lockup"><img class="bolt-img vec" src="../media/bolt-vector.png" alt=""><span class="word">THUNDERSTRUCK</span></span>
   </div>
 </div>
 
