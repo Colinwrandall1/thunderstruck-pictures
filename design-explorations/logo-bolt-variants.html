@@ -19,13 +19,24 @@
 
   /* ---- lockup: real bolt image behind the exact wordmark ---- */
   .lockup{ position:relative; display:inline-flex; flex-direction:column; align-items:center; line-height:1; }
-  /* centered on each bolt's ACTUAL ink centroid (size-independent):
-     glow core sits at 30.9% across its PNG, vector at 49.5% -> translateX matches. */
+  /* ONE bolt shape (the vector) for EVERY treatment, so size + jog-spacing always match.
+     Centered horizontally on the vector's ink centroid (49.5%) and vertically so the
+     bolt's two horizontal jogs straddle the wordmark's cap-center (-48.9%). */
   .bolt-img{ position:absolute; left:50%; top:50%; z-index:0; pointer-events:none; }
-  .bolt-img.glow{ height:480%; transform:translate(-30.9%,-50%); }
-  .bolt-img.vec{ height:520%; transform:translate(-49.5%,-50%); }
-  /* the vector bolt ships white (great on dark); flip it to ink on light backgrounds */
+  .bolt-img.vec{ height:520%; transform:translate(-49.5%,-48.9%); }
+  /* the vector ships white (great on dark); flip it to ink on light backgrounds */
   .light .bolt-img.vec{ filter:brightness(0) opacity(0.82); }
+  /* "glow" treatment = the SAME vector bolt with an electric lighting effect layered on */
+  .bolt-img.glowfx{ filter:
+      drop-shadow(0 0 3px rgba(255,255,255,0.90))
+      drop-shadow(0 0 10px rgba(159,196,238,0.85))
+      drop-shadow(0 0 26px rgba(120,170,255,0.60))
+      drop-shadow(0 0 54px rgba(90,150,255,0.42)); }
+  .light .bolt-img.glowfx{ filter:
+      drop-shadow(0 0 3px rgba(255,255,255,0.95))
+      drop-shadow(0 0 10px rgba(120,170,255,0.85))
+      drop-shadow(0 0 26px rgba(80,140,240,0.60))
+      drop-shadow(0 0 54px rgba(60,120,230,0.48)); }
 
   .word{ position:relative; z-index:1; font-weight:800; font-style:italic; text-transform:uppercase;
     font-size:5rem; letter-spacing:0.01em; line-height:0.8; white-space:nowrap; }
@@ -39,12 +50,12 @@
 
 <div class="grid">
   <div class="cell dark">
-    <span class="tag">Stylized · glow bolt · on dark</span>
-    <span class="lockup"><img class="bolt-img glow" src="../media/bolt-glow.png" alt=""><span class="word">THUNDERSTRUCK</span></span>
+    <span class="tag">Vector bolt + glow · on dark</span>
+    <span class="lockup"><img class="bolt-img vec glowfx" src="../media/bolt-vector.png" alt=""><span class="word">THUNDERSTRUCK</span></span>
   </div>
   <div class="cell light">
-    <span class="tag">Stylized · glow bolt · on grey</span>
-    <span class="lockup"><img class="bolt-img glow" src="../media/bolt-glow.png" alt=""><span class="word">THUNDERSTRUCK</span></span>
+    <span class="tag">Vector bolt + glow · on grey</span>
+    <span class="lockup"><img class="bolt-img vec glowfx" src="../media/bolt-vector.png" alt=""><span class="word">THUNDERSTRUCK</span></span>
   </div>
   <div class="cell dark">
     <span class="tag">Simple · vector bolt · on dark</span>
