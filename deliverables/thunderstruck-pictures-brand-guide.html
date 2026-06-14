@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thunderstruck Pictures — Brand &amp; Logo Guidelines</title>
+<link rel="icon" type="image/png" href="../assets/brand/app-icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:ital,wght@0,500;0,600;0,700;1,700;1,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:ital,wght@0,500;0,600;0,700;1,700;1,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:ital,wght@0,500;0,600;0,700;1,700;1,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<style>
+  :root{
+    --navy:#04060c; --panel:#0b121d; --panel-2:#0e1828;
+    --ice:#9fc4ee; --ice-soft:#c8defa;
+    --frost:#eef4fb; --slate:#9fb0c6; --faint:#647588;
+    --gold:#f4c24a;
+    --light:#e7ecf3; --paper:#fdfdfb;
+    --line:rgba(159,196,238,.14); --line-soft:rgba(159,196,238,.09);
+    --max:1140px; --pad:clamp(22px,5vw,64px); --r:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--navy);color:var(--frost);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;font-size:16px;line-height:1.6}
+  img{display:block;max-width:100%}
+  .wrap{max-width:var(--max);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+  section{padding:clamp(54px,7vw,96px) 0;border-top:1px solid var(--line)}
+  section:first-of-type{border-top:none}
+
+  h1,h2,h3{font-family:'Saira Condensed',sans-serif;font-weight:700;letter-spacing:-.01em;color:#fff}
+  h1 em,h2 em{font-style:italic;font-weight:700;color:var(--ice)}
+  .eyebrow{display:inline-flex;align-items:center;gap:12px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--ice);margin-bottom:18px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ice);opacity:.7}
+  h2{font-size:clamp(28px,3.4vw,46px);line-height:1.04;max-width:22ch;text-transform:uppercase}
+  p.lede{font-size:16.5px;color:var(--slate);max-width:62ch;margin-top:14px}
+
+  /* cover */
+  .cover{background:
+      radial-gradient(120% 120% at 70% -10%, #0c1626 0%, #04060c 58%);
+      color:#fff;padding:clamp(72px,9vw,134px) 0;border-top:none;position:relative;overflow:hidden}
+  .cover::after{content:"";position:absolute;inset:0;background:url('../assets/brand/pattern-tile-ice.png');background-size:120px auto;opacity:.5;pointer-events:none}
+  .cover .wrap{position:relative;z-index:1}
+  .cover .mark{margin-bottom:46px}
+  .cover h1{font-size:clamp(40px,5.6vw,82px);line-height:.98;max-width:16ch;text-transform:uppercase}
+  .cover p{color:rgba(255,255,255,.62);margin-top:20px;max-width:56ch;font-size:16.5px}
+  .cover .meta{margin-top:48px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:rgba(159,196,238,.6);letter-spacing:.14em;text-transform:uppercase}
+
+  /* live logo lockup (bolt mask + wordmark) */
+  .lk{position:relative;display:inline-flex;align-items:center;line-height:.8;white-space:nowrap}
+  .lk .b{position:absolute;left:50%;top:50%;height:520%;aspect-ratio:766/1369;transform:translate(-50%,-49%);z-index:0;pointer-events:none;
+    -webkit-mask:url('../assets/brand/monogram.png') center/contain no-repeat;mask:url('../assets/brand/monogram.png') center/contain no-repeat;background:var(--bc)}
+  .lk .w{position:relative;z-index:1;font-family:'Saira Condensed',sans-serif;font-weight:800;font-style:italic;text-transform:uppercase;letter-spacing:.01em;color:var(--wc)}
+  .lk.primary{--bc:var(--ice);--wc:var(--frost)}
+  .lk.primary .b{filter:drop-shadow(0 0 5px rgba(159,196,238,.5)) drop-shadow(0 0 16px rgba(120,170,255,.34))}
+  .lk.white{--bc:#fff;--wc:#fff}
+  .lk.navy{--bc:var(--navy);--wc:var(--navy)}
+  .lk.ice{--bc:var(--ice);--wc:var(--ice)}
+  /* bolt-only mark */
+  .mk{aspect-ratio:766/1369;-webkit-mask:url('../assets/brand/monogram.png') center/contain no-repeat;mask:url('../assets/brand/monogram.png') center/contain no-repeat}
+  .mk.ice{background:var(--ice)} .mk.white{background:#fff} .mk.navy{background:var(--navy)}
+  .mk.glow{filter:drop-shadow(0 0 6px rgba(159,196,238,.55)) drop-shadow(0 0 18px rgba(120,170,255,.4))}
+
+  /* tiles */
+  .grid{display:grid;gap:18px;margin-top:42px}
+  .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)}
+  .tile{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--panel)}
+  .tile .stage{display:flex;align-items:center;justify-content:center;min-height:172px;padding:30px}
+  .tile .cap{border-top:1px solid var(--line);padding:13px 18px;font-size:12.5px;color:var(--slate);background:var(--panel)}
+  .tile .cap strong{color:var(--frost);font-weight:600;display:block;font-size:13px;margin-bottom:2px}
+  .stage.on-navy{background:#04060c}
+  .stage.on-deep{background:radial-gradient(120% 120% at 50% 0,#0c1626,#04060c)}
+  .stage.on-light{background:var(--light)}
+  .stage.on-white{background:#fff}
+  .stage.on-photo{background:url('../media/storm-hero-poster.jpg') center/cover;position:relative}
+  .stage.on-photo::before{content:"";position:absolute;inset:0;background:rgba(4,8,18,.55)}
+  .stage.on-photo .lk,.stage.on-photo .mk{position:relative}
+
+  /* clearspace + min size */
+  .duo{display:grid;grid-template-columns:repeat(2,1fr);gap:34px;align-items:start;margin-top:42px}
+  .clear-demo{position:relative;display:inline-block;border:1.5px dashed rgba(159,196,238,.5);padding:42px;border-radius:8px;background:var(--panel)}
+  .clear-demo .x{position:absolute;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:500;letter-spacing:.1em;color:var(--ice)}
+  .clear-demo .x.t{top:10px;left:50%;transform:translateX(-50%)} .clear-demo .x.b{bottom:10px;left:50%;transform:translateX(-50%)}
+  .clear-demo .x.l{left:12px;top:50%;transform:translateY(-50%)} .clear-demo .x.r{right:12px;top:50%;transform:translateY(-50%)}
+  .min-demo{display:flex;align-items:flex-end;gap:44px;flex-wrap:wrap;margin-top:6px}
+  .min-demo .item{text-align:center}
+  .min-demo .item .l{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--slate);margin-top:12px;line-height:1.6}
+  .min-demo .item .l b{color:var(--frost);font-weight:500}
+  .rule-note{font-size:13.5px;color:var(--slate);margin-top:22px;max-width:60ch;line-height:1.65}
+  .rule-note strong{color:var(--frost)}
+
+  /* color chips */
+  .chip{border-radius:var(--r);border:1px solid var(--line);overflow:hidden;background:var(--panel)}
+  .chip .swatch{height:108px}
+  .chip .info{padding:13px 16px;font-size:12.5px;color:var(--slate)}
+  .chip .info strong{display:block;color:var(--frost);font-size:13.5px;font-weight:600}
+  .chip .info code{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ice)}
+
+  /* type specimens */
+  .spec{border:1px solid var(--line);border-radius:var(--r);background:var(--panel);padding:30px;display:flex;flex-direction:column}
+  .spec .which{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ice);margin-bottom:14px}
+  .spec .sample-disp{font-family:'Saira Condensed',sans-serif;font-weight:800;font-style:italic;text-transform:uppercase;font-size:42px;line-height:1;color:#fff}
+  .spec .sample-body{font-family:'Inter';font-size:25px;font-weight:600;letter-spacing:-.01em;line-height:1.2;color:var(--frost)}
+  .spec .desc{font-size:13.5px;color:var(--slate);margin-top:14px;line-height:1.6}
+  .spec .glyphs{font-family:'Saira Condensed';font-weight:600;font-size:15px;color:var(--slate);letter-spacing:.04em;margin-top:10px}
+
+  /* don'ts */
+  .dont .stage{position:relative}
+  .dont .stage::after{content:"✕";position:absolute;top:10px;right:13px;color:#ff6a55;font-size:17px;font-weight:700}
+  .squish{transform:scaleX(1.5)}
+  .tinted{filter:hue-rotate(85deg) saturate(2.4)}
+  .shadowbad{filter:drop-shadow(3px 4px 2px rgba(0,0,0,.7))}
+
+  /* pattern */
+  .pat{border-radius:var(--r);min-height:240px;border:1px solid var(--line)}
+  .pat.ice{background:#04060c url('../assets/brand/pattern-tile-ice.png');background-size:118px auto}
+  .pat.navy{background:var(--light) url('../assets/brand/pattern-tile-navy.png');background-size:118px auto}
+
+  /* business cards */
+  .cards-stage{display:flex;gap:36px;flex-wrap:wrap;align-items:center;justify-content:center;background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r);padding:56px 30px;margin-top:42px}
+  .bcard{width:344px;aspect-ratio:3.5/2;border-radius:12px;box-shadow:0 22px 48px rgba(0,0,0,.5),0 2px 6px rgba(0,0,0,.4);position:relative;overflow:hidden}
+  .bcard.front{background:#04060c url('../assets/brand/pattern-tile-ice.png');background-size:104px auto;background-position:center;display:flex;align-items:center;justify-content:center;transform:rotate(-2deg)}
+  .bcard.back{background:#fff;color:#04060c;transform:rotate(1.7deg);padding:24px 26px;display:flex;flex-direction:column;justify-content:space-between}
+  .bcard.back .top{display:flex;justify-content:space-between;align-items:flex-start}
+  .bcard.back .who .nm{font-family:'Saira Condensed';font-weight:700;font-style:italic;text-transform:uppercase;font-size:21px;letter-spacing:.01em;color:#04060c}
+  .bcard.back .who .rl{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#3f5b86;font-weight:500;letter-spacing:.14em;text-transform:uppercase;margin-top:5px}
+  .bcard.back .lines{font-size:11px;color:#46566b;line-height:1.8}
+  .bcard.back .lines strong{color:#04060c;font-weight:600}
+  .bcard.back::after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:linear-gradient(90deg,#9fc4ee,#5f93d6)}
+
+  /* letterhead */
+  .lh-stage{display:flex;gap:40px;flex-wrap:wrap;align-items:flex-start;justify-content:center;background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r);padding:56px 30px;margin-top:42px}
+  .letter{width:392px;aspect-ratio:8.5/11;background:var(--paper);box-shadow:0 22px 48px rgba(0,0,0,.45);border-radius:6px;position:relative;overflow:hidden;display:flex;flex-direction:column}
+  .letter .lh-head{display:flex;justify-content:space-between;align-items:center;padding:26px 30px 20px;border-bottom:1px solid rgba(4,6,12,.1)}
+  .letter .lh-head .co{font-family:'JetBrains Mono',monospace;font-size:7.5px;color:#5b6a7e;text-align:right;line-height:1.9;letter-spacing:.06em;text-transform:uppercase}
+  .letter .body{flex:1;padding:28px 30px}
+  .letter .ln{height:6px;border-radius:3px;background:rgba(4,6,12,.09);margin-bottom:12px}
+  .letter .ln.w60{width:60%}.letter .ln.w85{width:85%}.letter .ln.w75{width:75%}.letter .ln.w40{width:40%}
+  .letter .lh-foot{padding:13px 30px;background:#04060c url('../assets/brand/pattern-tile-ice.png');background-size:80px auto;background-position:center;color:rgba(238,244,251,.72);font-family:'JetBrains Mono',monospace;font-size:7.5px;letter-spacing:.08em;display:flex;justify-content:space-between;align-items:center;text-transform:uppercase}
+  .letter.alt .lh-head{border-bottom:none}
+  .letter.alt .side{position:absolute;top:0;bottom:0;left:0;width:15px;background:var(--light) url('../assets/brand/pattern-tile-navy.png');background-size:60px auto;border-right:1px solid rgba(4,6,12,.08)}
+  .letter.alt .lh-head,.letter.alt .body{padding-left:46px}
+  .letter.alt .lh-foot{background:none;color:#5b6a7e;border-top:1px solid rgba(4,6,12,.1);padding-left:46px}
+
+  footer{padding:42px 0 72px;border-top:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--faint);letter-spacing:.04em;line-height:1.8}
+
+  @media (max-width:900px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:620px){.g2,.g3,.g4,.duo{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="wrap">
+    <span class="lk primary mark" style="margin-bottom:46px"><span class="b"></span><span class="w" style="font-size:clamp(36px,6vw,76px)">Thunderstruck</span></span>
+    <span class="eyebrow">Brand &amp; logo guidelines · v1</span>
+    <h1>One mark. <em>Charged</em> the same way everywhere.</h1>
+    <p>How the Thunderstruck Pictures identity holds up across web, signage, social, and the front of every reel — which version of the bolt to use where, the colors and type around it, and the handful of rules that keep it looking deliberate.</p>
+    <p class="meta">Thunderstruck Pictures · Prepared by Randall Systems · June 2026</p>
+  </div>
+</section>
+
+<!-- 01 LOGO SYSTEM -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">01 · The logo system</span>
+    <h2>Four versions. Each has <em>one job.</em></h2>
+    <p class="lede">Every lockup below is the same bolt and the same wordmark — only the color changes. Pick by background and size; never restyle on the fly. The bolt always sits behind the wordmark, centered.</p>
+    <div class="grid g2">
+      <div class="tile">
+        <div class="stage on-deep"><span class="lk primary"><span class="b"></span><span class="w" style="font-size:40px">Thunderstruck</span></span></div>
+        <div class="cap"><strong>Primary — white + ice-blue bolt</strong>The hero treatment. Dark sections, the site, signage, reel intros. The brand at full strength.</div>
+      </div>
+      <div class="tile">
+        <div class="stage on-light"><span class="lk navy"><span class="b"></span><span class="w" style="font-size:40px">Thunderstruck</span></span></div>
+        <div class="cap"><strong>One-color navy — for light backgrounds</strong>Documents, invoices, anything on white or light. Never use the white version here.</div>
+      </div>
+      <div class="tile">
+        <div class="stage on-photo"><span class="lk white"><span class="b"></span><span class="w" style="font-size:36px">Thunderstruck</span></span></div>
+        <div class="cap"><strong>One-color white — over photos &amp; video</strong>Knockout white over the storm footage or any dark image — always over a scrim, never raw on a busy frame.</div>
+      </div>
+      <div class="tile">
+        <div class="stage on-navy"><span class="mk ice glow" style="height:104px"></span></div>
+        <div class="cap"><strong>The bolt mark — small spaces</strong>Social avatars, app icon, watermark, the corner of a slate. Use when the full lockup would shrink below legibility.</div>
+      </div>
+    </div>
+    <div class="grid g3">
+      <div class="tile">
+        <div class="stage on-white"><span class="mk navy" style="height:104px"></span></div>
+        <div class="cap"><strong>Bolt mark — on light</strong>Navy one-color bolt for light contexts: favicons on white, document corners, stamps.</div>
+      </div>
+      <div class="tile">
+        <div class="stage on-light"><img src="../assets/brand/app-icon-512.png" style="height:84px;border-radius:19px" alt="App icon"></div>
+        <div class="cap"><strong>App tile / favicon</strong>Ice-blue bolt on a rounded navy tile. Browser tabs, home-screen icon, Google Business Profile.</div>
+      </div>
+      <div class="tile">
+        <div class="stage on-photo"><span class="lk white"><span class="b"></span><span class="w" style="font-size:30px">Thunderstruck</span></span></div>
+        <div class="cap"><strong>Over photography</strong>White lockup only, always over a dark scrim (≈55%) — never raw on a busy image.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 CLEARSPACE & MIN SIZE -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">02 · Clearspace &amp; minimum size</span>
+    <h2>Give it air. Don't let it <em>shrink past legible.</em></h2>
+    <div class="duo">
+      <div>
+        <div class="clear-demo">
+          <span class="x t">X</span><span class="x b">X</span><span class="x l">X</span><span class="x r">X</span>
+          <span class="lk white"><span class="b"></span><span class="w" style="font-size:30px">Thunderstruck</span></span>
+        </div>
+        <p class="rule-note"><strong>Clearspace = X,</strong> the cap-height of the wordmark. Keep that margin clear on all four sides — no text, photo edges, page borders, or other logos inside it. The bolt's glow doesn't count as clearspace.</p>
+      </div>
+      <div>
+        <div class="min-demo">
+          <div class="item"><span class="lk navy" style="--wc:var(--frost);--bc:var(--ice)"><span class="b"></span><span class="w" style="font-size:15px;color:#eef4fb">Thunderstruck</span></span><div class="l">Lockup minimum<br><b>120px wide / 32mm</b></div></div>
+          <div class="item"><span class="mk ice" style="height:30px"></span><div class="l">Bolt minimum<br><b>20px / 6mm</b></div></div>
+        </div>
+        <p class="rule-note">Below the lockup minimum the wordmark stops reading — switch to the <strong>bolt mark alone</strong> rather than scaling the lockup smaller. That's exactly the rule the website follows: full lockup in the nav, bolt mark as the favicon.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 COLOR -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">03 · Color</span>
+    <h2>Storm navy leads. Ice-blue is the <em>charge.</em></h2>
+    <p class="lede">Near-black navy carries almost every surface; ice-blue is the electric accent — the bolt, links, focus states, key moments. Gold appears in one place only (the gear-list / booking affordance) and never touches the logo.</p>
+    <div class="grid g4">
+      <div class="chip"><div class="swatch" style="background:#04060c;border-bottom:1px solid var(--line)"></div><div class="info"><strong>Storm Navy</strong><code>#04060C</code> · background, primary</div></div>
+      <div class="chip"><div class="swatch" style="background:#9fc4ee"></div><div class="info"><strong>Ice Blue</strong><code>#9FC4EE</code> · accent · the bolt</div></div>
+      <div class="chip"><div class="swatch" style="background:#eef4fb;border-bottom:1px solid var(--line)"></div><div class="info"><strong>Frost</strong><code>#EEF4FB</code> · text on dark</div></div>
+      <div class="chip"><div class="swatch" style="background:#f4c24a"></div><div class="info"><strong>Signal Gold</strong><code>#F4C24A</code> · gear-list only</div></div>
+      <div class="chip"><div class="swatch" style="background:#0e1828"></div><div class="info"><strong>Storm Steel</strong><code>#0E1828</code> · raised panels</div></div>
+      <div class="chip"><div class="swatch" style="background:#9fb0c6"></div><div class="info"><strong>Slate</strong><code>#9FB0C6</code> · secondary text</div></div>
+      <div class="chip"><div class="swatch" style="background:#e7ecf3;border-bottom:1px solid var(--line)"></div><div class="info"><strong>Light Frost</strong><code>#E7ECF3</code> · light surfaces</div></div>
+      <div class="chip"><div class="swatch" style="background:#647588"></div><div class="info"><strong>Faint</strong><code>#647588</code> · captions, meta</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 TYPOGRAPHY -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">04 · Typography</span>
+    <h2>A condensed display face, a <em>clean workhorse.</em></h2>
+    <div class="grid g2">
+      <div class="spec">
+        <span class="which">Display &amp; wordmark — Saira Condensed</span>
+        <span class="sample-disp">Stories that hit like lightning.</span>
+        <p class="desc">Extra-bold italic is the wordmark and the voice of every headline — uppercase, tight, fast. Use 700–800 weights for display only; don't set paragraphs in it. Free via Google Fonts; fallback: system condensed sans.</p>
+      </div>
+      <div class="spec">
+        <span class="which">Body &amp; UI — Inter</span>
+        <span class="sample-body">Grip-truck rental &amp; production, Austin TX.</span>
+        <p class="desc">Inter carries all running text, buttons, and labels — 400/500 for body, 600 for emphasis. JetBrains Mono handles small uppercase eyebrows and spec lines (like this kit's labels). Both free via Google Fonts.</p>
+        <p class="glyphs">Saira Condensed · ABCDEFGHIJKLM · 0123456789</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 DON'TS -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">05 · What not to do</span>
+    <h2>Four ways the mark gets <em>ruined.</em></h2>
+    <div class="grid g4">
+      <div class="tile dont">
+        <div class="stage on-light"><span class="lk white"><span class="b"></span><span class="w" style="font-size:26px">Thunderstruck</span></span></div>
+        <div class="cap"><strong>Don't put white on light</strong>It disappears. Use the navy version.</div>
+      </div>
+      <div class="tile dont">
+        <div class="stage on-deep"><span class="lk primary squish"><span class="b"></span><span class="w" style="font-size:26px">Thunderstruck</span></span></div>
+        <div class="cap"><strong>Don't stretch or squish</strong>Scale proportionally, always.</div>
+      </div>
+      <div class="tile dont">
+        <div class="stage on-deep"><span class="lk primary tinted"><span class="b"></span><span class="w" style="font-size:26px">Thunderstruck</span></span></div>
+        <div class="cap"><strong>Don't recolor the bolt</strong>Ice-blue, white, or navy only — never gold.</div>
+      </div>
+      <div class="tile dont">
+        <div class="stage on-photo"><span class="lk white shadowbad"><span class="b"></span><span class="w" style="font-size:26px">Thunderstruck</span></span></div>
+        <div class="cap"><strong>Don't float on busy frames</strong>No hard drop-shadows; use a scrim.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 PATTERN -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">06 · Brand pattern</span>
+    <h2>The bolt, repeated — a <em>storm-charged</em> texture.</h2>
+    <p class="lede">A low-opacity field of the bolt mark. It turns empty surfaces — card fronts, slide backgrounds, folder interiors, the footer of a page — into branded space without shouting. Two approved colorways, kept faint.</p>
+    <div class="grid g2">
+      <div class="tile">
+        <div class="pat ice"></div>
+        <div class="cap"><strong>Ice on navy</strong>Dark surfaces: card fronts, dark slides, social frames, page footers.</div>
+      </div>
+      <div class="tile">
+        <div class="pat navy"></div>
+        <div class="cap"><strong>Navy on light</strong>Light surfaces: letterhead edges, envelope liners, document covers.</div>
+      </div>
+    </div>
+    <p class="rule-note"><strong>Rules:</strong> the pattern never sits behind body text, never appears in both colorways on one piece, and the bolt inside it is never the "official" logo placement — a real lockup must appear elsewhere on the piece.</p>
+  </div>
+</section>
+
+<!-- 07 BUSINESS CARDS -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">07 · Business cards</span>
+    <h2>Pattern front, <em>working</em> back.</h2>
+    <p class="lede">Front: the white lockup centered on the ice-on-navy pattern. Back: white stock, navy contact details, the bolt mark, finished with an ice-blue edge line. Shown for Martin — same template for the whole crew.</p>
+    <div class="cards-stage">
+      <div class="bcard front"><span class="lk white"><span class="b"></span><span class="w" style="font-size:23px">Thunderstruck</span></span></div>
+      <div class="bcard back">
+        <div class="top">
+          <div class="who">
+            <div class="nm">Martin Shapiro</div>
+            <div class="rl">Founder · Cinematographer</div>
+          </div>
+          <span class="mk navy" style="height:38px"></span>
+        </div>
+        <div class="lines">
+          <strong>thunderstruckpictures.co</strong> · @nightowlmartin<br>
+          martin@thunderstruckpictures.co<br>
+          Stray Vista Studios, Dripping Springs TX · Austin &amp; Central Texas
+        </div>
+      </div>
+    </div>
+    <p class="rule-note"><strong>Print spec:</strong> 3.5 × 2 in, navy as a solid spot color (not four-color black), pattern printed tone-on-tone. The ice-blue edge line is a spot-gloss or chrome/silver-foil opportunity — fitting for lightning — if budget allows. Uncoated or soft-touch stock suits the brand better than gloss.</p>
+  </div>
+</section>
+
+<!-- 08 LETTERHEAD -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">08 · Letterhead</span>
+    <h2>Quiet page, <em>charged edges.</em></h2>
+    <p class="lede">Two approved layouts. A: navy lockup header with an ice-on-navy pattern footer band. B: a navy-on-light pattern spine down the left edge, plain footer — calmer, good for invoices and contracts. Both keep the body completely clear for content.</p>
+    <div class="lh-stage">
+      <div class="letter">
+        <div class="lh-head">
+          <span class="lk navy"><span class="b"></span><span class="w" style="font-size:16px">Thunderstruck</span></span>
+          <div class="co">Thunderstruck Pictures<br>Dripping Springs, TX</div>
+        </div>
+        <div class="body">
+          <div class="ln w40"></div><div style="height:14px"></div>
+          <div class="ln w85"></div><div class="ln w75"></div><div class="ln w85"></div><div class="ln w60"></div>
+          <div style="height:14px"></div>
+          <div class="ln w85"></div><div class="ln w75"></div><div class="ln w40"></div>
+        </div>
+        <div class="lh-foot">
+          <span>thunderstruckpictures.co · Austin &amp; Central Texas</span>
+          <span class="mk ice" style="height:15px"></span>
+        </div>
+      </div>
+      <div class="letter alt">
+        <div class="side"></div>
+        <div class="lh-head">
+          <span class="lk navy"><span class="b"></span><span class="w" style="font-size:16px">Thunderstruck</span></span>
+          <div class="co">Thunderstruck Pictures<br>Dripping Springs, TX</div>
+        </div>
+        <div class="body">
+          <div class="ln w40"></div><div style="height:14px"></div>
+          <div class="ln w85"></div><div class="ln w75"></div><div class="ln w85"></div><div class="ln w60"></div>
+          <div style="height:14px"></div>
+          <div class="ln w85"></div><div class="ln w75"></div><div class="ln w40"></div>
+        </div>
+        <div class="lh-foot">
+          <span>thunderstruckpictures.co · @nightowlmartin · Austin &amp; Central Texas</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 IN USE -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">09 · In use</span>
+    <h2>The system, already <em>live.</em></h2>
+    <p class="lede">The website follows these rules today: the bolt + wordmark in the nav, the animated bolt behind the hero wordmark over the storm video, and the bolt tile as the favicon. Every new touchpoint — email signature, reel intro, rate card, yard signage — pulls from this same kit. No new variants.</p>
+    <div class="grid g3">
+      <div class="tile">
+        <div class="stage on-deep" style="min-height:120px"><span class="lk primary"><span class="b"></span><span class="w" style="font-size:22px">Thunderstruck</span></span></div>
+        <div class="cap"><strong>Website nav</strong>Horizontal lockup, bolt + wordmark.</div>
+      </div>
+      <div class="tile">
+        <div class="stage on-photo" style="min-height:120px"><span class="lk primary"><span class="b"></span><span class="w" style="font-size:30px">Thunderstruck</span></span></div>
+        <div class="cap"><strong>Hero / reel intro</strong>Animated bolt behind the wordmark.</div>
+      </div>
+      <div class="tile">
+        <div class="stage on-light" style="min-height:120px"><img src="../assets/brand/app-icon-512.png" style="height:54px;border-radius:13px" alt="favicon"></div>
+        <div class="cap"><strong>Tab, avatar &amp; GBP</strong>Bolt tile everywhere small.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Thunderstruck Pictures · Brand &amp; Logo Guidelines v1 · Prepared by Randall Systems · June 2026<br>Assets in assets/brand/ — bolt mark (ice / white / navy), app-icon tile, pattern tiles + sheets (ice-on-navy, navy-on-light). Logo lockups are live type (Saira Condensed) over the bolt mark.</div>
+</footer>
+
+</body>
+</html>
