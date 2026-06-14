@@ -22,8 +22,8 @@
   /* centered on each bolt's ACTUAL ink centroid (size-independent):
      glow core sits at 30.9% across its PNG, vector at 49.5% -> translateX matches. */
   .bolt-img{ position:absolute; left:50%; top:50%; z-index:0; pointer-events:none; }
-  .bolt-img.glow{ height:480%; transform:translate(-30.9%,-52%); }
-  .bolt-img.vec{ height:520%; transform:translate(-49.5%,-52%); }
+  .bolt-img.glow{ height:480%; transform:translate(-30.9%,-50%); }
+  .bolt-img.vec{ height:520%; transform:translate(-49.5%,-50%); }
   /* the vector bolt ships white (great on dark); flip it to ink on light backgrounds */
   .light .bolt-img.vec{ filter:brightness(0) opacity(0.82); }
 
