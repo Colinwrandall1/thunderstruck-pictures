@@ -3,69 +3,71 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thunderstruck — final logo lockups</title>
+<title>Thunderstruck — logo treatments (brand colors)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:ital,wght@0,600;0,700;1,600;1,700;1,800&display=swap" rel="stylesheet">
 <style>
+  :root{
+    --navy:#04060c;   /* site background */
+    --ice:#9fc4ee;    /* brand electric ice-blue accent */
+    --white:#f2f6fc;  /* heading white */
+    --stroke-ice:#e2ecfa; /* hero outline color */
+  }
   *{ box-sizing:border-box; margin:0; padding:0; }
-  body{ font-family:'Saira Condensed',system-ui,sans-serif; background:#0a0e16; }
+  body{ font-family:'Saira Condensed',system-ui,sans-serif; background:var(--navy); }
   .grid{ display:grid; grid-template-columns:1fr 1fr; }
-  .cell{ min-height:380px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.6rem; padding:3.5rem; }
-  .dark{ background:#0a0e16; }
-  .light{ background:#b9c0c9; }       /* grey, like the client mockup */
-  .tag{ font-family:'JetBrains Mono',monospace; font-size:0.62rem; letter-spacing:0.24em; text-transform:uppercase; }
-  .dark .tag{ color:#5e7089; } .light .tag{ color:#5b6470; }
+  .cell{ min-height:330px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.4rem; padding:3rem; }
+  .navy-bg{ background:var(--navy); }
+  .light-bg{ background:#d7dde6; }
+  .tag{ font-family:'JetBrains Mono',monospace; font-size:0.62rem; letter-spacing:0.22em; text-transform:uppercase; text-align:center; }
+  .navy-bg .tag{ color:#5e7089; } .light-bg .tag{ color:#5b6470; }
 
-  /* ---- lockup: real bolt image behind the exact wordmark ---- */
+  /* ---- lockup: ONE vector bolt shape, recolorable via CSS mask, behind the wordmark ---- */
   .lockup{ position:relative; display:inline-flex; flex-direction:column; align-items:center; line-height:1; }
-  /* ONE bolt shape (the vector) for EVERY treatment, so size + jog-spacing always match.
-     Centered horizontally on the vector's ink centroid (49.5%) and vertically so the
-     bolt's two horizontal jogs straddle the wordmark's cap-center (-48.9%). */
-  .bolt-img{ position:absolute; left:50%; top:50%; z-index:0; pointer-events:none; }
-  .bolt-img.vec{ height:520%; transform:translate(-49.5%,-48.9%); }
-  /* the vector ships white (great on dark); flip it to ink on light backgrounds */
-  .light .bolt-img.vec{ filter:brightness(0) opacity(0.82); }
-  /* "glow" treatment = the SAME vector bolt with an electric lighting effect layered on */
-  .bolt-img.glowfx{ filter:
-      drop-shadow(0 0 3px rgba(255,255,255,0.90))
-      drop-shadow(0 0 10px rgba(159,196,238,0.85))
-      drop-shadow(0 0 26px rgba(120,170,255,0.60))
-      drop-shadow(0 0 54px rgba(90,150,255,0.42)); }
-  .light .bolt-img.glowfx{ filter:
-      drop-shadow(0 0 3px rgba(255,255,255,0.95))
-      drop-shadow(0 0 10px rgba(120,170,255,0.85))
-      drop-shadow(0 0 26px rgba(80,140,240,0.60))
-      drop-shadow(0 0 54px rgba(60,120,230,0.48)); }
-
+  .bolt{ position:absolute; left:50%; top:50%; height:520%; aspect-ratio:836/1500;
+    transform:translate(-49.5%,-48.9%); z-index:0; pointer-events:none;
+    -webkit-mask:url('../media/bolt-vector.png') center/contain no-repeat;
+            mask:url('../media/bolt-vector.png') center/contain no-repeat;
+    background:var(--bolt,var(--white)); }
   .word{ position:relative; z-index:1; font-weight:800; font-style:italic; text-transform:uppercase;
-    font-size:5rem; letter-spacing:0.01em; line-height:0.8; white-space:nowrap; }
-  .sub{ position:relative; z-index:1; font-weight:600; text-transform:uppercase; text-align:center; width:100%;
-    font-size:1.02rem; letter-spacing:0.62em; text-indent:0.62em; margin-top:0.25rem; }
-  .dark .word, .dark .sub{ color:#f2f6fc; }
-  .light .word, .light .sub{ color:#10161e; }
+    font-size:5rem; letter-spacing:0.01em; line-height:0.8; white-space:nowrap; color:var(--ink,var(--white)); }
+
+  /* ---- treatments ---- */
+  /* 1. PRIMARY — white wordmark + ice-blue bolt with an electric glow */
+  .t-primary{ --bolt:var(--ice); --ink:var(--white); }
+  .t-primary .bolt{ filter:
+      drop-shadow(0 0 3px rgba(159,196,238,0.55))
+      drop-shadow(0 0 12px rgba(159,196,238,0.55))
+      drop-shadow(0 0 30px rgba(120,170,255,0.40)); }
+  /* 2. OUTLINED — hero-style: wordmark is stroke-only (navy shows through), ice-blue bolt */
+  .t-outline{ --bolt:var(--ice); }
+  .t-outline .word{ color:transparent; -webkit-text-fill-color:transparent;
+    -webkit-text-stroke:1.6px var(--stroke-ice); }
+  /* 3. ONE-COLOR WHITE — for dark / photo / video backgrounds */
+  .t-white{ --bolt:var(--white); --ink:var(--white); }
+  /* 4. ONE-COLOR NAVY — for light backgrounds & print */
+  .t-navy{ --bolt:var(--navy); --ink:var(--navy); }
 </style>
 </head>
 <body>
-
 <div class="grid">
-  <div class="cell dark">
-    <span class="tag">Vector bolt + glow · on dark</span>
-    <span class="lockup"><img class="bolt-img vec glowfx" src="../media/bolt-vector.png" alt=""><span class="word">THUNDERSTRUCK</span></span>
+  <div class="cell navy-bg">
+    <span class="tag">Primary · white + ice-blue bolt</span>
+    <span class="lockup t-primary"><span class="bolt"></span><span class="word">THUNDERSTRUCK</span></span>
   </div>
-  <div class="cell light">
-    <span class="tag">Vector bolt + glow · on grey</span>
-    <span class="lockup"><img class="bolt-img vec glowfx" src="../media/bolt-vector.png" alt=""><span class="word">THUNDERSTRUCK</span></span>
+  <div class="cell navy-bg">
+    <span class="tag">Outlined · hero treatment</span>
+    <span class="lockup t-outline"><span class="bolt"></span><span class="word">THUNDERSTRUCK</span></span>
   </div>
-  <div class="cell dark">
-    <span class="tag">Simple · vector bolt · on dark</span>
-    <span class="lockup"><img class="bolt-img vec" src="../media/bolt-vector.png" alt=""><span class="word">THUNDERSTRUCK</span></span>
+  <div class="cell navy-bg">
+    <span class="tag">One-color · white</span>
+    <span class="lockup t-white"><span class="bolt"></span><span class="word">THUNDERSTRUCK</span></span>
   </div>
-  <div class="cell light">
-    <span class="tag">Simple · vector bolt · on grey</span>
-    <span class="lockup"><img class="bolt-img vec" src="../media/bolt-vector.png" alt=""><span class="word">THUNDERSTRUCK</span></span>
+  <div class="cell light-bg">
+    <span class="tag">One-color · navy (on light)</span>
+    <span class="lockup t-navy"><span class="bolt"></span><span class="word">THUNDERSTRUCK</span></span>
   </div>
 </div>
-
 </body>
 </html>
