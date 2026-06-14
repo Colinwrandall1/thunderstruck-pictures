@@ -48,6 +48,12 @@
   .t-white{ --bolt:var(--white); --ink:var(--white); }
   /* 4. ONE-COLOR NAVY — for light backgrounds & print */
   .t-navy{ --bolt:var(--navy); --ink:var(--navy); }
+  /* 5. PRIMARY ON LIGHT — navy wordmark + ice-blue bolt (full color for light bg).
+     A soft dark edge keeps the light ice-blue bolt legible on the light background. */
+  .t-primary-light{ --bolt:var(--ice); --ink:var(--navy); }
+  .t-primary-light .bolt{ filter:
+      drop-shadow(0 1px 2px rgba(4,6,12,0.30))
+      drop-shadow(0 0 9px rgba(120,170,255,0.55)); }
 </style>
 </head>
 <body>
@@ -67,6 +73,10 @@
   <div class="cell light-bg">
     <span class="tag">One-color · navy (on light)</span>
     <span class="lockup t-navy"><span class="bolt"></span><span class="word">THUNDERSTRUCK</span></span>
+  </div>
+  <div class="cell light-bg">
+    <span class="tag">Primary on light · navy + ice-blue bolt</span>
+    <span class="lockup t-primary-light"><span class="bolt"></span><span class="word">THUNDERSTRUCK</span></span>
   </div>
 </div>
 </body>
