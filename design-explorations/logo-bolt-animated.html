@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thunderstruck — animated electric bolt (native)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:ital,wght@0,600;0,700;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<style>
+  :root{ --navy:#04060c; --ice:#9fc4ee; --bright:#eaf4ff; --white:#f2f6fc; --bolt-url:url('../media/bolt-vector.png'); }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:'Saira Condensed',system-ui,sans-serif; background:
+      radial-gradient(120% 90% at 50% 0%, #0a1020 0%, #04060c 60%); color:#cdd7e3; min-height:100vh; }
+  .wrap{ max-width:1100px; margin:0 auto; padding:4rem 2rem 6rem; }
+  h2{ font-size:0.7rem; letter-spacing:0.28em; text-transform:uppercase; color:#5e7089;
+      font-family:'JetBrains Mono',monospace; margin-bottom:1.6rem; }
+  section{ padding:3rem 0; border-bottom:1px solid rgba(159,196,238,0.10); }
+  .row{ display:flex; align-items:center; gap:3rem; flex-wrap:wrap; }
+
+  /* ============ THE ANIMATED ELECTRIC BOLT ============ */
+  .ebolt{ position:relative; aspect-ratio:836/1500; flex:none;
+    animation: glowStrike 6s ease-in-out infinite; }
+  .ebolt > span{ position:absolute; inset:0;
+    -webkit-mask:var(--bolt-url) center/contain no-repeat; mask:var(--bolt-url) center/contain no-repeat; }
+  .ebolt .core{ background:var(--ice); animation: corePulse 6s ease-in-out infinite; }
+  /* bright energy band that "crawls" down the length of the bolt */
+  .ebolt .sheen{ background:linear-gradient(172deg, transparent 40%, var(--bright) 50%, transparent 60%);
+    background-size:100% 300%; background-repeat:no-repeat; mix-blend-mode:screen;
+    animation: crawl 2.8s linear infinite; }
+
+  @keyframes corePulse{
+    0%,26%,34%,59%,63%,100%{ background:var(--ice); }
+    29%,31%{ background:var(--bright); }   /* main strike */
+    61%{ background:#c8e0fb; }              /* minor flicker */
+  }
+  @keyframes glowStrike{
+    0%,26%   { filter:drop-shadow(0 0 5px rgba(159,196,238,.50)) drop-shadow(0 0 16px rgba(120,170,255,.35)); }
+    29%      { filter:drop-shadow(0 0 4px #eaf4ff) drop-shadow(0 0 32px rgba(190,220,255,.95)) drop-shadow(0 0 72px rgba(120,170,255,.7)); }
+    34%,59%  { filter:drop-shadow(0 0 5px rgba(159,196,238,.50)) drop-shadow(0 0 16px rgba(120,170,255,.35)); }
+    61%      { filter:drop-shadow(0 0 7px rgba(200,224,251,.75)) drop-shadow(0 0 24px rgba(140,185,255,.55)); }
+    63%,100% { filter:drop-shadow(0 0 5px rgba(159,196,238,.50)) drop-shadow(0 0 16px rgba(120,170,255,.35)); }
+  }
+  @keyframes crawl{ 0%{ background-position:50% -70%; } 100%{ background-position:50% 170%; } }
+
+  /* sizes */
+  .ebolt.lg{ height:320px; }
+  .ebolt.sm{ height:1.5em; }
+
+  /* ============ Hero-style lockup: animated bolt behind the wordmark ============ */
+  .lockup{ position:relative; display:inline-flex; align-items:center; line-height:0.8; }
+  .lockup .ebolt{ position:absolute; left:50%; top:50%; height:520%;
+    transform:translate(-49.5%,-48.9%); z-index:0; }
+  .lockup .word{ position:relative; z-index:1; font-weight:800; font-style:italic; text-transform:uppercase;
+    font-size:5rem; letter-spacing:0.01em; color:var(--white); white-space:nowrap; }
+
+  /* ============ CTA that strikes on hover ============ */
+  .btn{ position:relative; display:inline-flex; align-items:center; gap:0.6rem; cursor:pointer;
+    font-family:'Saira Condensed'; font-weight:700; font-style:italic; text-transform:uppercase;
+    letter-spacing:0.05em; font-size:1.05rem; color:var(--white); text-decoration:none;
+    padding:0.85rem 1.6rem; border-radius:6px; border:1px solid rgba(159,196,238,0.35);
+    background:rgba(14,20,28,0.55); transition:border-color .2s, box-shadow .2s; }
+  .btn .ebolt{ height:1.4em; animation-play-state:paused; }
+  .btn:hover{ border-color:var(--ice); box-shadow:0 0 22px rgba(159,196,238,0.30); }
+  .btn:hover .ebolt{ animation: hoverStrike .5s ease-out; }
+  @keyframes hoverStrike{
+    0%{ filter:drop-shadow(0 0 4px rgba(159,196,238,.5)); }
+    30%{ filter:drop-shadow(0 0 3px #fff) drop-shadow(0 0 18px rgba(190,220,255,.95)); }
+    100%{ filter:drop-shadow(0 0 5px rgba(159,196,238,.55)); }
+  }
+  .btn .core{ background:var(--ice); animation:none; }
+  .btn .sheen{ display:none; }
+
+  .cap{ font-size:0.95rem; color:#8fa1b5; max-width:46ch; line-height:1.5; }
+
+  @media (prefers-reduced-motion: reduce){
+    .ebolt, .ebolt .core, .ebolt .sheen { animation: none !important; }
+    .ebolt{ filter:drop-shadow(0 0 6px rgba(159,196,238,.55)) drop-shadow(0 0 18px rgba(120,170,255,.4)); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section>
+    <h2>Animated mark · idle flicker + periodic strike</h2>
+    <div class="row">
+      <span class="ebolt lg"><span class="core"></span><span class="sheen"></span></span>
+      <p class="cap">Pure CSS on the vector bolt — an energy band crawls down the length continuously, with a sharp white strike every ~6 seconds. Transparent, vector-crisp at any size, ~2&nbsp;KB. Honors reduced-motion.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Hero lockup · the logo comes alive</h2>
+    <span class="lockup"><span class="ebolt"><span class="core"></span><span class="sheen"></span></span><span class="word">THUNDERSTRUCK</span></span>
+  </section>
+
+  <section>
+    <h2>CTA · strikes on hover</h2>
+    <div class="row">
+      <a class="btn"><span class="ebolt"><span class="core"></span><span class="sheen"></span></span>Book / Hire</a>
+      <p class="cap">Hover the button — the bolt fires. Same idea works on the nav mark and section transitions.</p>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
