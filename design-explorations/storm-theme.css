@@ -34,7 +34,19 @@ body.storm-off .storm-static { display: block; }
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22) 30%, rgba(159,196,238,0.35) 50%, rgba(255,255,255,0.18) 70%, transparent);
   pointer-events:none;
 }
-.nav .brand { font-style: italic; font-weight: 700; }
+.nav .brand {
+  font-style: italic; font-weight: 800;
+  display: inline-flex !important; align-items: center; gap: 0.42rem;
+}
+/* Lightning bolt mark (ice-blue) before the wordmark — same vector bolt as the
+   primary logo, recolored via CSS mask so no per-page markup change is needed. */
+.nav .brand::before {
+  content: ""; height: 1.5em; aspect-ratio: 836/1500; flex: none; transform: translateY(-0.03em);
+  -webkit-mask: url('../media/bolt-vector.png') center/contain no-repeat;
+          mask: url('../media/bolt-vector.png') center/contain no-repeat;
+  background: #9fc4ee;
+  filter: drop-shadow(0 0 5px rgba(159,196,238,0.55)) drop-shadow(0 0 12px rgba(120,170,255,0.40));
+}
 .cart-trigger {
   background: rgba(14,20,28,0.55) !important;
   border-color: rgba(159,196,238,0.15) !important;

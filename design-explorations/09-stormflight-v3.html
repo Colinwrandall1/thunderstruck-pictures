@@ -82,8 +82,17 @@
     pointer-events:none;
   }
   .nav .brand {
-    font-family: 'Saira Condensed', sans-serif; font-weight:700; font-style: italic;
-    text-transform: uppercase; font-size: 1.35rem; letter-spacing: 0.06em; line-height: 1;
+    display:inline-flex; align-items:center; gap:0.42rem;
+    font-family: 'Saira Condensed', sans-serif; font-weight:800; font-style: italic;
+    text-transform: uppercase; font-size: 1.3rem; letter-spacing: 0.05em; line-height: 1;
+    color:#f2f6fc;
+  }
+  .nav .brand .blt {
+    height:1.6em; aspect-ratio:836/1500; flex:none; transform:translateY(-0.03em);
+    -webkit-mask:url('../media/bolt-vector.png') center/contain no-repeat;
+            mask:url('../media/bolt-vector.png') center/contain no-repeat;
+    background:#9fc4ee;
+    filter: drop-shadow(0 0 5px rgba(159,196,238,0.55)) drop-shadow(0 0 12px rgba(120,170,255,0.40));
   }
   .nav .links { display: flex; align-items: center; gap: 1.25rem; flex-wrap: nowrap; }
   .nav .links a {
@@ -423,7 +432,7 @@
 
 <!-- NAV -->
 <nav class="nav" id="nav">
-  <a href="#top" class="brand">Thunderstruck</a>
+  <a href="#top" class="brand" aria-label="Thunderstruck"><span class="blt" aria-hidden="true"></span>Thunderstruck</a>
   <div class="links">
     <a href="../camera-storm-v2.html">Camera</a>
     <a href="../rentals-storm-v2.html">Lighting</a>

@@ -62,6 +62,7 @@ cp assets/clouds-bg.jpg assets/hero-plate-lit.webp storm-public/assets/
 cp media/truck-profile.webp media/gear-lineup-storm.webp storm-public/media/
 cp media/storm-hero.mp4 media/storm-hero-poster.jpg storm-public/media/
 cp media/martin-shapiro.jpg media/taylor-randall.jpg storm-public/media/
+cp media/bolt-vector.png storm-public/media/   # nav logo mark (ice-blue via CSS mask)
 cp -R media/products storm-public/media/products
 
 echo "Built storm-public/ ($(du -sh storm-public | cut -f1))"
