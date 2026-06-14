@@ -209,6 +209,31 @@
   body.loaded .hero h1      { opacity:1; filter:none; transform:none; transition-delay:.4s; }
   body.loaded .hero .sub    { opacity:1; filter:none; transform:none; transition-delay:.75s; }
   body.loaded .hero .cta-row{ opacity:1; filter:none; transform:none; transition-delay:1.0s; }
+  /* ---- HERO logo lockup: animated electric bolt behind the wordmark ---- */
+  .hero h1.ts-hero{ line-height:0.8; display:inline-flex; align-items:center; justify-content:center; position:relative; }
+  .ts-word{ position:relative; z-index:1; font-family:'Saira Condensed',sans-serif;
+    font-weight:800; font-style:italic; text-transform:uppercase; color:#f2f6fc;
+    font-size:clamp(2.6rem,12.6vw,10.5rem); letter-spacing:0.01em; line-height:0.8; white-space:nowrap;
+    text-shadow:0 2px 26px rgba(4,6,12,0.78), 0 0 2px rgba(4,6,12,0.7); }
+  .ts-bolt{ position:absolute; left:50%; top:50%; height:520%; aspect-ratio:836/1500;
+    transform:translate(-49.5%,-48.9%); z-index:0; pointer-events:none;
+    animation:tsGlow 6s ease-in-out infinite; }
+  .ts-bolt > span{ position:absolute; inset:0;
+    -webkit-mask:url('../media/bolt-vector.png') center/contain no-repeat;
+            mask:url('../media/bolt-vector.png') center/contain no-repeat; }
+  .ts-bolt .core{ background:#9fc4ee; animation:tsCore 6s ease-in-out infinite; }
+  .ts-bolt .sheen{ background:linear-gradient(172deg, transparent 40%, #eaf4ff 50%, transparent 60%);
+    background-size:100% 300%; background-repeat:no-repeat; mix-blend-mode:screen;
+    animation:tsCrawl 2.8s linear infinite; }
+  @keyframes tsCore{ 0%,26%,34%,59%,63%,100%{ background:#9fc4ee; } 29%,31%{ background:#eaf4ff; } 61%{ background:#c8e0fb; } }
+  @keyframes tsGlow{
+    0%,26%   { filter:drop-shadow(0 0 6px rgba(159,196,238,.5)) drop-shadow(0 0 20px rgba(120,170,255,.38)); }
+    29%      { filter:drop-shadow(0 0 5px #eaf4ff) drop-shadow(0 0 40px rgba(190,220,255,.95)) drop-shadow(0 0 92px rgba(120,170,255,.68)); }
+    34%,59%  { filter:drop-shadow(0 0 6px rgba(159,196,238,.5)) drop-shadow(0 0 20px rgba(120,170,255,.38)); }
+    61%      { filter:drop-shadow(0 0 8px rgba(200,224,251,.75)) drop-shadow(0 0 28px rgba(140,185,255,.55)); }
+    63%,100% { filter:drop-shadow(0 0 6px rgba(159,196,238,.5)) drop-shadow(0 0 20px rgba(120,170,255,.38)); }
+  }
+  @keyframes tsCrawl{ 0%{ background-position:50% -70%; } 100%{ background-position:50% 170%; } }
   .scroll-hint {
     position: absolute; left: 0; right: 0; bottom: 3.4vh; margin: 0 auto; width: fit-content;
     font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.3em;
@@ -450,30 +475,9 @@
   <header class="hero" id="hero">
     <div>
       <p class="eyebrow">There's a storm coming</p>
-      <h1 aria-label="Thunderstruck">
-        <svg viewBox="0 0 1600 250" role="img" aria-label="Thunderstruck" preserveAspectRatio="xMidYMid meet" style="overflow:visible;">
-          <defs>
-            <!-- Halo painted on an oversized rect (overflow:visible) with the gradient
-                 reaching zero exactly at the rect bounds — no visible edges or seams. -->
-            <radialGradient id="tsScrim9" gradientUnits="userSpaceOnUse"
-                            cx="800" cy="359" r="1000" gradientTransform="matrix(1,0,0,0.32,0,0)">
-              <stop offset="0%" stop-color="#04060c" stop-opacity="0.8"/>
-              <stop offset="42%" stop-color="#04060c" stop-opacity="0.52"/>
-              <stop offset="78%" stop-color="#04060c" stop-opacity="0.16"/>
-              <stop offset="100%" stop-color="#04060c" stop-opacity="0"/>
-            </radialGradient>
-            <mask id="tsMask9" maskUnits="userSpaceOnUse" x="-200" y="-205" width="2000" height="660">
-              <rect x="-200" y="-205" width="2000" height="660" fill="#fff"/>
-              <text class="ts-text" x="800" y="186" text-anchor="middle" font-size="210"
-                    textLength="1520" lengthAdjust="spacingAndGlyphs" fill="#000">THUNDERSTRUCK</text>
-            </mask>
-          </defs>
-          <!-- dark halo with the letters punched out — the LIVE storm shows through the letterforms -->
-          <rect x="-200" y="-205" width="2000" height="660" fill="url(#tsScrim9)" mask="url(#tsMask9)"/>
-          <text class="ts-text" x="800" y="186" text-anchor="middle" font-size="210"
-                textLength="1520" lengthAdjust="spacingAndGlyphs"
-                fill="none" stroke="#e2ecfa" stroke-opacity="0.62" stroke-width="1.4">THUNDERSTRUCK</text>
-        </svg>
+      <h1 aria-label="Thunderstruck" class="ts-hero">
+        <span class="ts-bolt" aria-hidden="true"><span class="core"></span><span class="sheen"></span></span>
+        <span class="ts-word">Thunderstruck</span>
       </h1>
       <p class="sub">Stories that hit like lightning. Grip truck rental &amp; production — Austin, TX.</p>
       <div class="cta-row">
