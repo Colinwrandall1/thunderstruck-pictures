@@ -18,6 +18,11 @@ sed 's|\.\./||g' design-explorations/09-stormflight-v3.html      > storm-public/
 sed 's|\.\./||g' design-explorations/09-stormflight-v3-alt.html  > storm-public/v3-alt.html
 sed 's|\.\./||g' design-explorations/09-stormflight-v3-alt2.html > storm-public/v3-alt2.html
 sed 's|\.\./||g' design-explorations/09-stormflight-v3-alt3.html > storm-public/v3-alt3.html
+# Gear-photo hero options: photo6 = full feathered photo hero (no text), photo7 = feathered photo under intro header
+sed 's|\.\./||g' design-explorations/09-stormflight-v3-photo6.html > storm-public/photo6.html
+sed 's|\.\./||g' design-explorations/09-stormflight-v3-photo7.html > storm-public/photo7.html
+sed 's|\.\./||g' design-explorations/09-stormflight-v3-photo8.html > storm-public/photo8.html
+sed 's|\.\./||g' design-explorations/09-stormflight-v3-photo9.html > storm-public/photo9.html
 
 # Storm pages + shared scripts/data
 cp camera-storm.html rentals-storm.html grip-truck-storm.html sound-storm.html \
@@ -62,8 +67,24 @@ cp assets/clouds-bg.jpg assets/hero-plate-lit.webp storm-public/assets/
 cp media/truck-profile.webp media/gear-lineup-storm.webp storm-public/media/
 cp media/storm-hero.mp4 media/storm-hero-poster.jpg storm-public/media/
 cp media/martin-shapiro.jpg media/taylor-randall.jpg storm-public/media/
+cp -R media/work storm-public/media/work   # crew "Selected Work" posters (production.html)
 cp media/bolt-vector.png storm-public/media/   # nav logo mark (ice-blue via CSS mask)
+cp media/gear-lineup-hero.webp storm-public/media/   # gear-lineup photo for photo6/photo7 hero options
+cp media/lighting-cart.webp storm-public/media/   # lighting dept hero (floating cart cut-out)
+cp media/grip-carts.webp storm-public/media/   # grip dept hero (floating carts cut-out)
+cp media/sound-gear.webp storm-public/media/   # audio dept hero (floating sound bag cut-out)
+cp media/camera-rig.webp storm-public/media/   # camera dept hero (floating rig cut-out)
 cp -R media/products storm-public/media/products
+
+# Brand guide deliverable -> /brand-guide/ (subfolder so its ../assets & ../media
+# relative paths resolve against the site root). Bundles the 4 brand PNGs it uses;
+# storm-hero-poster.jpg is already copied above.
+mkdir -p storm-public/brand-guide storm-public/assets/brand
+cp deliverables/thunderstruck-pictures-brand-guide.html storm-public/brand-guide/index.html
+cp assets/brand/monogram.png assets/brand/app-icon-512.png \
+   assets/brand/pattern-tile-ice.png assets/brand/pattern-tile-navy.png \
+   assets/brand/logo-dynamic-titlecard.webp assets/brand/bolt-glow-dynamic.webp \
+   storm-public/assets/brand/
 
 echo "Built storm-public/ ($(du -sh storm-public | cut -f1))"
 echo "Deploy: netlify deploy --prod --dir storm-public --site <storm-site-id>"

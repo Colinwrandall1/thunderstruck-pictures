@@ -219,11 +219,23 @@
   .success-view .done-btn:hover { background:var(--text); color:#0a0a0a; }
 
   /* ---------- FOOTER ---------- */
-  footer { background:#04060a; border-top:1px solid var(--line); padding:2.5rem clamp(1.2rem,4vw,3rem); }
-  .foot-in { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap; }
-  .foot-in .brand { font-family:'Saira Condensed',sans-serif; text-transform:uppercase; letter-spacing:0.05em; font-size:1.1rem; }
-  .foot-in .small { color:var(--dim); font-size:0.74rem; font-family:'JetBrains Mono',monospace; letter-spacing:0.1em; }
-  .foot-in .small a:hover { color: var(--yellow); }
+  footer { background:#04060a; border-top:1px solid var(--line); padding: clamp(2.6rem,5vw,3.6rem) clamp(1.2rem,4vw,3rem) 1.6rem; }
+  .foot-grid { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1.7fr 1fr 1fr 1.3fr; gap:clamp(1.6rem,4vw,3rem); }
+  @media (max-width:820px){ .foot-grid{ grid-template-columns:1fr 1fr; gap:2rem; } .foot-brand{ grid-column:1 / -1; } }
+  .foot-logo { display:inline-flex; align-items:center; gap:0.55rem; font-family:'Saira Condensed',sans-serif; font-weight:700; font-style:italic; text-transform:uppercase; font-size:1.45rem; letter-spacing:0.05em; color:var(--text); }
+  .foot-logo svg { width:17px; height:23px; fill:var(--yellow); flex:0 0 auto; }
+  .foot-tag { color:var(--muted); font-size:0.9rem; line-height:1.6; max-width:36ch; margin-top:0.95rem; }
+  .foot-cta { display:inline-block; margin-top:1.2rem; font-family:'JetBrains Mono',monospace; font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--yellow); border:1px solid var(--line-bright); border-radius:999px; padding:0.55rem 1.15rem; transition:color .15s,background .15s,border-color .15s; }
+  .foot-cta:hover { color:#04060c; background:var(--yellow); border-color:var(--yellow); }
+  .foot-col h4 { font-family:'JetBrains Mono',monospace; font-size:0.64rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--dim); margin-bottom:1rem; }
+  .foot-col a, .foot-col .foot-loc { display:block; color:#c7d0da; font-size:0.92rem; line-height:1.5; padding:0.3rem 0; transition:color .15s; }
+  .foot-col a:hover { color:var(--yellow); }
+  .foot-col .foot-loc { color:var(--dim); }
+  .foot-base { max-width:1200px; margin:clamp(2rem,4vw,2.8rem) auto 0; padding-top:1.4rem; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center; gap:1rem 2rem; flex-wrap:wrap;
+    font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.1em; color:var(--dim); }
+  .foot-base .foot-tagline { color:var(--muted); font-family:'Saira Condensed',sans-serif; font-style:italic; letter-spacing:0.04em; font-size:0.92rem; text-transform:uppercase; }
+  @media (max-width:560px){ .foot-base{ justify-content:flex-start; } }
 
   /* ---------- Voltage unification ---------- */
   .nav .brand,.rhero h1{ font-style: italic; }
@@ -251,6 +263,13 @@
     background:linear-gradient(180deg, rgba(4,6,12,0) 55%, rgba(4,6,12,0.35) 100%); }
   @media (max-width:860px){ .rhero .inner.rhero-grid { grid-template-columns:1fr; gap:1.8rem; }
     .rhero-media img { aspect-ratio:16/9; } }
+  /* floating cut-out treatment (transparent PNG that carries its own shadow);
+     uniform 5:4 frames + fixed media-box height -> consistent, compact hero across departments */
+  .rhero-media.float { height:400px; }
+  .rhero-media.float img { aspect-ratio:auto; width:100%; height:100%; max-height:none; object-fit:contain; object-position:center bottom;
+    border:none; border-radius:0; box-shadow:none; }
+  .rhero-media.float::before, .rhero-media.float::after { display:none; }
+  @media (max-width:860px){ .rhero-media.float { height:auto; } .rhero-media.float img { height:auto; } }
 </style>
 <link rel="stylesheet" href="design-explorations/storm-theme.css">
 <link rel="stylesheet" href="design-explorations/accent-gold.css">
@@ -279,7 +298,7 @@
     <h1>The camera <span class="y">department.</span></h1>
     <p class="lede"><strong>ARRI ALEXA 35, RED Komodo 6K, Sony A7 IV</strong>, DZOFilm anamorphic &amp; full-frame primes, Sachtler support, and Teradek wireless video — a complete camera package built by working DPs. Build your package below; we respond within 24 hours with availability and a firm rate. No card, no commitment.</p>
   </div>
-    <div class="rhero-media"><img src="media/products/cat-camera.webp" alt="Camera department — cameras, lenses, support" loading="lazy"></div>
+    <div class="rhero-media float"><img src="media/camera-rig.webp" alt="Thunderstruck cinema camera package built out on a fluid-head tripod" loading="lazy"></div>
   </div>
 </section>
 
@@ -312,9 +331,36 @@
 </main>
 
 <footer>
-  <div class="foot-in">
-    <span class="brand">Thunderstruck Pictures</span>
-    <span class="small">© 2026 Thunderstruck Pictures LLC · Austin, TX · <a href="index.html#book">Book / Hire →</a></span>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <a href="index.html" class="foot-logo"><svg viewBox="0 0 24 32" aria-hidden="true"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg>Thunderstruck</a>
+      <p class="foot-tag">Grip, lighting, camera &amp; sound &mdash; rented and run by working filmmakers across Austin &amp; Central Texas.</p>
+      <a class="foot-cta" href="camera-storm-v2.html">Build a gear list &rarr;</a>
+    </div>
+    <nav class="foot-col" aria-label="Rentals">
+      <h4>Rentals</h4>
+      <a href="camera-storm-v2.html">Camera</a>
+      <a href="rentals-storm-v2.html">Lighting</a>
+      <a href="grip-truck-storm-v2.html">Grip</a>
+      <a href="sound-storm-v2.html">Audio</a>
+    </nav>
+    <nav class="foot-col" aria-label="Studio">
+      <h4>Studio</h4>
+      <a href="production.html">Production</a>
+      <a href="index.html#book">Book / Hire</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="foot-col">
+      <h4>Get in touch</h4>
+      <a href="mailto:hello@thunderstruckpictures.co">hello@thunderstruckpictures.co</a>
+      <a href="https://instagram.com/nightowlmartin" target="_blank" rel="noopener">Instagram &#8599;</a>
+      <span class="foot-loc">Austin &amp; Central Texas</span>
+    </div>
+  </div>
+  <div class="foot-base">
+    <span>&copy; 2026 Thunderstruck Pictures LLC</span>
+    <span class="foot-tagline">Stories that hit like lightning.</span>
+    <span>Austin, TX</span>
   </div>
 </footer>
 

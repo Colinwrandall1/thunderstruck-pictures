@@ -35,13 +35,17 @@ body.storm-off .storm-static { display: block; }
   pointer-events:none;
 }
 .nav .brand {
+  position: relative; line-height: 1;
   font-style: italic; font-weight: 800;
-  display: inline-flex !important; align-items: center; gap: 0.42rem;
+  display: inline-flex !important; align-items: center;
 }
-/* Lightning bolt mark (ice-blue) before the wordmark — same vector bolt as the
-   primary logo, recolored via CSS mask so no per-page markup change is needed. */
+/* Lightning bolt mark (ice-blue) crossing BEHIND the wordmark — same vector bolt
+   as the primary logo, recolored via CSS mask so no per-page markup change is
+   needed. z-index:-1 keeps it behind the text without wrapping the text node. */
 .nav .brand::before {
-  content: ""; height: 1.5em; aspect-ratio: 836/1500; flex: none; transform: translateY(-0.03em);
+  content: ""; position: absolute; left: 50%; top: 50%;
+  height: 3em; aspect-ratio: 836/1500; z-index: -1; pointer-events: none;
+  transform: translate(-49.5%, -48.9%);
   -webkit-mask: url('../media/bolt-vector.png') center/contain no-repeat;
           mask: url('../media/bolt-vector.png') center/contain no-repeat;
   background: #9fc4ee;
@@ -142,6 +146,8 @@ section[style*="background"], .band { background: transparent !important; }
 
 /* ---------- Contact page: float info/form panels on the storm ---------- */
 .cgrid > .sec, .reach, .studio, .loc { background: transparent !important; }
+/* but keep the location card's lower half a solid dark slab (consistent with the site's cards) */
+.loc .lbody { background: linear-gradient(160deg, rgba(15,22,34,0.94), rgba(9,14,23,0.92)) !important; }
 .field input, .field select, .field textarea {
   background: rgba(8,13,22,0.6) !important;
   border-color: rgba(159,196,238,0.2) !important;
