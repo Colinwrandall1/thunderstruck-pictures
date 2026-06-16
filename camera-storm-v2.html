@@ -222,8 +222,11 @@
   footer { background:#04060a; border-top:1px solid var(--line); padding: clamp(2.6rem,5vw,3.6rem) clamp(1.2rem,4vw,3rem) 1.6rem; }
   .foot-grid { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1.7fr 1fr 1fr 1.3fr; gap:clamp(1.6rem,4vw,3rem); }
   @media (max-width:820px){ .foot-grid{ grid-template-columns:1fr 1fr; gap:2rem; } .foot-brand{ grid-column:1 / -1; } }
-  .foot-logo { display:inline-flex; align-items:center; gap:0.55rem; font-family:'Saira Condensed',sans-serif; font-weight:700; font-style:italic; text-transform:uppercase; font-size:1.45rem; letter-spacing:0.05em; color:var(--text); }
-  .foot-logo svg { width:17px; height:23px; fill:var(--yellow); flex:0 0 auto; }
+  .foot-logo { position:relative; display:inline-flex; align-items:center; height:1.7rem; line-height:1; }
+  .foot-logo .ts-mark { position:absolute; left:50%; top:50%; transform:translate(-50%,-53%); height:260%; aspect-ratio:836/1500; z-index:0; pointer-events:none;
+    background:#9fc4ee; -webkit-mask:url('media/bolt-vector.png') center/contain no-repeat; mask:url('media/bolt-vector.png') center/contain no-repeat;
+    filter:drop-shadow(0 0 5px rgba(159,196,238,0.55)) drop-shadow(0 0 13px rgba(120,170,255,0.40)); }
+  .foot-logo .ts-text { position:relative; z-index:1; font-family:'Saira Condensed',sans-serif; font-weight:700; font-style:italic; text-transform:uppercase; font-size:1.5rem; letter-spacing:0.05em; color:#f4f8ff; white-space:nowrap; }
   .foot-tag { color:var(--muted); font-size:0.9rem; line-height:1.6; max-width:36ch; margin-top:0.95rem; }
   .foot-cta { display:inline-block; margin-top:1.2rem; font-family:'JetBrains Mono',monospace; font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--yellow); border:1px solid var(--line-bright); border-radius:999px; padding:0.55rem 1.15rem; transition:color .15s,background .15s,border-color .15s; }
   .foot-cta:hover { color:#04060c; background:var(--yellow); border-color:var(--yellow); }
@@ -333,7 +336,7 @@
 <footer>
   <div class="foot-grid">
     <div class="foot-brand">
-      <a href="index.html" class="foot-logo"><svg viewBox="0 0 24 32" aria-hidden="true"><path d="M13 0 L2 18 H10 L7 32 L22 11 H13 Z"/></svg>Thunderstruck</a>
+      <a href="index.html" class="foot-logo"><span class="ts-mark" aria-hidden="true"></span><span class="ts-text">Thunderstruck</span></a>
       <p class="foot-tag">Grip, lighting, camera &amp; sound &mdash; rented and run by working filmmakers across Austin &amp; Central Texas.</p>
       <a class="foot-cta" href="camera-storm-v2.html">Build a gear list &rarr;</a>
     </div>
