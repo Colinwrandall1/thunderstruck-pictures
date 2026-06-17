@@ -152,3 +152,16 @@ section[style*="background"], .band { background: transparent !important; }
   background: rgba(8,13,22,0.6) !important;
   border-color: rgba(159,196,238,0.2) !important;
 }
+
+/* ---------- Mobile fixes ---------- */
+/* 1. html stays dark so overscroll/rubber-band doesn't flash white behind the fixed storm bg */
+html { background: #04060c !important; }
+/* 3. hero header/lede need a left+right gutter (the page's .rhero .inner zeroes horizontal padding) */
+.rhero .inner { padding-left: clamp(1.2rem,4vw,3rem) !important; padding-right: clamp(1.2rem,4vw,3rem) !important; }
+@media (max-width: 960px) {
+  /* 2. solid nav + slide-down drawer so the mobile menu reads as a clean opaque overlay.
+     (the drawer's own backdrop-filter blur fails nested inside the nav's backdrop-filter,
+     so the page ghosted through — drop both filters on mobile and use solid fills.) */
+  .nav { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; background: rgba(6,8,11,0.97) !important; }
+  .nav .links { background: #06080b !important; -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+}
