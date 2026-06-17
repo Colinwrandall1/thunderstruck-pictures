@@ -165,3 +165,16 @@ html { background: #04060c !important; }
   .nav { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; background: rgba(6,8,11,0.97) !important; }
   .nav .links { background: #06080b !important; -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
 }
+
+/* ---------- Mobile nav bar: keep brand + Gear List + burger from crowding ---------- */
+@media (max-width: 480px) {
+  .nav { padding-left: 1rem !important; padding-right: 1rem !important; }
+  .nav .brand { font-size: 1.18rem !important; }
+  .cart-trigger { padding: 0.45rem 0.7rem !important; font-size: 0.74rem !important; letter-spacing: 0.05em !important; }
+  .cart-trigger .count { min-width: 1.15rem !important; padding: 0.1rem 0.38rem !important; }
+  .nav-cluster { gap: 0.45rem !important; }
+}
+@media (max-width: 360px) {
+  .nav .brand { font-size: 1.02rem !important; }
+  .cart-trigger { font-size: 0.68rem !important; padding: 0.42rem 0.6rem !important; }
+}
